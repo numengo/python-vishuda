@@ -1,0 +1,85 @@
+{
+  "$id": "https://numengo.org/vishuda#",
+  "type": "object",
+  "$comment": "automatically generated for NgoCI",
+  "$defs": {
+    "personas": {
+      "type": "object",
+      "$defs": {
+        "User": {
+          "type": "object",
+          "extends": [
+              "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          ],
+          "properties": {
+            "email": {
+              "type": "string"
+            },
+            "username": {
+              "type": "string",
+              "default": "{{this.email}}"
+            },
+            "githubUsername": {
+              "type": "string"
+            },
+            "firstName": {
+              "type": "string"
+            },
+            "lastName": {
+              "type": "string"
+            },
+            "fullName": {
+              "type": "string",
+              "default": "{{this.firstName}} {{this.lastName}}"
+            }
+          }
+        }
+      }
+    },
+    "app": {
+      "type": "object",
+      "$defs": {
+        "Model": {
+          "type": "object",
+          "extends": [
+              "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          ]
+        },
+        "Fixture": {
+          "type": "object",
+          "extends": [
+              "#/$defs/app/$defs/Model"
+          ],
+          "properties": {
+              "fields": {
+                  "type": "object"
+              }
+          }
+        },
+        "View": {
+          "type": "object",
+          "extends": [
+              "https://numengo.org/ngoschema#/$defs/protocols/$defs/Serializer"
+          ]
+        },
+        "App": {
+          "type": "object",
+          "extends": [
+              "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "properties": {
+              "models": {
+                  "$ref": "#/$defs/app/$defs/Model"
+              },
+              "fixtures": {
+                  "$ref": "#/$defs/app/$defs/Fixture"
+              },
+              "views": {
+                  "$ref": "#/$defs/app/$defs/View"
+              }
+          }
+        }
+      }
+    }
+  }
+}

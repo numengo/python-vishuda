@@ -1,0 +1,16 @@
+[paths]
+source =
+   src/vishuda
+   */site-packages/vishuda
+
+[run]
+branch = true
+source =
+    vishuda
+    tests
+parallel = true
+
+[report]
+show_missing = true
+precision = 2
+omit = *migrations*
