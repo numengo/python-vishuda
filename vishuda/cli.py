@@ -32,7 +32,7 @@ cli = click.command(
     name='vishuda',
     module_name='vishuda',
     cmd_folder=CMD_FOLDER,
-    help='Framework/language for application development',
+    help='Framework for rapid application development and code generation',
     context_settings=CONTEXT_SETTINGS)(base_cli)
 
 if __name__ == "__main__":

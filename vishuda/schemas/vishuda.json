@@ -11,6 +11,9 @@
           "extends": [
               "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
+          "primaryKeys": [
+              "username"
+          ],
           "properties": {
             "email": {
               "type": "string"

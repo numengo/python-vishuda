@@ -39,7 +39,7 @@ def get_version(package):
 
 name = 'vishuda'
 package = 'vishuda'
-description = 'Framework/language for application development'
+description = 'Framework for rapid application development and code generation'
 url = 'https://github.com/numengo/python-vishuda'
 author='Cedric ROMAN',
 author_email='roman@numengo.com',
@@ -70,7 +70,7 @@ install_requires = [
     'future',
     'python-gettext',
     'click',
-    'git+https://github.com/RomanCedric/python-ngoschema', 
+    'git+https://github.com/RomanCedric/python-ngoschema',
 ]
 
 post_install_requires = [i for i in install_requires if ('-' in i or ':' in i or '.' in i)]

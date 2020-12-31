@@ -59,7 +59,7 @@ Overview
 
 .. end-badges
 
-Framework/language for application development
+Framework for rapid application development and code generation
 
 * Free software: GNU General Public License v3
 
