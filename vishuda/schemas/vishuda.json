@@ -1,18 +1,18 @@
 {
   "$id": "https://numengo.org/vishuda#",
   "type": "object",
-  "$comment": "automatically generated for NgoCI",
+  "$comment": "automatically generated for vishuda",
   "$defs": {
     "personas": {
       "type": "object",
       "$defs": {
         "User": {
           "type": "object",
-          "extends": [
-              "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-          ],
           "primaryKeys": [
-              "username"
+            "username"
+          ],
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
           "properties": {
             "email": {
@@ -45,41 +45,59 @@
         "Model": {
           "type": "object",
           "extends": [
-              "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ]
         },
         "Fixture": {
           "type": "object",
           "extends": [
-              "#/$defs/app/$defs/Model"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
           "properties": {
-              "fields": {
-                  "type": "object"
-              }
+            "model": {
+              "$ref": "#/$defs/app/$defs/Model"
+            },
+            "pk": true,
+            "fields": {
+              "type": "object"
+            }
           }
         },
         "View": {
           "type": "object",
           "extends": [
-              "https://numengo.org/ngoschema#/$defs/protocols/$defs/Serializer"
+            "https://numengo.org/ngoschema#/$defs/protocols/$defs/Serializer"
           ]
         },
         "App": {
           "type": "object",
+          "primaryKeys": [
+            "canonicalName"
+          ],
           "extends": [
-              "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
           "properties": {
-              "models": {
-                  "$ref": "#/$defs/app/$defs/Model"
-              },
-              "fixtures": {
-                  "$ref": "#/$defs/app/$defs/Fixture"
-              },
-              "views": {
-                  "$ref": "#/$defs/app/$defs/View"
+            "models": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/Model"
               }
+            },
+            "fixtures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/Fixture"
+              }
+            },
+            "views": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/View"
+              }
+            }
           }
         }
       }
