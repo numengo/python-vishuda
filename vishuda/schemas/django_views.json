@@ -1,0 +1,1463 @@
+{
+  "$id": "https://numengo.org/django-views#",
+  "$schema": "https://numengo.org/ngoschema/draft-06",
+  "description": "Django views definitions",
+  "title": "object",
+  "$defs": {
+    "base": {
+      "type": "object",
+      "$defs": {
+        "View": {
+          "type": "object",
+          "description": "Intentionally simple parent class for all views. Only implements\ndispatch-by-method and simple sanity checking.",
+          "wraps": "django.views.generic.base.View",
+          "properties": {
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            }
+          }
+        },
+        "TemplateView": {
+          "type": "object",
+          "description": "Render a template. Pass keyword arguments from the URLconf to the context.",
+          "extends": [
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.base.TemplateView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            }
+          }
+        },
+        "RedirectView": {
+          "type": "object",
+          "description": "Provide a redirect on any GET request.",
+          "extends": [
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.base.RedirectView",
+          "properties": {
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "pattern_name": {
+              "type": "string"
+            },
+            "permanent": {
+              "type": "boolean"
+            },
+            "query_string": {
+              "type": "boolean"
+            },
+            "url": {
+              "type": "string"
+            }
+          }
+        },
+        "ContextMixin": {
+          "type": "object",
+          "description": "A default context mixin that passes the keyword arguments received by\nget_context_data() as the template context.",
+          "wraps": "django.views.generic.base.ContextMixin",
+          "properties": {
+            "extra_context": {
+              "type": "string"
+            }
+          }
+        },
+        "TemplateResponseMixin": {
+          "type": "object",
+          "description": "A mixin that can be used to render a template.",
+          "wraps": "django.views.generic.base.TemplateResponseMixin",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "edit": {
+      "type": "object",
+      "$defs": {
+        "BaseFormView": {
+          "type": "object",
+          "description": "A base view for displaying a form.",
+          "extends": [
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.BaseFormView",
+          "properties": {
+            "extra_context": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "BaseCreateView": {
+          "type": "object",
+          "description": "Base view for creating a new object instance.",
+          "longDescription": "Using this base class requires subclassing to provide a response mixin.",
+          "extends": [
+            "#/$defs/edit/$defs/ModelFormMixin",
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.BaseCreateView",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "BaseDeleteView": {
+          "type": "object",
+          "description": "Base view for deleting an object.",
+          "longDescription": "Using this base class requires subclassing to provide a response mixin.",
+          "extends": [
+            "#/$defs/edit/$defs/DeletionMixin",
+            "#/$defs/detail/$defs/BaseDetailView",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.BaseDeleteView",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "BaseUpdateView": {
+          "type": "object",
+          "description": "Base view for updating an existing object.",
+          "longDescription": "Using this base class requires subclassing to provide a response mixin.",
+          "extends": [
+            "#/$defs/edit/$defs/ModelFormMixin",
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.BaseUpdateView",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "FormView": {
+          "type": "object",
+          "description": "A view for displaying a form and rendering a template response.",
+          "extends": [
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/edit/$defs/BaseFormView",
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.FormView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "success_url": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            }
+          }
+        },
+        "CreateView": {
+          "type": "object",
+          "description": "View for creating a new object, with a response rendered by a template.",
+          "extends": [
+            "#/$defs/detail/$defs/SingleObjectTemplateResponseMixin",
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/edit/$defs/BaseCreateView",
+            "#/$defs/edit/$defs/ModelFormMixin",
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.CreateView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_field": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_form"
+            }
+          }
+        },
+        "DeleteView": {
+          "type": "object",
+          "description": "View for deleting an object retrieved with self.get_object(), with a\nresponse rendered by a template.",
+          "extends": [
+            "#/$defs/detail/$defs/SingleObjectTemplateResponseMixin",
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/edit/$defs/BaseDeleteView",
+            "#/$defs/edit/$defs/DeletionMixin",
+            "#/$defs/detail/$defs/BaseDetailView",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.DeleteView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_field": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_confirm_delete"
+            }
+          }
+        },
+        "UpdateView": {
+          "type": "object",
+          "description": "View for updating an object, with a response rendered by a template.",
+          "extends": [
+            "#/$defs/detail/$defs/SingleObjectTemplateResponseMixin",
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/edit/$defs/BaseUpdateView",
+            "#/$defs/edit/$defs/ModelFormMixin",
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/edit/$defs/ProcessFormView",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.UpdateView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "initial": {
+              "type": "object"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_field": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_form"
+            }
+          }
+        },
+        "FormMixin": {
+          "type": "object",
+          "description": "Provide a way to show and handle a form in a request.",
+          "extends": [
+            "#/$defs/base/$defs/ContextMixin"
+          ],
+          "wraps": "django.views.generic.edit.FormMixin",
+          "properties": {
+            "extra_context": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "initial": {
+              "type": "object"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "ModelFormMixin": {
+          "type": "object",
+          "description": "Provide a way to show and handle a ModelForm in a request.",
+          "extends": [
+            "#/$defs/edit/$defs/FormMixin",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin"
+          ],
+          "wraps": "django.views.generic.edit.ModelFormMixin",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "fields": {
+              "type": "string"
+            },
+            "form_class": {
+              "type": "string"
+            },
+            "initial": {
+              "type": "object"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "success_url": {
+              "type": "string"
+            }
+          }
+        },
+        "ProcessFormView": {
+          "type": "object",
+          "description": "Render a form on GET and processes it on POST.",
+          "extends": [
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.edit.ProcessFormView",
+          "properties": {
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            }
+          }
+        },
+        "DeletionMixin": {
+          "type": "object",
+          "description": "Provide the ability to delete objects.",
+          "wraps": "django.views.generic.edit.DeletionMixin",
+          "properties": {
+            "success_url": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "detail": {
+      "type": "object",
+      "$defs": {
+        "BaseDetailView": {
+          "type": "object",
+          "description": "A base view for displaying a single object.",
+          "extends": [
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.detail.BaseDetailView",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            }
+          }
+        },
+        "DetailView": {
+          "type": "object",
+          "description": "Render a \"detail\" view of an object.",
+          "longDescription": "By default this is a model instance looked up from `self.queryset`, but the\nview will support display of *any* object by overriding `self.get_object()`.",
+          "extends": [
+            "#/$defs/detail/$defs/SingleObjectTemplateResponseMixin",
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/detail/$defs/BaseDetailView",
+            "#/$defs/detail/$defs/SingleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.detail.DetailView",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_field": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_detail"
+            }
+          }
+        },
+        "SingleObjectMixin": {
+          "type": "object",
+          "description": "Provide the ability to retrieve a single object for further manipulation.",
+          "extends": [
+            "#/$defs/base/$defs/ContextMixin"
+          ],
+          "wraps": "django.views.generic.detail.SingleObjectMixin",
+          "properties": {
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "pk_url_kwarg": {
+              "type": "string",
+              "default": "pk"
+            },
+            "query_pk_and_slug": {
+              "type": "boolean"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "slug_field": {
+              "type": "string",
+              "default": "slug"
+            },
+            "slug_url_kwarg": {
+              "type": "string",
+              "default": "slug"
+            }
+          }
+        },
+        "SingleObjectTemplateResponseMixin": {
+          "type": "object",
+          "extends": [
+            "#/$defs/base/$defs/TemplateResponseMixin"
+          ],
+          "wraps": "django.views.generic.detail.SingleObjectTemplateResponseMixin",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_field": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_detail"
+            }
+          }
+        }
+      }
+    },
+    "list": {
+      "type": "object",
+      "$defs": {
+        "BaseListView": {
+          "type": "object",
+          "description": "A base view for displaying a list of objects.",
+          "extends": [
+            "#/$defs/list/$defs/MultipleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.list.BaseListView",
+          "properties": {
+            "allow_empty": {
+              "type": "boolean",
+              "default": true
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "ordering": {
+              "type": "string"
+            },
+            "page_kwarg": {
+              "type": "string",
+              "default": "page"
+            },
+            "paginate_by": {
+              "type": "string"
+            },
+            "paginate_orphans": {
+              "type": "integer"
+            },
+            "queryset": {
+              "type": "string"
+            }
+          }
+        },
+        "ListView": {
+          "type": "object",
+          "description": "Render some list of objects, set by `self.model` or `self.queryset`.\n`self.queryset` can actually be any iterable of items, not just a queryset.",
+          "extends": [
+            "#/$defs/list/$defs/MultipleObjectTemplateResponseMixin",
+            "#/$defs/base/$defs/TemplateResponseMixin",
+            "#/$defs/list/$defs/BaseListView",
+            "#/$defs/list/$defs/MultipleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.list.ListView",
+          "properties": {
+            "allow_empty": {
+              "type": "boolean",
+              "default": true
+            },
+            "content_type": {
+              "type": "string"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "ordering": {
+              "type": "string"
+            },
+            "page_kwarg": {
+              "type": "string",
+              "default": "page"
+            },
+            "paginate_by": {
+              "type": "string"
+            },
+            "paginate_orphans": {
+              "type": "integer"
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_list"
+            }
+          }
+        },
+        "MultipleObjectMixin": {
+          "type": "object",
+          "description": "A mixin for views manipulating multiple objects.",
+          "extends": [
+            "#/$defs/base/$defs/ContextMixin"
+          ],
+          "wraps": "django.views.generic.list.MultipleObjectMixin",
+          "properties": {
+            "allow_empty": {
+              "type": "boolean",
+              "default": true
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "ordering": {
+              "type": "string"
+            },
+            "page_kwarg": {
+              "type": "string",
+              "default": "page"
+            },
+            "paginate_by": {
+              "type": "string"
+            },
+            "paginate_orphans": {
+              "type": "integer"
+            },
+            "queryset": {
+              "type": "string"
+            }
+          }
+        },
+        "MultipleObjectTemplateResponseMixin": {
+          "type": "object",
+          "description": "Mixin for responding with a template and list of objects.",
+          "extends": [
+            "#/$defs/base/$defs/TemplateResponseMixin"
+          ],
+          "wraps": "django.views.generic.list.MultipleObjectTemplateResponseMixin",
+          "properties": {
+            "content_type": {
+              "type": "string"
+            },
+            "template_engine": {
+              "type": "string"
+            },
+            "template_name": {
+              "type": "string"
+            },
+            "template_name_suffix": {
+              "type": "string",
+              "default": "_list"
+            }
+          }
+        }
+      }
+    },
+    "dates": {
+      "type": "object",
+      "$defs": {
+        "YearMixin": {
+          "type": "object",
+          "description": "Mixin for views manipulating year-based data.",
+          "wraps": "django.views.generic.dates.YearMixin",
+          "properties": {
+            "year": {
+              "type": "string"
+            },
+            "year_format": {
+              "type": "string",
+              "default": "%Y"
+            }
+          }
+        },
+        "MonthMixin": {
+          "type": "object",
+          "description": "Mixin for views manipulating month-based data.",
+          "wraps": "django.views.generic.dates.MonthMixin",
+          "properties": {
+            "month": {
+              "type": "string"
+            },
+            "month_format": {
+              "type": "string",
+              "default": "%b"
+            }
+          }
+        },
+        "DayMixin": {
+          "type": "object",
+          "description": "Mixin for views manipulating day-based data.",
+          "wraps": "django.views.generic.dates.DayMixin",
+          "properties": {
+            "day": {
+              "type": "string"
+            },
+            "day_format": {
+              "type": "string",
+              "default": "%d"
+            }
+          }
+        },
+        "WeekMixin": {
+          "type": "object",
+          "description": "Mixin for views manipulating week-based data.",
+          "wraps": "django.views.generic.dates.WeekMixin",
+          "properties": {
+            "week": {
+              "type": "string"
+            },
+            "week_format": {
+              "type": "string",
+              "default": "%U"
+            }
+          }
+        },
+        "DateMixin": {
+          "type": "object",
+          "description": "Mixin class for views manipulating date-based data.",
+          "wraps": "django.views.generic.dates.DateMixin",
+          "properties": {
+            "allow_future": {
+              "type": "boolean"
+            },
+            "date_field": {
+              "type": "string"
+            }
+          }
+        },
+        "BaseDateListView": {
+          "type": "object",
+          "description": "Abstract base class for date-based views displaying a list of objects.",
+          "extends": [
+            "#/$defs/list/$defs/MultipleObjectMixin",
+            "#/$defs/base/$defs/ContextMixin",
+            "#/$defs/dates/$defs/DateMixin",
+            "#/$defs/base/$defs/View"
+          ],
+          "wraps": "django.views.generic.dates.BaseDateListView",
+          "properties": {
+            "allow_empty": {
+              "type": "boolean"
+            },
+            "allow_future": {
+              "type": "boolean"
+            },
+            "context_object_name": {
+              "type": "string"
+            },
+            "date_field": {
+              "type": "string"
+            },
+            "date_list_period": {
+              "type": "string",
+              "default": "year"
+            },
+            "extra_context": {
+              "type": "string"
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "model": {
+              "type": "string"
+            },
+            "ordering": {
+              "type": "string"
+            },
+            "page_kwarg": {
+              "type": "string",
+              "default": "page"
+            },
+            "paginate_by": {
+              "type": "string"
+            },
+            "paginate_orphans": {
+              "type": "integer"
+            },
+            "queryset": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "mixins": {
+      "type": "object",
+      "$defs": {
+        "AccessMixin": {
+          "type": "object",
+          "description": "Abstract CBV mixin that gives access mixins the same customizable\nfunctionality.",
+          "wraps": "django.contrib.auth.mixins.AccessMixin",
+          "properties": {
+            "login_url": {
+              "type": "string"
+            },
+            "permission_denied_message": {
+              "type": "string"
+            },
+            "raise_exception": {
+              "type": "boolean"
+            },
+            "redirect_field_name": {
+              "type": "string",
+              "default": "next"
+            }
+          }
+        },
+        "LoginRequiredMixin": {
+          "type": "object",
+          "description": "Verify that the current user is authenticated.",
+          "extends": [
+            "#/$defs/mixins/$defs/AccessMixin"
+          ],
+          "wraps": "django.contrib.auth.mixins.LoginRequiredMixin",
+          "properties": {
+            "login_url": {
+              "type": "string"
+            },
+            "permission_denied_message": {
+              "type": "string"
+            },
+            "raise_exception": {
+              "type": "boolean"
+            },
+            "redirect_field_name": {
+              "type": "string",
+              "default": "next"
+            }
+          }
+        },
+        "PermissionRequiredMixin": {
+          "type": "object",
+          "description": "Verify that the current user has all specified permissions.",
+          "extends": [
+            "#/$defs/mixins/$defs/AccessMixin"
+          ],
+          "wraps": "django.contrib.auth.mixins.PermissionRequiredMixin",
+          "properties": {
+            "login_url": {
+              "type": "string"
+            },
+            "permission_denied_message": {
+              "type": "string"
+            },
+            "permission_required": {
+              "type": "string"
+            },
+            "raise_exception": {
+              "type": "boolean"
+            },
+            "redirect_field_name": {
+              "type": "string",
+              "default": "next"
+            }
+          }
+        },
+        "UserPassesTestMixin": {
+          "type": "object",
+          "description": "Deny a request with a permission error if the test_func() method returns\nFalse.",
+          "extends": [
+            "#/$defs/mixins/$defs/AccessMixin"
+          ],
+          "wraps": "django.contrib.auth.mixins.UserPassesTestMixin",
+          "properties": {
+            "login_url": {
+              "type": "string"
+            },
+            "permission_denied_message": {
+              "type": "string"
+            },
+            "raise_exception": {
+              "type": "boolean"
+            },
+            "redirect_field_name": {
+              "type": "string",
+              "default": "next"
+            }
+          }
+        }
+      }
+    }
+  }
+}

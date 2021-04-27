@@ -3,7 +3,7 @@
 <node TEXT="vishuda" FOLDED="false" ID="ID_244004206" CREATED="1601987431072" MODIFIED="1601987442507" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
-    <properties show_icon_for_attributes="true" fit_to_viewport="false" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
+    <properties fit_to_viewport="false" show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
 
 <map_styles>
 <stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
@@ -63,7 +63,7 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="10" RULE="ON_BRANCH_CREATION"/>
+<hook NAME="AutomaticEdgeColor" COUNTER="11" RULE="ON_BRANCH_CREATION"/>
 <node TEXT="personas" POSITION="right" ID="ID_873965533" CREATED="1587552096281" MODIFIED="1601987470309">
 <icon BUILTIN="executable"/>
 <edge COLOR="#0000ff"/>
@@ -98,6 +98,9 @@
 <node TEXT="extends" ID="ID_1864385661" CREATED="1596882750530" MODIFIED="1596883061561">
 <node TEXT="ngoschema.instances.Instance" ID="ID_297416115" CREATED="1600966857836" MODIFIED="1610526331971"/>
 <node TEXT="ngoschema.instances.Entity" ID="ID_1949442662" CREATED="1600966857836" MODIFIED="1601995406747"/>
+</node>
+<node TEXT="abstract" ID="ID_1306849918" CREATED="1612100323230" MODIFIED="1612100341031">
+<node TEXT="true" ID="ID_1026045888" CREATED="1612100341957" MODIFIED="1612100344887"/>
 </node>
 <node TEXT="primaryKeys" ID="ID_719812270" CREATED="1609606018387" MODIFIED="1610868968268">
 <icon BUILTIN="button_cancel"/>
@@ -148,6 +151,24 @@
 <icon BUILTIN="very_positive"/>
 <node TEXT="View" ID="ID_971307254" CREATED="1601988532175" MODIFIED="1601988533857"/>
 </node>
+<node TEXT="shop" ID="ID_409565235" CREATED="1614150214564" MODIFIED="1614150220159">
+<node TEXT="Shop" ID="ID_704762901" CREATED="1614150242376" MODIFIED="1614150244985"/>
+</node>
+<node TEXT="cms" ID="ID_432166417" CREATED="1614150220687" MODIFIED="1614150222197">
+<node TEXT="Cms" ID="ID_676329726" CREATED="1614150247179" MODIFIED="1614150260441"/>
+</node>
+</node>
+</node>
+<node TEXT="Shop" ID="ID_167682662" CREATED="1614150224171" MODIFIED="1614150227363">
+<node TEXT="properties" ID="ID_837825609" CREATED="1614150593679" MODIFIED="1614151207222">
+<node TEXT="catalogs" ID="ID_390295180" CREATED="1614151207701" MODIFIED="1614151210341"/>
+<node TEXT="products" ID="ID_368851727" CREATED="1614151210567" MODIFIED="1614151216178"/>
+<node TEXT="manufacturers" ID="ID_765813615" CREATED="1614151788897" MODIFIED="1614151795613"/>
+</node>
+</node>
+<node TEXT="Cms" ID="ID_1762157746" CREATED="1614150227705" MODIFIED="1614150237638">
+<node TEXT="extends" ID="ID_134162404" CREATED="1614150521205" MODIFIED="1614150522974">
+<node TEXT="ngomm_cms.PageNode" ID="ID_1297817837" CREATED="1614150523901" MODIFIED="1614150532111"/>
 </node>
 </node>
 </node>
@@ -170,6 +191,10 @@
 <node TEXT="Vishuda defines a framework of basic objects and interfaces to quickly define new apps or extend existing ones." ID="ID_704448729" CREATED="1602527619137" MODIFIED="1602527894553"/>
 <node TEXT="As the schema used to define most of the API is in json-schema, the remaining coding in Python should only be business implementation." ID="ID_1050189403" CREATED="1602527901768" MODIFIED="1602528705150"/>
 <node TEXT="Existing libraries allow to automatically create interfaces to other frameworks for web apps such as Django, Django Rest Framework, Django CMS, Django Shop; or for scientific calculations to generate corresponding code in other languages (cpp, c, fmi, modelica, matlab, amesim). Contact Numengo for consultancy." ID="ID_50281975" CREATED="1602528739089" MODIFIED="1602535832588"/>
+</node>
+<node TEXT="https://github.com/wighawag/template-ethereum-contracts" POSITION="right" ID="ID_844039625" CREATED="1615277876567" MODIFIED="1615277885964" LINK="https://github.com/wighawag/template-ethereum-contracts">
+<icon BUILTIN="button_cancel"/>
+<edge COLOR="#7c7c00"/>
 </node>
 </node>
 </map>

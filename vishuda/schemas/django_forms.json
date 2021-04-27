@@ -1,0 +1,4570 @@
+{
+  "$id": "https://numengo.org/django-forms#",
+  "$schema": "https://numengo.org/ngoschema/draft-06",
+  "description": "Django forms definitions",
+  "title": "object",
+  "$defs": {
+    "forms": {
+      "type": "object",
+      "$defs": {
+        "BaseModelForm": {
+          "type": "object",
+          "extends": [
+            "#/$defs/forms/$defs/BaseForm"
+          ],
+          "wraps": "django.forms.models.BaseModelForm",
+          "properties": {
+            "default_renderer": {
+              "type": "string"
+            },
+            "field_order": {
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "use_required_attribute": {
+              "type": "string",
+              "default": true
+            },
+            "data": {
+              "type": "string"
+            },
+            "files": {
+              "type": "string"
+            },
+            "auto_id": {
+              "type": "string",
+              "default": "id_%s"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "error_class": {
+              "type": "importable",
+              "default": "django.forms.utils.ErrorList"
+            },
+            "label_suffix": {
+              "type": "string"
+            },
+            "empty_permitted": {
+              "type": "boolean"
+            },
+            "instance": {
+              "type": "string"
+            },
+            "renderer": {
+              "type": "string"
+            }
+          }
+        },
+        "InlineForeignKeyField": {
+          "type": "object",
+          "description": "A basic integer field that deals with validating the given value to a\ngiven parent instance in an inline.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.models.InlineForeignKeyField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "The inline value did not match the parent instance."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "parent_instance": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "ModelChoiceField": {
+          "type": "object",
+          "description": "A ChoiceField whose choices are a model QuerySet.",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.models.ModelChoiceField",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "pk": {
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ModelForm": {
+          "type": "object",
+          "extends": [
+            "#/$defs/forms/$defs/BaseModelForm",
+            "#/$defs/forms/$defs/BaseForm"
+          ],
+          "wraps": "django.forms.models.ModelForm",
+          "properties": {
+            "base_fields": {
+              "type": "object"
+            },
+            "declared_fields": {
+              "type": "object"
+            },
+            "default_renderer": {
+              "type": "string"
+            },
+            "field_order": {
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "use_required_attribute": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "ModelMultipleChoiceField": {
+          "type": "object",
+          "description": "A MultipleChoiceField whose choices are a model QuerySet.",
+          "extends": [
+            "#/$defs/forms/$defs/ModelChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.models.ModelMultipleChoiceField",
+          "properties": {
+            "model": {
+              "type": "string"
+            },
+            "p_keys": {
+              "type": "array"
+            }
+          },
+          "additionalProperties": false
+        },
+        "BaseForm": {
+          "type": "object",
+          "description": "The main implementation of all the Form logic. Note that this class is\ndifferent than Form. See the comments by the Form class for more info. Any\nimprovements to the form API should be made to this class, not to the Form\nclass.",
+          "wraps": "django.forms.forms.BaseForm",
+          "properties": {
+            "errors": true,
+            "media": true,
+            "default_renderer": {
+              "type": "string"
+            },
+            "field_order": {
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "use_required_attribute": {
+              "type": "string",
+              "default": true
+            },
+            "data": {
+              "type": "string"
+            },
+            "files": {
+              "type": "string"
+            },
+            "auto_id": {
+              "type": "string",
+              "default": "id_%s"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "error_class": {
+              "type": "importable",
+              "default": "django.forms.utils.ErrorList"
+            },
+            "label_suffix": {
+              "type": "string"
+            },
+            "empty_permitted": {
+              "type": "boolean"
+            },
+            "renderer": {
+              "type": "string"
+            }
+          }
+        },
+        "Form": {
+          "type": "object",
+          "description": "A collection of Fields, plus their associated data.",
+          "extends": [
+            "#/$defs/forms/$defs/BaseForm"
+          ],
+          "wraps": "django.forms.forms.Form",
+          "properties": {
+            "base_fields": {
+              "type": "object"
+            },
+            "declared_fields": {
+              "type": "object"
+            },
+            "default_renderer": {
+              "type": "string"
+            },
+            "field_order": {
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            },
+            "use_required_attribute": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        }
+      }
+    },
+    "fields": {
+      "type": "object",
+      "$defs": {
+        "BaseTemporalField": {
+          "type": "datetime",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.BaseTemporalField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "BooleanField": {
+          "type": "boolean",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.BooleanField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "CharField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.CharField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "ChoiceField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.ChoiceField",
+          "properties": {
+            "choices": true,
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "ComboField": {
+          "type": "object",
+          "description": "A Field whose clean() method calls multiple Field clean() methods.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.ComboField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "fields": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "DateField": {
+          "type": "date",
+          "extends": [
+            "#/$defs/fields/$defs/BaseTemporalField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.DateField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid date."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "input_formats": {
+              "type": "object",
+              "default": [
+                "%Y-%m-%d",
+                "%m/%d/%Y",
+                "%m/%d/%y"
+              ]
+            }
+          }
+        },
+        "DateTimeField": {
+          "type": "datetime",
+          "extends": [
+            "#/$defs/fields/$defs/BaseTemporalField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.DateTimeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid date/time."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "input_formats": {
+              "type": "object",
+              "default": [
+                "%Y-%m-%d %H:%M:%S",
+                "%Y-%m-%d %H:%M:%S.%f",
+                "%Y-%m-%d %H:%M",
+                "%Y-%m-%d",
+                "%m/%d/%Y %H:%M:%S",
+                "%m/%d/%Y %H:%M:%S.%f",
+                "%m/%d/%Y %H:%M",
+                "%m/%d/%Y",
+                "%m/%d/%y %H:%M:%S",
+                "%m/%d/%y %H:%M:%S.%f",
+                "%m/%d/%y %H:%M",
+                "%m/%d/%y"
+              ]
+            }
+          }
+        },
+        "DecimalField": {
+          "type": "number",
+          "extends": [
+            "#/$defs/fields/$defs/IntegerField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.DecimalField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a number."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "re_decimal": {
+              "type": "object",
+              "default": "\\.0*\\s*$"
+            }
+          }
+        },
+        "DurationField": {
+          "type": "integer",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.DurationField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid duration.",
+                "overflow": "The number of days must be between {min_days} and {max_days}."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "EmailField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.EmailField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "string",
+                  "format": "email"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          },
+          "format": "email"
+        },
+        "Field": {
+          "type": "object",
+          "wraps": "django.forms.fields.Field",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "string",
+                  "format": "email"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "FileField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.FileField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "No file was submitted. Check the encoding type on the form.",
+                "missing": "No file was submitted.",
+                "empty": "The submitted file is empty.",
+                "max_length": "",
+                "contradiction": "Please either submit a file or check the clear checkbox, not both."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "FilePathField": {
+          "type": "path",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.FilePathField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "FloatField": {
+          "type": "number",
+          "extends": [
+            "#/$defs/fields/$defs/IntegerField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.FloatField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a number."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "re_decimal": {
+              "type": "object",
+              "default": "\\.0*\\s*$"
+            }
+          }
+        },
+        "GenericIPAddressField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.GenericIPAddressField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          },
+          "format": [
+            "ipv4",
+            "ipv6"
+          ]
+        },
+        "ImageField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/FileField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.ImageField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_image": "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "path"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "IntegerField": {
+          "type": "integer",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.IntegerField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_image": "Upload a valid image. The file you uploaded was either not an image or a corrupted image."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "path"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "re_decimal": {
+              "type": "object",
+              "default": "\\.0*\\s*$"
+            }
+          }
+        },
+        "MultiValueField": {
+          "type": "object",
+          "description": "Aggregate the logic of multiple Fields.",
+          "longDescription": "Its clean() method takes a \"decompressed\" list of values, which are then\ncleaned into a single value according to self.fields. Each value in\nthis list is cleaned by the corresponding field -- the first value is\ncleaned by the first field, the second value is cleaned by the second\nfield, etc. Once all fields are cleaned, the list of clean values is\n\"compressed\" into a single value.\n\nSubclasses should not have to implement clean(). Instead, they must\nimplement compress(), which takes a list of valid values and returns a\n\"compressed\" version of those values -- a single value.\n\nYou'll probably want to use this with MultiWidget.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.MultiValueField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a list of values.",
+                "incomplete": "Enter a complete value."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "fields": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "MultipleChoiceField": {
+          "type": "array",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.MultipleChoiceField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices.",
+                "invalid_list": "Enter a list of values."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          },
+          "items": {
+            "type": "string"
+          }
+        },
+        "NullBooleanField": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "A field whose valid values are None, True, and False. Clean invalid values\nto None.",
+          "extends": [
+            "#/$defs/fields/$defs/BooleanField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.NullBooleanField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "RegexField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.RegexField",
+          "properties": {
+            "regex": true,
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "SlugField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.SlugField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "string",
+                  "pattern": "^[-a-zA-Z0-9_]+\\Z"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "SplitDateTimeField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/MultiValueField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.SplitDateTimeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_date": "Enter a valid date.",
+                "invalid_time": "Enter a valid time."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "TimeField": {
+          "type": "time",
+          "extends": [
+            "#/$defs/fields/$defs/BaseTemporalField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.TimeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid time."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "input_formats": {
+              "type": "object",
+              "default": [
+                "%H:%M:%S",
+                "%H:%M:%S.%f",
+                "%H:%M"
+              ]
+            }
+          }
+        },
+        "TypedChoiceField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.TypedChoiceField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "TypedMultipleChoiceField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/MultipleChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.TypedMultipleChoiceField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices.",
+                "invalid_list": "Enter a list of values."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "URLField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.URLField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid URL."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "default": [
+                {
+                  "type": "string",
+                  "format": "uri-reference"
+                }
+              ]
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          },
+          "format": "uri-reference"
+        },
+        "UUIDField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "django.forms.fields.UUIDField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a valid UUID."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "MoneyFieldWidget": {
+          "type": "object",
+          "description": "Replacement for NumberInput widget adding the currency suffix.",
+          "extends": [
+            "#/$defs/widgets/$defs/NumberInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "shop.money.fields.MoneyFieldWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "number"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/number.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "MoneyFormField": {
+          "type": "object",
+          "description": "Use this field type in Django Forms instead of a DecimalField, whenever a input field for\nthe Money representation is required.",
+          "extends": [
+            "#/$defs/fields/$defs/DecimalField",
+            "#/$defs/fields/$defs/IntegerField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "shop.money.fields.MoneyFormField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a number."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "re_decimal": {
+              "type": "object",
+              "default": "\\.0*\\s*$"
+            },
+            "money_class": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminFileFormField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/forms/$defs/ModelChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "filer.fields.file.AdminFileFormField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. That choice is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "rel": {
+              "type": "string",
+              "required": true
+            },
+            "queryset": {
+              "type": "string",
+              "required": true
+            },
+            "to_field_name": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "AdminFileWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/ForeignKeyRawIdWidget",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "filer.fields.file.AdminFileWidget",
+          "properties": {
+            "choices": {
+              "type": "object",
+              "default": {
+                "field": "Image",
+                "entity": "filer.models.filemodels.File",
+                "order_by": false
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/foreign_key_raw_id.html"
+            }
+          }
+        },
+        "AdminFolderFormField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/forms/$defs/ModelChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "filer.fields.folder.AdminFolderFormField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. That choice is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "rel": {
+              "type": "string",
+              "required": true
+            },
+            "queryset": {
+              "type": "string",
+              "required": true
+            },
+            "to_field_name": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "AdminFolderWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/ForeignKeyRawIdWidget",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "filer.fields.folder.AdminFolderWidget",
+          "properties": {
+            "choices": {
+              "type": "object",
+              "default": {
+                "field": "Folder",
+                "entity": "filer.models.foldermodels.Folder",
+                "order_by": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "hidden"
+            },
+            "is_hidden": {
+              "type": "boolean"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/foreign_key_raw_id.html"
+            }
+          }
+        },
+        "AdminImageFormField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/AdminFileFormField",
+            "#/$defs/forms/$defs/ModelChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "filer.fields.image.AdminImageFormField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. That choice is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "AdminImageWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/AdminFileWidget",
+            "#/$defs/widgets/$defs/ForeignKeyRawIdWidget",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "filer.fields.image.AdminImageWidget",
+          "properties": {
+            "choices": {
+              "type": "object",
+              "default": {
+                "field": "Marker Image",
+                "entity": "filer.models.imagemodels.Image",
+                "order_by": false
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/foreign_key_raw_id.html"
+            }
+          }
+        },
+        "BorderChoiceField": {
+          "type": "array",
+          "extends": [
+            "#/$defs/fields/$defs/MultiValueField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.BorderChoiceField",
+          "properties": {
+            "BORDER_STYLES": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "none",
+                "solid",
+                "dashed",
+                "dotted",
+                "double",
+                "groove",
+                "hidden",
+                "inset",
+                "outset",
+                "ridge"
+              ]
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a list of values.",
+                "incomplete": "Enter a complete value."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          },
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "CascadeImageField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/AdminImageFormField",
+            "#/$defs/fields/$defs/AdminFileFormField",
+            "#/$defs/forms/$defs/ModelChoiceField",
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.CascadeImageField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. That choice is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "ColorField": {
+          "type": "array",
+          "extends": [
+            "#/$defs/fields/$defs/MultiValueField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.ColorField",
+          "properties": {
+            "DEFAULT_COLOR": {
+              "type": "string",
+              "default": "#808080"
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a list of values.",
+                "incomplete": "Enter a complete value."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "inherit_color": {
+              "type": "boolean"
+            },
+            "default_color": {
+              "type": "string"
+            }
+          },
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "boolean"
+            }
+          ]
+        },
+        "HiddenDictField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.HiddenDictField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "MultiSizeField": {
+          "type": "object",
+          "description": "Some size input fields must be specified per Bootstrap breakpoint. Use this multiple\ninput field to handle this.",
+          "extends": [
+            "#/$defs/fields/$defs/MultiValueField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.MultiSizeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid": "Enter a list of values.",
+                "incomplete": "Enter a complete value."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            },
+            "properties": {
+              "type": "string",
+              "required": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "SelectOverflowField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.SelectOverflowField",
+          "properties": {
+            "CHOICES": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "default": [
+                [
+                  "auto",
+                  "auto"
+                ],
+                [
+                  "scroll",
+                  "scroll"
+                ],
+                [
+                  "hidden",
+                  "hidden"
+                ]
+              ]
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "SelectTextAlignField": {
+          "type": "string",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.SelectTextAlignField",
+          "properties": {
+            "CHOICES": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "default": [
+                [
+                  "left",
+                  "left"
+                ],
+                [
+                  "center",
+                  "center"
+                ],
+                [
+                  "right",
+                  "right"
+                ],
+                [
+                  "justify",
+                  "justify"
+                ]
+              ]
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "invalid_choice": "Select a valid choice. %(value)s is not one of the available choices."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "SizeField": {
+          "type": "string",
+          "description": "Use this field for validating input containing a value ending in ``px``, ``em``, ``rem`` or ``%``.\nUse it for values representing a size, margin, padding, width or height.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "cmsplugin_cascade.fields.SizeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required."
+              }
+            },
+            "default_validators": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
+            },
+            "empty_values": {
+              "type": "array",
+              "items": [
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "array"
+                },
+                {
+                  "type": "object"
+                }
+              ],
+              "default": [
+                null,
+                "",
+                [],
+                [],
+                {}
+              ]
+            }
+          }
+        },
+        "TranslatedField": {
+          "type": "string",
+          "description": "Proxy field attached to a model.",
+          "longDescription": "The field is automatically added to the shared model.\nHowever, this can be assigned manually to be more explicit, or to pass the ``any_language`` value.\nThe ``any_language=True`` option causes the attribute to always return a translated value,\neven when the current language and fallback are missing.\nThis can be useful for \"title\" attributes for example.\n\nExample:\n\n.. code-block:: python\n\n    from django.db import models\n    from parler.models import TranslatableModel, TranslatedFieldsModel\n\n    class MyModel(TranslatableModel):\n        title = TranslatedField(any_language=True)  # Add with any-fallback support\n        slug = TranslatedField()                    # Optional, but explicitly mentioned\n\n\n    class MyModelTranslation(TranslatedFieldsModel):\n        # Manual model class:\n        master = models.ForeignKey(MyModel, related_name='translations', null=True)\n        title = models.CharField(\"Title\", max_length=200)\n        slug = models.SlugField(\"Slug\")",
+          "wraps": "parler.fields.TranslatedField",
+          "properties": {
+            "meta": true,
+            "any_language": {
+              "type": "boolean"
+            }
+          },
+          "maxLength": 1000
+        }
+      }
+    },
+    "widgets": {
+      "type": "object",
+      "$defs": {
+        "CheckboxInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/CheckboxInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "shop.forms.widgets.CheckboxInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "checkbox"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "djng/forms/widgets/bootstrap3/checkbox.html"
+            }
+          }
+        },
+        "CheckboxSelectMultiple": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.CheckboxSelectMultiple",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_multiple_selected": {
+              "type": "boolean",
+              "default": true
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "checked": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "checkbox"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean",
+              "default": true
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/checkbox_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/checkbox_select.html"
+            }
+          }
+        },
+        "ChoiceWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.ChoiceWidget",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_multiple_selected": {
+              "type": "boolean",
+              "default": true
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "checked": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "checkbox"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean",
+              "default": true
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/checkbox_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/checkbox_select.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "choices": {
+              "type": "array"
+            }
+          }
+        },
+        "ClearableFileInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/FileInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.ClearableFileInput",
+          "properties": {
+            "clear_checkbox_label": {
+              "type": "object",
+              "default": "Clear"
+            },
+            "initial_text": {
+              "type": "object",
+              "default": "Currently"
+            },
+            "input_text": {
+              "type": "object",
+              "default": "Change"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "file"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean",
+              "default": true
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/clearable_file_input.html"
+            }
+          }
+        },
+        "DateInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/DateTimeBaseInput",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.DateInput",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "DATE_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/date.html"
+            }
+          }
+        },
+        "DateTimeBaseInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.DateTimeBaseInput",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "DATE_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/date.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "format": {
+              "type": "string"
+            }
+          }
+        },
+        "DateTimeInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/DateTimeBaseInput",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.DateTimeInput",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "DATETIME_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/datetime.html"
+            }
+          }
+        },
+        "EmailInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.EmailInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "email"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/email.html"
+            }
+          }
+        },
+        "FileInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.FileInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "email"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/email.html"
+            }
+          }
+        },
+        "HiddenInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.HiddenInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "hidden"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/hidden.html"
+            }
+          }
+        },
+        "Input": {
+          "type": "object",
+          "description": "Base class for all <input> widgets.",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.Input",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "hidden"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/hidden.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "MultiWidget": {
+          "type": "object",
+          "description": "A widget that is composed of multiple widgets.",
+          "longDescription": "In addition to the values added by Widget.get_context(), this widget\nadds a list of subwidgets to the context as widget['subwidgets'].\nThese can be looped over and rendered like normal widgets.\n\nYou'll probably want to use this class with MultiValueField.",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.MultiWidget",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/multiwidget.html"
+            },
+            "widgets": {
+              "type": "string",
+              "required": true
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "MultipleHiddenInput": {
+          "type": "object",
+          "description": "Handle <input type=\"hidden\"> for fields that have a list\nof values.",
+          "extends": [
+            "#/$defs/widgets/$defs/HiddenInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.MultipleHiddenInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "hidden"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/multiple_hidden.html"
+            }
+          }
+        },
+        "NullBooleanSelect": {
+          "type": "object",
+          "description": "A Select Widget intended to be used with NullBooleanField.",
+          "extends": [
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.NullBooleanSelect",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean"
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "NumberInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.NumberInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "hidden"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/multiple_hidden.html"
+            }
+          }
+        },
+        "PasswordInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.PasswordInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "password"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/password.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "render_value": {
+              "type": "boolean"
+            }
+          }
+        },
+        "RadioSelect": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/RadioSelect",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "shop.forms.widgets.RadioSelect",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_multiple_selected": {
+              "type": "boolean"
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "checked": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "radio"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean",
+              "default": true
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/radio_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "djng/forms/widgets/bootstrap3/radio.html"
+            }
+          }
+        },
+        "Select": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "shop.forms.widgets.Select",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean"
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "djng/forms/widgets/bootstrap3/select.html"
+            }
+          }
+        },
+        "SelectDateWidget": {
+          "type": "object",
+          "description": "A widget that splits date input into three <select> boxes.",
+          "longDescription": "This also serves as an example of a Widget that has more than one HTML\nelement and hence implements value_from_datadict.",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.SelectDateWidget",
+          "properties": {
+            "date_re": {
+              "type": "object",
+              "default": "(\\d{4}|0)-(\\d\\d?)-(\\d\\d?)$"
+            },
+            "day_field": {
+              "type": "string",
+              "default": "%s_day"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "month_field": {
+              "type": "string",
+              "default": "%s_month"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "none_value": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "",
+                "---"
+              ]
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_date.html"
+            },
+            "year_field": {
+              "type": "string",
+              "default": "%s_year"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "years": {
+              "type": "string"
+            },
+            "months": {
+              "type": "string"
+            },
+            "empty_label": {
+              "type": "string"
+            }
+          }
+        },
+        "SelectMultiple": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.SelectMultiple",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean",
+              "default": true
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select.html"
+            }
+          }
+        },
+        "SplitDateTimeWidget": {
+          "type": "object",
+          "description": "A widget that splits datetime input into two <input type=\"text\"> boxes.",
+          "extends": [
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.SplitDateTimeWidget",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/splitdatetime.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "date_format": {
+              "type": "string"
+            },
+            "time_format": {
+              "type": "string"
+            },
+            "date_attrs": {
+              "type": "string"
+            },
+            "time_attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "SplitHiddenDateTimeWidget": {
+          "type": "object",
+          "description": "A widget that splits datetime input into two <input type=\"hidden\"> inputs.",
+          "extends": [
+            "#/$defs/widgets/$defs/SplitDateTimeWidget",
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.SplitHiddenDateTimeWidget",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/splithiddendatetime.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "date_format": {
+              "type": "string"
+            },
+            "time_format": {
+              "type": "string"
+            },
+            "date_attrs": {
+              "type": "string"
+            },
+            "time_attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "TextInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.TextInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "password"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/password.html"
+            }
+          }
+        },
+        "Textarea": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.Textarea",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/textarea.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "TimeInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/DateTimeBaseInput",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.TimeInput",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "TIME_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/time.html"
+            }
+          }
+        },
+        "URLInput": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.forms.widgets.URLInput",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "url"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/url.html"
+            }
+          }
+        },
+        "Widget": {
+          "type": "object",
+          "wraps": "django.forms.widgets.Widget",
+          "properties": {
+            "is_hidden": true,
+            "media": true,
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminBigIntegerFieldWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/AdminIntegerFieldWidget",
+            "#/$defs/widgets/$defs/NumberInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminBigIntegerFieldWidget",
+          "properties": {
+            "class_name": {
+              "type": "string",
+              "default": "vBigIntegerField"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "number"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/number.html"
+            }
+          }
+        },
+        "AdminDateWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/DateInput",
+            "#/$defs/widgets/$defs/DateTimeBaseInput",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminDateWidget",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "DATE_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/date.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "format": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminEmailInputWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/EmailInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminEmailInputWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "email"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/email.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminFileWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/ClearableFileInput",
+            "#/$defs/widgets/$defs/FileInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminFileWidget",
+          "properties": {
+            "clear_checkbox_label": {
+              "type": "object",
+              "default": "Clear"
+            },
+            "initial_text": {
+              "type": "object",
+              "default": "Currently"
+            },
+            "input_text": {
+              "type": "object",
+              "default": "Change"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "file"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean",
+              "default": true
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/clearable_file_input.html"
+            }
+          }
+        },
+        "AdminIntegerFieldWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/NumberInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminIntegerFieldWidget",
+          "properties": {
+            "class_name": {
+              "type": "string",
+              "default": "vBigIntegerField"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "file"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean",
+              "default": true
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/clearable_file_input.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminRadioSelect": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/RadioSelect",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminRadioSelect",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_multiple_selected": {
+              "type": "boolean"
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "checked": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "radio"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean",
+              "default": true
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/radio_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/radio.html"
+            }
+          }
+        },
+        "AdminSplitDateTime": {
+          "type": "object",
+          "description": "A SplitDateTime Widget that has some admin-specific styling.",
+          "extends": [
+            "#/$defs/widgets/$defs/SplitDateTimeWidget",
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminSplitDateTime",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/split_datetime.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminTextInputWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminTextInputWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/text.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminTextareaWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/Textarea",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminTextareaWidget",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/textarea.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminTimeWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/TimeInput",
+            "#/$defs/widgets/$defs/DateTimeBaseInput",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminTimeWidget",
+          "properties": {
+            "format_key": {
+              "type": "string",
+              "default": "TIME_INPUT_FORMATS"
+            },
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean"
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/time.html"
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "format": {
+              "type": "string"
+            }
+          }
+        },
+        "AdminURLFieldWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/URLInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AdminURLFieldWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "url"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/url.html"
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "AutocompleteMixin": {
+          "type": "object",
+          "description": "Select widget mixin that loads options from AutocompleteJsonView via AJAX.",
+          "longDescription": "Renders the necessary data attributes for select2 and adds the static form\nmedia.",
+          "wraps": "django.contrib.admin.widgets.AutocompleteMixin",
+          "properties": {
+            "media": true,
+            "url_name": {
+              "type": "string",
+              "default": "%s:%s_%s_autocomplete"
+            },
+            "rel": {
+              "type": "string",
+              "required": true
+            },
+            "admin_site": {
+              "type": "string",
+              "required": true
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "choices": {
+              "type": "array"
+            },
+            "using": {
+              "type": "string"
+            }
+          }
+        },
+        "AutocompleteSelect": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/AutocompleteMixin",
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AutocompleteSelect",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean"
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select.html"
+            },
+            "url_name": {
+              "type": "string",
+              "default": "%s:%s_%s_autocomplete"
+            }
+          }
+        },
+        "AutocompleteSelectMultiple": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/AutocompleteMixin",
+            "#/$defs/widgets/$defs/SelectMultiple",
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.AutocompleteSelectMultiple",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean",
+              "default": true
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select.html"
+            },
+            "url_name": {
+              "type": "string",
+              "default": "%s:%s_%s_autocomplete"
+            }
+          }
+        },
+        "FilteredSelectMultiple": {
+          "type": "object",
+          "description": "A SelectMultiple with a JavaScript filter interface.",
+          "longDescription": "Note that the resulting JavaScript assumes that the jsi18n\ncatalog has been loaded in the page",
+          "extends": [
+            "#/$defs/widgets/$defs/SelectMultiple",
+            "#/$defs/widgets/$defs/Select",
+            "#/$defs/widgets/$defs/ChoiceWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.FilteredSelectMultiple",
+          "properties": {
+            "add_id_index": {
+              "type": "boolean"
+            },
+            "allow_multiple_selected": {
+              "type": "boolean",
+              "default": true
+            },
+            "checked_attribute": {
+              "type": "object",
+              "default": {
+                "selected": true
+              }
+            },
+            "input_type": {
+              "type": "string",
+              "default": "select"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "option_inherits_attrs": {
+              "type": "boolean"
+            },
+            "option_template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select_option.html"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/select.html"
+            },
+            "verbose_name": {
+              "type": "string",
+              "required": true
+            },
+            "is_stacked": {
+              "type": "string",
+              "required": true
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "choices": {
+              "type": "array"
+            }
+          }
+        },
+        "ForeignKeyRawIdWidget": {
+          "type": "object",
+          "description": "A Widget for displaying ForeignKeys in the \"raw_id\" interface rather than\nin a <select> box.",
+          "extends": [
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.ForeignKeyRawIdWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "url"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/url.html"
+            },
+            "rel": {
+              "type": "string",
+              "required": true
+            },
+            "admin_site": {
+              "type": "string",
+              "required": true
+            },
+            "attrs": {
+              "type": "string"
+            },
+            "using": {
+              "type": "string"
+            }
+          }
+        },
+        "ManyToManyRawIdWidget": {
+          "type": "object",
+          "description": "A Widget for displaying ManyToMany ids in the \"raw_id\" interface rather than\nin a <select multiple> box.",
+          "extends": [
+            "#/$defs/widgets/$defs/ForeignKeyRawIdWidget",
+            "#/$defs/widgets/$defs/TextInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.ManyToManyRawIdWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "text"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/many_to_many_raw_id.html"
+            }
+          }
+        },
+        "RelatedFieldWidgetWrapper": {
+          "type": "object",
+          "description": "This class is a wrapper to a given widget to add the add icon for the\nadmin interface.",
+          "extends": [
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "django.contrib.admin.widgets.RelatedFieldWidgetWrapper",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "admin/widgets/related_widget_wrapper.html"
+            },
+            "widget": {
+              "type": "string",
+              "required": true
+            },
+            "rel": {
+              "type": "string",
+              "required": true
+            },
+            "admin_site": {
+              "type": "string",
+              "required": true
+            },
+            "can_add_related": {
+              "type": "string"
+            },
+            "can_change_related": {
+              "type": "boolean"
+            },
+            "can_delete_related": {
+              "type": "boolean"
+            },
+            "can_view_related": {
+              "type": "boolean"
+            }
+          }
+        },
+        "BorderChoiceWidget": {
+          "type": "object",
+          "description": "Use this field to enter the three values of a border: width style color.",
+          "extends": [
+            "#/$defs/widgets/$defs/AColorPickerMixin",
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "cmsplugin_cascade.widgets.BorderChoiceWidget",
+          "properties": {
+            "acolorpicker_js": {
+              "type": "string",
+              "default": "node_modules/a-color-picker/dist/acolorpicker.js"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "cascade/admin/widgets/borderchoice.html"
+            },
+            "choices": {
+              "type": "string",
+              "required": true
+            },
+            "with_alpha": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "ColorPickerWidget": {
+          "type": "object",
+          "description": "Use this field to enter a color value. Clicking onto this widget will pop up a color picker.\nThe value passed to the consumer is a tuple of a Boolean and a string guaranteed to be in #rgb format.",
+          "extends": [
+            "#/$defs/widgets/$defs/AColorPickerMixin",
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "cmsplugin_cascade.widgets.ColorPickerWidget",
+          "properties": {
+            "acolorpicker_js": {
+              "type": "string",
+              "default": "node_modules/a-color-picker/dist/acolorpicker.js"
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "cascade/admin/widgets/colorpicker.html"
+            },
+            "with_alpha": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "JSONMultiWidget": {
+          "type": "object",
+          "description": "Deprecated.\nBase class for MultiWidgets using a JSON field in database.",
+          "extends": [
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "cmsplugin_cascade.widgets.JSONMultiWidget",
+          "properties": {
+            "html_parser": {
+              "type": "object",
+              "default": true
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/multiwidget.html"
+            },
+            "glossary_fields": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "MultipleTextInputWidget": {
+          "type": "object",
+          "description": "A widgets accepting multiple input values.",
+          "extends": [
+            "#/$defs/widgets/$defs/MultiWidget",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "cmsplugin_cascade.widgets.MultipleTextInputWidget",
+          "properties": {
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/multiwidget.html"
+            },
+            "labels": {
+              "type": "string",
+              "required": true
+            },
+            "attrs": {
+              "type": "string"
+            }
+          }
+        },
+        "NumberInputWidget": {
+          "type": "object",
+          "extends": [
+            "#/$defs/widgets/$defs/NumberInput",
+            "#/$defs/widgets/$defs/Input",
+            "#/$defs/widgets/$defs/Widget"
+          ],
+          "wraps": "cmsplugin_cascade.widgets.NumberInputWidget",
+          "properties": {
+            "input_type": {
+              "type": "string",
+              "default": "number"
+            },
+            "invalid_message": {
+              "type": "object",
+              "default": "In '%(label)s': Value '%(value)s' shall contain a valid decimal number."
+            },
+            "is_localized": {
+              "type": "boolean"
+            },
+            "is_required": {
+              "type": "boolean"
+            },
+            "needs_multipart_form": {
+              "type": "boolean"
+            },
+            "required_message": {
+              "type": "object",
+              "default": "In '%(label)s': This field is required."
+            },
+            "supports_microseconds": {
+              "type": "boolean",
+              "default": true
+            },
+            "template_name": {
+              "type": "string",
+              "default": "django/forms/widgets/number.html"
+            },
+            "validation_pattern": {
+              "type": "object",
+              "default": "^-?\\d+(\\.\\d{1,2})?$"
+            }
+          }
+        }
+      }
+    }
+  }
+}

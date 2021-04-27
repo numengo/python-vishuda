@@ -1,0 +1,3239 @@
+{
+  "$id": "https://numengo.org/drf#",
+  "$schema": "https://numengo.org/ngoschema/draft-06",
+  "description": "Django REST Framework definitions",
+  "title": "object",
+  "$defs": {
+    "views": {
+      "type": "object",
+      "wraps": "rest_framework.views",
+      "description": "Provides an APIView class that is the base of all views in REST framework.",
+      "$defs": {
+        "APIView": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.views.APIView",
+          "properties": {
+            "allowed_methods": true,
+            "default_response_headers": true,
+            "schema": true,
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "viewsets": {
+      "type": "object",
+      "wraps": "rest_framework.viewsets",
+      "description": "ViewSets are essentially just a type of class based view, that doesn't provide\nany method handlers, such as `get()`, `post()`, etc... but instead has actions,\nsuch as `list()`, `retrieve()`, `create()`, etc...\n\nActions are only bound to methods at the point of instantiating the views.\n\n    user_list = UserViewSet.as_view({'get': 'list'})\n    user_detail = UserViewSet.as_view({'get': 'retrieve'})\n\nTypically, rather than instantiate views from viewsets directly, you'll\nregister the viewset with a router and let the URL conf be determined\nautomatically.\n\n    router = DefaultRouter()\n    router.register(r'users', UserViewSet, 'user')\n    urlpatterns = router.urls",
+      "$defs": {
+        "GenericViewSet": {
+          "type": "object",
+          "description": "The GenericViewSet class does not provide any actions by default,\nbut does include the base set of generic view behavior, such as\nthe `get_object` and `get_queryset` methods.",
+          "extends": [
+            "#/$defs/viewsets/$defs/ViewSetMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.viewsets.GenericViewSet",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ModelViewSet": {
+          "type": "object",
+          "description": "A viewset that provides default `create()`, `retrieve()`, `update()`,\n`partial_update()`, `destroy()` and `list()` actions.",
+          "extends": [
+            "#/$defs/mixins/$defs/CreateModelMixin",
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/mixins/$defs/UpdateModelMixin",
+            "#/$defs/mixins/$defs/DestroyModelMixin",
+            "#/$defs/mixins/$defs/ListModelMixin",
+            "#/$defs/viewsets/$defs/GenericViewSet",
+            "#/$defs/viewsets/$defs/ViewSetMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.viewsets.ModelViewSet",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ReadOnlyModelViewSet": {
+          "type": "object",
+          "description": "A viewset that provides default `list()` and `retrieve()` actions.",
+          "extends": [
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/mixins/$defs/ListModelMixin",
+            "#/$defs/viewsets/$defs/GenericViewSet",
+            "#/$defs/viewsets/$defs/ViewSetMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.viewsets.ReadOnlyModelViewSet",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ViewSet": {
+          "type": "object",
+          "description": "The base ViewSet class does not provide any actions by default.",
+          "extends": [
+            "#/$defs/viewsets/$defs/ViewSetMixin",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.viewsets.ViewSet",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ViewSetMixin": {
+          "type": "object",
+          "description": "This is the magic.",
+          "longDescription": "Overrides `.as_view()` so that it takes an `actions` keyword that performs\nthe binding of HTTP methods to actions on the Resource.\n\nFor example, to create a concrete view binding the 'GET' and 'POST' methods\nto the 'list' and 'create' actions...\n\nview = MyViewSet.as_view({'get': 'list', 'post': 'create'})",
+          "wraps": "rest_framework.viewsets.ViewSetMixin"
+        }
+      }
+    },
+    "parsers": {
+      "type": "object",
+      "wraps": "rest_framework.parsers",
+      "description": "Parsers are used to parse the content of incoming HTTP requests.",
+      "longDescription": "They give us a generic way of being able to handle various media types\non the request, such as form content or json encoded data.",
+      "$defs": {
+        "BaseParser": {
+          "type": "object",
+          "description": "All parsers should extend `BaseParser`, specifying a `media_type`\nattribute, and overriding the `.parse()` method.",
+          "wraps": "rest_framework.parsers.BaseParser",
+          "properties": {
+            "media_type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            }
+          }
+        },
+        "DataAndFiles": {
+          "type": "object",
+          "wraps": "rest_framework.parsers.DataAndFiles",
+          "properties": {
+            "data": {
+              "type": "string",
+              "required": true
+            },
+            "files": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "FileUploadParser": {
+          "type": "object",
+          "description": "Parser for file upload data.",
+          "extends": [
+            "#/$defs/parsers/$defs/BaseParser"
+          ],
+          "wraps": "rest_framework.parsers.FileUploadParser",
+          "properties": {
+            "errors": {
+              "type": "object",
+              "default": {
+                "unhandled": "FileUpload parse error - none of upload handlers can handle the stream",
+                "no_filename": "Missing filename. Request should include a Content-Disposition header with a filename parameter."
+              }
+            },
+            "media_type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            }
+          }
+        },
+        "FormParser": {
+          "type": "object",
+          "description": "Parser for form data.",
+          "extends": [
+            "#/$defs/parsers/$defs/BaseParser"
+          ],
+          "wraps": "rest_framework.parsers.FormParser",
+          "properties": {
+            "media_type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            }
+          }
+        },
+        "JSONParser": {
+          "type": "object",
+          "description": "Parses JSON-serialized data.",
+          "extends": [
+            "#/$defs/parsers/$defs/BaseParser"
+          ],
+          "wraps": "rest_framework.parsers.JSONParser",
+          "properties": {
+            "media_type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            },
+            "strict": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "MultiPartParser": {
+          "type": "object",
+          "description": "Parser for multipart form data, which may include file data.",
+          "extends": [
+            "#/$defs/parsers/$defs/BaseParser"
+          ],
+          "wraps": "rest_framework.parsers.MultiPartParser",
+          "properties": {
+            "media_type": {
+              "type": "string",
+              "default": "multipart/form-data"
+            }
+          }
+        }
+      }
+    },
+    "serializers": {
+      "type": "object",
+      "wraps": "rest_framework.serializers",
+      "description": "Serializers and ModelSerializers are similar to Forms and ModelForms.\nUnlike forms, they are not constrained to dealing with HTML output, and\nform encoded input.\n\nSerialization in REST framework is a two-phase process:\n\n1. Serializers marshal between complex types like model instances, and\npython primitives.\n2. The process of marshalling between python primitives and request and\nresponse content is handled by parsers and renderers.",
+      "$defs": {
+        "BaseSerializer": {
+          "type": "object",
+          "description": "The BaseSerializer class provides a minimal class which may be used\nfor writing custom serializer implementations.\n\nNote that we strongly restrict the ordering of operations/properties\nthat may be used on the serializer in order to enforce correct usage.\n\nIn particular, if a `data=` argument is passed then:\n\n.is_valid() - Available.\n.initial_data - Available.\n.validated_data - Only available after calling `is_valid()`\n.errors - Only available after calling `is_valid()`\n.data - Only available after calling `is_valid()`\n\nIf a `data=` argument is not passed then:\n\n.is_valid() - Not available.\n.initial_data - Not available.\n.validated_data - Not available.\n.errors - Not available.\n.data - Available.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.serializers.BaseSerializer",
+          "properties": {
+            "data": true,
+            "errors": true,
+            "validated_data": true,
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "not_a_list": "Expected a list of items but got type \"{input_type}\".",
+                "empty": "This list may not be empty."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "instance": {
+              "type": "string"
+            }
+          }
+        },
+        "HyperlinkedModelSerializer": {
+          "type": "object",
+          "description": "A type of `ModelSerializer` that uses hyperlinked relationships instead\nof primary key relationships. Specifically:\n\n* A 'url' field is included instead of the 'id' field.\n* Relationships to other instances are hyperlinks, instead of primary keys.",
+          "extends": [
+            "#/$defs/serializers/$defs/ModelSerializer",
+            "#/$defs/serializers/$defs/Serializer",
+            "#/$defs/serializers/$defs/BaseSerializer",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.serializers.HyperlinkedModelSerializer",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "not_a_list": "Expected a list of items but got type \"{input_type}\".",
+                "empty": "This list may not be empty."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "url_field_name": {
+              "type": "string"
+            },
+            "instance": {
+              "type": "string"
+            },
+            "data": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            }
+          }
+        },
+        "ListSerializer": {
+          "type": "object",
+          "extends": [
+            "#/$defs/serializers/$defs/BaseSerializer",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.serializers.ListSerializer",
+          "properties": {
+            "child": {
+              "type": "string"
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "not_a_list": "Expected a list of items but got type \"{input_type}\".",
+                "empty": "This list may not be empty."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "many": {
+              "type": "boolean",
+              "default": true
+            }
+          }
+        },
+        "ModelSerializer": {
+          "type": "object",
+          "description": "A `ModelSerializer` is just a regular `Serializer`, except that:",
+          "longDescription": "* A set of default fields are automatically populated.\n* A set of default validators are automatically populated.\n* Default `.create()` and `.update()` implementations are provided.\n\nThe process of automatically determining a set of serializer fields\nbased on the model fields is reasonably complex, but you almost certainly\ndon't need to dig into the implementation.\n\nIf the `ModelSerializer` class *doesn't* generate the set of fields that\nyou need you should either declare the extra/differing fields explicitly on\nthe serializer class, or simply use a `Serializer` class.",
+          "extends": [
+            "#/$defs/serializers/$defs/Serializer",
+            "#/$defs/serializers/$defs/BaseSerializer",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.serializers.ModelSerializer",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "not_a_list": "Expected a list of items but got type \"{input_type}\".",
+                "empty": "This list may not be empty."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "url_field_name": {
+              "type": "string"
+            },
+            "instance": {
+              "type": "string"
+            },
+            "data": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            }
+          }
+        },
+        "Serializer": {
+          "type": "object",
+          "extends": [
+            "#/$defs/serializers/$defs/BaseSerializer",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.serializers.Serializer",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "not_a_list": "Expected a list of items but got type \"{input_type}\".",
+                "empty": "This list may not be empty."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "instance": {
+              "type": "string"
+            },
+            "data": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            }
+          }
+        },
+        "SerializerMetaclass": {
+          "type": "object",
+          "description": "This metaclass sets a dictionary named `_declared_fields` on the class.",
+          "longDescription": "Any instances of `Field` included as attributes on either the class\nor on any of its superclasses will be include in the\n`_declared_fields` dictionary.",
+          "wraps": "rest_framework.serializers.SerializerMetaclass"
+        }
+      }
+    },
+    "fields": {
+      "type": "object",
+      "wraps": "rest_framework.fields",
+      "$defs": {
+        "BooleanField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.BooleanField",
+          "properties": {
+            "FALSE_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                "FALSE",
+                "f",
+                "OFF",
+                0,
+                "no",
+                "F",
+                "N",
+                "off",
+                "Off",
+                "n",
+                "false",
+                "False",
+                "NO",
+                "0"
+              ]
+            },
+            "NULL_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                "",
+                null,
+                "null",
+                "Null",
+                "NULL"
+              ]
+            },
+            "TRUE_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                1,
+                "On",
+                "Y",
+                "YES",
+                "True",
+                "T",
+                "true",
+                "ON",
+                "yes",
+                "on",
+                "y",
+                "1",
+                "t",
+                "TRUE"
+              ]
+            },
+            "default_empty_html": {
+              "type": "boolean"
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "read_only": {
+              "type": "boolean"
+            },
+            "write_only": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "string"
+            },
+            "default": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "source": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "help_text": {
+              "type": "string"
+            },
+            "style": {
+              "type": "string"
+            },
+            "error_messages": {
+              "type": "string"
+            },
+            "validators": {
+              "type": "string"
+            },
+            "allow_null": {
+              "type": "boolean"
+            }
+          }
+        },
+        "BuiltinSignatureError": {
+          "type": "object",
+          "description": "Built-in function signatures are not inspectable. This exception is raised\nso the serializer can raise a helpful error message.",
+          "wraps": "rest_framework.fields.BuiltinSignatureError",
+          "properties": {
+            "args": true
+          }
+        },
+        "CharField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.CharField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "ChoiceField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.ChoiceField",
+          "properties": {
+            "choices": true,
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "html_cutoff": {
+              "type": "string"
+            },
+            "html_cutoff_text": {
+              "type": "object",
+              "default": "More than {count} items..."
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "CreateOnlyDefault": {
+          "type": "object",
+          "description": "This class may be used to provide default values that are only used\nfor create operations, but that do not return any value for update\noperations.",
+          "wraps": "rest_framework.fields.CreateOnlyDefault",
+          "properties": {
+            "default": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "CurrentUserDefault": {
+          "type": "object",
+          "wraps": "rest_framework.fields.CurrentUserDefault"
+        },
+        "DateField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.DateField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "format": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "input_formats": {
+              "type": "string"
+            }
+          }
+        },
+        "DateTimeField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.DateTimeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "format": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "input_formats": {
+              "type": "string"
+            },
+            "default_timezone": {
+              "type": "string"
+            }
+          }
+        },
+        "DecimalField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.DecimalField",
+          "properties": {
+            "MAX_STRING_LENGTH": {
+              "type": "integer",
+              "default": 1000
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "max_digits": {
+              "type": "string",
+              "required": true
+            },
+            "decimal_places": {
+              "type": "string",
+              "required": true
+            },
+            "coerce_to_string": {
+              "type": "string"
+            },
+            "max_value": {
+              "type": "string"
+            },
+            "min_value": {
+              "type": "string"
+            },
+            "localize": {
+              "type": "boolean"
+            },
+            "rounding": {
+              "type": "string"
+            }
+          }
+        },
+        "DictField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.DictField",
+          "properties": {
+            "child": {
+              "type": "object",
+              "default": {
+                "type": "string"
+              }
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "DurationField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.DurationField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "EmailField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.EmailField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "Field": {
+          "type": "object",
+          "wraps": "rest_framework.fields.Field",
+          "properties": {
+            "context": true,
+            "root": true,
+            "validators": true,
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "read_only": {
+              "type": "boolean"
+            },
+            "write_only": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "string"
+            },
+            "default": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "source": {
+              "type": "string"
+            },
+            "label": {
+              "type": "string"
+            },
+            "help_text": {
+              "type": "string"
+            },
+            "style": {
+              "type": "string"
+            },
+            "error_messages": {
+              "type": "string"
+            },
+            "allow_null": {
+              "type": "boolean"
+            }
+          }
+        },
+        "FileField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.FileField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "FilePathField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.FilePathField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "html_cutoff": {
+              "type": "string"
+            },
+            "html_cutoff_text": {
+              "type": "object",
+              "default": "More than {count} items..."
+            },
+            "initial": {
+              "type": "string"
+            },
+            "path": {
+              "type": "string",
+              "required": true
+            },
+            "match": {
+              "type": "string"
+            },
+            "recursive": {
+              "type": "boolean"
+            },
+            "allow_files": {
+              "type": "boolean",
+              "default": true
+            },
+            "allow_folders": {
+              "type": "boolean"
+            },
+            "required": {
+              "type": "string"
+            }
+          }
+        },
+        "FloatField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.FloatField",
+          "properties": {
+            "MAX_STRING_LENGTH": {
+              "type": "integer",
+              "default": 1000
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "HStoreField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/DictField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.HStoreField",
+          "properties": {
+            "child": {
+              "type": "object",
+              "default": {
+                "type": "string"
+              }
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "HiddenField": {
+          "type": "object",
+          "description": "A hidden field does not take input from the user, or present any output,\nbut it does populate a field in `validated_data`, based on its default\nvalue. This is particularly useful when we have a `unique_for_date`\nconstraint on a pair of fields, as we need some way to include the date in\nthe validated data.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.HiddenField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "IPAddressField": {
+          "type": "object",
+          "description": "Support both IPAddressField and GenericIPAddressField",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.IPAddressField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "protocol": {
+              "type": "string",
+              "default": "both"
+            }
+          }
+        },
+        "ImageField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/FileField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.ImageField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "IntegerField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.IntegerField",
+          "properties": {
+            "MAX_STRING_LENGTH": {
+              "type": "integer",
+              "default": 1000
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "re_decimal": {
+              "type": "object",
+              "default": "\\.0*\\s*$"
+            }
+          }
+        },
+        "JSONField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.JSONField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "ListField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.ListField",
+          "properties": {
+            "child": {
+              "type": "object",
+              "default": true
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "ModelField": {
+          "type": "object",
+          "description": "A generic field that can be used against an arbitrary model field.",
+          "longDescription": "This is used by `ModelSerializer` when dealing with custom model fields,\nthat do not have a serializer field to be mapped to.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.ModelField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "model_field": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "MultipleChoiceField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/ChoiceField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.MultipleChoiceField",
+          "properties": {
+            "default_empty_html": {
+              "type": "array"
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "html_cutoff": {
+              "type": "string"
+            },
+            "html_cutoff_text": {
+              "type": "object",
+              "default": "More than {count} items..."
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "NullBooleanField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.NullBooleanField",
+          "properties": {
+            "FALSE_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                "FALSE",
+                "f",
+                "OFF",
+                0,
+                "no",
+                "F",
+                "N",
+                "off",
+                "Off",
+                "n",
+                "false",
+                "False",
+                "NO",
+                "0"
+              ]
+            },
+            "NULL_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "string"
+                },
+                {},
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                "",
+                null,
+                "null",
+                "Null",
+                "NULL"
+              ]
+            },
+            "TRUE_VALUES": {
+              "type": "array",
+              "items": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                }
+              ],
+              "uniqueItems": true,
+              "default": [
+                1,
+                "On",
+                "Y",
+                "YES",
+                "True",
+                "T",
+                "true",
+                "ON",
+                "yes",
+                "on",
+                "y",
+                "1",
+                "t",
+                "TRUE"
+              ]
+            },
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "ReadOnlyField": {
+          "type": "object",
+          "description": "A read-only field that simply returns the field value.",
+          "longDescription": "If the field is a method with no parameters, the method will be called\nand its return value used as the representation.\n\nFor example, the following would call `get_expiry_date()` on the object:\n\nclass ExampleSerializer(Serializer):\n    expiry_date = ReadOnlyField(source='get_expiry_date')",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.ReadOnlyField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "RegexField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.RegexField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "regex": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "SerializerMethodField": {
+          "type": "object",
+          "description": "A read-only field that get its representation from calling a method on the\nparent serializer class. The method called will be of the form\n\"get_{field_name}\", and should take a single argument, which is the\nobject being serialized.\n\nFor example:\n\nclass ExampleSerializer(self):\n    extra_info = SerializerMethodField()\n\n    def get_extra_info(self, obj):\n        return ...  # Calculate some data to return.",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.SerializerMethodField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "method_name": {
+              "type": "string"
+            }
+          }
+        },
+        "SkipField": {
+          "type": "object",
+          "wraps": "rest_framework.fields.SkipField",
+          "properties": {
+            "args": true
+          }
+        },
+        "SlugField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.SlugField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "allow_unicode": {
+              "type": "boolean"
+            }
+          }
+        },
+        "TimeField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.TimeField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "format": {
+              "type": "importable",
+              "default": "rest_framework.fields.empty"
+            },
+            "input_formats": {
+              "type": "string"
+            }
+          }
+        },
+        "URLField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/CharField",
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.URLField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            }
+          }
+        },
+        "UUIDField": {
+          "type": "object",
+          "extends": [
+            "#/$defs/fields/$defs/Field"
+          ],
+          "wraps": "rest_framework.fields.UUIDField",
+          "properties": {
+            "default_error_messages": {
+              "type": "object",
+              "default": {
+                "required": "This field is required.",
+                "null": "This field may not be null."
+              }
+            },
+            "default_validators": {
+              "type": "array"
+            },
+            "initial": {
+              "type": "string"
+            },
+            "valid_formats": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "hex_verbose",
+                "hex",
+                "int",
+                "urn"
+              ]
+            }
+          }
+        },
+        "empty": {
+          "type": "object",
+          "description": "This class is used to represent no data being provided for a given input\nor output value.\n\nIt is required because `None` may be a valid input or output value.",
+          "wraps": "rest_framework.fields.empty"
+        }
+      }
+    },
+    "authentication": {
+      "type": "object",
+      "wraps": "rest_framework.authentication",
+      "description": "Provides various authentication policies.",
+      "$defs": {
+        "BaseAuthentication": {
+          "type": "object",
+          "description": "All authentication classes should extend BaseAuthentication.",
+          "wraps": "rest_framework.authentication.BaseAuthentication"
+        },
+        "BasicAuthentication": {
+          "type": "object",
+          "description": "HTTP Basic authentication against username/password.",
+          "extends": [
+            "#/$defs/authentication/$defs/BaseAuthentication"
+          ],
+          "wraps": "rest_framework.authentication.BasicAuthentication",
+          "properties": {
+            "www_authenticate_realm": {
+              "type": "string",
+              "default": "api"
+            }
+          }
+        },
+        "CSRFCheck": {
+          "type": "object",
+          "extends": [
+            "#/$defs/authentication/$defs/CsrfViewMiddleware",
+            "#/$defs/authentication/$defs/MiddlewareMixin"
+          ],
+          "wraps": "rest_framework.authentication.CSRFCheck",
+          "properties": {
+            "get_response": {
+              "type": "string"
+            }
+          }
+        },
+        "RemoteUserAuthentication": {
+          "type": "object",
+          "description": "REMOTE_USER authentication.",
+          "longDescription": "To use this, set up your web server to perform authentication, which will\nset the REMOTE_USER environment variable. You will need to have\n'django.contrib.auth.backends.RemoteUserBackend in your\nAUTHENTICATION_BACKENDS setting",
+          "extends": [
+            "#/$defs/authentication/$defs/BaseAuthentication"
+          ],
+          "wraps": "rest_framework.authentication.RemoteUserAuthentication",
+          "properties": {
+            "header": {
+              "type": "string",
+              "default": "REMOTE_USER"
+            }
+          }
+        },
+        "SessionAuthentication": {
+          "type": "object",
+          "description": "Use Django's session framework for authentication.",
+          "extends": [
+            "#/$defs/authentication/$defs/BaseAuthentication"
+          ],
+          "wraps": "rest_framework.authentication.SessionAuthentication"
+        },
+        "TokenAuthentication": {
+          "type": "object",
+          "description": "Simple token based authentication.",
+          "longDescription": "Clients should authenticate by passing the token key in the \"Authorization\"\nHTTP header, prepended with the string \"Token \".  For example:\n\n    Authorization: Token 401f7ac837da42b97f613d789819ff93537bee6a",
+          "extends": [
+            "#/$defs/authentication/$defs/BaseAuthentication"
+          ],
+          "wraps": "rest_framework.authentication.TokenAuthentication",
+          "properties": {
+            "keyword": {
+              "type": "string",
+              "default": "Token"
+            },
+            "model": {
+              "type": "string"
+            }
+          }
+        },
+        "MiddlewareMixin": {
+          "type": "object",
+          "wraps": "django.utils.deprecation.MiddlewareMixin",
+          "properties": {
+            "get_response": {
+              "type": "string"
+            }
+          }
+        },
+        "CsrfViewMiddleware": {
+          "type": "object",
+          "description": "Require a present and correct csrfmiddlewaretoken for POST requests that\nhave a CSRF cookie, and set an outgoing CSRF cookie.\n\nThis middleware should be used in conjunction with the {% csrf_token %}\ntemplate tag.",
+          "extends": [
+            "#/$defs/authentication/$defs/MiddlewareMixin"
+          ],
+          "wraps": "django.middleware.csrf.CsrfViewMiddleware"
+        }
+      }
+    },
+    "generics": {
+      "type": "object",
+      "wraps": "rest_framework.generics",
+      "description": "Generic views that provide commonly needed behaviour.",
+      "$defs": {
+        "CreateAPIView": {
+          "type": "object",
+          "description": "Concrete view for creating a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/CreateModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.CreateAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "DestroyAPIView": {
+          "type": "object",
+          "description": "Concrete view for deleting a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/DestroyModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.DestroyAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "GenericAPIView": {
+          "type": "object",
+          "description": "Base class for all other generic views.",
+          "extends": [
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.GenericAPIView",
+          "properties": {
+            "paginator": true,
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ListAPIView": {
+          "type": "object",
+          "description": "Concrete view for listing a queryset.",
+          "extends": [
+            "#/$defs/mixins/$defs/ListModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.ListAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "ListCreateAPIView": {
+          "type": "object",
+          "description": "Concrete view for listing a queryset or creating a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/ListModelMixin",
+            "#/$defs/mixins/$defs/CreateModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.ListCreateAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "RetrieveAPIView": {
+          "type": "object",
+          "description": "Concrete view for retrieving a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.RetrieveAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "RetrieveDestroyAPIView": {
+          "type": "object",
+          "description": "Concrete view for retrieving or deleting a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/mixins/$defs/DestroyModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.RetrieveDestroyAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "RetrieveUpdateAPIView": {
+          "type": "object",
+          "description": "Concrete view for retrieving, updating a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/mixins/$defs/UpdateModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.RetrieveUpdateAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "RetrieveUpdateDestroyAPIView": {
+          "type": "object",
+          "description": "Concrete view for retrieving, updating or deleting a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/RetrieveModelMixin",
+            "#/$defs/mixins/$defs/UpdateModelMixin",
+            "#/$defs/mixins/$defs/DestroyModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.RetrieveUpdateDestroyAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        },
+        "UpdateAPIView": {
+          "type": "object",
+          "description": "Concrete view for updating a model instance.",
+          "extends": [
+            "#/$defs/mixins/$defs/UpdateModelMixin",
+            "#/$defs/generics/$defs/GenericAPIView",
+            "#/$defs/views/$defs/APIView",
+            "https://numengo.org/django-views#/$defs/base/$defs/View"
+          ],
+          "wraps": "rest_framework.generics.UpdateAPIView",
+          "properties": {
+            "authentication_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "SessionAuthentication",
+                "BasicAuthentication"
+              ]
+            },
+            "filter_backends": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "DjangoFilterBackend"
+              ]
+            },
+            "http_method_names": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "default": [
+                "get",
+                "post",
+                "put",
+                "patch",
+                "delete",
+                "head",
+                "options",
+                "trace"
+              ]
+            },
+            "lookup_field": {
+              "type": "string",
+              "default": "pk"
+            },
+            "lookup_url_kwarg": {
+              "type": "string"
+            },
+            "pagination_class": {
+              "type": "string"
+            },
+            "parser_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONParser",
+                "FormParser",
+                "MultiPartParser"
+              ]
+            },
+            "permission_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "AllowAny"
+              ]
+            },
+            "queryset": {
+              "type": "string"
+            },
+            "renderer_classes": {
+              "type": "array",
+              "items": {
+                "type": "importable"
+              },
+              "default": [
+                "JSONRenderer",
+                "BrowsableAPIRenderer"
+              ]
+            },
+            "serializer_class": {
+              "type": "string"
+            },
+            "settings": {
+              "type": "object",
+              "default": {
+                "type": "object"
+              }
+            },
+            "throttle_classes": {
+              "type": "array"
+            },
+            "versioning_class": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "mixins": {
+      "type": "object",
+      "wraps": "rest_framework.mixins",
+      "description": "Basic building blocks for generic class based views.",
+      "longDescription": "We don't bind behaviour to http method handlers yet,\nwhich allows mixin classes to be composed in interesting ways.",
+      "$defs": {
+        "CreateModelMixin": {
+          "type": "object",
+          "description": "Create a model instance.",
+          "wraps": "rest_framework.mixins.CreateModelMixin"
+        },
+        "DestroyModelMixin": {
+          "type": "object",
+          "description": "Destroy a model instance.",
+          "wraps": "rest_framework.mixins.DestroyModelMixin"
+        },
+        "ListModelMixin": {
+          "type": "object",
+          "description": "List a queryset.",
+          "wraps": "rest_framework.mixins.ListModelMixin"
+        },
+        "RetrieveModelMixin": {
+          "type": "object",
+          "description": "Retrieve a model instance.",
+          "wraps": "rest_framework.mixins.RetrieveModelMixin"
+        },
+        "UpdateModelMixin": {
+          "type": "object",
+          "description": "Update a model instance.",
+          "wraps": "rest_framework.mixins.UpdateModelMixin"
+        }
+      }
+    }
+  }
+}

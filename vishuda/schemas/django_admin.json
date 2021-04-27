@@ -1,0 +1,836 @@
+{
+  "$id": "https://numengo.org/django-admin#",
+  "$schema": "https://numengo.org/ngoschema/draft-06",
+  "description": "Django admin definitions",
+  "title": "object",
+  "$defs": {
+    "BaseModelAdmin": {
+      "type": "object",
+      "description": "Functionality common to both ModelAdmin and InlineAdmin.",
+      "wraps": "django.contrib.admin.options.BaseModelAdmin",
+      "properties": {
+        "media": true,
+        "autocomplete_fields": {
+          "type": "array"
+        },
+        "exclude": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        },
+        "fieldsets": {
+          "type": "string"
+        },
+        "filter_horizontal": {
+          "type": "array"
+        },
+        "filter_vertical": {
+          "type": "array"
+        },
+        "formfield_overrides": {
+          "type": "object"
+        },
+        "ordering": {
+          "type": "string"
+        },
+        "prepopulated_fields": {
+          "type": "object"
+        },
+        "radio_fields": {
+          "type": "object"
+        },
+        "raw_id_fields": {
+          "type": "array"
+        },
+        "readonly_fields": {
+          "type": "array"
+        },
+        "show_full_result_count": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortable_by": {
+          "type": "string"
+        },
+        "view_on_site": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "InlineModelAdmin": {
+      "type": "object",
+      "description": "Options for inline editing of ``model`` instances.",
+      "longDescription": "Provide ``fk_name`` to specify the attribute name of the ``ForeignKey``\nfrom ``model`` to its parent. This is required if ``model`` has more than\none ``ForeignKey`` to its parent.",
+      "extends": [
+        "#/$defs/options/$defs/BaseModelAdmin"
+      ],
+      "wraps": "django.contrib.admin.options.InlineModelAdmin",
+      "properties": {
+        "autocomplete_fields": {
+          "type": "array"
+        },
+        "can_delete": {
+          "type": "boolean",
+          "default": true
+        },
+        "classes": {
+          "type": "string"
+        },
+        "exclude": {
+          "type": "string"
+        },
+        "extra": {
+          "type": "integer",
+          "default": 3
+        },
+        "fields": {
+          "type": "string"
+        },
+        "fieldsets": {
+          "type": "string"
+        },
+        "filter_horizontal": {
+          "type": "array"
+        },
+        "filter_vertical": {
+          "type": "array"
+        },
+        "fk_name": {
+          "type": "string"
+        },
+        "formfield_overrides": {
+          "type": "object"
+        },
+        "max_num": {
+          "type": "string"
+        },
+        "min_num": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "ordering": {
+          "type": "string"
+        },
+        "prepopulated_fields": {
+          "type": "object"
+        },
+        "radio_fields": {
+          "type": "object"
+        },
+        "raw_id_fields": {
+          "type": "array"
+        },
+        "readonly_fields": {
+          "type": "array"
+        },
+        "show_change_link": {
+          "type": "boolean"
+        },
+        "show_full_result_count": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortable_by": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string"
+        },
+        "verbose_name": {
+          "type": "string"
+        },
+        "verbose_name_plural": {
+          "type": "string"
+        },
+        "view_on_site": {
+          "type": "boolean",
+          "default": true
+        },
+        "parent_model": {
+          "type": "string",
+          "required": true
+        },
+        "admin_site": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "ModelAdmin": {
+      "type": "object",
+      "description": "Encapsulate all admin options and functionality for a given model.",
+      "extends": [
+        "#/$defs/options/$defs/BaseModelAdmin"
+      ],
+      "wraps": "django.contrib.admin.options.ModelAdmin",
+      "properties": {
+        "urls": true,
+        "actions": {
+          "type": "array"
+        },
+        "actions_on_bottom": {
+          "type": "boolean"
+        },
+        "actions_on_top": {
+          "type": "boolean",
+          "default": true
+        },
+        "actions_selection_counter": {
+          "type": "boolean",
+          "default": true
+        },
+        "add_form_template": {
+          "type": "string"
+        },
+        "autocomplete_fields": {
+          "type": "array"
+        },
+        "change_form_template": {
+          "type": "string"
+        },
+        "change_list_template": {
+          "type": "string"
+        },
+        "date_hierarchy": {
+          "type": "string"
+        },
+        "delete_confirmation_template": {
+          "type": "string"
+        },
+        "delete_selected_confirmation_template": {
+          "type": "string"
+        },
+        "exclude": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        },
+        "fieldsets": {
+          "type": "string"
+        },
+        "filter_horizontal": {
+          "type": "array"
+        },
+        "filter_vertical": {
+          "type": "array"
+        },
+        "formfield_overrides": {
+          "type": "object"
+        },
+        "inlines": {
+          "type": "array"
+        },
+        "list_display": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "__str__"
+          ]
+        },
+        "list_display_links": {
+          "type": "array"
+        },
+        "list_editable": {
+          "type": "array"
+        },
+        "list_filter": {
+          "type": "array"
+        },
+        "list_max_show_all": {
+          "type": "integer",
+          "default": 200
+        },
+        "list_per_page": {
+          "type": "integer",
+          "default": 100
+        },
+        "list_select_related": {
+          "type": "boolean"
+        },
+        "object_history_template": {
+          "type": "string"
+        },
+        "ordering": {
+          "type": "string"
+        },
+        "popup_response_template": {
+          "type": "string"
+        },
+        "prepopulated_fields": {
+          "type": "object"
+        },
+        "preserve_filters": {
+          "type": "boolean",
+          "default": true
+        },
+        "radio_fields": {
+          "type": "object"
+        },
+        "raw_id_fields": {
+          "type": "array"
+        },
+        "readonly_fields": {
+          "type": "array"
+        },
+        "save_as": {
+          "type": "boolean"
+        },
+        "save_as_continue": {
+          "type": "boolean",
+          "default": true
+        },
+        "save_on_top": {
+          "type": "boolean"
+        },
+        "search_fields": {
+          "type": "array"
+        },
+        "show_full_result_count": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortable_by": {
+          "type": "string"
+        },
+        "view_on_site": {
+          "type": "boolean",
+          "default": true
+        },
+        "model": {
+          "type": "string",
+          "required": true
+        },
+        "admin_site": {
+          "type": "string",
+          "required": true
+        }
+      }
+    },
+    "StackedInline": {
+      "type": "object",
+      "extends": [
+        "#/$defs/options/$defs/InlineModelAdmin",
+        "#/$defs/options/$defs/BaseModelAdmin"
+      ],
+      "wraps": "django.contrib.admin.options.StackedInline",
+      "properties": {
+        "autocomplete_fields": {
+          "type": "array"
+        },
+        "can_delete": {
+          "type": "boolean",
+          "default": true
+        },
+        "classes": {
+          "type": "string"
+        },
+        "exclude": {
+          "type": "string"
+        },
+        "extra": {
+          "type": "integer",
+          "default": 3
+        },
+        "fields": {
+          "type": "string"
+        },
+        "fieldsets": {
+          "type": "string"
+        },
+        "filter_horizontal": {
+          "type": "array"
+        },
+        "filter_vertical": {
+          "type": "array"
+        },
+        "fk_name": {
+          "type": "string"
+        },
+        "formfield_overrides": {
+          "type": "object"
+        },
+        "max_num": {
+          "type": "string"
+        },
+        "min_num": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "ordering": {
+          "type": "string"
+        },
+        "prepopulated_fields": {
+          "type": "object"
+        },
+        "radio_fields": {
+          "type": "object"
+        },
+        "raw_id_fields": {
+          "type": "array"
+        },
+        "readonly_fields": {
+          "type": "array"
+        },
+        "show_change_link": {
+          "type": "boolean"
+        },
+        "show_full_result_count": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortable_by": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string",
+          "default": "admin/edit_inline/stacked.html"
+        },
+        "verbose_name": {
+          "type": "string"
+        },
+        "verbose_name_plural": {
+          "type": "string"
+        },
+        "view_on_site": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "TabularInline": {
+      "type": "object",
+      "extends": [
+        "#/$defs/options/$defs/InlineModelAdmin",
+        "#/$defs/options/$defs/BaseModelAdmin"
+      ],
+      "wraps": "django.contrib.admin.options.TabularInline",
+      "properties": {
+        "autocomplete_fields": {
+          "type": "array"
+        },
+        "can_delete": {
+          "type": "boolean",
+          "default": true
+        },
+        "classes": {
+          "type": "string"
+        },
+        "exclude": {
+          "type": "string"
+        },
+        "extra": {
+          "type": "integer",
+          "default": 3
+        },
+        "fields": {
+          "type": "string"
+        },
+        "fieldsets": {
+          "type": "string"
+        },
+        "filter_horizontal": {
+          "type": "array"
+        },
+        "filter_vertical": {
+          "type": "array"
+        },
+        "fk_name": {
+          "type": "string"
+        },
+        "formfield_overrides": {
+          "type": "object"
+        },
+        "max_num": {
+          "type": "string"
+        },
+        "min_num": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "ordering": {
+          "type": "string"
+        },
+        "prepopulated_fields": {
+          "type": "object"
+        },
+        "radio_fields": {
+          "type": "object"
+        },
+        "raw_id_fields": {
+          "type": "array"
+        },
+        "readonly_fields": {
+          "type": "array"
+        },
+        "show_change_link": {
+          "type": "boolean"
+        },
+        "show_full_result_count": {
+          "type": "boolean",
+          "default": true
+        },
+        "sortable_by": {
+          "type": "string"
+        },
+        "template": {
+          "type": "string",
+          "default": "admin/edit_inline/tabular.html"
+        },
+        "verbose_name": {
+          "type": "string"
+        },
+        "verbose_name_plural": {
+          "type": "string"
+        },
+        "view_on_site": {
+          "type": "boolean",
+          "default": true
+        }
+      }
+    },
+    "filters": {
+      "type": "object",
+      "$defs": {
+        "AllValuesFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.AllValuesFieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "BooleanFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.BooleanFieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "ChoicesFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.ChoicesFieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "DateFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.DateFieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "FieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.FieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "ListFilter": {
+          "type": "object",
+          "wraps": "django.contrib.admin.filters.ListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "RelatedFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.RelatedFieldListFilter",
+          "properties": {
+            "include_empty_choice": true,
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "field": {
+              "type": "string",
+              "required": true
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            },
+            "field_path": {
+              "type": "string",
+              "required": true
+            }
+          }
+        },
+        "RelatedOnlyFieldListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/RelatedFieldListFilter",
+            "#/$defs/filters/$defs/FieldListFilter",
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.RelatedOnlyFieldListFilter",
+          "properties": {
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            }
+          }
+        },
+        "SimpleListFilter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/filters/$defs/ListFilter"
+          ],
+          "wraps": "django.contrib.admin.filters.SimpleListFilter",
+          "properties": {
+            "parameter_name": {
+              "type": "string"
+            },
+            "template": {
+              "type": "string",
+              "default": "admin/filter.html"
+            },
+            "title": {
+              "type": "string"
+            },
+            "request": {
+              "type": "string",
+              "required": true
+            },
+            "params": {
+              "type": "string",
+              "required": true
+            },
+            "model": {
+              "type": "string",
+              "required": true
+            },
+            "model_admin": {
+              "type": "string",
+              "required": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

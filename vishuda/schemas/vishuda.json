@@ -44,6 +44,7 @@
       "$defs": {
         "Model": {
           "type": "object",
+          "abstract": true,
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
