@@ -110,15 +110,25 @@
         },
         "Shop": {
           "type": "object",
+          "lazyLoading": true,
           "properties": {
             "catalogs": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/Fixture"
+              }
             },
             "products": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/Fixture"
+              }
             },
             "manufacturers": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/app/$defs/Fixture"
+              }
             }
           }
         },

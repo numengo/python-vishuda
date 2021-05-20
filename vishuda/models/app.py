@@ -4,7 +4,6 @@ from __future__ import unicode_literals
 
 from ngoschema.models.instances import Entity
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-import ngomm_cms
 
 
 class Model(with_metaclass(SchemaMetaclass)):
