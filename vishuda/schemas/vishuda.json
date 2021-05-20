@@ -46,12 +46,14 @@
           "type": "object",
           "abstract": true,
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ]
         },
         "Fixture": {
           "type": "object",
+          "primaryKeys": [
+            "canonicalName"
+          ],
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
@@ -77,7 +79,6 @@
             "canonicalName"
           ],
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
           "properties": {
@@ -98,8 +99,34 @@
               "items": {
                 "$ref": "#/$defs/app/$defs/View"
               }
+            },
+            "shop": {
+              "$ref": "#/$defs/app/$defs/Shop"
+            },
+            "cms": {
+              "$ref": "#/$defs/app/$defs/Cms"
             }
           }
+        },
+        "Shop": {
+          "type": "object",
+          "properties": {
+            "catalogs": {
+              "type": "string"
+            },
+            "products": {
+              "type": "string"
+            },
+            "manufacturers": {
+              "type": "string"
+            }
+          }
+        },
+        "Cms": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngomm-cms#/$defs/nodes/$defs/PageNode"
+          ]
         }
       }
     }

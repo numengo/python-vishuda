@@ -2,17 +2,17 @@
 
 from django.db import models
 
-from ngomm.models import InstanceNode
+from ngomm.models.instances import InstanceNode
 from ngoutils.models import DjangoModelNodeAbstractBase
 
 from .app import Model, Fixture, View, App
 from .personas import User
 
-ModelNode = InstanceNode.make_class_from_django_model('https://numengo.org/vishuda#/$defs/nodes/$defs/ModelNode', Model)
-FixtureNode = InstanceNode.make_class_from_django_model('https://numengo.org/vishuda#/$defs/nodes/$defs/FixtureNode', Fixture)
-ViewNode = InstanceNode.make_class_from_django_model('https://numengo.org/vishuda#/$defs/nodes/$defs/ViewNode', View)
-AppNode = InstanceNode.make_class_from_django_model('https://numengo.org/vishuda#/$defs/nodes/$defs/AppNode', App)
-UserNode = InstanceNode.make_class_from_django_model('https://numengo.org/vishuda#/$defs/nodes/$defs/UserNode', User)
+ModelNode = InstanceNode.make_class_from_django_model(Model, 'https://numengo.org/vishuda#/$defs/nodes/$defs/ModelNode', module=__name__)
+FixtureNode = InstanceNode.make_class_from_django_model(Fixture, 'https://numengo.org/vishuda#/$defs/nodes/$defs/FixtureNode', module=__name__)
+ViewNode = InstanceNode.make_class_from_django_model(View, 'https://numengo.org/vishuda#/$defs/nodes/$defs/ViewNode', module=__name__)
+AppNode = InstanceNode.make_class_from_django_model(App, 'https://numengo.org/vishuda#/$defs/nodes/$defs/AppNode', module=__name__)
+UserNode = InstanceNode.make_class_from_django_model(User, 'https://numengo.org/vishuda#/$defs/nodes/$defs/UserNode', module=__name__)
 
 
 class DjangoModelNodeNode(DjangoModelNodeAbstractBase):

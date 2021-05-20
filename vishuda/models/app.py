@@ -2,8 +2,9 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
-from ngoschema.models import instances
+from ngoschema.models.instances import Entity
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
+import ngomm_cms
 
 
 class Model(with_metaclass(SchemaMetaclass)):
@@ -20,3 +21,6 @@ class View(with_metaclass(SchemaMetaclass)):
 
 class App(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/app/$defs/App"
+
+    #def __init__(self, *args, **kwargs):
+    #    Entity.__init__(self, *args, **kwargs)
