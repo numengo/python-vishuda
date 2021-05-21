@@ -44,6 +44,9 @@
       "$defs": {
         "Model": {
           "type": "object",
+          "primaryKeys": [
+            "canonicalName"
+          ],
           "abstract": true,
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"

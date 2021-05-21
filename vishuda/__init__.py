@@ -10,7 +10,7 @@ from simple_settings import LazySettings
 settings = LazySettings('vishuda.config.settings', 'VISHUDA_.environ')
 
 # PROTECTED REGION ID(vishuda.init) ENABLED START
-import ngomm_cms
+import ngomm_cms.models
 from ngoschema.loaders import register_module
 register_module('vishuda')
 
