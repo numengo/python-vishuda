@@ -798,16 +798,8 @@
           "properties": {
             "FALSE_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                },
                 {
                   "type": "integer"
                 },
@@ -840,28 +832,37 @@
                 },
                 {
                   "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
-                "FALSE",
-                "f",
-                "OFF",
                 0,
-                "no",
-                "F",
-                "N",
-                "off",
+                "FALSE",
                 "Off",
                 "n",
+                "no",
+                "0",
+                "F",
                 "false",
-                "False",
+                "f",
+                "OFF",
+                "N",
                 "NO",
-                "0"
+                "off",
+                "False"
               ]
             },
             "NULL_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
                 {
                   "type": "string"
@@ -877,18 +878,24 @@
                   "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
                 "",
                 null,
-                "null",
+                "NULL",
                 "Null",
-                "NULL"
+                "null"
               ]
             },
             "TRUE_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
                 {
                   "type": "integer"
                 },
@@ -924,30 +931,23 @@
                 },
                 {
                   "type": "string"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
-                1,
-                "On",
-                "Y",
-                "YES",
-                "True",
-                "T",
-                "true",
+                "TRUE",
                 "ON",
-                "yes",
+                1,
                 "on",
-                "y",
+                "On",
+                "yes",
                 "1",
-                "t",
-                "TRUE"
+                "Y",
+                "True",
+                "y",
+                "true",
+                "YES",
+                "T",
+                "t"
               ]
             },
             "default_empty_html": {
@@ -1664,16 +1664,8 @@
           "properties": {
             "FALSE_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
-                },
                 {
                   "type": "integer"
                 },
@@ -1706,28 +1698,37 @@
                 },
                 {
                   "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
-                "FALSE",
-                "f",
-                "OFF",
                 0,
-                "no",
-                "F",
-                "N",
-                "off",
+                "FALSE",
                 "Off",
                 "n",
+                "no",
+                "0",
+                "F",
                 "false",
-                "False",
+                "f",
+                "OFF",
+                "N",
                 "NO",
-                "0"
+                "off",
+                "False"
               ]
             },
             "NULL_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
                 {
                   "type": "string"
@@ -1743,18 +1744,24 @@
                   "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
                 "",
                 null,
-                "null",
+                "NULL",
                 "Null",
-                "NULL"
+                "null"
               ]
             },
             "TRUE_VALUES": {
               "type": "array",
+              "uniqueItems": true,
               "items": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "string"
+                },
                 {
                   "type": "integer"
                 },
@@ -1790,30 +1797,23 @@
                 },
                 {
                   "type": "string"
-                },
-                {
-                  "type": "string"
-                },
-                {
-                  "type": "string"
                 }
               ],
-              "uniqueItems": true,
               "default": [
-                1,
-                "On",
-                "Y",
-                "YES",
-                "True",
-                "T",
-                "true",
+                "TRUE",
                 "ON",
-                "yes",
+                1,
                 "on",
-                "y",
+                "On",
+                "yes",
                 "1",
-                "t",
-                "TRUE"
+                "Y",
+                "True",
+                "y",
+                "true",
+                "YES",
+                "T",
+                "t"
               ]
             },
             "default_error_messages": {

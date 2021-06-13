@@ -2115,7 +2115,7 @@
           ]
         },
         "CascadeImageField": {
-          "type": "object",
+          "type": "string",
           "extends": [
             "#/$defs/fields/$defs/AdminImageFormField",
             "#/$defs/fields/$defs/AdminFileFormField",
