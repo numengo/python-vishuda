@@ -3,20 +3,23 @@
 
 import telebot
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-from ngoschema.types import String, Symbol
+from ngoschema.registries import repositories_registry
+from ngoschema.repositories import MemoryRepository
+from ngoschema.models.instances import Entity
+
+from .. import settings
 
 
-class CustomFilter(with_metaclass(SchemaMetaclass)):
-    _id = 'https://numengo.org/vishuda#/$defs/telebot/$defs/filters/$defs/CustomFilter'
+class Telebot(with_metaclass(SchemaMetaclass, telebot.TeleBot)):
+    _id = 'https://numengo.org/vishuda#/$defs/app/$defs/Telebot'
 
-    def __init__(self, value=None, **opts):
-        data = value if value is not None else opts
-        opts = opts if value is not None else {}
-        if value and String.check(value):
-            s = Symbol.convert(value)
-            data = {'symbol': s, 'key': s.key}
-        ObjectProtocol.__init__(self, data, **opts)
+    def __init__(self, value=None, context=None, **opts):
+        Entity.__init__(self, value, context=context, **opts)
+        self.token = token = self.token or settings.TELEGRAM_BOT_TOKEN
+        telebot.TeleBot.__init__(self, token=token, **opts)
 
 
-class Telebot(telebot.TeleBot):
-    pass
+@repositories_registry.register()
+class TelebotRepository(with_metaclass(SchemaMetaclass, MemoryRepository)):
+    _instanceClass = Telebot
+    _many = True

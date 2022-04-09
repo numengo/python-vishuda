@@ -70,8 +70,8 @@
         "Address": {
           "type": "object",
           "aliases": {
-            "city": "locality",
             "street": "street-address",
+            "city": "locality",
             "zip": "postal-code"
           },
           "extends": [
@@ -95,9 +95,9 @@
         "User": {
           "type": "object",
           "aliases": {
-            "lastName": "familyName",
+            "firstName": "givenName",
             "fullName": "fn",
-            "firstName": "givenName"
+            "lastName": "familyName"
           },
           "primaryKeys": [
             "username"
@@ -126,8 +126,8 @@
         "BankAccount": {
           "type": "object",
           "aliases": {
-            "IBAN": "iban",
-            "BIC": "swift_bic"
+            "BIC": "swift_bic",
+            "IBAN": "iban"
           },
           "properties": {
             "holder_name": {
@@ -164,14 +164,14 @@
         "Merchant": {
           "type": "object",
           "aliases": {
-            "reg_id": "registration_id",
-            "reg_city": "registration_city",
-            "city": "merchant_city",
-            "VAT_id": "merchant_vat_id",
-            "street": "merchant_street",
-            "zip": "merchant_zip",
             "reg_capital": "registration_capital",
-            "tax_id": "merchant_tax_id"
+            "VAT_id": "merchant_vat_id",
+            "reg_city": "registration_city",
+            "street": "merchant_street",
+            "tax_id": "merchant_tax_id",
+            "city": "merchant_city",
+            "zip": "merchant_zip",
+            "reg_id": "registration_id"
           },
           "primaryKeys": [
             "merchant_name"
@@ -287,27 +287,26 @@
               "type": "array"
             }
           }
-        }
-      }
-    },
-    "telebot": {
-      "type": "object",
-      "$defs": {
+        },
         "Telebot": {
           "type": "object",
           "notSerialized": [
             "token"
           ],
           "primaryKeys": [
-            "canonicalName"
+            "telebot_name"
           ],
           "required": [
-            "token"
+            "token",
+            "telebot_name"
           ],
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
           ],
           "properties": {
+            "telebot_name": {
+              "type": "string"
+            },
             "token": {
               "type": "string"
             },
@@ -317,321 +316,24 @@
             "num_threads": {
               "type": "integer",
               "default": 2
-            },
-            "entry_points": {
-              "type": "array"
-            },
-            "message_handlers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/handlers/$defs/Handler"
-              }
-            },
-            "edited_message_handlers": {
-              "type": "array"
-            },
-            "channel_post_handlers": {
-              "type": "array"
-            },
-            "edited_channel_post_handlers": {
-              "type": "array"
-            },
-            "inline_handlers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/handlers/$defs/Handler"
-              }
-            },
-            "chosen_inline_handlers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/handlers/$defs/Handler"
-              }
-            },
-            "callback_query_handlers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/handlers/$defs/Handler"
-              }
-            },
-            "shipping_query_handlers": {
-              "type": "array"
-            },
-            "pre_checkout_query_handlers": {
-              "type": "array"
-            },
-            "poll_handlers": {
-              "type": "array"
-            },
-            "poll_answer_handlers": {
-              "type": "array"
-            },
-            "my_chat_member_handlers": {
-              "type": "array"
-            },
-            "chat_member_handlers": {
-              "type": "array"
-            },
-            "customs_filters": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/filters/$defs/CustomFilter"
-              }
-            },
-            "state_handlers": {
-              "type": "array"
-            },
-            "middleware_handlers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/telebot/$defs/handlers/$defs/MiddlewareHandler"
-              }
             }
           }
         },
-        "handlers": {
-          "type": "object",
-          "$defs": {
-            "Handler": {
-              "type": "object",
-              "primaryKeys": [
-                "canonicalName"
-              ],
-              "readOnly": [
-                "name"
-              ],
-              "required": [
-                "function_name"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "function_name": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string",
-                  "default": "{{this.function_name}}"
-                },
-                "content_types": {
-                  "type": "array"
-                },
-                "commands": {
-                  "type": "array"
-                },
-                "chat_types": {
-                  "type": "array"
-                },
-                "regexp": {
-                  "type": "string"
-                },
-                "func": {
-                  "type": "string"
-                }
-              }
-            },
-            "MiddlewareHandler": {
-              "type": "object",
-              "primaryKeys": [
-                "canonicalName"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "update_types": {
-                  "type": "array"
-                }
-              }
-            }
-          }
-        },
-        "filters": {
-          "type": "object",
-          "$defs": {
-            "CustomFilter": {
-              "type": "object",
-              "primaryKeys": [
-                "symbol"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "symbol": {
-                  "type": "string"
-                },
-                "key": {
-                  "type": "string"
-                },
-                "return": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "chatbot": {
-      "type": "object",
-      "$defs": {
         "Chatbot": {
-          "type": "object"
-        },
-        "simple": {
           "type": "object",
-          "$defs": {
-            "Reflection": {
-              "type": "object",
-              "primaryKeys": [
-                "mine"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "mine": {
-                  "type": "string"
-                },
-                "yours": {
-                  "type": "string"
-                }
-              }
+          "abstract": true,
+          "primaryKeys": [
+            "chatbot_name"
+          ],
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          ],
+          "properties": {
+            "chatbot_name": {
+              "type": "string"
             },
-            "Response": {
-              "type": "object",
-              "primaryKeys": [
-                "regex"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "regex": {
-                  "type": "string"
-                },
-                "answers": {
-                  "type": "array"
-                }
-              }
-            },
-            "ChatbotSimple": {
-              "type": "object",
-              "required": [
-                "responses"
-              ],
-              "extends": [
-                "#/$defs/chatbot/$defs/ChatBot"
-              ],
-              "properties": {
-                "reflections": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/chatbot/$defs/simple/$defs/Reflection"
-                  }
-                },
-                "responses": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/chatbot/$defs/simple/$defs/Response"
-                  }
-                },
-                "reflections_dict": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "advanced": {
-          "type": "object",
-          "$defs": {
-            "Decomp": {
-              "type": "object",
-              "properties": {
-                "parts": {
-                  "type": "array"
-                },
-                "save": {
-                  "type": "boolean",
-                  "default": true
-                },
-                "reasmbs": {
-                  "type": "array"
-                }
-              }
-            },
-            "Key": {
-              "type": "object",
-              "primaryKeys": [
-                "word"
-              ],
-              "required": [
-                "word"
-              ],
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-              ],
-              "properties": {
-                "word": {
-                  "type": "string"
-                },
-                "weight": {
-                  "type": "integer"
-                },
-                "decompos": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/chatbot/$defs/advanced/$defs/Decomp"
-                  }
-                }
-              }
-            },
-            "ChatbotAdvanced": {
-              "type": "object",
-              "required": [
-                "filepath"
-              ],
-              "extends": [
-                "#/$defs/chatbot/$defs/ChatBot"
-              ],
-              "properties": {
-                "filepath": {
-                  "type": "path"
-                },
-                "initials": {
-                  "type": "array"
-                },
-                "finals": {
-                  "type": "array"
-                },
-                "quits": {
-                  "type": "array"
-                },
-                "pres": {
-                  "type": "object",
-                  "additionalProperties": true
-                },
-                "posts": {
-                  "type": "object",
-                  "additionalProperties": true
-                },
-                "synons": {
-                  "type": "object",
-                  "additionalProperties": true
-                },
-                "keys": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/chatbot/$defs/advanced/$defs/Key"
-                  }
-                }
-              }
+            "responses": {
+              "type": "array"
             }
           }
         }
