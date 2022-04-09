@@ -4,20 +4,129 @@
 """Tests for `vishuda` package."""
 from click.testing import CliRunner
 
-from vishuda.cli import main
+from vishuda.cli import cli
 
 # PROTECTED REGION ID(vishuda.tests.test_vishuda) ENABLED START
 
 def test_vishuda():
-    # from vishuda import vishuda
-    # assert vishuda
+    from vishuda import settings
+    TOKEN = '5186103460:AAGmRRgW_mVB08EPoeE1zbh3C_ie1Pwndog'
+    settings.configure(TELEGRAM_BOT_TOKEN=TOKEN)
+    from vishuda import telegram_bot
+    tb = telegram_bot.bot
+
+    test_telebot(tb)
+    test_telebot2(tb)
 
 
-    runner = CliRunner()
-    result = runner.invoke(main, [])
+def test_telebot(tb):
+    # https://github.com/eternnoir/pyTelegramBotAPI#telegram-channel
+    # getMe
+    user = tb.get_me()
 
-    assert result.output == 'Hello World!\n'
-    assert result.exit_code == 0
+    # setWebhook
+    tb.set_webhook(url="http://example.com", certificate=open('mycert.pem'))
+    # unset webhook
+    tb.remove_webhook()
+
+    # getUpdates
+    updates = tb.get_updates()
+    # or
+    updates = tb.get_updates(1234, 100, 20)  # get_Updates(offset, limit, timeout):
+
+    # sendMessage
+    tb.send_message(chat_id, text)
+
+    # editMessageText
+    tb.edit_message_text(new_text, chat_id, message_id)
+
+    # forwardMessage
+    tb.forward_message(to_chat_id, from_chat_id, message_id)
+
+    # All send_xyz functions which can take a file as an argument, can also take a file_id instead of a file.
+    # sendPhoto
+    photo = open('/tmp/photo.png', 'rb')
+    tb.send_photo(chat_id, photo)
+    tb.send_photo(chat_id, "FILEID")
+
+    # sendAudio
+    audio = open('/tmp/audio.mp3', 'rb')
+    tb.send_audio(chat_id, audio)
+    tb.send_audio(chat_id, "FILEID")
+
+    ## sendAudio with duration, performer and title.
+    tb.send_audio(CHAT_ID, file_data, 1, 'eternnoir', 'pyTelegram')
+
+    # sendVoice
+    voice = open('/tmp/voice.ogg', 'rb')
+    tb.send_voice(chat_id, voice)
+    tb.send_voice(chat_id, "FILEID")
+
+    # sendDocument
+    doc = open('/tmp/file.txt', 'rb')
+    tb.send_document(chat_id, doc)
+    tb.send_document(chat_id, "FILEID")
+
+    # sendSticker
+    sti = open('/tmp/sti.webp', 'rb')
+    tb.send_sticker(chat_id, sti)
+    tb.send_sticker(chat_id, "FILEID")
+
+    # sendVideo
+    video = open('/tmp/video.mp4', 'rb')
+    tb.send_video(chat_id, video)
+    tb.send_video(chat_id, "FILEID")
+
+    # sendVideoNote
+    videonote = open('/tmp/videonote.mp4', 'rb')
+    tb.send_video_note(chat_id, videonote)
+    tb.send_video_note(chat_id, "FILEID")
+
+    # sendLocation
+    tb.send_location(chat_id, lat, lon)
+
+    # sendChatAction
+    # action_string can be one of the following strings: 'typing', 'upload_photo', 'record_video', 'upload_video',
+    # 'record_audio', 'upload_audio', 'upload_document' or 'find_location'.
+    tb.send_chat_action(chat_id, action_string)
+
+    # getFile
+    # Downloading a file is straightforward
+    # Returns a File object
+    import requests
+    file_info = tb.get_file(file_id)
+
+    file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
+
+def test_telebot2(tb):
+    # https://github.com/eternnoir/pyTelegramBotAPI#telegram-channel
+    from telebot import types
+
+    # Using the ReplyKeyboardMarkup class
+    # It's constructor can take the following optional arguments:
+    # - resize_keyboard: True/False (default False)
+    # - one_time_keyboard: True/False (default False)
+    # - selective: True/False (default False)
+    # - row_width: integer (default 3)
+    # row_width is used in combination with the add() function.
+    # It defines how many buttons are fit on each row before continuing on the next row.
+    markup = types.ReplyKeyboardMarkup(row_width=2)
+    itembtn1 = types.KeyboardButton('a')
+    itembtn2 = types.KeyboardButton('v')
+    itembtn3 = types.KeyboardButton('d')
+    markup.add(itembtn1, itembtn2, itembtn3)
+    tb.send_message(chat_id, "Choose one letter:", reply_markup=markup)
+
+    # or add KeyboardButton one row at a time:
+    markup = types.ReplyKeyboardMarkup()
+    itembtna = types.KeyboardButton('a')
+    itembtnv = types.KeyboardButton('v')
+    itembtnc = types.KeyboardButton('c')
+    itembtnd = types.KeyboardButton('d')
+    itembtne = types.KeyboardButton('e')
+    markup.row(itembtna, itembtnv)
+    markup.row(itembtnc, itembtnd, itembtne)
+    tb.send_message(chat_id, "Choose one letter:", reply_markup=markup)
 
 
 if __name__ == '__main__':

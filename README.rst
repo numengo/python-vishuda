@@ -63,15 +63,17 @@ Framework for rapid application development and code generation
 
 * Free software: GNU General Public License v3
 
+.. skip-next
+
 Installation
 ============
 
-::
+Install command::
 
     pip install vishuda
 
 Settings are managed using
-`simple-settings <https://raw.githubusercontent.com/drgarcia1986/simple-settings>`__
+`simple-settings <https://github.com/drgarcia1986/simple-settings>`__
 and can be overriden with configuration files (cfg, yaml, json) or with environment variables
 prefixed with VISHUDA_.
 

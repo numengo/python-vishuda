@@ -41,8 +41,8 @@ name = 'vishuda'
 package = 'vishuda'
 description = 'Framework for rapid application development and code generation'
 url = 'https://github.com/numengo/python-vishuda'
-author='Cedric ROMAN',
-author_email='roman@numengo.com',
+author = 'Cedric ROMAN'
+author_email = 'roman@numengo.com'
 license = 'GNU General Public License v3'
 version = get_version(package)
 
@@ -70,7 +70,12 @@ install_requires = [
     'future',
     'python-gettext',
     'click',
-    'git+https://github.com/RomanCedric/python-ngoschema',
+    'ngoschema',
+    'pyTelegramBotAPI',
+    'emoji',
+
+    'pyowm',
+    'beautifulsoup4'
 ]
 
 post_install_requires = [i for i in install_requires if ('-' in i or ':' in i or '.' in i)]
@@ -101,14 +106,15 @@ setup(
     version=version,
     license=license,
     description=description,
-    long_description='%s\n%s' % (
-        re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('', read('README.rst')),
-        re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))
-    ),
+    long_description='%s\n%s' %
+    (re.compile('^.. skip-next.*', re.M | re.S).sub('',
+     re.compile('^.. start-badges.*^.. end-badges', re.M | re.S).sub('',
+     read('README.rst'))),
+     re.sub(':[a-z]+:`~?(.*?)`', r'``\1``', read('CHANGELOG.rst'))),
     author=author,
     author_email=author_email,
     url=url,
-    packages=[package],
+    packages=find_packages(exclude='tests'),
     package_data=get_package_data(package),
     include_package_data=True,
     zip_safe=False,
