@@ -71,7 +71,6 @@ install_requires = [
     'python-gettext',
     'click',
     'ngoschema',
-    'pyTelegramBotAPI',
     'emoji',
 
     'pyowm',

@@ -3,6 +3,8 @@ from .auth import *
 from .personas import *
 from .app import *
 from .telegram import *
+from .chatbot import *
+from .telebot import *
 #from .nodes import *
 
 __all__ = [
@@ -22,4 +24,9 @@ __all__ = [
     #'ViewNode',
     #'AppNode',
     #'UserNode',
+    # chatbot
+    'Chatbot',
+    'ChatbotSimple',
+    # telebot\
+    'Telebot'
 ]

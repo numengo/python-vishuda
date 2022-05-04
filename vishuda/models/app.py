@@ -18,6 +18,10 @@ class View(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/app/$defs/View"
 
 
+class Namespace(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/app/$defs/Namespace"
+
+
 class App(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/app/$defs/App"
 

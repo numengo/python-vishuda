@@ -10,7 +10,15 @@ from vishuda.cli import cli
 
 def test_vishuda():
     from vishuda import settings
-    TOKEN = '5186103460:AAGmRRgW_mVB08EPoeE1zbh3C_ie1Pwndog'
+    from vishuda.models.chatbot.advanced import ChatbotAdvanced
+    chatbot = ChatbotAdvanced(filepath='../vishuda/static/doctor.txt')
+    chatbot.load()
+    chatbot.initial()
+    chatbot.respond('hello, how are you?')
+
+
+def test_vishuda2():
+    from vishuda import settings
     settings.configure(TELEGRAM_BOT_TOKEN=TOKEN)
     from vishuda import telegram_bot
     tb = telegram_bot.bot

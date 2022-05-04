@@ -5,6 +5,7 @@
   "$defs": {
     "i18n": {
       "type": "object",
+      "description": "This is a mixin for classes that require multlingual support",
       "$defs": {
         "TranslatableMixin": {
           "type": "object",
@@ -21,22 +22,34 @@
       "$defs": {
         "ContentType": {
           "type": "object",
+          "description": "This represents associates a typed content to a db model symbol.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          ],
+          "primaryKeys": [
+            "app_label",
+            "model"
           ],
           "properties": {
             "app_label": {
               "type": "string"
             },
-            "name": {
-              "type": "string"
+            "model": {
+              "type": "string",
+              "description": "python model class name"
             }
           }
         },
         "Permission": {
           "type": "object",
+          "description": "The permissions system provides a way to assign permissions to specific users and groups of users.\n\nThe permission system is used by the Django admin site, but may also be useful in your own code. The Django admin site uses permissions as follows:\n    - The \"add\" permission limits the user's ability to view the \"add\" form\n      and add an object.\n    - The \"change\" permission limits a user's ability to view the change\n      list, view the \"change\" form and change an object.\n    - The \"delete\" permission limits the ability to delete an object.\n    - The \"view\" permission limits the ability to view an object.\n\nPermissions are set globally per type of object, not per specific object instance. It is possible to say \"Mary may change news stories,\" but it's not currently possible to say \"Mary may change news stories, but only the ones she created herself\" or \"Mary may only change news stories that have a certain status or publication date.\"\nThe permissions listed above are automatically created for each model.",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Name"
+          ],
+          "primaryKeys": [
+            "content_type",
+            "codename"
           ],
           "properties": {
             "name": {
@@ -52,8 +65,13 @@
         },
         "Group": {
           "type": "object",
+          "description": "Groups are a generic way of categorizing users to apply permissions, or some other label, to those users.\nA user can belong to any number of groups. A user in a group automatically has all the permissions granted to that group. For example, if the group 'Site editors' has the permission can_edit_home_page, any user in that group will have that permission.",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Name"
+          ],
+          "primaryKeys": [
+            "name"
           ],
           "properties": {
             "name": {
@@ -69,23 +87,55 @@
         },
         "Address": {
           "type": "object",
-          "aliases": {
-            "street": "street-address",
-            "city": "locality",
-            "zip": "postal-code"
-          },
+          "description": "This object represents an address following the convention of http://microformats.org/wiki/hcard",
           "extends": [
             "https://json-schema.org/address"
-          ]
+          ],
+          "aliases": {
+            "zip": "postal-code",
+            "street": "street-address",
+            "city": "locality"
+          },
+          "properties": {
+            "post-office-box": {
+              "type": "string",
+              "description": "Post office box description if any"
+            },
+            "extended-address": {
+              "type": "string",
+              "description": "Apartment/suite/room name/number if any"
+            },
+            "street-address": {
+              "type": "string",
+              "description": "Street number + name, apt/ste"
+            },
+            "locality": {
+              "type": "string",
+              "description": "City/town/village"
+            },
+            "region": {
+              "type": "string",
+              "description": "State/county/province"
+            },
+            "postal-code": {
+              "type": "string",
+              "description": "Postal code, e.g. US ZIP"
+            },
+            "country-name": {
+              "type": "string",
+              "description": "Country name"
+            }
+          }
         },
         "Card": {
           "type": "object",
-          "aliases": {
-            "address": "adr"
-          },
+          "description": "This object represent a person, a company, an organization, or a place",
           "extends": [
             "https://json-schema.org/card"
           ],
+          "aliases": {
+            "address": "adr"
+          },
           "properties": {
             "adr": {
               "$ref": "#/$defs/auth/$defs/Address"
@@ -94,6 +144,11 @@
         },
         "User": {
           "type": "object",
+          "description": "This objects represents a fully featured User model with admin-compliant permissions.",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "#/$defs/auth/$defs/Card"
+          ],
           "aliases": {
             "firstName": "givenName",
             "fullName": "fn",
@@ -102,57 +157,74 @@
           "primaryKeys": [
             "username"
           ],
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
-            "#/$defs/auth/$defs/Card"
-          ],
           "properties": {
             "email": {
-              "type": "string"
+              "type": "string",
+              "description": "Email address"
             },
             "username": {
               "type": "string",
+              "description": "Unique User name, usually email address",
               "default": "{{this.email}}"
             },
             "githubUsername": {
-              "type": "string"
+              "type": "string",
+              "description": "Username on github"
+            },
+            "firstName": {
+              "type": "string",
+              "description": "First Name"
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Family (often last) name"
             },
             "fn": {
               "type": "string",
+              "description": "Name, formatted/full",
               "default": "{{this.firstName}} {{this.lastName}}"
             }
           }
         },
         "BankAccount": {
           "type": "object",
+          "description": "This objects represents a bank account.",
           "aliases": {
-            "BIC": "swift_bic",
-            "IBAN": "iban"
+            "IBAN": "iban",
+            "BIC": "swift_bic"
           },
           "properties": {
             "holder_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank account holder's name"
             },
             "bank_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank's name"
             },
             "bank_street": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank's street"
             },
             "bank_city": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank's city"
             },
             "bank_zip": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank's zip code"
             },
             "agency": {
-              "type": "string"
+              "type": "string",
+              "description": "Bank agency identifier"
             },
             "swift_bic": {
-              "type": "string"
+              "type": "string",
+              "description": "SWIFT BIC number"
             },
             "iban": {
-              "type": "string"
+              "type": "string",
+              "description": "IBAN number"
             }
           }
         }
@@ -163,22 +235,23 @@
       "$defs": {
         "Merchant": {
           "type": "object",
-          "aliases": {
-            "reg_capital": "registration_capital",
-            "VAT_id": "merchant_vat_id",
-            "reg_city": "registration_city",
-            "street": "merchant_street",
-            "tax_id": "merchant_tax_id",
-            "city": "merchant_city",
-            "zip": "merchant_zip",
-            "reg_id": "registration_id"
-          },
-          "primaryKeys": [
-            "merchant_name"
-          ],
+          "description": "This objects represents a merchant.",
           "extends": [
             "https://numengo.org/django-cms#/$defs/Merchant",
             "#/$defs/auth/$defs/Card"
+          ],
+          "aliases": {
+            "street": "merchant_street",
+            "reg_city": "registration_city",
+            "zip": "merchant_zip",
+            "reg_id": "registration_id",
+            "reg_capital": "registration_capital",
+            "VAT_id": "merchant_vat_id",
+            "tax_id": "merchant_tax_id",
+            "city": "merchant_city"
+          },
+          "primaryKeys": [
+            "merchant_name"
           ],
           "properties": {
             "bank_account": {
@@ -188,31 +261,33 @@
         },
         "Manufacturer": {
           "type": "object",
-          "primaryKeys": [
-            "fn"
-          ],
+          "description": "This objects represents a product manufacturer.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
             "#/$defs/auth/$defs/Card"
+          ],
+          "primaryKeys": [
+            "fn"
           ]
         },
         "Customer": {
           "type": "object",
-          "primaryKeys": [
-            "username"
-          ],
+          "description": "This objects represents a customer.",
           "extends": [
             "#/$defs/auth/$defs/User"
+          ],
+          "primaryKeys": [
+            "username"
           ]
         },
         "BusinessCustomer": {
           "type": "object",
-          "primaryKeys": [
-            "username"
-          ],
           "extends": [
             "#/$defs/personas/$defs/Customer",
             "#/$defs/personas/$defs/Merchant"
+          ],
+          "primaryKeys": [
+            "username"
           ]
         }
       }
@@ -222,22 +297,24 @@
       "$defs": {
         "Model": {
           "type": "object",
-          "abstract": true,
-          "primaryKeys": [
-            "canonicalName"
-          ],
+          "description": "This objects represents an app model.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
             "#/$defs/i18n/$defs/TranslatableMixin"
+          ],
+          "abstract": true,
+          "primaryKeys": [
+            "canonicalName"
           ]
         },
         "Fixture": {
           "type": "object",
-          "primaryKeys": [
-            "canonicalName"
-          ],
+          "description": "This objects represents an app fixture.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          ],
+          "primaryKeys": [
+            "canonicalName"
           ],
           "properties": {
             "model": {
@@ -245,70 +322,92 @@
             },
             "pk": true,
             "fields": {
-              "type": "object"
+              "type": "object",
+              "description": "Fixture values"
             }
           }
         },
         "View": {
           "type": "object",
+          "description": "This objects represents an app view.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/protocols/$defs/Serializer",
             "#/$defs/i18n/$defs/TranslatableMixin"
           ]
         },
-        "App": {
+        "Namespace": {
           "type": "object",
-          "primaryKeys": [
-            "canonicalName"
-          ],
+          "description": "This objects represents an app namespace.",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
           "properties": {
             "models": {
               "type": "array",
+              "description": "Namespace models",
               "items": {
                 "$ref": "#/$defs/app/$defs/Model"
               }
             },
             "fixtures": {
               "type": "array",
+              "description": "Namespace fixtures",
               "items": {
                 "$ref": "#/$defs/app/$defs/Fixture"
               }
             },
             "views": {
               "type": "array",
+              "description": "Namespace views",
               "items": {
                 "$ref": "#/$defs/app/$defs/View"
               }
-            },
-            "entry_points": {
-              "type": "array"
             }
           }
         },
+        "App": {
+          "type": "object",
+          "description": "This objects represents an app.",
+          "extends": [
+            "#/$defs/app/$defs/Namespace"
+          ],
+          "properties": {
+            "entry_points": {
+              "type": "array",
+              "description": "App entry points"
+            },
+            "languages": {
+              "type": "array",
+              "description": "App supported language lists",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "telebot": {
+      "type": "object",
+      "$defs": {
         "Telebot": {
           "type": "object",
+          "additionalProperties": true,
           "notSerialized": [
             "token"
-          ],
-          "primaryKeys": [
-            "telebot_name"
           ],
           "required": [
             "token",
             "telebot_name"
           ],
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
-          ],
           "properties": {
             "telebot_name": {
-              "type": "string"
+              "type": "string",
+              "description": "Bot name"
             },
             "token": {
-              "type": "string"
+              "type": "string",
+              "description": "bot API token"
             },
             "threaded": {
               "type": "boolean"
@@ -319,21 +418,63 @@
             }
           }
         },
+        "description": {
+          "type": "object"
+        }
+      }
+    },
+    "chatbot": {
+      "type": "object",
+      "$defs": {
+        "Pair": {
+          "type": "object",
+          "description": "This objects represents a conversational pair.",
+          "required": [
+            "pattern"
+          ],
+          "properties": {
+            "pattern": {
+              "type": "string",
+              "rawLiterals": true
+            },
+            "responses": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "rawLiterals": true
+              }
+            },
+            "tag": {
+              "type": "string"
+            },
+            "context_set": {
+              "type": "object"
+            }
+          }
+        },
         "Chatbot": {
           "type": "object",
-          "abstract": true,
-          "primaryKeys": [
-            "chatbot_name"
-          ],
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity"
+          "description": "This objects represents a conversational NLTK chatbot",
+          "required": [
+            "pairs"
           ],
           "properties": {
             "chatbot_name": {
               "type": "string"
             },
-            "responses": {
-              "type": "array"
+            "pairs": {
+              "type": "array",
+              "description": "List of patterns and responses.",
+              "items": {
+                "$ref": "#/$defs/chatbot/$defs/Pair"
+              }
+            },
+            "reflections": {
+              "type": "object",
+              "description": "Mapping between first and second person expressions",
+              "additionalProperties": {
+                "type": "string"
+              }
             }
           }
         }
