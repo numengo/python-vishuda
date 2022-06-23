@@ -1,6 +1,7 @@
 # *- coding: utf-8 -*-
 from .auth import *
 from .personas import *
+from .ical import *
 from .app import *
 from .telegram import *
 from .chatbot import *
@@ -11,9 +12,12 @@ __all__ = [
     # auth
     'User',
     'Card',
-    # personas
     'Address',
+    # personas
     'Merchant',
+    # ical
+    'Event',
+    'Calendar',
     # app
     'Model',
     'Fixture',
@@ -26,7 +30,6 @@ __all__ = [
     #'UserNode',
     # chatbot
     'Chatbot',
-    'ChatbotSimple',
-    # telebot\
+    # telebot
     'Telebot'
 ]

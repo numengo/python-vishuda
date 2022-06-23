@@ -19,7 +19,7 @@ class Pair(with_metaclass(SchemaMetaclass)):
         is given, e.g. ['Why do you like %1', 'Did you ever dislike %1'].  Material
         which is matched by parenthesized sections of the patterns (e.g. .*) is mapped to
         the numbered positions in the responses, e.g. %1."""
-    _id = 'https://numengo.org/vishuda#/$defs/chatbot/$defs/Pair'
+    _id = 'https://numengo.org/vishuda#/$defs/app/$defs/chatbot/$defs/Pair'
 
 
 class Chatbot(with_metaclass(SchemaMetaclass, Chat)):
@@ -28,7 +28,7 @@ class Chatbot(with_metaclass(SchemaMetaclass, Chat)):
     :param pairs: list of patterns and responses.
     :param reflections: A mapping between first and second person expressions
     """
-    _id = 'https://numengo.org/vishuda#/$defs/chatbot/$defs/Chatbot'
+    _id = 'https://numengo.org/vishuda#/$defs/app/$defs/chatbot/$defs/Chatbot'
 
     def __init__(self, *args, **kwargs):
         ObjectProtocol.__init__(self, *args, **kwargs)

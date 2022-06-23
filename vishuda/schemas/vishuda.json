@@ -7,11 +7,853 @@
       "type": "object",
       "description": "This is a mixin for classes that require multlingual support",
       "$defs": {
+        "Translatable": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "primaryKeys": [
+            "language"
+          ],
+          "properties": {
+            "language": {
+              "type": "string",
+              "description": "Translation language code"
+            },
+            "text": {
+              "type": "string"
+            }
+          }
+        },
         "TranslatableMixin": {
           "type": "object",
+          "abstract": true,
           "properties": {
             "multilingual": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/$defs/Translatable"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "LanguageCode": {
+          "type": "object",
+          "enum": [
+            "zh",
+            "es",
+            "ar",
+            "fr",
+            "pt",
+            "id",
+            "ur",
+            "bn",
+            "ru",
+            "ja",
+            "fa",
+            "am",
+            "tl",
+            "de",
+            "vi",
+            "tr",
+            "ko",
+            "th",
+            "it",
+            "zu",
+            "sw",
+            "my",
+            "uk",
+            "pl",
+            "uz",
+            "ms",
+            "nl",
+            "ne",
+            "ro",
+            "si",
+            "kk",
+            "ny",
+            "km",
+            "so",
+            "rw",
+            "el",
+            "ht",
+            "cu",
+            "cs",
+            "sv",
+            "az",
+            "hu",
+            "be",
+            "tg",
+            "he",
+            "sr",
+            "lo",
+            "bg",
+            "ky",
+            "tk",
+            "da",
+            "cmn",
+            "fi",
+            "sk",
+            "no",
+            "sq",
+            "hr",
+            "ka",
+            "bs",
+            "mn",
+            "hy",
+            "lt",
+            "mk",
+            "sl",
+            "lv",
+            "et",
+            "tet",
+            "dz",
+            "lb",
+            "dv",
+            "mt",
+            "is",
+            "bi",
+            "sm",
+            "to",
+            "ca",
+            "mh",
+            "fil",
+            "kl",
+            "fo",
+            "pau",
+            "wls",
+            "na",
+            "tvl",
+            "niu",
+            "tkl",
+            "la",
+            "aa"
+          ]
+        }
+      }
+    },
+    "emojis": {
+      "type": "object",
+      "$defs": {
+        "Emoji": {
+          "type": "object",
+          "extends": [
+            "#/$defs/i18n/$defs/Translatable"
+          ],
+          "primaryKeys": [
+            "emoji"
+          ],
+          "_type": "string",
+          "properties": {
+            "emoji": {
+              "type": "string"
+            },
+            "language": {
+              "type": "string",
+              "default": "alias"
+            },
+            "variant": {
+              "type": "string"
+            }
+          }
+        },
+        "EmojiCategory": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "primaryKeys": [
+            "name"
+          ],
+          "$defs": {
+            "food_drink": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "food_asian": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "food_prepared": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "food_fruit": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "drink": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "dishware": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "food_vegetable": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "food_sweet": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                },
+                "food_marine": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/food_drink"
+                  ]
+                }
+              }
+            },
+            "flags": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "flag": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/flags"
+                  ]
+                },
+                "subdivision_flag": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/flags"
+                  ]
+                },
+                "country_flag": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/flags"
+                  ]
+                }
+              }
+            },
+            "travel_places": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "time": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "place_geographic": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "place_map": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "place_building": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "sky_weather": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "transport_air": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "transport_ground": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "transport_water": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "place_other": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "hotel": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                },
+                "place_religious": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/travel_places"
+                  ]
+                }
+              }
+            },
+            "people_body": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "hands": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_fantasy": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "hand_fingers_partial": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "hand_fingers_closed": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_gesture": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_sport": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "hand_single_finger": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_activity": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_symbol": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_resting": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "body_parts": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "family": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "hand_fingers_open": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "hand_prop": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                },
+                "person_role": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/people_body"
+                  ]
+                }
+              }
+            },
+            "objects": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "clothing": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "mail": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "sound": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "phone": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "office": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "book_paper": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "writing": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "other_object": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "money": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "computer": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "music": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "musical_instrument": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "household": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "lock": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "science": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "light_video": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "medical": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                },
+                "tool": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/objects"
+                  ]
+                }
+              }
+            },
+            "component": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "skin_tone": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/component"
+                  ]
+                },
+                "hair_style": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/component"
+                  ]
+                }
+              }
+            },
+            "animals_nature": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "animal_amphibian": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "animal_bird": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "animal_marine": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "plant_other": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "plant_flower": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "animal_reptile": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "animal_bug": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                },
+                "animal_mammal": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/animals_nature"
+                  ]
+                }
+              }
+            },
+            "smileys_emotion": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "cat_face": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_sleepy": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_smiling": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_affection": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_tongue": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_concerned": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_unwell": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_costume": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_negative": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_hat": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "monkey_face": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "emotion": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_hand": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_neutral_skeptical": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                },
+                "face_glasses": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/smileys_emotion"
+                  ]
+                }
+              }
+            },
+            "symbols": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "zodiac": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "geometric": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "gender": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "punctuation": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "transport_sign": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "arrow": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "other_symbol": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "warning": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "av_symbol": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "keycap": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "religion": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "math": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "currency": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                },
+                "alphanum": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/symbols"
+                  ]
+                }
+              }
+            },
+            "activities": {
+              "type": "object",
+              "extends": [
+                "#/$defs/emojis/$defs/EmojiCategory"
+              ],
+              "$defs": {
+                "event": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/activities"
+                  ]
+                },
+                "award_medal": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/activities"
+                  ]
+                },
+                "game": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/activities"
+                  ]
+                },
+                "arts_crafts": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/activities"
+                  ]
+                },
+                "sport": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/activities"
+                  ]
+                }
+              }
+            }
+          },
+          "properties": {
+            "emojis": {
+              "$ref": "#/$defs/emojis/$defs/Emoji"
+            },
+            "categories": {
+              "$ref": "#/$defs/emojis/$defs/EmojiCategory"
             }
           }
         }
@@ -91,10 +933,11 @@
           "extends": [
             "https://json-schema.org/address"
           ],
+          "abstract": true,
           "aliases": {
-            "zip": "postal-code",
+            "city": "locality",
             "street": "street-address",
-            "city": "locality"
+            "zip": "postal-code"
           },
           "properties": {
             "post-office-box": {
@@ -131,14 +974,22 @@
           "type": "object",
           "description": "This object represent a person, a company, an organization, or a place",
           "extends": [
-            "https://json-schema.org/card"
+            "https://json-schema.org/card",
+            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Name"
           ],
+          "abstract": true,
           "aliases": {
             "address": "adr"
           },
           "properties": {
             "adr": {
               "$ref": "#/$defs/auth/$defs/Address"
+            },
+            "extra_adrresses": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/auth/$defs/Address"
+              }
             }
           }
         },
@@ -149,6 +1000,7 @@
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
             "#/$defs/auth/$defs/Card"
           ],
+          "abstract": true,
           "aliases": {
             "firstName": "givenName",
             "fullName": "fn",
@@ -166,10 +1018,6 @@
               "type": "string",
               "description": "Unique User name, usually email address",
               "default": "{{this.email}}"
-            },
-            "githubUsername": {
-              "type": "string",
-              "description": "Username on github"
             },
             "firstName": {
               "type": "string",
@@ -190,8 +1038,8 @@
           "type": "object",
           "description": "This objects represents a bank account.",
           "aliases": {
-            "IBAN": "iban",
-            "BIC": "swift_bic"
+            "BIC": "swift_bic",
+            "IBAN": "iban"
           },
           "properties": {
             "holder_name": {
@@ -230,6 +1078,504 @@
         }
       }
     },
+    "ical": {
+      "type": "object",
+      "$defs": {
+        "Event": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "aliases": {
+            "item_attendee": "ATTENDEE",
+            "item_class": "CLASS",
+            "item_created": "CREATED",
+            "item_description": "DESCRIPTION",
+            "item_end_datetime": "DTEND",
+            "item_exdate": "EXDATE",
+            "item_geolocation": "GEO",
+            "item_guid": "UID",
+            "item_link": "URL",
+            "item_location": "LOCATION",
+            "item_organizer": "ORGANIZER",
+            "item_rdate": "RDATE",
+            "item_rrule": "RRULE",
+            "item_start_datetime": "DTSTART",
+            "item_status": "STATUS",
+            "item_title": "SUMMARY",
+            "item_transparency": "TRANSP",
+            "item_updateddate": "LAST-MODIFIED",
+            "item_valarm": "VALARM"
+          },
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Event",
+          "properties": {
+            "UID": {
+              "type": "string",
+              "description": "The event’s unique id. This id should be globally unique so you should add an @DOMAIN_NAME to your id."
+            },
+            "DTSTAMP": {
+              "type": "datetime"
+            },
+            "CLASS": {
+              "type": "string",
+              "description": "The event class (e.g. PUBLIC, PRIVATE, CONFIDENTIAL)"
+            },
+            "CREATED": {
+              "type": "datetime",
+              "description": "The event create time"
+            },
+            "DESCRIPTION": {
+              "type": "string",
+              "description": "The event description"
+            },
+            "DTSTART": {
+              "type": "datetime",
+              "description": "The event start time"
+            },
+            "GEO": {
+              "type": "string",
+              "description": "The latitude and longitude of the event. The value returned by this property should be a two-tuple containing the latitude and longitude as float values. semicolon. Ex: (37.386013, -122.082932)"
+            },
+            "LAST-MODIFIED": {
+              "type": "datetime",
+              "description": "The event modified time"
+            },
+            "LOCATION": {
+              "type": "string",
+              "description": "The event location"
+            },
+            "ORGANIZER": {
+              "type": "string",
+              "description": "The event organizer. Expected to be a vCalAddress object. See iCalendar documentation or tests to know how to build them."
+            },
+            "PRIORITY": {
+              "type": "integer"
+            },
+            "SEQUENCE": {
+              "type": "integer"
+            },
+            "STATUS": {
+              "type": "string",
+              "description": "The status of an event. Can be CONFIRMED, CANCELLED or TENTATIVE.",
+              "enum": [
+                "CONFIRMED",
+                "CANCELLED",
+                "TENTATIVE"
+              ]
+            },
+            "SUMMARY": {
+              "type": "string",
+              "description": "The event name/title"
+            },
+            "TRANSP": {
+              "type": "string",
+              "description": "The event transparency. Defines whether the event shows up in busy searches. (e.g. OPAQUE, TRANSPARENT)"
+            },
+            "URL": {
+              "type": "uri",
+              "description": "The event url"
+            },
+            "RECURRENCE-ID": {
+              "type": "datetime"
+            },
+            "DTEND": {
+              "type": "string",
+              "description": "The event end time"
+            },
+            "DURATION": {
+              "type": "integer"
+            },
+            "CATEGORIES": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array",
+              "description": "The event attendees. Expected to be a list of vCalAddress objects. See iCalendar documentation or tests to know how to build them."
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array",
+              "description": "The dates/times for exceptions of a recurring event. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "type": "datetime"
+              }
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RESOURCES": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array",
+              "description": "The recurring dates/times for a repeating event. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "type": "datetime"
+              }
+            },
+            "RRULE": {
+              "type": "array",
+              "description": "The recurrence rule for repeating events. See iCalendar documentation or tests to know how to build them."
+            },
+            "VALARM": {
+              "type": "array",
+              "description": "Alarms for the event, must be a list of Alarm objects. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "$ref": "#/$defs/ical/$defs/Alarm"
+              }
+            }
+          }
+        },
+        "Todo": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Todo",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "datetime"
+            },
+            "CLASS": {
+              "type": "string"
+            },
+            "COMPLETED": {
+              "type": "string"
+            },
+            "CREATED": {
+              "type": "datetime"
+            },
+            "DESCRIPTION": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "datetime"
+            },
+            "GEO": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "datetime"
+            },
+            "LOCATION": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "PERCENT-COMPLETE": {
+              "type": "string"
+            },
+            "PRIORITY": {
+              "type": "string"
+            },
+            "RECURRENCE-ID": {
+              "type": "datetime"
+            },
+            "SEQUENCE": {
+              "type": "string"
+            },
+            "STATUS": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "uri"
+            },
+            "DUE": {
+              "type": "string"
+            },
+            "DURATION": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "CATEGORIES": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RESOURCES": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array"
+            },
+            "RRULE": {
+              "type": "array"
+            }
+          }
+        },
+        "Journal": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Journal",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "string"
+            },
+            "CLASS": {
+              "type": "string"
+            },
+            "CREATED": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "RECURRENCE-ID": {
+              "type": "string"
+            },
+            "SEQUENCE": {
+              "type": "string"
+            },
+            "STATUS": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "CATEGORIES": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array"
+            },
+            "RRULE": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "DESCRIPTION": {
+              "type": "array"
+            }
+          }
+        },
+        "FreeBusy": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.FreeBusy",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "string"
+            },
+            "CONTACT": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "string"
+            },
+            "DTEND": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "string"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "FREEBUSY": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            }
+          }
+        },
+        "Timezone": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "TZID"
+          ],
+          "wraps": "icalendar.cal.Timezone",
+          "properties": {
+            "TZID": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "string"
+            },
+            "TZURL": {
+              "type": "string"
+            }
+          }
+        },
+        "Alarm": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "ACTION",
+            "TRIGGER"
+          ],
+          "wraps": "icalendar.cal.Alarm",
+          "properties": {
+            "ACTION": {
+              "type": "string"
+            },
+            "TRIGGER": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "DESCRIPTION": {
+              "type": "string"
+            },
+            "DURATION": {
+              "type": "string"
+            },
+            "REPEAT": {
+              "type": "string"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "ATTACH": {
+              "type": "array"
+            }
+          }
+        },
+        "Calendar": {
+          "type": "object",
+          "description": "This is the base object for an iCalendar file.",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "aliases": {
+            "method": "METHOD",
+            "product_id": "PRODID",
+            "timezone": "X-WR-TIMEZONE"
+          },
+          "required": [
+            "PRODID",
+            "VERSION"
+          ],
+          "wraps": "icalendar.cal.Calendar",
+          "properties": {
+            "PRODID": {
+              "type": "string",
+              "description": "The calendar product ID"
+            },
+            "VERSION": {
+              "type": "string"
+            },
+            "CALSCALE": {
+              "type": "string"
+            },
+            "METHOD": {
+              "type": "string",
+              "description": "The calendar method such as meeting requests."
+            },
+            "X-WR-TIMEZONE": {
+              "type": "string",
+              "description": "The calendar timezone"
+            },
+            "X-WR-CALNAME": {
+              "type": "string",
+              "description": "The calendar name/title"
+            }
+          }
+        }
+      }
+    },
     "personas": {
       "type": "object",
       "$defs": {
@@ -241,14 +1587,14 @@
             "#/$defs/auth/$defs/Card"
           ],
           "aliases": {
-            "street": "merchant_street",
-            "reg_city": "registration_city",
-            "zip": "merchant_zip",
-            "reg_id": "registration_id",
-            "reg_capital": "registration_capital",
             "VAT_id": "merchant_vat_id",
+            "city": "merchant_city",
+            "reg_capital": "registration_capital",
+            "reg_city": "registration_city",
+            "reg_id": "registration_id",
+            "street": "merchant_street",
             "tax_id": "merchant_tax_id",
-            "city": "merchant_city"
+            "zip": "merchant_zip"
           },
           "primaryKeys": [
             "merchant_name"
@@ -302,10 +1648,7 @@
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
             "#/$defs/i18n/$defs/TranslatableMixin"
           ],
-          "abstract": true,
-          "primaryKeys": [
-            "canonicalName"
-          ]
+          "abstract": true
         },
         "Fixture": {
           "type": "object",
@@ -365,6 +1708,36 @@
             }
           }
         },
+        "EntryPoint": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "symbol"
+          ],
+          "properties": {
+            "symbol": {
+              "type": "importable"
+            },
+            "command_name": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string",
+              "default": "{{ this.command_name }}"
+            },
+            "help": {
+              "type": "string"
+            },
+            "emojis": {
+              "type": "string"
+            },
+            "emojis_after": {
+              "type": "string"
+            }
+          }
+        },
         "App": {
           "type": "object",
           "description": "This objects represents an app.",
@@ -374,7 +1747,10 @@
           "properties": {
             "entry_points": {
               "type": "array",
-              "description": "App entry points"
+              "description": "App entry points",
+              "items": {
+                "$ref": "#/$defs/app/$defs/EntryPoint"
+              }
             },
             "languages": {
               "type": "array",
@@ -382,98 +1758,137 @@
               "items": {
                 "type": "string"
               }
-            }
-          }
-        }
-      }
-    },
-    "telebot": {
-      "type": "object",
-      "$defs": {
-        "Telebot": {
-          "type": "object",
-          "additionalProperties": true,
-          "notSerialized": [
-            "token"
-          ],
-          "required": [
-            "token",
-            "telebot_name"
-          ],
-          "properties": {
-            "telebot_name": {
-              "type": "string",
-              "description": "Bot name"
             },
-            "token": {
-              "type": "string",
-              "description": "bot API token"
+            "telebot": {
+              "$ref": "https://numengo.org/telebot#/$defs/Telebot"
             },
-            "threaded": {
-              "type": "boolean"
-            },
-            "num_threads": {
-              "type": "integer",
-              "default": 2
+            "chatbot": {
+              "$ref": "#/$defs/app/$defs/chatbot/$defs/Chatbot"
             }
           }
         },
-        "description": {
-          "type": "object"
-        }
-      }
-    },
-    "chatbot": {
-      "type": "object",
-      "$defs": {
-        "Pair": {
+        "signatures": {
           "type": "object",
-          "description": "This objects represents a conversational pair.",
-          "required": [
-            "pattern"
-          ],
-          "properties": {
-            "pattern": {
-              "type": "string",
-              "rawLiterals": true
-            },
-            "responses": {
-              "type": "array",
-              "items": {
-                "type": "string",
-                "rawLiterals": true
-              }
-            },
-            "tag": {
-              "type": "string"
-            },
-            "context_set": {
-              "type": "object"
-            }
-          }
-        },
-        "Chatbot": {
-          "type": "object",
-          "description": "This objects represents a conversational NLTK chatbot",
-          "required": [
-            "pairs"
-          ],
-          "properties": {
-            "chatbot_name": {
-              "type": "string"
-            },
-            "pairs": {
-              "type": "array",
-              "description": "List of patterns and responses.",
-              "items": {
-                "$ref": "#/$defs/chatbot/$defs/Pair"
-              }
-            },
-            "reflections": {
+          "$defs": {
+            "Parameter": {
               "type": "object",
-              "description": "Mapping between first and second person expressions",
-              "additionalProperties": {
-                "type": "string"
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+              ],
+              "properties": {
+                "empty": {
+                  "type": "boolean"
+                },
+                "default": {
+                  "type": "string"
+                },
+                "annotation": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string",
+                  "enum": [
+                    "POSITIONAL_ONLY",
+                    "POSITIONAL_OR_KEYWORD",
+                    "VAR_POSITIONAL",
+                    "KEYWORD_ONLY",
+                    "VAR_KEYWORD"
+                  ]
+                }
+              }
+            },
+            "Signature": {
+              "type": "object",
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+              ],
+              "properties": {
+                "parameters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/app/$defs/signatures/$defs/Parameter"
+                  }
+                },
+                "return_annotation": {
+                  "type": "string"
+                },
+                "empty": {
+                  "type": "boolean"
+                }
+              }
+            },
+            "BoundArguments": {
+              "type": "object",
+              "properties": {
+                "arguments": {
+                  "type": "string"
+                },
+                "args": {
+                  "type": "string"
+                },
+                "kwargs": {
+                  "type": "string"
+                },
+                "signature": {
+                  "$ref": "#/$defs/app/$defs/signatures/$defs/Signature"
+                }
+              }
+            }
+          }
+        },
+        "chatbot": {
+          "type": "object",
+          "$defs": {
+            "Pair": {
+              "type": "object",
+              "description": "This objects represents a conversational pair.",
+              "required": [
+                "pattern"
+              ],
+              "properties": {
+                "pattern": {
+                  "type": "string",
+                  "rawLiterals": true
+                },
+                "responses": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "rawLiterals": true
+                  }
+                },
+                "tag": {
+                  "type": "string"
+                },
+                "context_set": {
+                  "type": "object"
+                }
+              }
+            },
+            "Chatbot": {
+              "type": "object",
+              "description": "This objects represents a conversational NLTK chatbot",
+              "required": [
+                "pairs"
+              ],
+              "properties": {
+                "chatbot_name": {
+                  "type": "string"
+                },
+                "pairs": {
+                  "type": "array",
+                  "description": "List of patterns and responses.",
+                  "items": {
+                    "$ref": "#/$defs/app/$defs/chatbot/$defs/Pair"
+                  }
+                },
+                "reflections": {
+                  "type": "object",
+                  "description": "Mapping between first and second person expressions",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
               }
             }
           }

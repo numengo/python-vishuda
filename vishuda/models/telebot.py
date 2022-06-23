@@ -8,9 +8,12 @@ from .. import settings
 
 
 class Telebot(with_metaclass(SchemaMetaclass, telebot.TeleBot)):
-    _id = 'https://numengo.org/vishuda#/$defs/telebot/$defs/Telebot'
+    _id = 'https://numengo.org/telebot#/$defs/Telebot'
 
     def __init__(self, value=None, context=None, **opts):
         ObjectProtocol.__init__(self, value, context=context, **opts)
         self.token = token = self.token or settings.TELEGRAM_BOT_TOKEN
         telebot.TeleBot.__init__(self, token=token, **opts)
+
+    #def get_bot_link(self):
+    #    return f'https://telegram.me/{self.user.username}'#?start = unique_code'
