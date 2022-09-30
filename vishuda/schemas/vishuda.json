@@ -974,8 +974,7 @@
           "type": "object",
           "description": "This object represent a person, a company, an organization, or a place",
           "extends": [
-            "https://json-schema.org/card",
-            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Name"
+            "https://json-schema.org/card"
           ],
           "abstract": true,
           "aliases": {
@@ -1635,6 +1634,173 @@
           "primaryKeys": [
             "username"
           ]
+        }
+      }
+    },
+    "pandas": {
+      "type": "object",
+      "$defs": {
+        "NdArray": {
+          "type": "object",
+          "description": "This object represents a numpy nd-array",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": true,
+          "required": [
+            "data"
+          ],
+          "wraps": "numpy.ndarray",
+          "properties": {
+            "data": true,
+            "dtype": {
+              "type": "string",
+              "description": "The desired data-type for the array.  If not given, then the type will be determined as the minimum type required to hold the objects in the sequence."
+            },
+            "copy": {
+              "type": "boolean",
+              "description": "If true (default), then the object is copied.  Otherwise, a copy will only be made if __array__ returns a copy, if obj is a nested sequence, or if a copy is needed to satisfy any of the other requirements(`dtype`, `order`, etc.).",
+              "default": true
+            },
+            "order": {
+              "type": "string",
+              "description": "Specify the memory layout of the array. If object is not an array, the newly created array will be in C order (row major) unless 'F' is specified, in which case it will be in Fortran order (column major). If object is an array the following holds.",
+              "enum": [
+                "K",
+                "A",
+                "C",
+                "F"
+              ]
+            },
+            "subok": {
+              "type": "boolean",
+              "description": "If True, then sub-classes will be passed-through, otherwise the returned array will be forced to be a base-class array (default)."
+            },
+            "ndmin": {
+              "type": "integer",
+              "description": "Specifies the minimum number of dimensions that the resulting array should have.  Ones will be pre-pended to the shape as needed to meet this requirement."
+            },
+            "like": {
+              "type": "string",
+              "description": "Reference object to allow the creation of arrays which are not NumPy arrays. If an array-like passed in as ``like`` supports the ``__array_function__`` protocol, the result will be defined by it. In this case, it ensures the creation of an array object compatible with that passed in via this argument."
+            }
+          }
+        },
+        "Index": {
+          "type": "object",
+          "description": "This object represents a serie for Pandas",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.indexes.base.Index",
+          "properties": {
+            "values": {
+              "type": "array"
+            }
+          }
+        },
+        "DatetimeIndex": {
+          "type": "object",
+          "extends": [
+            "#/$defs/pandas/$defs/Index"
+          ],
+          "wraps": "pandas.core.indexes.datetimes.DatetimeIndex"
+        },
+        "Series": {
+          "type": "object",
+          "description": "This object represents series for Pandas",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": true,
+          "required": [
+            "index"
+          ],
+          "wraps": "pandas.core.series.Series",
+          "properties": {
+            "data": true,
+            "index": {
+              "$ref": "#/$defs/pandas/$defs/Index"
+            },
+            "dtype": {
+              "type": "string",
+              "description": "dtype object of the underlying data."
+            }
+          }
+        },
+        "TimeSeries": {
+          "type": "object",
+          "extends": [
+            "#/$defs/pandas/$defs/Series"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.series.Series",
+          "properties": {
+            "index": {
+              "$ref": "#/$defs/pandas/$defs/DatetimeIndex"
+            }
+          }
+        },
+        "DataFrame": {
+          "type": "object",
+          "description": "Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns).",
+          "extends": [
+            "#/$defs/pandas/$defs/Series"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.frame.DataFrame",
+          "properties": {
+            "data": true,
+            "index": {
+              "$ref": "#/$defs/pandas/$defs/Index"
+            }
+          }
+        }
+      }
+    },
+    "pyplot": {
+      "type": "object",
+      "$defs": {
+        "Figure": {
+          "type": "object"
+        },
+        "primitive": {
+          "type": "object",
+          "$defs": {
+            "Text": {
+              "type": "object"
+            },
+            "Line2D": {
+              "type": "object"
+            },
+            "Rectangle": {
+              "type": "object"
+            },
+            "Circle": {
+              "type": "object"
+            }
+          }
+        },
+        "axes": {
+          "type": "object",
+          "$defs": {
+            "AxisTicks": {
+              "type": "object"
+            },
+            "AxisLabel": {
+              "type": "object"
+            },
+            "Axis": {
+              "type": "object"
+            },
+            "Axes": {
+              "type": "object"
+            },
+            "Locator": {
+              "type": "object"
+            }
+          }
         }
       }
     },
