@@ -8,7 +8,10 @@ from .chatbot import *
 from .telebot import *
 #from .nodes import *
 
+Thing = type_builder.load('https://schema.org/#/$defs/Thing')
+
 __all__ = [
+    'Thing',
     # auth
     'User',
     'Card',

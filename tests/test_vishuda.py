@@ -7,8 +7,61 @@ from click.testing import CliRunner
 from vishuda.cli import cli
 
 # PROTECTED REGION ID(vishuda.tests.test_vishuda) ENABLED START
+def test_vishuda_schema_org():
+    from vishuda.models import Thing
+    from vishuda.models.things import Intangible
+    from vishuda.models.things.intangibles import Enumeration, EntryPoint
+
+    a = issubclass(Enumeration, Intangible)
+    b = issubclass(Enumeration, Thing)
+    c = issubclass(Intangible, Thing)
+    d = issubclass(Intangible, Enumeration)
+    assert a and b and c
+    assert not d
+
+    e = Enumeration()
+    assert isinstance(e, Enumeration)
+    assert isinstance(e, Intangible)
+    assert isinstance(e, Thing)
+    assert not  isinstance(e, EntryPoint)
+
 
 def test_vishuda():
+    from vishuda.models.media_files import AudioFile, ImageFile, VideoFile
+
+    image_file = ImageFile(filepath='/Users/cedric/Nextcloud/Documents/mindmaps/yoni-mudra.jpg')
+    image_file_info = image_file.file_info
+    image_mime = image_file.file_info.mimetype
+    image_info = image_file.image_info
+    assert image_info.height
+
+    image_file = ImageFile(filepath='/Users/cedric/Devel/python/python-nonosolaris/keep_calm_nonosolaris.png')
+    image_file_info = image_file.file_info
+    image_mime = image_file.file_info.mimetype
+    image_info = image_file.image_info
+    assert image_info.height
+
+    video_file = VideoFile(filepath='/Users/cedric/Videos/Documentaries/initiates-2-3.mp4')
+    #videofile = VideoFile(filepath='/Users/cedric/Videos/Documentaries/« Anunnaki » avec Michel Deseille - NURÉA TV-7VpP5jX70II.mp4')
+    video_file_info = video_file.file_info
+    video_mime = video_file.file_info.mimetype
+    video_info = video_file.video_info
+    assert video_info.height
+
+    video_file = VideoFile(filepath='/Volumes/finewish128/Misc/engineering/ac-basics-learn-all-about.mp4')
+    video_mime = video_file.file_info.mimetype
+    video_info = video_file.video_info
+
+    audio_file = AudioFile(filepath='/Users/cedric/Music/medecine songs/Mistico - Suddhosi Buddhosi.mp3')
+    audio_file_info = audio_file.file_info
+    audio_mime = audio_file.file_info.mimetype
+    stream_info = audio_file.stream_info
+    tags = audio_file.tags
+    tn = tags.tracknumber
+    assert tn
+
+
+def test_vishuda_():
     from vishuda import settings
     from vishuda.models.chatbot.advanced import ChatbotAdvanced
     chatbot = ChatbotAdvanced(filepath='../vishuda/static/doctor.txt')
@@ -139,6 +192,6 @@ def test_telebot2(tb):
 
 if __name__ == '__main__':
     # to run test file standalone
-    test_vishuda()
+    test_vishuda_schema_org()
 
 # PROTECTED REGION END

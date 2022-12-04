@@ -1,0 +1,18 @@
+# -*- coding: utf-8
+from emoji import emojize
+movie_camera = emojize(":movie_camera:")
+film_frames = emojize(":film_frames:")
+film_projector = emojize(":film_projector:")
+clapper_board = emojize(":clapper_board:")
+television = emojize(":television:")
+camera = emojize(":camera:")
+camera_with_flash = emojize(":camera_with_flash:")
+video_camera = emojize(":video_camera:")
+videocassette = emojize(":videocassette:")
+magnifying_glass_tilted_left = emojize(":magnifying_glass_tilted_left:")
+magnifying_glass_tilted_right = emojize(":magnifying_glass_tilted_right:")
+candle = emojize(":candle:")
+light_bulb = emojize(":light_bulb:")
+flashlight = emojize(":flashlight:")
+red_paper_lantern = emojize(":red_paper_lantern:")
+diya_lamp = emojize(":diya_lamp:")

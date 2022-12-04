@@ -73,6 +73,11 @@ install_requires = [
     'ngoschema',
     'emoji',
 
+    'audiofile',
+    #'eyed3',
+    'songdetails',
+    'imageio',
+
     'pyowm',
     'beautifulsoup4'
 ]

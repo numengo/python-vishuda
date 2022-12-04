@@ -1,0 +1,16 @@
+# -*- coding: utf-8
+from emoji import emojize
+battery = emojize(":battery:")
+low_battery = emojize(":low_battery:")
+electric_plug = emojize(":electric_plug:")
+laptop = emojize(":laptop:")
+desktop_computer = emojize(":desktop_computer:")
+printer = emojize(":printer:")
+keyboard = emojize(":keyboard:")
+computer_mouse = emojize(":computer_mouse:")
+trackball = emojize(":trackball:")
+computer_disk = emojize(":computer_disk:")
+floppy_disk = emojize(":floppy_disk:")
+optical_disk = emojize(":optical_disk:")
+dvd = emojize(":dvd:")
+abacus = emojize(":abacus:")

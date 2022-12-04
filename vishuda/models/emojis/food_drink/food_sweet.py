@@ -1,0 +1,16 @@
+# -*- coding: utf-8
+from emoji import emojize
+soft_ice_cream = emojize(":soft_ice_cream:")
+shaved_ice = emojize(":shaved_ice:")
+ice_cream = emojize(":ice_cream:")
+doughnut = emojize(":doughnut:")
+cookie = emojize(":cookie:")
+birthday_cake = emojize(":birthday_cake:")
+shortcake = emojize(":shortcake:")
+cupcake = emojize(":cupcake:")
+pie = emojize(":pie:")
+chocolate_bar = emojize(":chocolate_bar:")
+candy = emojize(":candy:")
+lollipop = emojize(":lollipop:")
+custard = emojize(":custard:")
+honey_pot = emojize(":honey_pot:")

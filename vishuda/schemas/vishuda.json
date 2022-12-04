@@ -1637,6 +1637,324 @@
         }
       }
     },
+    "media_files": {
+      "type": "object",
+      "$defs": {
+        "MediaBaseInfo": {
+          "type": "object",
+          "properties": {
+            "format": {
+              "type": "string"
+            },
+            "codec": {
+              "type": "string"
+            },
+            "long_codec": {
+              "type": "string"
+            }
+          }
+        },
+        "MediaFile": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/files/$defs/UriFile",
+            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable"
+          ],
+          "binary": true,
+          "https://mediaarea.net/en/MediaInfo": "https://mediaarea.net/en/MediaInfo",
+          "properties": {
+            "_type": {
+              "type": "string"
+            },
+            "file_info": {
+              "$ref": "https://numengo.org/ngoschema#/$defs/files/$defs/FileInfo"
+            }
+          }
+        },
+        "AudioTags": {
+          "type": "object",
+          "additionalProperties": true,
+          "properties": {
+            "title": {
+              "type": "array"
+            },
+            "artist": {
+              "type": "array"
+            },
+            "album": {
+              "type": "array"
+            },
+            "year": {
+              "type": "array"
+            },
+            "comment": {
+              "type": "array"
+            },
+            "tracknumber": {
+              "type": "array"
+            },
+            "genre": {
+              "type": "array"
+            },
+            "bpm": {
+              "type": "array"
+            },
+            "composer": {
+              "type": "array"
+            },
+            "url": {
+              "type": "array"
+            }
+          }
+        },
+        "AudioStreamInfo": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/MediaBaseInfo"
+          ],
+          "properties": {
+            "duration": {
+              "type": "number"
+            },
+            "bit_depth": {
+              "type": "integer"
+            },
+            "bitrate": {
+              "type": "integer"
+            },
+            "bitrate_mode": {
+              "type": "string",
+              "enum": [
+                "CBR",
+                "ABR",
+                "VBR_METHOD_1",
+                "VBR_METHOD_2",
+                "VBR_METHOD_3",
+                "VBR_METHOD_4",
+                "CBR_2_PASS",
+                "ABR_2_PASS"
+              ]
+            },
+            "channels": {
+              "type": "integer"
+            },
+            "channel_mode": {
+              "type": "string",
+              "enum": [
+                "MONO",
+                "STEREO",
+                "DUAL_CHANNEL",
+                "JOINT_STEREO",
+                "FORCED",
+                "AUTO",
+                "INTENSITY",
+                "UNDEFINED"
+              ]
+            },
+            "layer": {
+              "type": "integer"
+            },
+            "sample_rate": {
+              "type": "integer"
+            },
+            "protected": {
+              "type": "boolean"
+            },
+            "version": {
+              "type": "string"
+            }
+          }
+        },
+        "AudioFile": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/MediaFile"
+          ],
+          "_type": "audio",
+          "properties": {
+            "stream_info": {
+              "$ref": "#/$defs/media_files/$defs/AudioStreamInfo"
+            },
+            "tags": {
+              "$ref": "#/$defs/media_files/$defs/AudioTags"
+            }
+          }
+        },
+        "ExifInfo": {
+          "type": "object",
+          "additonalProperties": true,
+          "properties": {
+            "alpha_channel": {
+              "type": "string"
+            },
+            "image_width": {
+              "type": "integer"
+            },
+            "photometric_interpretation": {
+              "type": "string"
+            },
+            "is_animated": {
+              "type": "string"
+            },
+            "model": {
+              "type": "string"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "x_resolution": {
+              "type": "string"
+            },
+            "y_resolution": {
+              "type": "string"
+            },
+            "date_time": {
+              "type": "datetime"
+            },
+            "software": {
+              "type": "string"
+            },
+            "bits_per_sample": {
+              "type": "string"
+            },
+            "n_frames": {
+              "type": "string"
+            },
+            "color_space": {
+              "type": "string"
+            },
+            "orientation": {
+              "type": "integer"
+            },
+            "gps_info": {
+              "type": "integer"
+            },
+            "channel": {
+              "type": "string"
+            },
+            "make": {
+              "type": "string"
+            },
+            "exif_offset": {
+              "type": "integer"
+            },
+            "width": {
+              "type": "integer"
+            },
+            "samples_per_pixel": {
+              "type": "integer"
+            },
+            "image_length": {
+              "type": "integer"
+            },
+            "y_cb_cr_positioning": {
+              "type": "integer"
+            },
+            "resolution": {
+              "type": "string"
+            },
+            "resolution_unit": {
+              "type": "string"
+            }
+          }
+        },
+        "ImageBaseInfo": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/MediaBaseInfo"
+          ],
+          "properties": {
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "layers": {
+              "type": "integer"
+            },
+            "n_frames": {
+              "type": "integer"
+            },
+            "bits": {
+              "type": "integer"
+            },
+            "color_space": {
+              "type": "string"
+            }
+          }
+        },
+        "ImageInfo": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/ImageBaseInfo"
+          ],
+          "additionalProperties": true,
+          "properties": {
+            "dpi": {
+              "type": "array"
+            },
+            "is_animated": {
+              "type": "boolean"
+            },
+            "color_space": {
+              "type": "string"
+            },
+            "alpha_channel": {
+              "type": "boolean"
+            },
+            "exif": {
+              "$ref": "#/$defs/media_files/$defs/ExifInfo"
+            }
+          }
+        },
+        "ImageFile": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/MediaFile"
+          ],
+          "_type": "image",
+          "properties": {
+            "image_info": {
+              "$ref": "#/$defs/media_files/$defs/ImageInfo"
+            }
+          }
+        },
+        "VideoInfo": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/ImageInfo"
+          ],
+          "additionalProperties": true,
+          "aliases": {
+            "video_format": "format"
+          },
+          "properties": {
+            "duration": {
+              "type": "number"
+            },
+            "fps": {
+              "type": "number"
+            },
+            "audio_channels": {
+              "type": "integer"
+            }
+          }
+        },
+        "VideoFile": {
+          "type": "object",
+          "extends": [
+            "#/$defs/media_files/$defs/MediaFile"
+          ],
+          "_type": "video",
+          "properties": {
+            "video_info": {
+              "$ref": "#/$defs/media_files/$defs/VideoInfo"
+            }
+          }
+        }
+      }
+    },
     "pandas": {
       "type": "object",
       "$defs": {
@@ -1754,51 +2072,6 @@
             "data": true,
             "index": {
               "$ref": "#/$defs/pandas/$defs/Index"
-            }
-          }
-        }
-      }
-    },
-    "pyplot": {
-      "type": "object",
-      "$defs": {
-        "Figure": {
-          "type": "object"
-        },
-        "primitive": {
-          "type": "object",
-          "$defs": {
-            "Text": {
-              "type": "object"
-            },
-            "Line2D": {
-              "type": "object"
-            },
-            "Rectangle": {
-              "type": "object"
-            },
-            "Circle": {
-              "type": "object"
-            }
-          }
-        },
-        "axes": {
-          "type": "object",
-          "$defs": {
-            "AxisTicks": {
-              "type": "object"
-            },
-            "AxisLabel": {
-              "type": "object"
-            },
-            "Axis": {
-              "type": "object"
-            },
-            "Axes": {
-              "type": "object"
-            },
-            "Locator": {
-              "type": "object"
             }
           }
         }

@@ -1,0 +1,17 @@
+# -*- coding: utf-8
+from emoji import emojize
+seedling = emojize(":seedling:")
+potted_plant = emojize(":potted_plant:")
+evergreen_tree = emojize(":evergreen_tree:")
+deciduous_tree = emojize(":deciduous_tree:")
+palm_tree = emojize(":palm_tree:")
+cactus = emojize(":cactus:")
+sheaf_of_rice = emojize(":sheaf_of_rice:")
+herb = emojize(":herb:")
+shamrock = emojize(":shamrock:")
+four_leaf_clover = emojize(":four_leaf_clover:")
+maple_leaf = emojize(":maple_leaf:")
+fallen_leaf = emojize(":fallen_leaf:")
+leaf_fluttering_in_wind = emojize(":leaf_fluttering_in_wind:")
+empty_nest = emojize(":empty_nest:")
+nest_with_eggs = emojize(":nest_with_eggs:")

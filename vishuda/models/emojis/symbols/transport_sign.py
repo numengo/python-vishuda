@@ -1,0 +1,15 @@
+# -*- coding: utf-8
+from emoji import emojize
+atm_sign = emojize(":atm_sign:")
+litter_in_bin_sign = emojize(":litter_in_bin_sign:")
+potable_water = emojize(":potable_water:")
+wheelchair_symbol = emojize(":wheelchair_symbol:")
+mens_room = emojize(":mens_room:")
+womens_room = emojize(":womens_room:")
+restroom = emojize(":restroom:")
+baby_symbol = emojize(":baby_symbol:")
+water_closet = emojize(":water_closet:")
+passport_control = emojize(":passport_control:")
+customs = emojize(":customs:")
+baggage_claim = emojize(":baggage_claim:")
+left_luggage = emojize(":left_luggage:")

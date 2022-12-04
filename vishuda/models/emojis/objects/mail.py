@@ -1,0 +1,15 @@
+# -*- coding: utf-8
+from emoji import emojize
+envelope = emojize(":envelope:")
+e_mail = emojize(":e_mail:")
+incoming_envelope = emojize(":incoming_envelope:")
+envelope_with_arrow = emojize(":envelope_with_arrow:")
+outbox_tray = emojize(":outbox_tray:")
+inbox_tray = emojize(":inbox_tray:")
+package = emojize(":package:")
+closed_mailbox_with_raised_flag = emojize(":closed_mailbox_with_raised_flag:")
+closed_mailbox_with_lowered_flag = emojize(":closed_mailbox_with_lowered_flag:")
+open_mailbox_with_raised_flag = emojize(":open_mailbox_with_raised_flag:")
+open_mailbox_with_lowered_flag = emojize(":open_mailbox_with_lowered_flag:")
+postbox = emojize(":postbox:")
+ballot_box_with_ballot = emojize(":ballot_box_with_ballot:")

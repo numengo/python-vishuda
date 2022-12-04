@@ -1,0 +1,15 @@
+# -*- coding: utf-8
+from emoji import emojize
+airplane = emojize(":airplane:")
+small_airplane = emojize(":small_airplane:")
+airplane_departure = emojize(":airplane_departure:")
+airplane_arrival = emojize(":airplane_arrival:")
+parachute = emojize(":parachute:")
+seat = emojize(":seat:")
+helicopter = emojize(":helicopter:")
+suspension_railway = emojize(":suspension_railway:")
+mountain_cableway = emojize(":mountain_cableway:")
+aerial_tramway = emojize(":aerial_tramway:")
+satellite = emojize(":satellite:")
+rocket = emojize(":rocket:")
+flying_saucer = emojize(":flying_saucer:")

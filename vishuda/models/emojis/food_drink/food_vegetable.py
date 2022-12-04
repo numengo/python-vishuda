@@ -1,0 +1,18 @@
+# -*- coding: utf-8
+from emoji import emojize
+avocado = emojize(":avocado:")
+eggplant = emojize(":eggplant:")
+potato = emojize(":potato:")
+carrot = emojize(":carrot:")
+ear_of_corn = emojize(":ear_of_corn:")
+hot_pepper = emojize(":hot_pepper:")
+bell_pepper = emojize(":bell_pepper:")
+cucumber = emojize(":cucumber:")
+leafy_green = emojize(":leafy_green:")
+broccoli = emojize(":broccoli:")
+garlic = emojize(":garlic:")
+onion = emojize(":onion:")
+mushroom = emojize(":mushroom:")
+peanuts = emojize(":peanuts:")
+beans = emojize(":beans:")
+chestnut = emojize(":chestnut:")
