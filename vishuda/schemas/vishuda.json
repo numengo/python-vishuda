@@ -3,43 +3,142 @@
   "type": "object",
   "$comment": "automatically generated for vishuda",
   "$defs": {
-    "i18n": {
+    "datasets": {
       "type": "object",
-      "description": "This is a mixin for classes that require multlingual support",
       "$defs": {
-        "Translatable": {
+        "NdArray": {
           "type": "object",
+          "description": "This object represents a numpy nd-array",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
-          "primaryKeys": [
-            "language"
+          "additionalProperties": true,
+          "required": [
+            "data"
           ],
+          "wraps": "numpy.ndarray",
           "properties": {
-            "language": {
+            "data": true,
+            "dtype": {
               "type": "string",
-              "description": "Translation language code"
+              "description": "The desired data-type for the array.  If not given, then the type will be determined as the minimum type required to hold the objects in the sequence."
             },
-            "text": {
-              "type": "string"
+            "copy": {
+              "type": "boolean",
+              "description": "If true (default), then the object is copied.  Otherwise, a copy will only be made if __array__ returns a copy, if obj is a nested sequence, or if a copy is needed to satisfy any of the other requirements(`dtype`, `order`, etc.).",
+              "default": true
+            },
+            "order": {
+              "type": "string",
+              "description": "Specify the memory layout of the array. If object is not an array, the newly created array will be in C order (row major) unless 'F' is specified, in which case it will be in Fortran order (column major). If object is an array the following holds.",
+              "enum": [
+                "K",
+                "A",
+                "C",
+                "F"
+              ]
+            },
+            "subok": {
+              "type": "boolean",
+              "description": "If True, then sub-classes will be passed-through, otherwise the returned array will be forced to be a base-class array (default)."
+            },
+            "ndmin": {
+              "type": "integer",
+              "description": "Specifies the minimum number of dimensions that the resulting array should have.  Ones will be pre-pended to the shape as needed to meet this requirement."
+            },
+            "like": {
+              "type": "string",
+              "description": "Reference object to allow the creation of arrays which are not NumPy arrays. If an array-like passed in as ``like`` supports the ``__array_function__`` protocol, the result will be defined by it. In this case, it ensures the creation of an array object compatible with that passed in via this argument."
             }
           }
         },
-        "TranslatableMixin": {
+        "Index": {
           "type": "object",
-          "abstract": true,
+          "description": "This object represents a serie for Pandas",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.indexes.base.Index",
           "properties": {
-            "multilingual": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/i18n/$defs/Translatable"
-              }
-            },
-            "additionalProperties": true
+            "values": {
+              "type": "array"
+            }
           }
         },
-        "LanguageCode": {
+        "DatetimeIndex": {
           "type": "object",
+          "extends": [
+            "#/$defs/datasets/$defs/Index"
+          ],
+          "wraps": "pandas.core.indexes.datetimes.DatetimeIndex"
+        },
+        "Series": {
+          "type": "object",
+          "description": "This object represents series for Pandas",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Series"
+          ],
+          "additionalProperties": true,
+          "required": [
+            "index"
+          ],
+          "wraps": "pandas.core.series.Series",
+          "properties": {
+            "data": true,
+            "index": {
+              "$ref": "#/$defs/datasets/$defs/Index"
+            },
+            "dtype": {
+              "type": "string",
+              "description": "dtype object of the underlying data."
+            }
+          }
+        },
+        "TimeSeries": {
+          "type": "object",
+          "extends": [
+            "#/$defs/datasets/$defs/Series"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.series.Series",
+          "properties": {
+            "index": {
+              "$ref": "#/$defs/datasets/$defs/DatetimeIndex"
+            }
+          }
+        },
+        "DataFrame": {
+          "type": "object",
+          "description": "Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns).",
+          "extends": [
+            "#/$defs/datasets/$defs/Series",
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Dataframe"
+          ],
+          "additionalProperties": true,
+          "wraps": "pandas.core.frame.DataFrame",
+          "properties": {
+            "data": true,
+            "index": {
+              "$ref": "#/$defs/datasets/$defs/Index"
+            },
+            "columns": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/datasets/$defs/Series"
+              }
+            }
+          }
+        }
+      }
+    },
+    "i18n": {
+      "type": "object",
+      "description": "This is a mixin for classes that require multlingual support",
+      "properties": {
+        "languageCode": {
+          "type": "string",
+          "description": "Translation language code",
           "enum": [
             "zh",
             "es",
@@ -130,6 +229,615 @@
             "la",
             "aa"
           ]
+        }
+      },
+      "$defs": {
+        "LocaleDirDomains": {
+          "type": "object",
+          "properties": {
+            "locale_dir": {
+              "type": "path"
+            },
+            "domains": {
+              "type": "array"
+            }
+          }
+        },
+        "Translations": {
+          "type": "object",
+          "properties": {
+            "locale_dirs": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/$defs/LocaleDirDomains"
+              }
+            },
+            "languages": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/properties/languageCode"
+              }
+            },
+            "all": {
+              "type": "boolean"
+            },
+            "fallback": {
+              "type": "boolean"
+            },
+            "codeset": {
+              "type": "string"
+            }
+          }
+        },
+        "Translatable": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "aliases": {
+            "text": "msgid"
+          },
+          "properties": {
+            "domain": {
+              "type": "string"
+            },
+            "language": {
+              "$ref": "#/$defs/i18n/properties/languageCode"
+            },
+            "msgid": {
+              "type": "string"
+            }
+          }
+        },
+        "Translation": {
+          "type": "object",
+          "extends": [
+            "#/$defs/i18n/$defs/Translatable"
+          ],
+          "aliases": {
+            "text": "msgstr"
+          },
+          "properties": {
+            "language": {
+              "$ref": "#/$defs/i18n/properties/languageCode"
+            },
+            "msgstr": {
+              "type": "string"
+            }
+          }
+        },
+        "TranslatableMixin": {
+          "type": "object",
+          "extends": [
+            "#/$defs/i18n/$defs/Translatable"
+          ],
+          "abstract": true,
+          "properties": {
+            "multilingual": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/$defs/Translation"
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "TranslationMixin": {
+          "type": "object",
+          "abstract": true,
+          "notSerialized": [
+            "translatedFields",
+            "language"
+          ],
+          "properties": {
+            "translatedFields": {
+              "type": "array"
+            },
+            "language": {
+              "$ref": "#/$defs/i18n/properties/languageCode"
+            }
+          }
+        }
+      }
+    },
+    "ical": {
+      "type": "object",
+      "$defs": {
+        "Event": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "aliases": {
+            "item_attendee": "ATTENDEE",
+            "item_class": "CLASS",
+            "item_created": "CREATED",
+            "item_description": "DESCRIPTION",
+            "item_end_datetime": "DTEND",
+            "item_exdate": "EXDATE",
+            "item_geolocation": "GEO",
+            "item_guid": "UID",
+            "item_link": "URL",
+            "item_location": "LOCATION",
+            "item_organizer": "ORGANIZER",
+            "item_rdate": "RDATE",
+            "item_rrule": "RRULE",
+            "item_start_datetime": "DTSTART",
+            "item_status": "STATUS",
+            "item_title": "SUMMARY",
+            "item_transparency": "TRANSP",
+            "item_updateddate": "LAST-MODIFIED",
+            "item_valarm": "VALARM"
+          },
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Event",
+          "properties": {
+            "UID": {
+              "type": "string",
+              "description": "The event’s unique id. This id should be globally unique so you should add an @DOMAIN_NAME to your id."
+            },
+            "DTSTAMP": {
+              "type": "datetime"
+            },
+            "CLASS": {
+              "type": "string",
+              "description": "The event class (e.g. PUBLIC, PRIVATE, CONFIDENTIAL)"
+            },
+            "CREATED": {
+              "type": "datetime",
+              "description": "The event create time"
+            },
+            "DESCRIPTION": {
+              "type": "string",
+              "description": "The event description"
+            },
+            "DTSTART": {
+              "type": "datetime",
+              "description": "The event start time"
+            },
+            "GEO": {
+              "type": "string",
+              "description": "The latitude and longitude of the event. The value returned by this property should be a two-tuple containing the latitude and longitude as float values. semicolon. Ex: (37.386013, -122.082932)"
+            },
+            "LAST-MODIFIED": {
+              "type": "datetime",
+              "description": "The event modified time"
+            },
+            "LOCATION": {
+              "type": "string",
+              "description": "The event location"
+            },
+            "ORGANIZER": {
+              "type": "string",
+              "description": "The event organizer. Expected to be a vCalAddress object. See iCalendar documentation or tests to know how to build them."
+            },
+            "PRIORITY": {
+              "type": "integer"
+            },
+            "SEQUENCE": {
+              "type": "integer"
+            },
+            "STATUS": {
+              "type": "string",
+              "description": "The status of an event. Can be CONFIRMED, CANCELLED or TENTATIVE.",
+              "enum": [
+                "CONFIRMED",
+                "CANCELLED",
+                "TENTATIVE"
+              ]
+            },
+            "SUMMARY": {
+              "type": "string",
+              "description": "The event name/title"
+            },
+            "TRANSP": {
+              "type": "string",
+              "description": "The event transparency. Defines whether the event shows up in busy searches. (e.g. OPAQUE, TRANSPARENT)"
+            },
+            "URL": {
+              "type": "uri",
+              "description": "The event url"
+            },
+            "RECURRENCE-ID": {
+              "type": "datetime"
+            },
+            "DTEND": {
+              "type": "string",
+              "description": "The event end time"
+            },
+            "DURATION": {
+              "type": "integer"
+            },
+            "CATEGORIES": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array",
+              "description": "The event attendees. Expected to be a list of vCalAddress objects. See iCalendar documentation or tests to know how to build them."
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array",
+              "description": "The dates/times for exceptions of a recurring event. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "type": "datetime"
+              }
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RESOURCES": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array",
+              "description": "The recurring dates/times for a repeating event. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "type": "datetime"
+              }
+            },
+            "RRULE": {
+              "type": "array",
+              "description": "The recurrence rule for repeating events. See iCalendar documentation or tests to know how to build them."
+            },
+            "VALARM": {
+              "type": "array",
+              "description": "Alarms for the event, must be a list of Alarm objects. See iCalendar documentation or tests to know how to build them.",
+              "items": {
+                "$ref": "#/$defs/ical/$defs/Alarm"
+              }
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Event"
+            }
+          }
+        },
+        "Todo": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Todo",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "datetime"
+            },
+            "CLASS": {
+              "type": "string"
+            },
+            "COMPLETED": {
+              "type": "string"
+            },
+            "CREATED": {
+              "type": "datetime"
+            },
+            "DESCRIPTION": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "datetime"
+            },
+            "GEO": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "datetime"
+            },
+            "LOCATION": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "PERCENT-COMPLETE": {
+              "type": "string"
+            },
+            "PRIORITY": {
+              "type": "string"
+            },
+            "RECURRENCE-ID": {
+              "type": "datetime"
+            },
+            "SEQUENCE": {
+              "type": "string"
+            },
+            "STATUS": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "uri"
+            },
+            "DUE": {
+              "type": "string"
+            },
+            "DURATION": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "CATEGORIES": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RESOURCES": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array"
+            },
+            "RRULE": {
+              "type": "array"
+            }
+          }
+        },
+        "Journal": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.Journal",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "string"
+            },
+            "CLASS": {
+              "type": "string"
+            },
+            "CREATED": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "RECURRENCE-ID": {
+              "type": "string"
+            },
+            "SEQUENCE": {
+              "type": "string"
+            },
+            "STATUS": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "string"
+            },
+            "ATTACH": {
+              "type": "array"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "CATEGORIES": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "CONTACT": {
+              "type": "array"
+            },
+            "EXDATE": {
+              "type": "array"
+            },
+            "RELATED": {
+              "type": "array"
+            },
+            "RDATE": {
+              "type": "array"
+            },
+            "RRULE": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            },
+            "DESCRIPTION": {
+              "type": "array"
+            }
+          }
+        },
+        "FreeBusy": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "UID",
+            "DTSTAMP"
+          ],
+          "wraps": "icalendar.cal.FreeBusy",
+          "properties": {
+            "UID": {
+              "type": "string"
+            },
+            "DTSTAMP": {
+              "type": "string"
+            },
+            "CONTACT": {
+              "type": "string"
+            },
+            "DTSTART": {
+              "type": "string"
+            },
+            "DTEND": {
+              "type": "string"
+            },
+            "ORGANIZER": {
+              "type": "string"
+            },
+            "URL": {
+              "type": "string"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "COMMENT": {
+              "type": "array"
+            },
+            "FREEBUSY": {
+              "type": "array"
+            },
+            "RSTATUS": {
+              "type": "array"
+            }
+          }
+        },
+        "Timezone": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "TZID"
+          ],
+          "wraps": "icalendar.cal.Timezone",
+          "properties": {
+            "TZID": {
+              "type": "string"
+            },
+            "LAST-MODIFIED": {
+              "type": "string"
+            },
+            "TZURL": {
+              "type": "string"
+            }
+          }
+        },
+        "Alarm": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "ACTION",
+            "TRIGGER"
+          ],
+          "wraps": "icalendar.cal.Alarm",
+          "properties": {
+            "ACTION": {
+              "type": "string"
+            },
+            "TRIGGER": {
+              "type": "string"
+            },
+            "SUMMARY": {
+              "type": "string"
+            },
+            "DESCRIPTION": {
+              "type": "string"
+            },
+            "DURATION": {
+              "type": "string"
+            },
+            "REPEAT": {
+              "type": "string"
+            },
+            "ATTENDEE": {
+              "type": "array"
+            },
+            "ATTACH": {
+              "type": "array"
+            }
+          }
+        },
+        "Calendar": {
+          "type": "object",
+          "description": "This is the base object for an iCalendar file.",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "aliases": {
+            "method": "METHOD",
+            "product_id": "PRODID",
+            "timezone": "X-WR-TIMEZONE"
+          },
+          "required": [
+            "PRODID",
+            "VERSION"
+          ],
+          "wraps": "icalendar.cal.Calendar",
+          "properties": {
+            "PRODID": {
+              "type": "string",
+              "description": "The calendar product ID"
+            },
+            "VERSION": {
+              "type": "string"
+            },
+            "CALSCALE": {
+              "type": "string"
+            },
+            "METHOD": {
+              "type": "string",
+              "description": "The calendar method such as meeting requests."
+            },
+            "X-WR-TIMEZONE": {
+              "type": "string",
+              "description": "The calendar timezone"
+            },
+            "X-WR-CALNAME": {
+              "type": "string",
+              "description": "The calendar name/title"
+            }
+          }
         }
       }
     },
@@ -856,6 +1564,55 @@
               "$ref": "#/$defs/emojis/$defs/EmojiCategory"
             }
           }
+        },
+        "EmojiMixin": {
+          "type": "object",
+          "abstract": true,
+          "notSerialized": [
+            "emojis"
+          ],
+          "properties": {
+            "emojis": {
+              "type": "array"
+            }
+          }
+        }
+      }
+    },
+    "schema_org": {
+      "type": "object",
+      "$defs": {
+        "SchemaOrg": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
+            "#/$defs/i18n/$defs/TranslationMixin",
+            "#/$defs/emojis/$defs/EmojiMixin"
+          ],
+          "abstract": true,
+          "notSerialized": [
+            "schema_org",
+            "object2schema_org",
+            "as_schema_org"
+          ],
+          "readOnly": [
+            "as_schema_org"
+          ],
+          "required": [
+            "object2schema_org"
+          ],
+          "properties": {
+            "object2schema_org": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Thing"
+            },
+            "as_schema_org": true
+          }
         }
       }
     },
@@ -927,118 +1684,48 @@
             }
           }
         },
-        "Address": {
-          "type": "object",
-          "description": "This object represents an address following the convention of http://microformats.org/wiki/hcard",
-          "extends": [
-            "https://json-schema.org/address"
-          ],
-          "abstract": true,
-          "aliases": {
-            "city": "locality",
-            "street": "street-address",
-            "zip": "postal-code"
-          },
-          "properties": {
-            "post-office-box": {
-              "type": "string",
-              "description": "Post office box description if any"
-            },
-            "extended-address": {
-              "type": "string",
-              "description": "Apartment/suite/room name/number if any"
-            },
-            "street-address": {
-              "type": "string",
-              "description": "Street number + name, apt/ste"
-            },
-            "locality": {
-              "type": "string",
-              "description": "City/town/village"
-            },
-            "region": {
-              "type": "string",
-              "description": "State/county/province"
-            },
-            "postal-code": {
-              "type": "string",
-              "description": "Postal code, e.g. US ZIP"
-            },
-            "country-name": {
-              "type": "string",
-              "description": "Country name"
-            }
-          }
-        },
-        "Card": {
-          "type": "object",
-          "description": "This object represent a person, a company, an organization, or a place",
-          "extends": [
-            "https://json-schema.org/card"
-          ],
-          "abstract": true,
-          "aliases": {
-            "address": "adr"
-          },
-          "properties": {
-            "adr": {
-              "$ref": "#/$defs/auth/$defs/Address"
-            },
-            "extra_adrresses": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/auth/$defs/Address"
-              }
-            }
-          }
-        },
         "User": {
           "type": "object",
           "description": "This objects represents a fully featured User model with admin-compliant permissions.",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
-            "#/$defs/auth/$defs/Card"
+            "#/$defs/personas/$defs/Person"
           ],
           "abstract": true,
-          "aliases": {
+          "object2schema_org": {
+            "email": "email",
             "firstName": "givenName",
-            "fullName": "fn",
             "lastName": "familyName"
           },
           "primaryKeys": [
             "username"
           ],
           "properties": {
-            "email": {
-              "type": "string",
-              "description": "Email address"
-            },
             "username": {
               "type": "string",
               "description": "Unique User name, usually email address",
               "default": "{{this.email}}"
-            },
-            "firstName": {
-              "type": "string",
-              "description": "First Name"
-            },
-            "lastName": {
-              "type": "string",
-              "description": "Family (often last) name"
-            },
-            "fn": {
-              "type": "string",
-              "description": "Name, formatted/full",
-              "default": "{{this.firstName}} {{this.lastName}}"
             }
           }
         },
         "BankAccount": {
           "type": "object",
           "description": "This objects represents a bank account.",
+          "extends": [
+            "#/$defs/schema_org/$defs/SchemaOrg"
+          ],
           "aliases": {
             "BIC": "swift_bic",
             "IBAN": "iban"
+          },
+          "object2schema_org": {
+            "agency": "provider.department.name",
+            "bank_city": "provider.address.addressLocality",
+            "bank_name": "provider.name",
+            "bank_street": "provider.address.streetAddress",
+            "bank_zip": "provider.address.postalCode",
+            "holder_name": "audience.name",
+            "iban": "alternateName",
+            "swift_bic": "identifier"
           },
           "properties": {
             "holder_name": {
@@ -1072,504 +1759,641 @@
             "iban": {
               "type": "string",
               "description": "IBAN number"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/DepositAccount"
             }
           }
         }
       }
     },
-    "ical": {
+    "files": {
       "type": "object",
       "$defs": {
-        "Event": {
+        "definition": {
+          "type": "object",
+          "$defs": {
+            "FileInfo": {
+              "type": "object",
+              "description": "This object represents file informations.",
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/files/$defs/Filepath"
+              ],
+              "readOnly": [
+                "contentSize",
+                "contentSizeHuman",
+                "mimetype",
+                "sha1"
+              ],
+              "properties": {
+                "contentSize": {
+                  "type": "integer",
+                  "description": "Content size in bytes."
+                },
+                "contentSizeHuman": {
+                  "type": "string",
+                  "description": "Content size in human readable units."
+                },
+                "sha1": {
+                  "type": "string",
+                  "description": "SHA1 hash of the file."
+                },
+                "mimetype": {
+                  "type": "string",
+                  "description": "MIME type of the file"
+                },
+                "media": {
+                  "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
+                }
+              }
+            },
+            "FolderInfo": {
+              "type": "object",
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/files/$defs/Filepath"
+              ],
+              "readOnly": [
+                "files",
+                "subfolders",
+                "parent"
+              ],
+              "properties": {
+                "recursive": {
+                  "type": "boolean"
+                },
+                "info_files": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/files/$defs/definition/$defs/FileInfo"
+                  }
+                },
+                "info_subfolders": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/files/$defs/definition/$defs/FolderInfo"
+                  }
+                },
+                "parent": {
+                  "$ref": "#/$defs/files/$defs/definition/$defs/FolderInfo"
+                }
+              }
+            },
+            "medias": {
+              "type": "object",
+              "$defs": {
+                "MediaBaseInfo": {
+                  "type": "object",
+                  "properties": {
+                    "format": {
+                      "type": "string"
+                    },
+                    "codec": {
+                      "type": "string"
+                    },
+                    "long_codec": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "MediaFile": {
+                  "type": "object",
+                  "extends": [
+                    "https://numengo.org/ngoschema#/$defs/files/$defs/UriFile",
+                    "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable"
+                  ],
+                  "binary": true,
+                  "properties": {
+                    "_type": {
+                      "type": "string"
+                    },
+                    "file_info": {
+                      "$ref": "#/$defs/files/$defs/FileInfo"
+                    },
+                    "schema_org": {
+                      "$ref": "https://schema.org/#/$defs/MediaObject"
+                    }
+                  }
+                },
+                "AudioTags": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "properties": {
+                    "title": {
+                      "type": "array"
+                    },
+                    "artist": {
+                      "type": "array"
+                    },
+                    "album": {
+                      "type": "array"
+                    },
+                    "year": {
+                      "type": "array"
+                    },
+                    "comment": {
+                      "type": "array"
+                    },
+                    "tracknumber": {
+                      "type": "array"
+                    },
+                    "genre": {
+                      "type": "array"
+                    },
+                    "bpm": {
+                      "type": "array"
+                    },
+                    "composer": {
+                      "type": "array"
+                    },
+                    "url": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "AudioStreamInfo": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaBaseInfo"
+                  ],
+                  "properties": {
+                    "duration": {
+                      "type": "number"
+                    },
+                    "bit_depth": {
+                      "type": "integer"
+                    },
+                    "bitrate": {
+                      "type": "integer"
+                    },
+                    "bitrate_mode": {
+                      "type": "string",
+                      "enum": [
+                        "CBR",
+                        "ABR",
+                        "VBR_METHOD_1",
+                        "VBR_METHOD_2",
+                        "VBR_METHOD_3",
+                        "VBR_METHOD_4",
+                        "CBR_2_PASS",
+                        "ABR_2_PASS"
+                      ]
+                    },
+                    "channels": {
+                      "type": "integer"
+                    },
+                    "channel_mode": {
+                      "type": "string",
+                      "enum": [
+                        "MONO",
+                        "STEREO",
+                        "DUAL_CHANNEL",
+                        "JOINT_STEREO",
+                        "FORCED",
+                        "AUTO",
+                        "INTENSITY",
+                        "UNDEFINED"
+                      ]
+                    },
+                    "layer": {
+                      "type": "integer"
+                    },
+                    "sample_rate": {
+                      "type": "integer"
+                    },
+                    "protected": {
+                      "type": "boolean"
+                    },
+                    "version": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "AudioFile": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
+                  ],
+                  "_type": "audio",
+                  "properties": {
+                    "stream_info": {
+                      "$ref": "#/$defs/files/$defs/definition/$defs/AudioStreamInfo"
+                    },
+                    "tags": {
+                      "$ref": "#/$defs/files/$defs/definition/$defs/AudioTags"
+                    },
+                    "schema_org": {
+                      "$ref": "https://schema.org/#/$defs/AudioObject"
+                    }
+                  }
+                },
+                "ExifInfo": {
+                  "type": "object",
+                  "additonalProperties": true,
+                  "properties": {
+                    "alpha_channel": {
+                      "type": "string"
+                    },
+                    "image_width": {
+                      "type": "integer"
+                    },
+                    "photometric_interpretation": {
+                      "type": "string"
+                    },
+                    "is_animated": {
+                      "type": "string"
+                    },
+                    "model": {
+                      "type": "string"
+                    },
+                    "height": {
+                      "type": "integer"
+                    },
+                    "x_resolution": {
+                      "type": "string"
+                    },
+                    "y_resolution": {
+                      "type": "string"
+                    },
+                    "date_time": {
+                      "type": "datetime"
+                    },
+                    "software": {
+                      "type": "string"
+                    },
+                    "bits_per_sample": {
+                      "type": "string"
+                    },
+                    "n_frames": {
+                      "type": "string"
+                    },
+                    "color_space": {
+                      "type": "string"
+                    },
+                    "orientation": {
+                      "type": "integer"
+                    },
+                    "gps_info": {
+                      "type": "integer"
+                    },
+                    "channel": {
+                      "type": "string"
+                    },
+                    "make": {
+                      "type": "string"
+                    },
+                    "exif_offset": {
+                      "type": "integer"
+                    },
+                    "width": {
+                      "type": "integer"
+                    },
+                    "samples_per_pixel": {
+                      "type": "integer"
+                    },
+                    "image_length": {
+                      "type": "integer"
+                    },
+                    "y_cb_cr_positioning": {
+                      "type": "integer"
+                    },
+                    "resolution": {
+                      "type": "string"
+                    },
+                    "resolution_unit": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "ImageBaseInfo": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaBaseInfo"
+                  ],
+                  "properties": {
+                    "width": {
+                      "type": "integer"
+                    },
+                    "height": {
+                      "type": "integer"
+                    },
+                    "layers": {
+                      "type": "integer"
+                    },
+                    "n_frames": {
+                      "type": "integer"
+                    },
+                    "bits": {
+                      "type": "integer"
+                    },
+                    "color_space": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "ImageInfo": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageBaseInfo"
+                  ],
+                  "additionalProperties": true,
+                  "properties": {
+                    "dpi": {
+                      "type": "array"
+                    },
+                    "is_animated": {
+                      "type": "boolean"
+                    },
+                    "color_space": {
+                      "type": "string"
+                    },
+                    "alpha_channel": {
+                      "type": "boolean"
+                    },
+                    "exif": {
+                      "$ref": "#/$defs/files/$defs/definition/$defs/ExifInfo"
+                    }
+                  }
+                },
+                "ImageFile": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
+                  ],
+                  "_type": "image",
+                  "properties": {
+                    "image_info": {
+                      "$ref": "#/$defs/files/$defs/definition/$defs/ImageInfo"
+                    },
+                    "schema_org": {
+                      "$ref": "https://schema.org/#/$defs/ImageObject"
+                    }
+                  }
+                },
+                "VideoInfo": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageInfo"
+                  ],
+                  "additionalProperties": true,
+                  "aliases": {
+                    "video_format": "format"
+                  },
+                  "properties": {
+                    "duration": {
+                      "type": "number"
+                    },
+                    "fps": {
+                      "type": "number"
+                    },
+                    "audio_channels": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "VideoFile": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
+                  ],
+                  "_type": "video",
+                  "properties": {
+                    "video_info": {
+                      "$ref": "#/$defs/files/$defs/definition/$defs/VideoInfo"
+                    },
+                    "schema_org": {
+                      "$ref": "https://schema.org/#/$defs/VideoObject"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "places": {
+      "type": "object",
+      "$defs": {
+        "GeoCoordinates": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "#/$defs/schema_org/$defs/SchemaOrg"
           ],
           "aliases": {
-            "item_attendee": "ATTENDEE",
-            "item_class": "CLASS",
-            "item_created": "CREATED",
-            "item_description": "DESCRIPTION",
-            "item_end_datetime": "DTEND",
-            "item_exdate": "EXDATE",
-            "item_geolocation": "GEO",
-            "item_guid": "UID",
-            "item_link": "URL",
-            "item_location": "LOCATION",
-            "item_organizer": "ORGANIZER",
-            "item_rdate": "RDATE",
-            "item_rrule": "RRULE",
-            "item_start_datetime": "DTSTART",
-            "item_status": "STATUS",
-            "item_title": "SUMMARY",
-            "item_transparency": "TRANSP",
-            "item_updateddate": "LAST-MODIFIED",
-            "item_valarm": "VALARM"
+            "postalCode": "postalAddress.postal_code"
           },
-          "required": [
-            "UID",
-            "DTSTAMP"
+          "dependencies": {
+            "country": [
+              "addressCountry"
+            ],
+            "geo": [
+              "longitude",
+              "latitude",
+              "postalCode"
+            ],
+            "point": [
+              "longitude",
+              "latitude"
+            ],
+            "postal": [
+              "postalCode"
+            ]
+          },
+          "object2schema_org": {
+            "elevation": "elevation",
+            "latitude": "latitude",
+            "longitude": "longitude",
+            "postalCode": "postalCode"
+          },
+          "readOnly": [
+            "country",
+            "geo",
+            "postal"
           ],
-          "wraps": "icalendar.cal.Event",
+          "required": [
+            "postalAddress"
+          ],
           "properties": {
-            "UID": {
-              "type": "string",
-              "description": "The event’s unique id. This id should be globally unique so you should add an @DOMAIN_NAME to your id."
+            "postalAddress": {
+              "$ref": "#/$defs/places/$defs/Address"
             },
-            "DTSTAMP": {
-              "type": "datetime"
+            "addressCountry": {
+              "type": "string"
             },
-            "CLASS": {
-              "type": "string",
-              "description": "The event class (e.g. PUBLIC, PRIVATE, CONFIDENTIAL)"
-            },
-            "CREATED": {
-              "type": "datetime",
-              "description": "The event create time"
-            },
-            "DESCRIPTION": {
-              "type": "string",
-              "description": "The event description"
-            },
-            "DTSTART": {
-              "type": "datetime",
-              "description": "The event start time"
-            },
-            "GEO": {
-              "type": "string",
-              "description": "The latitude and longitude of the event. The value returned by this property should be a two-tuple containing the latitude and longitude as float values. semicolon. Ex: (37.386013, -122.082932)"
-            },
-            "LAST-MODIFIED": {
-              "type": "datetime",
-              "description": "The event modified time"
-            },
-            "LOCATION": {
-              "type": "string",
-              "description": "The event location"
-            },
-            "ORGANIZER": {
-              "type": "string",
-              "description": "The event organizer. Expected to be a vCalAddress object. See iCalendar documentation or tests to know how to build them."
-            },
-            "PRIORITY": {
+            "elevation": {
               "type": "integer"
             },
-            "SEQUENCE": {
+            "latitude": {
               "type": "integer"
             },
-            "STATUS": {
-              "type": "string",
-              "description": "The status of an event. Can be CONFIRMED, CANCELLED or TENTATIVE.",
-              "enum": [
-                "CONFIRMED",
-                "CANCELLED",
-                "TENTATIVE"
-              ]
-            },
-            "SUMMARY": {
-              "type": "string",
-              "description": "The event name/title"
-            },
-            "TRANSP": {
-              "type": "string",
-              "description": "The event transparency. Defines whether the event shows up in busy searches. (e.g. OPAQUE, TRANSPARENT)"
-            },
-            "URL": {
-              "type": "uri",
-              "description": "The event url"
-            },
-            "RECURRENCE-ID": {
-              "type": "datetime"
-            },
-            "DTEND": {
-              "type": "string",
-              "description": "The event end time"
-            },
-            "DURATION": {
+            "longitude": {
               "type": "integer"
             },
-            "CATEGORIES": {
-              "type": "string"
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/GeoCoordinates"
             },
-            "ATTACH": {
-              "type": "array"
+            "point": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/coordinates/$defs/Point"
             },
-            "ATTENDEE": {
-              "type": "array",
-              "description": "The event attendees. Expected to be a list of vCalAddress objects. See iCalendar documentation or tests to know how to build them."
+            "country": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Country"
             },
-            "COMMENT": {
-              "type": "array"
-            },
-            "CONTACT": {
-              "type": "array"
-            },
-            "EXDATE": {
-              "type": "array",
-              "description": "The dates/times for exceptions of a recurring event. See iCalendar documentation or tests to know how to build them.",
-              "items": {
-                "type": "datetime"
-              }
-            },
-            "RSTATUS": {
-              "type": "array"
-            },
-            "RELATED": {
-              "type": "array"
-            },
-            "RESOURCES": {
-              "type": "array"
-            },
-            "RDATE": {
-              "type": "array",
-              "description": "The recurring dates/times for a repeating event. See iCalendar documentation or tests to know how to build them.",
-              "items": {
-                "type": "datetime"
-              }
-            },
-            "RRULE": {
-              "type": "array",
-              "description": "The recurrence rule for repeating events. See iCalendar documentation or tests to know how to build them."
-            },
-            "VALARM": {
-              "type": "array",
-              "description": "Alarms for the event, must be a list of Alarm objects. See iCalendar documentation or tests to know how to build them.",
-              "items": {
-                "$ref": "#/$defs/ical/$defs/Alarm"
-              }
+            "territory": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Territory"
             }
           }
         },
-        "Todo": {
+        "Address": {
           "type": "object",
+          "description": "This object represents an address following the convention of http://microformats.org/wiki/hcard",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "required": [
-            "UID",
-            "DTSTAMP"
-          ],
-          "wraps": "icalendar.cal.Todo",
-          "properties": {
-            "UID": {
-              "type": "string"
-            },
-            "DTSTAMP": {
-              "type": "datetime"
-            },
-            "CLASS": {
-              "type": "string"
-            },
-            "COMPLETED": {
-              "type": "string"
-            },
-            "CREATED": {
-              "type": "datetime"
-            },
-            "DESCRIPTION": {
-              "type": "string"
-            },
-            "DTSTART": {
-              "type": "datetime"
-            },
-            "GEO": {
-              "type": "string"
-            },
-            "LAST-MODIFIED": {
-              "type": "datetime"
-            },
-            "LOCATION": {
-              "type": "string"
-            },
-            "ORGANIZER": {
-              "type": "string"
-            },
-            "PERCENT-COMPLETE": {
-              "type": "string"
-            },
-            "PRIORITY": {
-              "type": "string"
-            },
-            "RECURRENCE-ID": {
-              "type": "datetime"
-            },
-            "SEQUENCE": {
-              "type": "string"
-            },
-            "STATUS": {
-              "type": "string"
-            },
-            "SUMMARY": {
-              "type": "string"
-            },
-            "URL": {
-              "type": "uri"
-            },
-            "DUE": {
-              "type": "string"
-            },
-            "DURATION": {
-              "type": "string"
-            },
-            "ATTACH": {
-              "type": "array"
-            },
-            "ATTENDEE": {
-              "type": "array"
-            },
-            "CATEGORIES": {
-              "type": "array"
-            },
-            "COMMENT": {
-              "type": "array"
-            },
-            "CONTACT": {
-              "type": "array"
-            },
-            "EXDATE": {
-              "type": "array"
-            },
-            "RSTATUS": {
-              "type": "array"
-            },
-            "RELATED": {
-              "type": "array"
-            },
-            "RESOURCES": {
-              "type": "array"
-            },
-            "RDATE": {
-              "type": "array"
-            },
-            "RRULE": {
-              "type": "array"
-            }
-          }
-        },
-        "Journal": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "required": [
-            "UID",
-            "DTSTAMP"
-          ],
-          "wraps": "icalendar.cal.Journal",
-          "properties": {
-            "UID": {
-              "type": "string"
-            },
-            "DTSTAMP": {
-              "type": "string"
-            },
-            "CLASS": {
-              "type": "string"
-            },
-            "CREATED": {
-              "type": "string"
-            },
-            "DTSTART": {
-              "type": "string"
-            },
-            "LAST-MODIFIED": {
-              "type": "string"
-            },
-            "ORGANIZER": {
-              "type": "string"
-            },
-            "RECURRENCE-ID": {
-              "type": "string"
-            },
-            "SEQUENCE": {
-              "type": "string"
-            },
-            "STATUS": {
-              "type": "string"
-            },
-            "SUMMARY": {
-              "type": "string"
-            },
-            "URL": {
-              "type": "string"
-            },
-            "ATTACH": {
-              "type": "array"
-            },
-            "ATTENDEE": {
-              "type": "array"
-            },
-            "CATEGORIES": {
-              "type": "array"
-            },
-            "COMMENT": {
-              "type": "array"
-            },
-            "CONTACT": {
-              "type": "array"
-            },
-            "EXDATE": {
-              "type": "array"
-            },
-            "RELATED": {
-              "type": "array"
-            },
-            "RDATE": {
-              "type": "array"
-            },
-            "RRULE": {
-              "type": "array"
-            },
-            "RSTATUS": {
-              "type": "array"
-            },
-            "DESCRIPTION": {
-              "type": "array"
-            }
-          }
-        },
-        "FreeBusy": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "required": [
-            "UID",
-            "DTSTAMP"
-          ],
-          "wraps": "icalendar.cal.FreeBusy",
-          "properties": {
-            "UID": {
-              "type": "string"
-            },
-            "DTSTAMP": {
-              "type": "string"
-            },
-            "CONTACT": {
-              "type": "string"
-            },
-            "DTSTART": {
-              "type": "string"
-            },
-            "DTEND": {
-              "type": "string"
-            },
-            "ORGANIZER": {
-              "type": "string"
-            },
-            "URL": {
-              "type": "string"
-            },
-            "ATTENDEE": {
-              "type": "array"
-            },
-            "COMMENT": {
-              "type": "array"
-            },
-            "FREEBUSY": {
-              "type": "array"
-            },
-            "RSTATUS": {
-              "type": "array"
-            }
-          }
-        },
-        "Timezone": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "required": [
-            "TZID"
-          ],
-          "wraps": "icalendar.cal.Timezone",
-          "properties": {
-            "TZID": {
-              "type": "string"
-            },
-            "LAST-MODIFIED": {
-              "type": "string"
-            },
-            "TZURL": {
-              "type": "string"
-            }
-          }
-        },
-        "Alarm": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "required": [
-            "ACTION",
-            "TRIGGER"
-          ],
-          "wraps": "icalendar.cal.Alarm",
-          "properties": {
-            "ACTION": {
-              "type": "string"
-            },
-            "TRIGGER": {
-              "type": "string"
-            },
-            "SUMMARY": {
-              "type": "string"
-            },
-            "DESCRIPTION": {
-              "type": "string"
-            },
-            "DURATION": {
-              "type": "string"
-            },
-            "REPEAT": {
-              "type": "string"
-            },
-            "ATTENDEE": {
-              "type": "array"
-            },
-            "ATTACH": {
-              "type": "array"
-            }
-          }
-        },
-        "Calendar": {
-          "type": "object",
-          "description": "This is the base object for an iCalendar file.",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "https://json-schema.org/address",
+            "#/$defs/schema_org/$defs/SchemaOrg"
           ],
           "aliases": {
-            "method": "METHOD",
-            "product_id": "PRODID",
-            "timezone": "X-WR-TIMEZONE"
+            "city": "locality",
+            "street": "street-address",
+            "zip": "postal-code"
           },
-          "required": [
-            "PRODID",
-            "VERSION"
+          "dependencies": {
+            "country": [
+              "country-name"
+            ],
+            "geo": [
+              "postal-code"
+            ],
+            "postal": [
+              "postal-code"
+            ]
+          },
+          "object2schema_org": {
+            "country-name": "addressCountry",
+            "post-office-box": "postOfficeBoxNumber",
+            "postal-code": "postalCode",
+            "region": "addressRegion",
+            "street-address": "streetAddress"
+          },
+          "readOnly": [
+            "country",
+            "geo",
+            "postal"
           ],
-          "wraps": "icalendar.cal.Calendar",
           "properties": {
-            "PRODID": {
+            "post-office-box": {
               "type": "string",
-              "description": "The calendar product ID"
+              "description": "Post office box description if any"
             },
-            "VERSION": {
+            "extended-address": {
+              "type": "string",
+              "description": "Apartment/suite/room name/number if any"
+            },
+            "street-address": {
+              "type": "string",
+              "description": "Street number + name, apt/ste"
+            },
+            "locality": {
+              "type": "string",
+              "description": "City/town/village"
+            },
+            "region": {
+              "type": "string",
+              "description": "State/county/province"
+            },
+            "postal-code": {
+              "type": "string",
+              "description": "Postal code, e.g. US ZIP"
+            },
+            "country-name": {
+              "type": "string",
+              "description": "Country name"
+            },
+            "geo": {
+              "$ref": "#/$defs/places/$defs/GeoCoordinates"
+            },
+            "postal": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/infos/$defs/PostalInfo"
+            },
+            "country": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Country"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/PostalAddress"
+            }
+          }
+        },
+        "Card": {
+          "type": "object",
+          "description": "This object represent a person, a company, an organization, or a place",
+          "extends": [
+            "https://json-schema.org/card",
+            "#/$defs/schema_org/$defs/SchemaOrg"
+          ],
+          "abstract": true,
+          "aliases": {
+            "address": "adr"
+          },
+          "object2schema_org": {
+            "adr": "address",
+            "email": "email",
+            "fn": "name",
+            "tel": "telephone"
+          },
+          "properties": {
+            "adr": {
+              "$ref": "#/$defs/places/$defs/Address"
+            },
+            "extra_addresses": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/$defs/places/$defs/Address"
+              }
+            },
+            "email": {
+              "type": "string",
+              "description": "Email address"
+            },
+            "tel": {
+              "type": "string",
+              "description": "Telephone number"
+            },
+            "extra_telephones": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "Place": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "#/$defs/places/$defs/Card"
+          ],
+          "additionalProperties": true,
+          "aliases": {
+            "geo": "address.geo"
+          },
+          "dependencies": {
+            "country": [
+              "country-name"
+            ],
+            "geo": [
+              "postal-code"
+            ]
+          },
+          "properties": {
+            "faxNumber": {
               "type": "string"
             },
-            "CALSCALE": {
+            "branchCode": {
               "type": "string"
             },
-            "METHOD": {
-              "type": "string",
-              "description": "The calendar method such as meeting requests."
+            "photo": {
+              "type": "string"
             },
-            "X-WR-TIMEZONE": {
-              "type": "string",
-              "description": "The calendar timezone"
-            },
-            "X-WR-CALNAME": {
-              "type": "string",
-              "description": "The calendar name/title"
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Place"
             }
           }
         }
@@ -1578,29 +2402,112 @@
     "personas": {
       "type": "object",
       "$defs": {
+        "Organization": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "#/$defs/places/$defs/Card"
+          ],
+          "aliases": {
+            "organizationName": "org.organizationName",
+            "organizationUnit": "org.organizationUnit"
+          },
+          "primaryKeys": [
+            "id"
+          ],
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Organization"
+            }
+          }
+        },
+        "Person": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
+            "#/$defs/places/$defs/Card"
+          ],
+          "aliases": {
+            "birthDate": "bday",
+            "firstName": "givenName",
+            "fullName": "fn",
+            "lastName": "familyName"
+          },
+          "primaryKeys": [
+            "id"
+          ],
+          "properties": {
+            "givenName": {
+              "type": "string",
+              "description": "First Name"
+            },
+            "familyName": {
+              "type": "string",
+              "description": "Family (often last) name"
+            },
+            "fn": {
+              "type": "string",
+              "description": "Name, formatted/full",
+              "default": "{{this.firstName}} {{this.lastName}}"
+            },
+            "id": {
+              "type": "integer"
+            },
+            "affiliation": {
+              "foreignKey": {
+                "foreignSchema": "#/$defs/personas/$defs/Organization"
+              }
+            },
+            "bday": {
+              "type": "date"
+            },
+            "birthPlace": {
+              "$ref": "#/$defs/places/$defs/Place"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Person"
+            }
+          }
+        },
         "Merchant": {
           "type": "object",
           "description": "This objects represents a merchant.",
           "extends": [
-            "https://numengo.org/django-cms#/$defs/Merchant",
-            "#/$defs/auth/$defs/Card"
+            "#/$defs/personas/$defs/Organization"
           ],
           "aliases": {
-            "VAT_id": "merchant_vat_id",
-            "city": "merchant_city",
-            "reg_capital": "registration_capital",
-            "reg_city": "registration_city",
-            "reg_id": "registration_id",
-            "street": "merchant_street",
-            "tax_id": "merchant_tax_id",
-            "zip": "merchant_zip"
+            "merchant_city": "adr.locality",
+            "merchant_name": "fn",
+            "merchant_street": "adr.postal-street",
+            "merchant_zip": "adr.postal-code"
           },
           "primaryKeys": [
-            "merchant_name"
+            "id"
           ],
           "properties": {
+            "registration_id": {
+              "type": "string"
+            },
+            "registration_city": {
+              "type": "string"
+            },
+            "registration_capital": {
+              "type": "string"
+            },
+            "merchant_tax_id": {
+              "type": "string"
+            },
+            "merchant_vat_id": {
+              "type": "string"
+            },
             "bank_account": {
               "$ref": "#/$defs/auth/$defs/BankAccount"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Organization"
             }
           }
         },
@@ -1608,11 +2515,7 @@
           "type": "object",
           "description": "This objects represents a product manufacturer.",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
-            "#/$defs/auth/$defs/Card"
-          ],
-          "primaryKeys": [
-            "fn"
+            "#/$defs/personas/$defs/Organization"
           ]
         },
         "Customer": {
@@ -1623,7 +2526,15 @@
           ],
           "primaryKeys": [
             "username"
-          ]
+          ],
+          "properties": {
+            "bank_accounts": {
+              "type": "array"
+            },
+            "payment_cards": {
+              "type": "array"
+            }
+          }
         },
         "BusinessCustomer": {
           "type": "object",
@@ -1633,445 +2544,10 @@
           ],
           "primaryKeys": [
             "username"
-          ]
-        }
-      }
-    },
-    "media_files": {
-      "type": "object",
-      "$defs": {
-        "MediaBaseInfo": {
-          "type": "object",
-          "properties": {
-            "format": {
-              "type": "string"
-            },
-            "codec": {
-              "type": "string"
-            },
-            "long_codec": {
-              "type": "string"
-            }
-          }
-        },
-        "MediaFile": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/files/$defs/UriFile",
-            "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable"
-          ],
-          "binary": true,
-          "https://mediaarea.net/en/MediaInfo": "https://mediaarea.net/en/MediaInfo",
-          "properties": {
-            "_type": {
-              "type": "string"
-            },
-            "file_info": {
-              "$ref": "https://numengo.org/ngoschema#/$defs/files/$defs/FileInfo"
-            }
-          }
-        },
-        "AudioTags": {
-          "type": "object",
-          "additionalProperties": true,
-          "properties": {
-            "title": {
-              "type": "array"
-            },
-            "artist": {
-              "type": "array"
-            },
-            "album": {
-              "type": "array"
-            },
-            "year": {
-              "type": "array"
-            },
-            "comment": {
-              "type": "array"
-            },
-            "tracknumber": {
-              "type": "array"
-            },
-            "genre": {
-              "type": "array"
-            },
-            "bpm": {
-              "type": "array"
-            },
-            "composer": {
-              "type": "array"
-            },
-            "url": {
-              "type": "array"
-            }
-          }
-        },
-        "AudioStreamInfo": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/MediaBaseInfo"
           ],
           "properties": {
-            "duration": {
-              "type": "number"
-            },
-            "bit_depth": {
-              "type": "integer"
-            },
-            "bitrate": {
-              "type": "integer"
-            },
-            "bitrate_mode": {
-              "type": "string",
-              "enum": [
-                "CBR",
-                "ABR",
-                "VBR_METHOD_1",
-                "VBR_METHOD_2",
-                "VBR_METHOD_3",
-                "VBR_METHOD_4",
-                "CBR_2_PASS",
-                "ABR_2_PASS"
-              ]
-            },
-            "channels": {
-              "type": "integer"
-            },
-            "channel_mode": {
-              "type": "string",
-              "enum": [
-                "MONO",
-                "STEREO",
-                "DUAL_CHANNEL",
-                "JOINT_STEREO",
-                "FORCED",
-                "AUTO",
-                "INTENSITY",
-                "UNDEFINED"
-              ]
-            },
-            "layer": {
-              "type": "integer"
-            },
-            "sample_rate": {
-              "type": "integer"
-            },
-            "protected": {
-              "type": "boolean"
-            },
-            "version": {
-              "type": "string"
-            }
-          }
-        },
-        "AudioFile": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/MediaFile"
-          ],
-          "_type": "audio",
-          "properties": {
-            "stream_info": {
-              "$ref": "#/$defs/media_files/$defs/AudioStreamInfo"
-            },
-            "tags": {
-              "$ref": "#/$defs/media_files/$defs/AudioTags"
-            }
-          }
-        },
-        "ExifInfo": {
-          "type": "object",
-          "additonalProperties": true,
-          "properties": {
-            "alpha_channel": {
-              "type": "string"
-            },
-            "image_width": {
-              "type": "integer"
-            },
-            "photometric_interpretation": {
-              "type": "string"
-            },
-            "is_animated": {
-              "type": "string"
-            },
-            "model": {
-              "type": "string"
-            },
-            "height": {
-              "type": "integer"
-            },
-            "x_resolution": {
-              "type": "string"
-            },
-            "y_resolution": {
-              "type": "string"
-            },
-            "date_time": {
-              "type": "datetime"
-            },
-            "software": {
-              "type": "string"
-            },
-            "bits_per_sample": {
-              "type": "string"
-            },
-            "n_frames": {
-              "type": "string"
-            },
-            "color_space": {
-              "type": "string"
-            },
-            "orientation": {
-              "type": "integer"
-            },
-            "gps_info": {
-              "type": "integer"
-            },
-            "channel": {
-              "type": "string"
-            },
-            "make": {
-              "type": "string"
-            },
-            "exif_offset": {
-              "type": "integer"
-            },
-            "width": {
-              "type": "integer"
-            },
-            "samples_per_pixel": {
-              "type": "integer"
-            },
-            "image_length": {
-              "type": "integer"
-            },
-            "y_cb_cr_positioning": {
-              "type": "integer"
-            },
-            "resolution": {
-              "type": "string"
-            },
-            "resolution_unit": {
-              "type": "string"
-            }
-          }
-        },
-        "ImageBaseInfo": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/MediaBaseInfo"
-          ],
-          "properties": {
-            "width": {
-              "type": "integer"
-            },
-            "height": {
-              "type": "integer"
-            },
-            "layers": {
-              "type": "integer"
-            },
-            "n_frames": {
-              "type": "integer"
-            },
-            "bits": {
-              "type": "integer"
-            },
-            "color_space": {
-              "type": "string"
-            }
-          }
-        },
-        "ImageInfo": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/ImageBaseInfo"
-          ],
-          "additionalProperties": true,
-          "properties": {
-            "dpi": {
-              "type": "array"
-            },
-            "is_animated": {
-              "type": "boolean"
-            },
-            "color_space": {
-              "type": "string"
-            },
-            "alpha_channel": {
-              "type": "boolean"
-            },
-            "exif": {
-              "$ref": "#/$defs/media_files/$defs/ExifInfo"
-            }
-          }
-        },
-        "ImageFile": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/MediaFile"
-          ],
-          "_type": "image",
-          "properties": {
-            "image_info": {
-              "$ref": "#/$defs/media_files/$defs/ImageInfo"
-            }
-          }
-        },
-        "VideoInfo": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/ImageInfo"
-          ],
-          "additionalProperties": true,
-          "aliases": {
-            "video_format": "format"
-          },
-          "properties": {
-            "duration": {
-              "type": "number"
-            },
-            "fps": {
-              "type": "number"
-            },
-            "audio_channels": {
-              "type": "integer"
-            }
-          }
-        },
-        "VideoFile": {
-          "type": "object",
-          "extends": [
-            "#/$defs/media_files/$defs/MediaFile"
-          ],
-          "_type": "video",
-          "properties": {
-            "video_info": {
-              "$ref": "#/$defs/media_files/$defs/VideoInfo"
-            }
-          }
-        }
-      }
-    },
-    "pandas": {
-      "type": "object",
-      "$defs": {
-        "NdArray": {
-          "type": "object",
-          "description": "This object represents a numpy nd-array",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "additionalProperties": true,
-          "required": [
-            "data"
-          ],
-          "wraps": "numpy.ndarray",
-          "properties": {
-            "data": true,
-            "dtype": {
-              "type": "string",
-              "description": "The desired data-type for the array.  If not given, then the type will be determined as the minimum type required to hold the objects in the sequence."
-            },
-            "copy": {
-              "type": "boolean",
-              "description": "If true (default), then the object is copied.  Otherwise, a copy will only be made if __array__ returns a copy, if obj is a nested sequence, or if a copy is needed to satisfy any of the other requirements(`dtype`, `order`, etc.).",
-              "default": true
-            },
-            "order": {
-              "type": "string",
-              "description": "Specify the memory layout of the array. If object is not an array, the newly created array will be in C order (row major) unless 'F' is specified, in which case it will be in Fortran order (column major). If object is an array the following holds.",
-              "enum": [
-                "K",
-                "A",
-                "C",
-                "F"
-              ]
-            },
-            "subok": {
-              "type": "boolean",
-              "description": "If True, then sub-classes will be passed-through, otherwise the returned array will be forced to be a base-class array (default)."
-            },
-            "ndmin": {
-              "type": "integer",
-              "description": "Specifies the minimum number of dimensions that the resulting array should have.  Ones will be pre-pended to the shape as needed to meet this requirement."
-            },
-            "like": {
-              "type": "string",
-              "description": "Reference object to allow the creation of arrays which are not NumPy arrays. If an array-like passed in as ``like`` supports the ``__array_function__`` protocol, the result will be defined by it. In this case, it ensures the creation of an array object compatible with that passed in via this argument."
-            }
-          }
-        },
-        "Index": {
-          "type": "object",
-          "description": "This object represents a serie for Pandas",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "additionalProperties": true,
-          "wraps": "pandas.core.indexes.base.Index",
-          "properties": {
-            "values": {
-              "type": "array"
-            }
-          }
-        },
-        "DatetimeIndex": {
-          "type": "object",
-          "extends": [
-            "#/$defs/pandas/$defs/Index"
-          ],
-          "wraps": "pandas.core.indexes.datetimes.DatetimeIndex"
-        },
-        "Series": {
-          "type": "object",
-          "description": "This object represents series for Pandas",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "additionalProperties": true,
-          "required": [
-            "index"
-          ],
-          "wraps": "pandas.core.series.Series",
-          "properties": {
-            "data": true,
-            "index": {
-              "$ref": "#/$defs/pandas/$defs/Index"
-            },
-            "dtype": {
-              "type": "string",
-              "description": "dtype object of the underlying data."
-            }
-          }
-        },
-        "TimeSeries": {
-          "type": "object",
-          "extends": [
-            "#/$defs/pandas/$defs/Series"
-          ],
-          "additionalProperties": true,
-          "wraps": "pandas.core.series.Series",
-          "properties": {
-            "index": {
-              "$ref": "#/$defs/pandas/$defs/DatetimeIndex"
-            }
-          }
-        },
-        "DataFrame": {
-          "type": "object",
-          "description": "Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns).",
-          "extends": [
-            "#/$defs/pandas/$defs/Series"
-          ],
-          "additionalProperties": true,
-          "wraps": "pandas.core.frame.DataFrame",
-          "properties": {
-            "data": true,
-            "index": {
-              "$ref": "#/$defs/pandas/$defs/Index"
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/Organization"
             }
           }
         }

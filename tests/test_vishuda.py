@@ -2,11 +2,10 @@
 # -*- coding: utf-8 -*-
 
 """Tests for `vishuda` package."""
-from click.testing import CliRunner
 
-from vishuda.cli import cli
 
 # PROTECTED REGION ID(vishuda.tests.test_vishuda) ENABLED START
+
 def test_vishuda_schema_org():
     from vishuda.models import Thing
     from vishuda.models.things import Intangible
@@ -25,9 +24,30 @@ def test_vishuda_schema_org():
     assert isinstance(e, Thing)
     assert not  isinstance(e, EntryPoint)
 
+    from vishuda.models.things.intangibles.structured_values.contact_points import PostalAddress
+    from vishuda.models.places import Address
+
+    assert issubclass(PostalAddress, Thing)
+
+    adr = PostalAddress(
+        streetAddress='21 Jump Street',
+        addressLocality='Beverly Hills',
+        postalCode='92010',
+        addressRegion='Californication',
+        addressCountry='US of A',
+    )
+    assert isinstance(adr, Thing)
+    A = Address()
+    A.schema_org = adr
+    assert A['street-address'] == adr.streetAddress
+    out = A.as_schema_org
+    assert out
+
+
+
 
 def test_vishuda():
-    from vishuda.models.media_files import AudioFile, ImageFile, VideoFile
+    from vishuda.models.files.media_files import AudioFile, ImageFile, VideoFile
 
     image_file = ImageFile(filepath='/Users/cedric/Nextcloud/Documents/mindmaps/yoni-mudra.jpg')
     image_file_info = image_file.file_info
@@ -62,9 +82,8 @@ def test_vishuda():
 
 
 def test_vishuda_():
-    from vishuda import settings
     from vishuda.models.chatbot.advanced import ChatbotAdvanced
-    chatbot = ChatbotAdvanced(filepath='../vishuda/static/doctor.txt')
+    chatbot = ChatbotAdvanced(filepath='../vishuda/static/doctor.bot')
     chatbot.load()
     chatbot.initial()
     chatbot.respond('hello, how are you?')

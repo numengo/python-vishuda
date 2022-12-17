@@ -1,4 +1,6 @@
 # *- coding: utf-8 -*-
+from .schema_org import *
+from .places import *
 from .auth import *
 from .personas import *
 from .ical import *
@@ -8,15 +10,19 @@ from .chatbot import *
 from .telebot import *
 #from .nodes import *
 
-Thing = type_builder.load('https://schema.org/#/$defs/Thing')
 
 __all__ = [
     'Thing',
+    # places
+    'GeoCoordinates',
+    'Address',
+    'Place',
     # auth
     'User',
     'Card',
-    'Address',
     # personas
+    'Person',
+    'Organization',
     'Merchant',
     # ical
     'Event',

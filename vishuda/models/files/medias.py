@@ -3,11 +3,13 @@ from __future__ import absolute_import
 from __future__ import unicode_literals
 
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-from ngoschema.models.files import UriFile, FileInfo
+from ngoschema.models.files import UriFile
 import audio_metadata
 import imageio.v3 as iio
 from PIL import Image
 import inflection
+
+from .files import FileInfo
 
 
 class MediaFile(with_metaclass(SchemaMetaclass)):

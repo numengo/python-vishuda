@@ -4,6 +4,9 @@ from __future__ import unicode_literals
 
 from ngoschema.models import instances
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
+from .things import Person, Organization
+from .things.intangibles.structured_values.contact_points import PostalAddress
+from .things.intangibles.services.financial_products import BankAccount
 
 
 class ContentType(with_metaclass(SchemaMetaclass)):
@@ -18,21 +21,46 @@ class Group(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/auth/$defs/Group"
 
 
-class Address(with_metaclass(SchemaMetaclass)):
-    _id = r"https://numengo.org/vishuda#/$defs/auth/$defs/Address"
-
-
-class Card(with_metaclass(SchemaMetaclass)):
-    _id = r"https://numengo.org/vishuda#/$defs/auth/$defs/Card"
-
-
 class User(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/auth/$defs/User"
 
     def __init__(self, *args, **kwargs):
         instances.Entity.__init__(self, *args, **kwargs)
 
+#    def set_schema_org(self, person):
+#        email
+#        description
+#        Email
+#        address
+#
+#
+#username
+#email
+#address
+#firstName
+#lastName
+#fn
+
+
+def get_schema_org(self):
+        pass
+
 
 class BankAccount(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/auth/$defs/BankAccount"
 
+#    def set_schema_org(self, bank_account):
+#        holder_name
+#        bank_name
+#        bank_street
+#        bank_city
+#        bank_zip
+#        agency
+#        swift_bic
+#        iban
+#
+#        bankAccountType
+#
+#
+#    def get_schema_org(self):
+#        pass

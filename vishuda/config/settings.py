@@ -1,3 +1,17 @@
+import pycountry
+
+LANGUAGES = ['en', 'fr', 'de']
+
+LOCALEDIR_DOMAINS = {
+    pycountry.LOCALES_DIR : [
+        'iso639-3',  # Languages
+        'iso3166-1',  # Countries
+        'iso3166-2',  # Subdivisions of countries
+        'iso4217',  # Currencies
+        'iso15924',  # Scripts
+    ],
+}
+
 TELEGRAM_BOT_TOKEN = ''
 
 

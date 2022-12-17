@@ -16,7 +16,9 @@ APP_CONTEXT.add_local_entries(_vishuda_env=settings.as_dict())
 
 from ngoschema.loaders import register_module
 register_module('vishuda')
-import ngomm_cms.models
+import ngogeo
+import ngomm_cms
+#import ngomm_cms.models
 
 from .vishuda import *
 __all__ = [
