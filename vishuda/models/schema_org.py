@@ -8,7 +8,7 @@ from collections import ChainMap
 
 from ngoschema import type_builder
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-
+from .i18n import activate
 
 Thing = type_builder.load('https://schema.org/#/$defs/Thing')
 
@@ -41,9 +41,12 @@ class SchemaOrg(with_metaclass(SchemaMetaclass)):
 
     def get_as_schema_org(self):
         ret = {}
+        activate(self.language)
         for ok, sok in self._object2schema_org.items():
             v = self[ok]
             if v is not None:
+                if sok in self.localized:
+                    v = _(v)
                 dpath.util.new(ret, sok, v)
         cls = self._items_type(self, 'schema_org')
         return cls(ret)

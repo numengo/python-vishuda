@@ -1,15 +1,17 @@
 import pycountry
 
 LANGUAGES = ['en', 'fr', 'de']
+#LANGUAGES = ['en', 'fr']
 
-LOCALEDIR_DOMAINS = {
-    pycountry.LOCALES_DIR : [
+LOCALE_MODULE_DOMAINS = {
+    'pycountry' : [
         'iso639-3',  # Languages
         'iso3166-1',  # Countries
         'iso3166-2',  # Subdivisions of countries
         'iso4217',  # Currencies
         'iso15924',  # Scripts
     ],
+    'vishuda': 'vishuda'
 }
 
 TELEGRAM_BOT_TOKEN = ''

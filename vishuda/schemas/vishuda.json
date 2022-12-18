@@ -235,6 +235,9 @@
         "LocaleDirDomains": {
           "type": "object",
           "properties": {
+            "module": {
+              "type": "importable"
+            },
             "locale_dir": {
               "type": "path"
             },
@@ -243,7 +246,7 @@
             }
           }
         },
-        "Translations": {
+        "DomainsTranslation": {
           "type": "object",
           "properties": {
             "locale_dirs": {
@@ -252,17 +255,15 @@
                 "$ref": "#/$defs/i18n/$defs/LocaleDirDomains"
               }
             },
-            "languages": {
-              "type": "array",
+            "language": {
+              "type": "string",
               "items": {
                 "$ref": "#/$defs/i18n/properties/languageCode"
               }
             },
-            "all": {
-              "type": "boolean"
-            },
             "fallback": {
-              "type": "boolean"
+              "type": "boolean",
+              "default": true
             },
             "codeset": {
               "type": "string"
@@ -326,12 +327,16 @@
           "type": "object",
           "abstract": true,
           "notSerialized": [
-            "translatedFields",
-            "language"
+            "localized",
+            "language",
+            "domainsTranslation"
           ],
           "properties": {
-            "translatedFields": {
+            "localized": {
               "type": "array"
+            },
+            "domainsTranslation": {
+              "$ref": "#/$defs/i18n/$defs/DomainsTranslation"
             },
             "language": {
               "$ref": "#/$defs/i18n/properties/languageCode"
@@ -1867,7 +1872,7 @@
                       "type": "string"
                     },
                     "file_info": {
-                      "$ref": "#/$defs/files/$defs/FileInfo"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/FileInfo"
                     },
                     "schema_org": {
                       "$ref": "https://schema.org/#/$defs/MediaObject"
@@ -1976,10 +1981,10 @@
                   "_type": "audio",
                   "properties": {
                     "stream_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/AudioStreamInfo"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/AudioStreamInfo"
                     },
                     "tags": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/AudioTags"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/AudioTags"
                     },
                     "schema_org": {
                       "$ref": "https://schema.org/#/$defs/AudioObject"
@@ -2110,7 +2115,7 @@
                       "type": "boolean"
                     },
                     "exif": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/ExifInfo"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/ExifInfo"
                     }
                   }
                 },
@@ -2122,7 +2127,7 @@
                   "_type": "image",
                   "properties": {
                     "image_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/ImageInfo"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageInfo"
                     },
                     "schema_org": {
                       "$ref": "https://schema.org/#/$defs/ImageObject"
@@ -2158,7 +2163,7 @@
                   "_type": "video",
                   "properties": {
                     "video_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/VideoInfo"
+                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/VideoInfo"
                     },
                     "schema_org": {
                       "$ref": "https://schema.org/#/$defs/VideoObject"

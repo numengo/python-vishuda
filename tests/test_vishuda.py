@@ -178,6 +178,7 @@ def test_telebot(tb):
 
     file = requests.get('https://api.telegram.org/file/bot{0}/{1}'.format(API_TOKEN, file_info.file_path))
 
+
 def test_telebot2(tb):
     # https://github.com/eternnoir/pyTelegramBotAPI#telegram-channel
     from telebot import types
@@ -209,8 +210,17 @@ def test_telebot2(tb):
     tb.send_message(chat_id, "Choose one letter:", reply_markup=markup)
 
 
+def test_translations():
+    from vishuda.models.i18n import activate
+    activate('fr')
+    assert _('Germany') == 'Allemagne'
+    assert __builtins__['_']('Germany') == 'Allemagne'
+
+
+
 if __name__ == '__main__':
     # to run test file standalone
-    test_vishuda_schema_org()
+    test_translations()
+    #test_vishuda_schema_org()
 
 # PROTECTED REGION END

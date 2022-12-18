@@ -14,7 +14,7 @@ from ngoschema import DEFAULT_CONTEXT, APP_CONTEXT
 DEFAULT_CONTEXT.add_local_entries(**getattr(settings, 'DEFAULT_CONTEXT', {}))
 APP_CONTEXT.add_local_entries(_vishuda_env=settings.as_dict())
 
-from ngoschema.loaders import register_module
+from ngoschema.loaders import register_module, register_locale_dir
 register_module('vishuda')
 import ngogeo
 import ngomm_cms
