@@ -1,8 +1,8 @@
 # -*- coding: utf-8
 from emoji import emojize
-military_medal = emojize(":military_medal:")
+military_medal = emojize(":military medal:")
 trophy = emojize(":trophy:")
-sports_medal = emojize(":sports_medal:")
-first_place_medal = emojize(":first_place_medal:")
-second_place_medal = emojize(":second_place_medal:")
-third_place_medal = emojize(":third_place_medal:")
+sports_medal = emojize(":sports medal:")
+first_place_medal = emojize(":1st place medal:")
+second_place_medal = emojize(":2nd place medal:")
+third_place_medal = emojize(":3rd place medal:")

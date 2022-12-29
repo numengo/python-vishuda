@@ -2,56 +2,85 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import inflection
+
 from ngoschema.models import instances
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-from ngogeo import ngogeo
+from ngogeo.territories import get_world, Postal, Country, City, Location
 
 from .schema_org import SchemaOrg
+from .emojis.flags import country_flag
+
+world = get_world()
+#world = None
+
+
+class HasCountry(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/emojis/$defs/HasCountry"
+
+    def get_country_emoji(self):
+        if self.country:
+            flag_name = 'flag_' + inflection.underscore(self.country.name)
+            return getattr(country_flag, flag_name, None)
+
+
+class Address(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/places/$defs/Address"
+
+    def get_country(self):
+        country = self.addressCountry
+        res = world.find_by_name(country) if country else None
+        return res
+
+    def get_postal(self):
+        country = self.country
+        postal_code = self.postalCode
+        if country and postal_code:
+            country.with_postals = True
+            pc = country.search_postal_code(postal_code, unique=True)
+            if len(pc):
+                return Postal(postal=pc, parent=country)
+
+    def get_city(self):
+        country = self.country
+        locality = self.locality
+        postal_code = self.postalCode
+        if country and (locality or postal_code):
+            country.with_postals = True
+            return country.locate_city(name=locality, postal_code=postal_code)
+
+    def get_admin(self):
+        city = self.city
+        if city is not None:
+            return city.admin3
 
 
 class GeoCoordinates(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/places/$defs/GeoCoordinates"
     _lazyLoading = True
 
-    def get_point(self):
-        pass
-
-    def get_geo(self):
-        pass
-
-    def get_postal(self):
-        pass
-
     def get_country(self):
-        pass
+        country = self.postalAddress.country if self.postalAddress is not None else None
+        if country is None:
+            location = self.location
+            if location:
+                country = world.locate_country(location, point_crs=self.crs)
+        return country
 
-    def set_schema_org(self, geo_coordinates):
-        SchemaOrg.set_schema_org(self, geo_coordinates)
+    def get_admin(self):
+        admin = self.postalAddress.admin if self.postalAddress is not None else None
+        if admin is None:
+            country = self.country
+            location = self.location
+            if location and country:
+                country.with_postals = True
+                admin = country.locate(location, point_crs=self.crs)
+        return admin
 
-    #def get_schema_org(self):
-    #    return SchemaOrg.get_schema_org(self)
-
-    #    def set_schema_org(self, postal_address):
-    #        self['street-address'] = postal_address.streetAddress
-    #        self['locality'] = postal_address.addressLocality
-    #        self['postal-code'] = postal_address.postalCode
-    #        self['post-office-box'] = postal_address.postOfficeBoxNumber
-    #        self['region'] = postal_address.addressRegion
-    #        self['country-name'] = postal_address.addressCountry
-    #
-    #    def get_schema_org(self):
-    #        return PostalAddress(
-    #            streetAddress=self['street-address'],
-    #            addressLocality=self['locality'],
-    #            postOfficeBoxNumber=self['post-office-box'],
-    #            postalCode=self['postal-code'],
-    #            addressRegion=self['region'],
-    #            addressCountry=self['country-name'],
-    #        )
-
-
-class Address(with_metaclass(SchemaMetaclass)):
-    _id = r"https://numengo.org/vishuda#/$defs/places/$defs/Address"
+    def geoname(self):
+        gid = self.geonameid
+        if gid:
+            return self.admin.find_geoname_id(gid)
 
 
 class Card(with_metaclass(SchemaMetaclass)):
@@ -87,9 +116,6 @@ class Card(with_metaclass(SchemaMetaclass)):
 #            legalName
 #            location
 #            telephone
-
-    def get_schema_org(self):
-        pass
 
 
 class Place(with_metaclass(SchemaMetaclass)):

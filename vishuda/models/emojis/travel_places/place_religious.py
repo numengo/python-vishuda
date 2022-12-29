@@ -2,7 +2,7 @@
 from emoji import emojize
 church = emojize(":church:")
 mosque = emojize(":mosque:")
-hindu_temple = emojize(":hindu_temple:")
+hindu_temple = emojize(":hindu temple:")
 synagogue = emojize(":synagogue:")
-shinto_shrine = emojize(":shinto_shrine:")
+shinto_shrine = emojize(":shinto shrine:")
 kaaba = emojize(":kaaba:")

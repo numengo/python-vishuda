@@ -29,22 +29,6 @@ def test_vishuda_schema_org():
 
     assert issubclass(PostalAddress, Thing)
 
-    adr = PostalAddress(
-        streetAddress='21 Jump Street',
-        addressLocality='Beverly Hills',
-        postalCode='92010',
-        addressRegion='Californication',
-        addressCountry='US of A',
-    )
-    assert isinstance(adr, Thing)
-    A = Address()
-    A.schema_org = adr
-    assert A['street-address'] == adr.streetAddress
-    out = A.as_schema_org
-    assert out
-
-
-
 
 def test_vishuda():
     from vishuda.models.files.media_files import AudioFile, ImageFile, VideoFile
@@ -211,15 +195,59 @@ def test_telebot2(tb):
 
 
 def test_translations():
+    import gettext
     from vishuda.models.i18n import activate
     activate('fr')
     assert _('Germany') == 'Allemagne'
-    assert __builtins__['_']('Germany') == 'Allemagne'
+    assert __builtins__.__dict__['_']('Germany') == 'Allemagne'
 
 
+def test_vishuda_places():
+    from vishuda.models import Thing
+    from vishuda.models.things.intangibles.structured_values.contact_points import PostalAddress
+    from vishuda.models.places import Address, GeoCoordinates
+
+    adr = PostalAddress(
+        streetAddress='Avenue Monplaisir',
+        addressLocality='Lyon',
+        postalCode='69003',
+        addressCountry='France',
+    )
+    assert isinstance(adr, Thing)
+    A = Address()
+    A.schema_org = adr
+    e = A.country_emoji
+    assert A['street-address'] == adr.streetAddress
+    out = A.as_schema_org
+    geo = GeoCoordinates(postalAddress=A)
+    gc = geo.country
+    ga = geo.admin
+    gp = geo.postal
+    gg = geo.geoname
+    assert out
+
+
+def test_places():
+    from vishuda.models.places import GeoCoordinates, Address
+    a = Address(streetAddress='27 rue JB Magnet', postalCode='42153', addressLocality='Riorges', addressCountry='France')
+    geo1 = GeoCoordinates(longitude=4.04255, latitude=46.04378)
+    geo2 = GeoCoordinates(postalCode='42153', addressCountry='FR')
+    c1 = geo1.country
+    c2 = geo2.country
+    c1.bound_from_cities = True
+    assert c1 is c2
+    t1 = geo1.admin
+    t2 = geo2.admin
+    p = a.city
+    assert a.admin is t2
+    a_so = a.as_schema_org
+    g_so = geo1.as_schema_org
+    assert t1 is t2
 
 if __name__ == '__main__':
     # to run test file standalone
+    test_vishuda_places()
+    test_places()
     test_translations()
     #test_vishuda_schema_org()
 

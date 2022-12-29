@@ -77,7 +77,7 @@
           "type": "object",
           "description": "This object represents series for Pandas",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Series"
+            "https://numengo.org/ngoschema#/$defs/datasets/$defs/Series"
           ],
           "additionalProperties": true,
           "required": [
@@ -108,12 +108,12 @@
             }
           }
         },
-        "DataFrame": {
+        "Dataframe": {
           "type": "object",
           "description": "Two-dimensional size-mutable, potentially heterogeneous tabular data structure with labeled axes (rows and columns).",
           "extends": [
-            "#/$defs/datasets/$defs/Series",
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Dataframe"
+            "https://numengo.org/ngoschema#/$defs/datasets/$defs/Dataframe",
+            "#/$defs/datasets/$defs/Series"
           ],
           "additionalProperties": true,
           "wraps": "pandas.core.frame.DataFrame",
@@ -129,6 +129,12 @@
               }
             }
           }
+        },
+        "DataframeSubset": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/datasets/$defs/DataframeSubset"
+          ]
         }
       }
     },
@@ -140,6 +146,7 @@
           "type": "string",
           "description": "Translation language code",
           "enum": [
+            "en",
             "zh",
             "es",
             "ar",
@@ -1581,6 +1588,20 @@
               "type": "array"
             }
           }
+        },
+        "HasCountry": {
+          "type": "object",
+          "abstract": true,
+          "dependencies": {
+            "country_emoji": [
+              "country"
+            ]
+          },
+          "properties": {
+            "country_emoji": {
+              "type": "string"
+            }
+          }
         }
       }
     },
@@ -2020,7 +2041,7 @@
                       "type": "string"
                     },
                     "date_time": {
-                      "type": "datetime"
+                      "type": "date"
                     },
                     "software": {
                       "type": "string"
@@ -2179,41 +2200,116 @@
     "places": {
       "type": "object",
       "$defs": {
+        "Address": {
+          "type": "object",
+          "description": "This object represents an address following the convention of http://microformats.org/wiki/hcard",
+          "extends": [
+            "https://json-schema.org/address",
+            "#/$defs/schema_org/$defs/SchemaOrg",
+            "#/$defs/emojis/$defs/HasCountry"
+          ],
+          "aliases": {
+            "addressCountry": "country-name",
+            "addressLocality": "locality",
+            "addressRegion": "region",
+            "postOfficeBoxNumber": "post-office-box",
+            "postalCode": "postal-code",
+            "streetAddress": "street-address"
+          },
+          "dependencies": {
+            "admin": [
+              "city"
+            ],
+            "city": [
+              "postal-code",
+              "locality",
+              "country"
+            ],
+            "country": [
+              "country-name"
+            ],
+            "country_emoji": [
+              "country"
+            ],
+            "postal": [
+              "postal-code",
+              "country"
+            ]
+          },
+          "localized": [
+            "addressCountry",
+            "addressLocality",
+            "addressRegion"
+          ],
+          "notSerialized": [
+            "country",
+            "country_emoji",
+            "postal",
+            "city",
+            "admin"
+          ],
+          "readOnly": [
+            "country",
+            "country_emoji",
+            "postal",
+            "city",
+            "admin"
+          ],
+          "properties": {
+            "country_emoji": {
+              "type": "string"
+            },
+            "country": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Country"
+            },
+            "postal": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Postal"
+            },
+            "city": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/City"
+            },
+            "admin": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Admin3"
+            },
+            "geo": {
+              "$ref": "#/$defs/places/$defs/GeoCoordinates"
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/PostalAddress"
+            }
+          }
+        },
         "GeoCoordinates": {
           "type": "object",
           "extends": [
-            "#/$defs/schema_org/$defs/SchemaOrg"
+            "#/$defs/schema_org/$defs/SchemaOrg",
+            "https://numengo.org/ngogeo#/$defs/territories/$defs/Location",
+            "#/$defs/emojis/$defs/HasCountry"
           ],
           "aliases": {
-            "postalCode": "postalAddress.postal_code"
+            "addressCountry": "postalAddress.addressCountry",
+            "postal": "postalAddress.postal",
+            "postalCode": "postalAddress.postal-code"
           },
+          "crs": "EPSG:4326",
           "dependencies": {
+            "admin": [
+              "postalAddress.country",
+              "location"
+            ],
             "country": [
-              "addressCountry"
+              "postalAddress.country",
+              "location"
             ],
-            "geo": [
-              "longitude",
-              "latitude",
-              "postalCode"
-            ],
-            "point": [
-              "longitude",
-              "latitude"
-            ],
-            "postal": [
-              "postalCode"
+            "geoname": [
+              "geonameid",
+              "admin"
             ]
           },
-          "object2schema_org": {
-            "elevation": "elevation",
-            "latitude": "latitude",
-            "longitude": "longitude",
-            "postalCode": "postalCode"
-          },
           "readOnly": [
-            "country",
-            "geo",
-            "postal"
+            "geoname",
+            "admin",
+            "country"
           ],
           "required": [
             "postalAddress"
@@ -2222,107 +2318,23 @@
             "postalAddress": {
               "$ref": "#/$defs/places/$defs/Address"
             },
-            "addressCountry": {
-              "type": "string"
-            },
             "elevation": {
-              "type": "integer"
-            },
-            "latitude": {
-              "type": "integer"
-            },
-            "longitude": {
-              "type": "integer"
+              "type": "number"
             },
             "schema_org": {
               "$ref": "https://schema.org/#/$defs/GeoCoordinates"
             },
-            "point": {
-              "$ref": "https://numengo.org/ngogeo#/$defs/coordinates/$defs/Point"
-            },
             "country": {
               "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Country"
             },
-            "territory": {
-              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Territory"
-            }
-          }
-        },
-        "Address": {
-          "type": "object",
-          "description": "This object represents an address following the convention of http://microformats.org/wiki/hcard",
-          "extends": [
-            "https://json-schema.org/address",
-            "#/$defs/schema_org/$defs/SchemaOrg"
-          ],
-          "aliases": {
-            "city": "locality",
-            "street": "street-address",
-            "zip": "postal-code"
-          },
-          "dependencies": {
-            "country": [
-              "country-name"
-            ],
-            "geo": [
-              "postal-code"
-            ],
-            "postal": [
-              "postal-code"
-            ]
-          },
-          "object2schema_org": {
-            "country-name": "addressCountry",
-            "post-office-box": "postOfficeBoxNumber",
-            "postal-code": "postalCode",
-            "region": "addressRegion",
-            "street-address": "streetAddress"
-          },
-          "readOnly": [
-            "country",
-            "geo",
-            "postal"
-          ],
-          "properties": {
-            "post-office-box": {
-              "type": "string",
-              "description": "Post office box description if any"
+            "admin": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Admin3"
             },
-            "extended-address": {
-              "type": "string",
-              "description": "Apartment/suite/room name/number if any"
+            "geonameid": {
+              "type": "integer"
             },
-            "street-address": {
-              "type": "string",
-              "description": "Street number + name, apt/ste"
-            },
-            "locality": {
-              "type": "string",
-              "description": "City/town/village"
-            },
-            "region": {
-              "type": "string",
-              "description": "State/county/province"
-            },
-            "postal-code": {
-              "type": "string",
-              "description": "Postal code, e.g. US ZIP"
-            },
-            "country-name": {
-              "type": "string",
-              "description": "Country name"
-            },
-            "geo": {
-              "$ref": "#/$defs/places/$defs/GeoCoordinates"
-            },
-            "postal": {
-              "$ref": "https://numengo.org/ngogeo#/$defs/infos/$defs/PostalInfo"
-            },
-            "country": {
-              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Country"
-            },
-            "schema_org": {
-              "$ref": "https://schema.org/#/$defs/PostalAddress"
+            "geoname": {
+              "$ref": "https://numengo.org/ngogeo#/$defs/territories/$defs/Geoname"
             }
           }
         },
@@ -2335,13 +2347,9 @@
           ],
           "abstract": true,
           "aliases": {
-            "address": "adr"
-          },
-          "object2schema_org": {
-            "adr": "address",
-            "email": "email",
+            "address": "adr",
             "fn": "name",
-            "tel": "telephone"
+            "telephone": "tel"
           },
           "properties": {
             "adr": {
@@ -2379,15 +2387,13 @@
           "aliases": {
             "geo": "address.geo"
           },
-          "dependencies": {
-            "country": [
-              "country-name"
-            ],
-            "geo": [
-              "postal-code"
-            ]
-          },
+          "primaryKeys": [
+            "id"
+          ],
           "properties": {
+            "id": {
+              "type": "integer"
+            },
             "faxNumber": {
               "type": "string"
             },
@@ -2445,6 +2451,9 @@
             "id"
           ],
           "properties": {
+            "id": {
+              "type": "integer"
+            },
             "givenName": {
               "type": "string",
               "description": "First Name"
@@ -2457,9 +2466,6 @@
               "type": "string",
               "description": "Name, formatted/full",
               "default": "{{this.firstName}} {{this.lastName}}"
-            },
-            "id": {
-              "type": "integer"
             },
             "affiliation": {
               "foreignKey": {

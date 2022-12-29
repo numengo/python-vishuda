@@ -133,7 +133,8 @@ def activate(language):
     if not language:
         return
     _active.value = t = _translations.get(language)
-    t.install(['gettext', 'ngettext', 'lgettext', 'lngettext'])
+    if t is not None:
+        t.install(['gettext', 'ngettext', 'lgettext', 'lngettext'])
 
 
 def deactivate():

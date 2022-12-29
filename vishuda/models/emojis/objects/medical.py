@@ -1,9 +1,9 @@
 # -*- coding: utf-8
 from emoji import emojize
 syringe = emojize(":syringe:")
-drop_of_blood = emojize(":drop_of_blood:")
+drop_of_blood = emojize(":drop of blood:")
 pill = emojize(":pill:")
-adhesive_bandage = emojize(":adhesive_bandage:")
+adhesive_bandage = emojize(":adhesive bandage:")
 crutch = emojize(":crutch:")
 stethoscope = emojize(":stethoscope:")
-x_ray = emojize(":x_ray:")
+x_ray = emojize(":x-ray:")
