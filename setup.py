@@ -73,13 +73,14 @@ install_requires = [
     'ngoschema',
     'emoji',
 
+    'nltk',
+
     'audiofile',
     #'eyed3',
-    'songdetails',
+    'audio_metadata',
     'imageio',
 
     'pyowm',
-    'beautifulsoup4'
 ]
 
 post_install_requires = [i for i in install_requires if ('-' in i or ':' in i or '.' in i)]

@@ -1,8 +1,8 @@
 # -*- coding: utf-8
 from emoji import emojize
 pencil = emojize(":pencil:")
-black_nib = emojize(":black nib:")
-fountain_pen = emojize(":fountain pen:")
+black_nib = emojize(":black_nib:")
+fountain_pen = emojize(":fountain_pen:")
 pen = emojize(":pen:")
 paintbrush = emojize(":paintbrush:")
 crayon = emojize(":crayon:")

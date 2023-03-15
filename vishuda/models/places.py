@@ -7,8 +7,13 @@ import inflection
 from ngoschema.models import instances
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
 from ngogeo.territories import get_world, Postal, Country, City, Location
+from ngoschema.registries import repositories_registry
+from ngoschema.repositories import MemoryRepository
 
-from .schema_org import SchemaOrg
+from .things.intangibles.structured_values import GeoCoordinates as GeoCoordinates_so
+from .things.intangibles.structured_values.contact_points import PostalAddress as PostalAddress_so
+from .things import Place as Place_so
+from .schema_org import SchemaOrg, SchemaOrgMetaclass
 from .emojis.flags import country_flag
 
 world = get_world()
@@ -24,7 +29,7 @@ class HasCountry(with_metaclass(SchemaMetaclass)):
             return getattr(country_flag, flag_name, None)
 
 
-class Address(with_metaclass(SchemaMetaclass)):
+class Address(with_metaclass(SchemaOrgMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/places/$defs/Address"
 
     def get_country(self):
@@ -55,7 +60,7 @@ class Address(with_metaclass(SchemaMetaclass)):
             return city.admin3
 
 
-class GeoCoordinates(with_metaclass(SchemaMetaclass)):
+class GeoCoordinates(with_metaclass(SchemaOrgMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/places/$defs/GeoCoordinates"
     _lazyLoading = True
 
@@ -83,7 +88,7 @@ class GeoCoordinates(with_metaclass(SchemaMetaclass)):
             return self.admin.find_geoname_id(gid)
 
 
-class Card(with_metaclass(SchemaMetaclass)):
+class Card(with_metaclass(SchemaOrgMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/places/$defs/Card"
 
 #    def set_schema_org(self, card):
@@ -118,8 +123,17 @@ class Card(with_metaclass(SchemaMetaclass)):
 #            telephone
 
 
-class Place(with_metaclass(SchemaMetaclass)):
+class Place(with_metaclass(SchemaOrgMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/places/$defs/Place"
 
     def __init__(self, *args, **kwargs):
         instances.Entity.__init__(self, *args, **kwargs)
+        SchemaOrg.__init__(self, *args, **kwargs)
+
+
+@repositories_registry.register()
+class PlaceRepository(with_metaclass(SchemaMetaclass, MemoryRepository)):
+    instanceClass = Place
+
+
+place_repo = PlaceRepository()

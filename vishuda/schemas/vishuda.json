@@ -129,12 +129,6 @@
               }
             }
           }
-        },
-        "DataframeSubset": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/datasets/$defs/DataframeSubset"
-          ]
         }
       }
     },
@@ -878,705 +872,6 @@
             }
           }
         },
-        "EmojiCategory": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "primaryKeys": [
-            "name"
-          ],
-          "$defs": {
-            "food_drink": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "food_asian": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "food_prepared": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "food_fruit": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "drink": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "dishware": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "food_vegetable": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "food_sweet": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                },
-                "food_marine": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/food_drink"
-                  ]
-                }
-              }
-            },
-            "flags": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "flag": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/flags"
-                  ]
-                },
-                "subdivision_flag": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/flags"
-                  ]
-                },
-                "country_flag": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/flags"
-                  ]
-                }
-              }
-            },
-            "travel_places": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "time": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "place_geographic": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "place_map": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "place_building": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "sky_weather": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "transport_air": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "transport_ground": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "transport_water": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "place_other": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "hotel": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                },
-                "place_religious": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/travel_places"
-                  ]
-                }
-              }
-            },
-            "people_body": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "hands": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_fantasy": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "hand_fingers_partial": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "hand_fingers_closed": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_gesture": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_sport": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "hand_single_finger": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_activity": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_symbol": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_resting": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "body_parts": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "family": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "hand_fingers_open": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "hand_prop": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                },
-                "person_role": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/people_body"
-                  ]
-                }
-              }
-            },
-            "objects": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "clothing": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "mail": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "sound": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "phone": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "office": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "book_paper": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "writing": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "other_object": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "money": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "computer": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "music": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "musical_instrument": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "household": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "lock": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "science": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "light_video": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "medical": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                },
-                "tool": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/objects"
-                  ]
-                }
-              }
-            },
-            "component": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "skin_tone": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/component"
-                  ]
-                },
-                "hair_style": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/component"
-                  ]
-                }
-              }
-            },
-            "animals_nature": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "animal_amphibian": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "animal_bird": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "animal_marine": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "plant_other": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "plant_flower": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "animal_reptile": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "animal_bug": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                },
-                "animal_mammal": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/animals_nature"
-                  ]
-                }
-              }
-            },
-            "smileys_emotion": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "cat_face": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_sleepy": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_smiling": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_affection": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_tongue": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_concerned": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_unwell": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_costume": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_negative": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_hat": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "monkey_face": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "emotion": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_hand": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_neutral_skeptical": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                },
-                "face_glasses": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/smileys_emotion"
-                  ]
-                }
-              }
-            },
-            "symbols": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "zodiac": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "geometric": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "gender": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "punctuation": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "transport_sign": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "arrow": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "other_symbol": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "warning": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "av_symbol": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "keycap": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "religion": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "math": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "currency": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                },
-                "alphanum": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/symbols"
-                  ]
-                }
-              }
-            },
-            "activities": {
-              "type": "object",
-              "extends": [
-                "#/$defs/emojis/$defs/EmojiCategory"
-              ],
-              "$defs": {
-                "event": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/activities"
-                  ]
-                },
-                "award_medal": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/activities"
-                  ]
-                },
-                "game": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/activities"
-                  ]
-                },
-                "arts_crafts": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/activities"
-                  ]
-                },
-                "sport": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/activities"
-                  ]
-                }
-              }
-            }
-          },
-          "properties": {
-            "emojis": {
-              "$ref": "#/$defs/emojis/$defs/Emoji"
-            },
-            "categories": {
-              "$ref": "#/$defs/emojis/$defs/EmojiCategory"
-            }
-          }
-        },
         "EmojiMixin": {
           "type": "object",
           "abstract": true,
@@ -1602,6 +897,23 @@
               "type": "string"
             }
           }
+        },
+        "EmojiCategory": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "primaryKeys": [
+            "name"
+          ],
+          "properties": {
+            "emojis": {
+              "$ref": "#/$defs/emojis/$defs/Emoji"
+            },
+            "categories": {
+              "$ref": "#/$defs/emojis/$defs/EmojiCategory"
+            }
+          }
         }
       }
     },
@@ -1623,9 +935,6 @@
           ],
           "readOnly": [
             "as_schema_org"
-          ],
-          "required": [
-            "object2schema_org"
           ],
           "properties": {
             "object2schema_org": {
@@ -1796,401 +1105,1013 @@
     "files": {
       "type": "object",
       "$defs": {
-        "definition": {
+        "FileInfo": {
           "type": "object",
-          "$defs": {
-            "FileInfo": {
-              "type": "object",
-              "description": "This object represents file informations.",
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/files/$defs/Filepath"
-              ],
-              "readOnly": [
-                "contentSize",
-                "contentSizeHuman",
-                "mimetype",
-                "sha1"
-              ],
-              "properties": {
-                "contentSize": {
-                  "type": "integer",
-                  "description": "Content size in bytes."
-                },
-                "contentSizeHuman": {
-                  "type": "string",
-                  "description": "Content size in human readable units."
-                },
-                "sha1": {
-                  "type": "string",
-                  "description": "SHA1 hash of the file."
-                },
-                "mimetype": {
-                  "type": "string",
-                  "description": "MIME type of the file"
-                },
-                "media": {
-                  "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
-                }
+          "description": "This object represents file informations.",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/files/$defs/Filepath"
+          ],
+          "dependencies": {
+            "media": [
+              "mimetype"
+            ]
+          },
+          "notSerialized": [
+            "media"
+          ],
+          "notValidated": [
+            "sha1",
+            "media",
+            "mimetype"
+          ],
+          "readOnly": [
+            "contentSize",
+            "contentSizeHuman",
+            "mimetype",
+            "sha1",
+            "media"
+          ],
+          "properties": {
+            "contentSize": {
+              "type": "integer",
+              "description": "Content size in bytes."
+            },
+            "contentSizeHuman": {
+              "type": "string",
+              "description": "Content size in human readable units."
+            },
+            "sha1": {
+              "type": "string",
+              "description": "SHA1 hash of the file."
+            },
+            "mimetype": {
+              "type": "string",
+              "description": "MIME type of the file"
+            },
+            "media": true
+          }
+        },
+        "FolderInfo": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/files/$defs/Folder"
+          ],
+          "dependencies": {
+            "audios": [
+              "medias"
+            ],
+            "files": [
+              "recursive",
+              "includes",
+              "excludes"
+            ],
+            "files_info": [
+              "files"
+            ],
+            "folders_info": [
+              "subfolders"
+            ],
+            "images": [
+              "medias"
+            ],
+            "medias": [
+              "files_info"
+            ],
+            "subfolders": [
+              "recursive",
+              "includes",
+              "excludes"
+            ],
+            "videos": [
+              "medias"
+            ]
+          },
+          "notSerialized": [
+            "files",
+            "files_info",
+            "subfolders",
+            "subfolders_infos",
+            "medias",
+            "images",
+            "audios",
+            "videos"
+          ],
+          "readOnly": [
+            "files",
+            "subfolders",
+            "files_info",
+            "subfolders_info",
+            "medias",
+            "images",
+            "audios",
+            "videos"
+          ],
+          "properties": {
+            "recursive": {
+              "type": "boolean"
+            },
+            "includes": {
+              "type": "array"
+            },
+            "excludes": {
+              "type": "array"
+            },
+            "files": {
+              "type": "array",
+              "items": {
+                "$ref": "https://numengo.org/ngoschema#/$defs/files/$defs/File"
               }
             },
-            "FolderInfo": {
-              "type": "object",
-              "extends": [
-                "https://numengo.org/ngoschema#/$defs/files/$defs/Filepath"
-              ],
-              "readOnly": [
-                "files",
-                "subfolders",
-                "parent"
-              ],
-              "properties": {
-                "recursive": {
-                  "type": "boolean"
-                },
-                "info_files": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/files/$defs/definition/$defs/FileInfo"
-                  }
-                },
-                "info_subfolders": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/$defs/files/$defs/definition/$defs/FolderInfo"
-                  }
-                },
-                "parent": {
-                  "$ref": "#/$defs/files/$defs/definition/$defs/FolderInfo"
-                }
+            "subfolders": {
+              "type": "array",
+              "items": {
+                "$ref": "https://numengo.org/ngoschema#/$defs/files/$defs/Folder"
+              }
+            },
+            "files_info": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/files/$defs/FileInfo"
+              }
+            },
+            "subfolders_info": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/files/$defs/FolderInfo"
               }
             },
             "medias": {
+              "type": "array"
+            },
+            "images": {
+              "type": "array"
+            },
+            "audios": {
+              "type": "array"
+            },
+            "videos": {
+              "type": "array"
+            },
+            "parent": {
+              "$ref": "#/$defs/files/$defs/FolderInfo"
+            }
+          }
+        },
+        "medias": {
+          "type": "object",
+          "$defs": {
+            "MediaBaseInfo": {
+              "type": "object",
+              "properties": {
+                "format": {
+                  "type": "string"
+                },
+                "codec": {
+                  "type": "string"
+                },
+                "long_codec": {
+                  "type": "string"
+                }
+              }
+            },
+            "MediaFile": {
+              "type": "object",
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/files/$defs/UriFile",
+                "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable",
+                "#/$defs/schema_org/$defs/SchemaOrg"
+              ],
+              "binary": true,
+              "notSerialized": [
+                "file_info",
+                "name"
+              ],
+              "notValidated": [
+                "file_info",
+                "name"
+              ],
+              "properties": {
+                "_type": {
+                  "type": "string"
+                },
+                "file_info": {
+                  "$ref": "#/$defs/files/$defs/FileInfo"
+                },
+                "name": {
+                  "type": "string",
+                  "default": "{% if filepath %}{{ filepath.name }}{% endif %}"
+                },
+                "schema_org": {
+                  "$ref": "https://schema.org/#/$defs/MediaObject"
+                }
+              }
+            },
+            "AudioTags": {
+              "type": "object",
+              "additionalProperties": true,
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "artist": {
+                  "type": "string"
+                },
+                "album": {
+                  "type": "string"
+                },
+                "year": {
+                  "type": "integer"
+                },
+                "comment": {
+                  "type": "array"
+                },
+                "tracknumber": {
+                  "type": "integer"
+                },
+                "genre": {
+                  "type": "string"
+                },
+                "bpm": {
+                  "type": "number"
+                },
+                "composer": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "uri"
+                }
+              }
+            },
+            "AudioStreamInfo": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/MediaBaseInfo"
+              ],
+              "properties": {
+                "duration": {
+                  "type": "number"
+                },
+                "bit_depth": {
+                  "type": "integer"
+                },
+                "bitrate": {
+                  "type": "integer"
+                },
+                "bitrate_mode": {
+                  "type": "string",
+                  "enum": [
+                    "CBR",
+                    "ABR",
+                    "VBR_METHOD_1",
+                    "VBR_METHOD_2",
+                    "VBR_METHOD_3",
+                    "VBR_METHOD_4",
+                    "CBR_2_PASS",
+                    "ABR_2_PASS"
+                  ]
+                },
+                "channels": {
+                  "type": "integer"
+                },
+                "channel_mode": {
+                  "type": "string",
+                  "enum": [
+                    "MONO",
+                    "STEREO",
+                    "DUAL_CHANNEL",
+                    "JOINT_STEREO",
+                    "FORCED",
+                    "AUTO",
+                    "INTENSITY",
+                    "UNDEFINED"
+                  ]
+                },
+                "layer": {
+                  "type": "integer"
+                },
+                "sample_rate": {
+                  "type": "integer"
+                },
+                "protected": {
+                  "type": "boolean"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            },
+            "AudioFile": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/MediaFile"
+              ],
+              "notSerialized": [
+                "stream_info",
+                "audiotags"
+              ],
+              "notValidated": [
+                "stream_info",
+                "audiotags"
+              ],
+              "_type": "audio",
+              "properties": {
+                "stream_info": {
+                  "$ref": "#/$defs/files/$defs/medias/$defs/AudioStreamInfo"
+                },
+                "audiotags": {
+                  "$ref": "#/$defs/files/$defs/medias/$defs/AudioTags"
+                },
+                "schema_org": {
+                  "$ref": "https://schema.org/#/$defs/AudioObject"
+                }
+              }
+            },
+            "ExifInfo": {
+              "type": "object",
+              "additonalProperties": true,
+              "properties": {
+                "alpha_channel": {
+                  "type": "string"
+                },
+                "image_width": {
+                  "type": "integer"
+                },
+                "photometric_interpretation": {
+                  "type": "string"
+                },
+                "is_animated": {
+                  "type": "string"
+                },
+                "model": {
+                  "type": "string"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "x_resolution": {
+                  "type": "string"
+                },
+                "y_resolution": {
+                  "type": "string"
+                },
+                "date_time": {
+                  "type": "date"
+                },
+                "software": {
+                  "type": "string"
+                },
+                "bits_per_sample": {
+                  "type": "string"
+                },
+                "n_frames": {
+                  "type": "string"
+                },
+                "color_space": {
+                  "type": "string"
+                },
+                "orientation": {
+                  "type": "integer"
+                },
+                "gps_info": {
+                  "type": "integer"
+                },
+                "channel": {
+                  "type": "string"
+                },
+                "make": {
+                  "type": "string"
+                },
+                "exif_offset": {
+                  "type": "integer"
+                },
+                "width": {
+                  "type": "integer"
+                },
+                "samples_per_pixel": {
+                  "type": "integer"
+                },
+                "image_length": {
+                  "type": "integer"
+                },
+                "y_cb_cr_positioning": {
+                  "type": "integer"
+                },
+                "resolution": {
+                  "type": "string"
+                },
+                "resolution_unit": {
+                  "type": "string"
+                }
+              }
+            },
+            "ImageBaseInfo": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/MediaBaseInfo"
+              ],
+              "properties": {
+                "width": {
+                  "type": "integer"
+                },
+                "height": {
+                  "type": "integer"
+                },
+                "layers": {
+                  "type": "integer"
+                },
+                "n_frames": {
+                  "type": "integer"
+                },
+                "bits": {
+                  "type": "integer"
+                },
+                "color_space": {
+                  "type": "string"
+                }
+              }
+            },
+            "ImageInfo": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/ImageBaseInfo"
+              ],
+              "additionalProperties": true,
+              "properties": {
+                "dpi": {
+                  "type": "array"
+                },
+                "is_animated": {
+                  "type": "boolean"
+                },
+                "color_space": {
+                  "type": "string"
+                },
+                "alpha_channel": {
+                  "type": "boolean"
+                },
+                "exif": {
+                  "$ref": "#/$defs/files/$defs/medias/$defs/ExifInfo"
+                }
+              }
+            },
+            "ImageFile": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/MediaFile"
+              ],
+              "notSerialized": [
+                "image_info"
+              ],
+              "notValidated": [
+                "image_info"
+              ],
+              "_type": "image",
+              "properties": {
+                "image_info": {
+                  "$ref": "#/$defs/files/$defs/medias/$defs/ImageInfo"
+                },
+                "schema_org": {
+                  "$ref": "https://schema.org/#/$defs/ImageObject"
+                }
+              }
+            },
+            "VideoInfo": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/ImageInfo"
+              ],
+              "additionalProperties": true,
+              "aliases": {
+                "video_format": "format"
+              },
+              "properties": {
+                "duration": {
+                  "type": "number"
+                },
+                "fps": {
+                  "type": "number"
+                },
+                "audio_channels": {
+                  "type": "integer"
+                }
+              }
+            },
+            "VideoFile": {
+              "type": "object",
+              "extends": [
+                "#/$defs/files/$defs/medias/$defs/MediaFile"
+              ],
+              "notSerialized": [
+                "video_info"
+              ],
+              "_type": "video",
+              "properties": {
+                "video_info": {
+                  "$ref": "#/$defs/files/$defs/medias/$defs/VideoInfo"
+                },
+                "schema_org": {
+                  "$ref": "https://schema.org/#/$defs/VideoObject"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "documents": {
+      "type": "object",
+      "$defs": {
+        "HasContent": {
+          "type": "object",
+          "aliases": {
+            "toc": "all_chapters"
+          },
+          "dependencies": {
+            "all_chapters": [
+              "content"
+            ],
+            "blockcodes": [
+              "content"
+            ],
+            "chapters": [
+              "content"
+            ],
+            "equations": [
+              "content"
+            ],
+            "figures": [
+              "content"
+            ],
+            "footnotes": [
+              "content"
+            ],
+            "images": [
+              "content"
+            ],
+            "links": [
+              "content"
+            ],
+            "raw_text": [
+              "content"
+            ],
+            "tables": [
+              "content"
+            ]
+          },
+          "required": [
+            "content"
+          ],
+          "properties": {
+            "content": {
+              "type": "array"
+            },
+            "autodiscover": {
+              "type": "boolean"
+            },
+            "chapters": {
+              "type": "array"
+            },
+            "all_chapters": {
+              "type": "array"
+            },
+            "tables": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/tables/$defs/Table"
+              }
+            },
+            "blockcodes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/BlockCode"
+              }
+            },
+            "images": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/Image"
+              }
+            },
+            "equations": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/Equation"
+              }
+            },
+            "figures": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/Figure"
+              }
+            },
+            "links": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/Link"
+              }
+            },
+            "footnotes": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/components/$defs/Footnote"
+              }
+            },
+            "raw_text": {
+              "type": "string"
+            }
+          }
+        },
+        "Chapter": {
+          "type": "object",
+          "extends": [
+            "#/$defs/documents/$defs/HasContent"
+          ],
+          "dependencies": {
+            "conclusion": [
+              "chapters"
+            ],
+            "introduction": [
+              "chapters"
+            ]
+          },
+          "properties": {
+            "title": {
+              "type": "string"
+            },
+            "heading": {
+              "$ref": "#/$defs/documents/$defs/components/$defs/Heading"
+            },
+            "content": {
+              "type": "array"
+            },
+            "introduction": {
+              "type": "string"
+            },
+            "conclusion": {
+              "type": "string"
+            }
+          }
+        },
+        "Document": {
+          "type": "object",
+          "extends": [
+            "#/$defs/documents/$defs/Chapter",
+            "https://numengo.org/ngoschema#/$defs/files/$defs/Document",
+            "#/$defs/schema_org/$defs/SchemaOrg"
+          ],
+          "dependencies": {
+            "toc": [
+              "content"
+            ]
+          },
+          "properties": {
+            "content": {
+              "type": "array"
+            },
+            "chapters": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/Chapter"
+              }
+            },
+            "all_chapters": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/documents/$defs/Chapter"
+              }
+            },
+            "schema_org": {
+              "$ref": "https://schema.org/#/$defs/DigitalDocument"
+            }
+          }
+        },
+        "components": {
+          "type": "object",
+          "$defs": {
+            "BlockToken": {
+              "type": "object",
+              "abstract": true,
+              "properties": {
+                "content": {
+                  "type": "array"
+                }
+              }
+            },
+            "SpanToken": {
+              "type": "object",
+              "abstract": true,
+              "properties": {
+                "content": true
+              }
+            },
+            "Heading": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ],
+              "properties": {
+                "level": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "Paragraph": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ]
+            },
+            "Quote": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ]
+            },
+            "BlockCode": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ],
+              "properties": {
+                "language": {
+                  "type": "string"
+                }
+              }
+            },
+            "Footnote": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ]
+            },
+            "ThematicBreak": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/BlockToken"
+              ]
+            },
+            "Figure": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken",
+                "https://numengo.org/ngoschema#/$defs/metadata/$defs/Annotation"
+              ]
+            },
+            "Image": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/Figure",
+                "#/$defs/files/$defs/medias/$defs/ImageFile"
+              ],
+              "properties": {
+                "src": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "Equation": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken",
+                "https://numengo.org/ngoschema#/$defs/metadata/$defs/Annotation"
+              ],
+              "properties": {
+                "language": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            },
+            "Strong": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "Emphasis": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "InlineCode": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "RawText": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "Link": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ],
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "target": {
+                  "type": "uri"
+                }
+              }
+            },
+            "AutoLink": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/Link"
+              ],
+              "properties": {
+                "mailto": {
+                  "type": "string"
+                }
+              }
+            },
+            "LineBreak": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "Strikethrough": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/components/$defs/SpanToken"
+              ]
+            },
+            "tables": {
               "type": "object",
               "$defs": {
-                "MediaBaseInfo": {
+                "Cell": {
                   "type": "object",
                   "properties": {
-                    "format": {
-                      "type": "string"
-                    },
-                    "codec": {
-                      "type": "string"
-                    },
-                    "long_codec": {
-                      "type": "string"
-                    }
+                    "content": true
                   }
                 },
-                "MediaFile": {
+                "Row": {
                   "type": "object",
                   "extends": [
-                    "https://numengo.org/ngoschema#/$defs/files/$defs/UriFile",
-                    "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable"
+                    "#/$defs/documents/$defs/components/$defs/BlockToken"
                   ],
-                  "binary": true,
-                  "properties": {
-                    "_type": {
-                      "type": "string"
-                    },
-                    "file_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/FileInfo"
-                    },
-                    "schema_org": {
-                      "$ref": "https://schema.org/#/$defs/MediaObject"
-                    }
-                  }
-                },
-                "AudioTags": {
-                  "type": "object",
-                  "additionalProperties": true,
-                  "properties": {
-                    "title": {
-                      "type": "array"
-                    },
-                    "artist": {
-                      "type": "array"
-                    },
-                    "album": {
-                      "type": "array"
-                    },
-                    "year": {
-                      "type": "array"
-                    },
-                    "comment": {
-                      "type": "array"
-                    },
-                    "tracknumber": {
-                      "type": "array"
-                    },
-                    "genre": {
-                      "type": "array"
-                    },
-                    "bpm": {
-                      "type": "array"
-                    },
-                    "composer": {
-                      "type": "array"
-                    },
-                    "url": {
-                      "type": "array"
-                    }
-                  }
-                },
-                "AudioStreamInfo": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaBaseInfo"
-                  ],
-                  "properties": {
-                    "duration": {
-                      "type": "number"
-                    },
-                    "bit_depth": {
-                      "type": "integer"
-                    },
-                    "bitrate": {
-                      "type": "integer"
-                    },
-                    "bitrate_mode": {
-                      "type": "string",
-                      "enum": [
-                        "CBR",
-                        "ABR",
-                        "VBR_METHOD_1",
-                        "VBR_METHOD_2",
-                        "VBR_METHOD_3",
-                        "VBR_METHOD_4",
-                        "CBR_2_PASS",
-                        "ABR_2_PASS"
-                      ]
-                    },
-                    "channels": {
-                      "type": "integer"
-                    },
-                    "channel_mode": {
-                      "type": "string",
-                      "enum": [
-                        "MONO",
-                        "STEREO",
-                        "DUAL_CHANNEL",
-                        "JOINT_STEREO",
-                        "FORCED",
-                        "AUTO",
-                        "INTENSITY",
-                        "UNDEFINED"
-                      ]
-                    },
-                    "layer": {
-                      "type": "integer"
-                    },
-                    "sample_rate": {
-                      "type": "integer"
-                    },
-                    "protected": {
-                      "type": "boolean"
-                    },
-                    "version": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "AudioFile": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
-                  ],
-                  "_type": "audio",
-                  "properties": {
-                    "stream_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/AudioStreamInfo"
-                    },
-                    "tags": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/AudioTags"
-                    },
-                    "schema_org": {
-                      "$ref": "https://schema.org/#/$defs/AudioObject"
-                    }
-                  }
-                },
-                "ExifInfo": {
-                  "type": "object",
-                  "additonalProperties": true,
-                  "properties": {
-                    "alpha_channel": {
-                      "type": "string"
-                    },
-                    "image_width": {
-                      "type": "integer"
-                    },
-                    "photometric_interpretation": {
-                      "type": "string"
-                    },
-                    "is_animated": {
-                      "type": "string"
-                    },
-                    "model": {
-                      "type": "string"
-                    },
-                    "height": {
-                      "type": "integer"
-                    },
-                    "x_resolution": {
-                      "type": "string"
-                    },
-                    "y_resolution": {
-                      "type": "string"
-                    },
-                    "date_time": {
-                      "type": "date"
-                    },
-                    "software": {
-                      "type": "string"
-                    },
-                    "bits_per_sample": {
-                      "type": "string"
-                    },
-                    "n_frames": {
-                      "type": "string"
-                    },
-                    "color_space": {
-                      "type": "string"
-                    },
-                    "orientation": {
-                      "type": "integer"
-                    },
-                    "gps_info": {
-                      "type": "integer"
-                    },
-                    "channel": {
-                      "type": "string"
-                    },
-                    "make": {
-                      "type": "string"
-                    },
-                    "exif_offset": {
-                      "type": "integer"
-                    },
-                    "width": {
-                      "type": "integer"
-                    },
-                    "samples_per_pixel": {
-                      "type": "integer"
-                    },
-                    "image_length": {
-                      "type": "integer"
-                    },
-                    "y_cb_cr_positioning": {
-                      "type": "integer"
-                    },
-                    "resolution": {
-                      "type": "string"
-                    },
-                    "resolution_unit": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "ImageBaseInfo": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaBaseInfo"
-                  ],
-                  "properties": {
-                    "width": {
-                      "type": "integer"
-                    },
-                    "height": {
-                      "type": "integer"
-                    },
-                    "layers": {
-                      "type": "integer"
-                    },
-                    "n_frames": {
-                      "type": "integer"
-                    },
-                    "bits": {
-                      "type": "integer"
-                    },
-                    "color_space": {
-                      "type": "string"
-                    }
-                  }
-                },
-                "ImageInfo": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageBaseInfo"
-                  ],
-                  "additionalProperties": true,
-                  "properties": {
-                    "dpi": {
-                      "type": "array"
-                    },
-                    "is_animated": {
-                      "type": "boolean"
-                    },
-                    "color_space": {
-                      "type": "string"
-                    },
-                    "alpha_channel": {
-                      "type": "boolean"
-                    },
-                    "exif": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/ExifInfo"
-                    }
-                  }
-                },
-                "ImageFile": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
-                  ],
-                  "_type": "image",
-                  "properties": {
-                    "image_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageInfo"
-                    },
-                    "schema_org": {
-                      "$ref": "https://schema.org/#/$defs/ImageObject"
-                    }
-                  }
-                },
-                "VideoInfo": {
-                  "type": "object",
-                  "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/ImageInfo"
-                  ],
-                  "additionalProperties": true,
                   "aliases": {
-                    "video_format": "format"
+                    "cells": "content"
                   },
                   "properties": {
-                    "duration": {
-                      "type": "number"
-                    },
-                    "fps": {
-                      "type": "number"
-                    },
-                    "audio_channels": {
-                      "type": "integer"
+                    "content": true,
+                    "cells": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/documents/$defs/components/$defs/tables/$defs/Cell"
+                      }
                     }
                   }
                 },
-                "VideoFile": {
+                "Table": {
                   "type": "object",
                   "extends": [
-                    "#/$defs/files/$defs/definition/$defs/medias/$defs/MediaFile"
+                    "#/$defs/documents/$defs/components/$defs/BlockToken"
                   ],
-                  "_type": "video",
+                  "aliases": {
+                    "rows": "content"
+                  },
                   "properties": {
-                    "video_info": {
-                      "$ref": "#/$defs/files/$defs/definition/$defs/medias/$defs/VideoInfo"
+                    "header": {
+                      "$ref": "#/$defs/documents/$defs/components/$defs/tables/$defs/Row"
                     },
-                    "schema_org": {
-                      "$ref": "https://schema.org/#/$defs/VideoObject"
+                    "content": true,
+                    "rows": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/documents/$defs/components/$defs/tables/$defs/Row"
+                      }
                     }
                   }
                 }
+              }
+            },
+            "lists": {
+              "type": "object",
+              "$defs": {
+                "ListItem": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/documents/$defs/components/$defs/BlockToken"
+                  ]
+                },
+                "List": {
+                  "type": "object",
+                  "aliases": {
+                    "list_items": "content"
+                  },
+                  "properties": {
+                    "list_items": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/documents/$defs/components/$defs/lists/$defs/ListItem"
+                      }
+                    },
+                    "content": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "html": {
+          "type": "object",
+          "$defs": {
+            "HasContentHtml": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/HasContent"
+              ],
+              "properties": {
+                "content": true,
+                "raw_text": {
+                  "type": "string"
+                }
+              }
+            },
+            "ChapterHtml": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/html/$defs/HasContentHtml",
+                "#/$defs/documents/$defs/Chapter"
+              ],
+              "dependencies": {
+                "content": [
+                  "start",
+                  "end"
+                ]
+              },
+              "notSerialized": [
+                "start",
+                "end"
+              ],
+              "properties": {
+                "content": {
+                  "type": "array"
+                },
+                "start": true,
+                "end": true
+              }
+            },
+            "DocumentHtml": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/html/$defs/HasContentHtml",
+                "#/$defs/documents/$defs/Document"
+              ],
+              "properties": {
+                "content": true,
+                "chapters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/documents/$defs/html/$defs/ChapterHtml"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "markdown": {
+          "type": "object",
+          "$defs": {
+            "DocumentMarkdown": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/html/$defs/DocumentHtml"
+              ],
+              "properties": {
+                "content": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "rest": {
+          "type": "object",
+          "$defs": {
+            "DocumentRest": {
+              "type": "object",
+              "extends": [
+                "#/$defs/documents/$defs/Document"
+              ],
+              "properties": {
+                "content": true
               }
             }
           }
@@ -2385,7 +2306,18 @@
           ],
           "additionalProperties": true,
           "aliases": {
-            "geo": "address.geo"
+            "addressCountry": "adr.country-name",
+            "addressLocality": "adr.locality",
+            "addressRegion": "adr.region",
+            "admin": "adr.admin",
+            "city": "adr.city",
+            "country": "adr.country",
+            "country_emoji": "adr.country_emoji",
+            "geo": "adr.geo",
+            "locality": "adr.locality",
+            "postal": "adr.postal",
+            "postalCode": "adr.postal-code",
+            "streetAddress": "adr.street-address"
           },
           "primaryKeys": [
             "id"
@@ -2477,6 +2409,9 @@
             },
             "birthPlace": {
               "$ref": "#/$defs/places/$defs/Place"
+            },
+            "birthTime": {
+              "type": "time"
             },
             "schema_org": {
               "$ref": "https://schema.org/#/$defs/Person"
@@ -2681,9 +2616,17 @@
             "languages": {
               "type": "array",
               "description": "App supported language lists",
+              "asString": true,
               "items": {
                 "type": "string"
-              }
+              },
+              "supersedes": "language",
+              "default": [
+                "en"
+              ]
+            },
+            "merchant": {
+              "$ref": "#/$defs/personas/$defs/Merchant"
             },
             "telebot": {
               "$ref": "https://numengo.org/telebot#/$defs/Telebot"

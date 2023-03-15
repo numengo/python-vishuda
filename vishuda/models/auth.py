@@ -2,11 +2,16 @@
 from __future__ import absolute_import
 from __future__ import unicode_literals
 
+import pathlib
+import os
+
 from ngoschema.models import instances
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
 from .things import Person, Organization
 from .things.intangibles.structured_values.contact_points import PostalAddress
 from .things.intangibles.services.financial_products import BankAccount
+
+from .personas import Person
 
 
 class ContentType(with_metaclass(SchemaMetaclass)):
@@ -26,6 +31,10 @@ class User(with_metaclass(SchemaMetaclass)):
 
     def __init__(self, *args, **kwargs):
         instances.Entity.__init__(self, *args, **kwargs)
+
+    @staticmethod
+    def get_environ_username():
+        return os.environ.get('USERNAME')
 
 #    def set_schema_org(self, person):
 #        email

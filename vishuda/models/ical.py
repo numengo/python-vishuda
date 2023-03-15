@@ -12,6 +12,9 @@ from ngoschema.repositories import MemoryRepository
 
 import icalendar
 
+from .things import Event
+from .schema_org import SchemaOrg
+
 
 class Event(with_metaclass(SchemaMetaclass)):
     _id = 'https://numengo.org/vishuda#/$defs/ical/$defs/Event'

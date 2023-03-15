@@ -14500,7 +14500,11 @@
       "description": "The unique identifier for the ticket."
     },
     "actors": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "actor",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Actors",
       "description": "An actor, e.g. in TV, radio, movie, video games etc. Actors can be associated with individual items or with a series, episode, clip."
     },
@@ -15421,7 +15425,11 @@
       "description": "A sub property of object. The object that is being replaced."
     },
     "tracks": {
-      "$ref": "#/$defs/MusicRecording",
+      "type": "array",
+      "supersedes": "track",
+      "items": {
+        "$ref": "#/$defs/MusicRecording"
+      },
       "title": "Tracks",
       "description": "A music recording (track)&#x2014;usually a single song."
     },
@@ -15798,10 +15806,18 @@
           "type": "string"
         },
         {
-          "$ref": "#/$defs/ItemList"
+          "type": "array",
+          "supersedes": "step",
+          "items": {
+            "$ref": "#/$defs/ItemList"
+          }
         },
         {
-          "$ref": "#/$defs/CreativeWork"
+          "type": "array",
+          "supersedes": "step",
+          "items": {
+            "$ref": "#/$defs/CreativeWork"
+          }
         }
       ],
       "title": "Steps",
@@ -16020,7 +16036,11 @@
       "description": "The text of the UserComment."
     },
     "founders": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "founder",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Founders",
       "description": "A person who founded this organization."
     },
@@ -16875,10 +16895,18 @@
     "photos": {
       "anyOf": [
         {
-          "$ref": "#/$defs/ImageObject"
+          "type": "array",
+          "supersedes": "photo",
+          "items": {
+            "$ref": "#/$defs/ImageObject"
+          }
         },
         {
-          "$ref": "#/$defs/Photograph"
+          "type": "array",
+          "supersedes": "photo",
+          "items": {
+            "$ref": "#/$defs/Photograph"
+          }
         }
       ],
       "title": "Photos",
@@ -17238,7 +17266,11 @@
       "description": "A minimum amount that has to be paid in every month."
     },
     "reviews": {
-      "$ref": "#/$defs/Review",
+      "type": "array",
+      "supersedes": "review",
+      "items": {
+        "$ref": "#/$defs/Review"
+      },
       "title": "Reviews",
       "description": "Review of the item."
     },
@@ -18165,7 +18197,11 @@
       "description": "A contact location for a person's place of work."
     },
     "albums": {
-      "$ref": "#/$defs/MusicAlbum",
+      "type": "array",
+      "supersedes": "album",
+      "items": {
+        "$ref": "#/$defs/MusicAlbum"
+      },
       "title": "Albums",
       "description": "A collection of music albums."
     },
@@ -18216,7 +18252,11 @@
       "description": "Human-readable terms of service documentation."
     },
     "contactPoints": {
-      "$ref": "#/$defs/ContactPoint",
+      "type": "array",
+      "supersedes": "contactPoint",
+      "items": {
+        "$ref": "#/$defs/ContactPoint"
+      },
       "title": "Contact Points",
       "description": "A contact point for a person or organization."
     },
@@ -18598,10 +18638,18 @@
     "attendees": {
       "anyOf": [
         {
-          "$ref": "#/$defs/Organization"
+          "type": "array",
+          "supersedes": "attendee",
+          "items": {
+            "$ref": "#/$defs/Organization"
+          }
         },
         {
-          "$ref": "#/$defs/Person"
+          "type": "array",
+          "supersedes": "attendee",
+          "items": {
+            "$ref": "#/$defs/Person"
+          }
         }
       ],
       "title": "Attendees",
@@ -19197,7 +19245,11 @@
       "description": "This ordering relation for qualitative values indicates that the subject is greater than or equal to the object."
     },
     "events": {
-      "$ref": "#/$defs/Event",
+      "type": "array",
+      "supersedes": "event",
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
       "title": "Events",
       "description": "Upcoming or past events associated with this place or organization."
     },
@@ -19323,7 +19375,11 @@
       "description": "A pointer to products or services sought by the organization or person (demand)."
     },
     "employees": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "employee",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Employees",
       "description": "People working for this organization."
     },
@@ -19491,7 +19547,11 @@
       "description": "Identifies the issue of publication; for example, \"iii\" or \"2\"."
     },
     "encodings": {
-      "$ref": "#/$defs/MediaObject",
+      "type": "array",
+      "supersedes": "encoding",
+      "items": {
+        "$ref": "#/$defs/MediaObject"
+      },
       "title": "Encodings",
       "description": "A media object that encodes this CreativeWork."
     },
@@ -19965,7 +20025,11 @@
       "description": "Indicates whether this content is family friendly."
     },
     "blogPosts": {
-      "$ref": "#/$defs/BlogPosting",
+      "type": "array",
+      "supersedes": "blogPost",
+      "items": {
+        "$ref": "#/$defs/BlogPosting"
+      },
       "title": "Blog Posts",
       "description": "Indicates a post that is part of a [[Blog]]. Note that historically, what we term a \"Blog\" was once known as a \"weblog\", and that what we term a \"BlogPosting\" is now often colloquially referred to as a \"blog\"."
     },
@@ -20796,7 +20860,11 @@
       "description": "Additional details to capture the origin of the cost data. For example, 'Medicare Part B'."
     },
     "episodes": {
-      "$ref": "#/$defs/Episode",
+      "type": "array",
+      "supersedes": "episode",
+      "items": {
+        "$ref": "#/$defs/Episode"
+      },
       "title": "Episodes",
       "description": "An episode of a TV/radio series or season."
     },
@@ -21477,7 +21545,11 @@
       "description": "What type of code sample: full (compile ready) solution, code snippet, inline code, scripts, template."
     },
     "seasons": {
-      "$ref": "#/$defs/CreativeWorkSeason",
+      "type": "array",
+      "supersedes": "season",
+      "items": {
+        "$ref": "#/$defs/CreativeWorkSeason"
+      },
       "title": "Seasons",
       "description": "A season in a media series."
     },
@@ -21653,7 +21725,11 @@
       "description": "The chemical composition describes the identity and relative ratio of the chemical elements that make up the substance."
     },
     "parents": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "parent",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Parents",
       "description": "A parents of the person."
     },
@@ -21688,7 +21764,11 @@
       "description": "The total delay between the receipt of the order and the goods reaching the final customer."
     },
     "siblings": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "sibling",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Siblings",
       "description": "A sibling of the person."
     },
@@ -21999,7 +22079,11 @@
       "description": "Description of the meals that will be provided or available for purchase."
     },
     "subEvents": {
-      "$ref": "#/$defs/Event",
+      "type": "array",
+      "supersedes": "subEvent",
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
       "title": "Sub Events",
       "description": "Events that are a part of this event. For example, a conference event includes many presentations, each subEvents of the conference."
     },
@@ -22602,10 +22686,18 @@
     "performers": {
       "anyOf": [
         {
-          "$ref": "#/$defs/Person"
+          "type": "array",
+          "supersedes": "performer",
+          "items": {
+            "$ref": "#/$defs/Person"
+          }
         },
         {
-          "$ref": "#/$defs/Organization"
+          "type": "array",
+          "supersedes": "performer",
+          "items": {
+            "$ref": "#/$defs/Organization"
+          }
         }
       ],
       "title": "Performers",
@@ -23021,10 +23113,18 @@
     "members": {
       "anyOf": [
         {
-          "$ref": "#/$defs/Organization"
+          "type": "array",
+          "supersedes": "member",
+          "items": {
+            "$ref": "#/$defs/Organization"
+          }
         },
         {
-          "$ref": "#/$defs/Person"
+          "type": "array",
+          "supersedes": "member",
+          "items": {
+            "$ref": "#/$defs/Person"
+          }
         }
       ],
       "title": "Members",
@@ -24394,7 +24494,11 @@
       "description": "The number of episodes in this season or series."
     },
     "directors": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "director",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Directors",
       "description": "A director of e.g. TV, radio, movie, video games etc. content. Directors can be associated with individual items or with a series, episode, clip."
     },
@@ -24827,7 +24931,11 @@
       "description": "An organization that the person is an alumni of."
     },
     "colleagues": {
-      "$ref": "#/$defs/Person",
+      "type": "array",
+      "supersedes": "colleague",
+      "items": {
+        "$ref": "#/$defs/Person"
+      },
       "title": "Colleagues",
       "description": "A colleague of the person."
     },

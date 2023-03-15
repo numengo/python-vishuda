@@ -17,6 +17,7 @@ __all__ = [
     'GeoCoordinates',
     'Address',
     'Place',
+    'place_repo',
     # auth
     'User',
     'Card',
@@ -24,6 +25,8 @@ __all__ = [
     'Person',
     'Organization',
     'Merchant',
+    'person_repo',
+    'organization_repo',
     # ical
     'Event',
     'Calendar',

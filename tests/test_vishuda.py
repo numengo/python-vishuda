@@ -5,6 +5,9 @@
 
 
 # PROTECTED REGION ID(vishuda.tests.test_vishuda) ENABLED START
+from time import time
+import multiprocessing as mp
+
 
 def test_vishuda_schema_org():
     from vishuda.models import Thing
@@ -228,7 +231,7 @@ def test_vishuda_places():
 
 
 def test_places():
-    from vishuda.models.places import GeoCoordinates, Address
+    from vishuda.models.places import GeoCoordinates, Address, Place, place_repo
     a = Address(streetAddress='27 rue JB Magnet', postalCode='42153', addressLocality='Riorges', addressCountry='France')
     geo1 = GeoCoordinates(longitude=4.04255, latitude=46.04378)
     geo2 = GeoCoordinates(postalCode='42153', addressCountry='FR')
@@ -243,12 +246,59 @@ def test_places():
     a_so = a.as_schema_org
     g_so = geo1.as_schema_org
     assert t1 is t2
+    place = Place(address=a)
+    place_repo.commit(place)
+
+
+def test_personas():
+    import time
+    from vishuda.models.personas import Person, person_repo, Organization, organization_repo
+    me = Person(familyName='ROMAN', firstName='Cédric',
+                birthDate='25/07/1978', birthTime='05:30',
+                birthPlace={'addressCountry': 'France',
+                            'locality': 'Lyon'}
+                )
+    print(me.birthAstroChart.sun.sign)
+    print(me.birthAstroChinese.do_serialize())
+    #assert sun_sign == 'Leo'
+
+
+def test_files():
+    from vishuda.models.files import FileInfo, FolderInfo, Folder
+    fp = '/Users/cedric/Devel/python/python-vishuda/vishuda/models/things'
+    fi = FolderInfo(filepath=fp)
+    assert len(fi.subfolders)
+    fi_s0 = fi.subfolders_info[0]
+
+    music_folder = FolderInfo(filepath='/Users/cedric/Music/medecine songs')
+    audios = music_folder.audios
+    assert audios
+
+def test_documents():
+    from vishuda.models.documents import Document
+    from vishuda.models.documents.html import DocumentHtml
+    from vishuda.models.documents.markdown import DocumentMarkdown
+    from vishuda.models.documents.rest import DocumentRest
+    test_rest = DocumentRest(filepath='/Users/cedric/Devel/python/python-vishuda/README.rst')
+    assert test_rest.content
+    print(test_rest.raw_text)
+    test_wikipedia = DocumentHtml(uri='https://en.wikipedia.org/wiki/Kali_Yuga')
+    assert test_wikipedia.chapters
+    #print(test_wikipedia.raw_text)
+
+    test_markdown = DocumentMarkdown(uri='https://raw.githubusercontent.com/miyuchina/mistletoe/master/README.md')
+    print(test_markdown.raw_text)
+    assert test_markdown.chapters
+
 
 if __name__ == '__main__':
     # to run test file standalone
-    test_vishuda_places()
-    test_places()
-    test_translations()
+    test_documents()
+    test_files()
+    #test_personas()
+    #test_vishuda_places()
+    #test_places()
+    #test_translations()
     #test_vishuda_schema_org()
 
 # PROTECTED REGION END
