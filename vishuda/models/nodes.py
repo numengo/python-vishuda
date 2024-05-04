@@ -22,21 +22,21 @@ from .personas import User
 #    model = models.ForeignKey(Model, on_delete=models.CASCADE)
 #
 #
-#class DjangoFixtureNode(DjangoModelNodeAbstractBase):
+#class FixtureDjangoNode(DjangoModelNodeAbstractBase):
 #    _object_node = FixtureNode
 #    _django_model = Fixture
 #    _model_key = 'fixture'
 #    fixture = models.ForeignKey(Fixture, on_delete=models.CASCADE)
 #
 #
-#class DjangoViewNode(DjangoModelNodeAbstractBase):
+#class ViewDjangoNode(DjangoModelNodeAbstractBase):
 #    _object_node = ViewNode
 #    _django_model = View
 #    _model_key = 'view'
 #    view = models.ForeignKey(View, on_delete=models.CASCADE)
 #
 #
-#class DjangoAppNode(DjangoModelNodeAbstractBase):
+#class AppDjangoNode(DjangoModelNodeAbstractBase):
 #    _object_node = AppNode
 #    _django_model = App
 #    _model_key = 'app'

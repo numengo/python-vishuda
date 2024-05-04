@@ -4,12 +4,30 @@
   "$comment": "automatically generated for telebot",
   "description": "This objects represents a Telegram bot. It allows you to add handlers for different kind of updates.",
   "$defs": {
+    "EntryPoint": {
+      "type": "object",
+      "extends": [
+        "https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint",
+        "#/$defs/actions/$defs/Action"
+      ],
+      "properties": {
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actions/$defs/Action"
+          }
+        }
+      }
+    },
     "Telebot": {
       "type": "object",
       "extends": [
-        "#/$defs/plugins/$defs/Plugin"
+        "https://numengo.org/vishuda#/$defs/app/$defs/App"
       ],
       "additionalProperties": true,
+      "aliases": {
+        "plugins": "entry_points"
+      },
       "notSerialized": [
         "token"
       ],
@@ -33,40 +51,23 @@
           "type": "integer",
           "default": 2
         },
+        "labels": {
+          "type": "array",
+          "description": "labels to make reference to for callback data (automatically numbered)"
+        },
         "entry_points": {
           "type": "array",
           "items": {
-            "type": "importable"
+            "$ref": "#/$defs/EntryPoint"
           }
         },
-        "plugins": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/plugins/$defs/Plugin"
-          }
-        },
-        "message_handlers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/handlers/$defs/MessageHandler"
-          }
-        },
-        "edited_message_handlers": {
-          "type": "array"
-        },
-        "channel_post_handlers": {
-          "type": "array"
-        },
-        "edited_channel_post_handlers": {
-          "type": "array"
-        },
-        "inline_handlers": {
+        "handlers": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/handlers/$defs/Handler"
           }
         },
-        "chosen_inline_handlers": {
+        "inline_handlers": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/handlers/$defs/Handler"
@@ -78,219 +79,17 @@
             "$ref": "#/$defs/handlers/$defs/CallbackQueryHandler"
           }
         },
-        "shipping_query_handlers": {
-          "type": "array"
-        },
-        "pre_checkout_query_handlers": {
-          "type": "array"
-        },
-        "poll_handlers": {
-          "type": "array"
-        },
-        "poll_answer_handlers": {
-          "type": "array"
-        },
-        "my_chat_member_handlers": {
-          "type": "array"
-        },
-        "chat_member_handlers": {
-          "type": "array"
-        },
-        "customs_filters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/filters/$defs/CustomFilter"
-          }
-        },
-        "state_handlers": {
-          "type": "array"
-        },
         "middleware_handlers": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/handlers/$defs/MiddlewareHandler"
           }
-        }
-      },
-      "methods": {
-        "send_message": {
-          "arguments": {
-            "token": {
-              "type": "string"
-            },
-            "chat_id": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            },
-            "disable_web_page_preview": {
-              "type": "boolean"
-            },
-            "reply_to_message_id": {
-              "type": "string"
-            },
-            "reply_markup": {
-              "type": "string"
-            },
-            "parse_mode": {
-              "type": "string"
-            },
-            "disable_notification": {
-              "type": "boolean"
-            },
-            "timeout": {
-              "type": "integer"
-            },
-            "entities": {
-              "type": "array"
-            },
-            "allow_sending_without_reply": {
-              "type": "boolean"
-            }
-          },
-          "required": [
-            "token",
-            "chat_id",
-            "text"
-          ]
         },
-        "forward_message": {
-          "arguments": {
-            "token": {
-              "type": "string"
-            },
-            "chat_id": {
-              "type": "string"
-            },
-            "from_chat_id": {
-              "type": "string"
-            },
-            "message_id": {
-              "type": "string"
-            },
-            "disable_notification": {
-              "type": "boolean"
-            },
-            "timeout": {
-              "type": "integer"
-            }
-          },
-          "required": [
-            "token",
-            "chat_id",
-            "from_chat_id"
-          ]
-        },
-        "copy_message": {
-          "arguments": {
-            "token": {
-              "type": "string"
-            },
-            "chat_id": {
-              "type": "string"
-            },
-            "from_chat_id": {
-              "type": "string"
-            },
-            "message_id": {
-              "type": "string"
-            },
-            "caption": {
-              "type": "string"
-            },
-            "parse_mode": {
-              "type": "string"
-            },
-            "caption_entities": {
-              "type": "array"
-            },
-            "disable_notification": {
-              "type": "boolean"
-            },
-            "reply_to_message_id": {
-              "type": "string"
-            },
-            "allow_sending_without_reply": {
-              "type": "boolean"
-            },
-            "reply_markup": {
-              "type": "string"
-            },
-            "timeout": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "token",
-            "chat_id",
-            "from_chat_id"
-          ]
-        },
-        "edit_message_text": {
-          "arguments": {
-            "text": {
-              "type": "string"
-            },
-            "chat_id": {
-              "type": "string"
-            },
-            "message_id": {
-              "type": "string"
-            },
-            "inline_message_id": {
-              "type": "string"
-            },
-            "parse_mode": {
-              "type": "string"
-            },
-            "entities": {
-              "type": "array"
-            },
-            "disable_web_page_preview": {
-              "type": "boolean"
-            },
-            "reply_markup": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "text"
-          ]
-        },
-        "edit_message_reply_markup": {
-          "arguments": {
-            "chat_id": {
-              "type": "string"
-            },
-            "message_id": {
-              "type": "string"
-            },
-            "inline_message_id": {
-              "type": "string"
-            },
-            "reply_markup": {
-              "type": "string"
-            }
-          },
-          "required": [
-            null
-          ]
-        },
-        "reply_to": {
-          "arguments": {
-            "message": {
-              "type": "string"
-            },
-            "text": {
-              "type": "string"
-            }
-          },
-          "kwargs": true,
-          "required": [
-            "message",
-            "text"
-          ]
+        "conversation_handlers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/handlers/$defs/ConversationHandler"
+          }
         }
       }
     },
@@ -378,6 +177,9 @@
             "_type": {
               "type": "string"
             },
+            "text": {
+              "type": "string"
+            },
             "triggers": {
               "type": "array"
             },
@@ -394,10 +196,10 @@
               "type": "string"
             },
             "emojis": {
-              "type": "string"
+              "type": "array"
             },
             "emojis_after": {
-              "type": "string"
+              "type": "array"
             }
           }
         },
@@ -426,25 +228,6 @@
             "#/$defs/actions/$defs/Action"
           ],
           "_type": "message"
-        }
-      }
-    },
-    "plugins": {
-      "type": "object",
-      "$defs": {
-        "Plugin": {
-          "type": "object",
-          "extends": [
-            "#/$defs/actions/$defs/Action"
-          ],
-          "properties": {
-            "actions": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/actions/$defs/Action"
-              }
-            }
-          }
         }
       }
     },
@@ -569,6 +352,25 @@
         }
       }
     },
+    "context": {
+      "type": "object",
+      "$defs": {
+        "ContextTypes": {
+          "type": "object",
+          "properties": {
+            "bot_data": {
+              "type": "object"
+            },
+            "chat_data": {
+              "type": "object"
+            },
+            "user_data": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    },
     "handlers": {
       "type": "object",
       "$defs": {
@@ -627,7 +429,10 @@
           ],
           "properties": {
             "entry_points": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/handlers/$defs/Handler"
+              }
             },
             "callback": {
               "type": "string"
@@ -639,7 +444,10 @@
               }
             },
             "fallbacks": {
-              "type": "array"
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/handlers/$defs/Handler"
+              }
             },
             "allow_reentry": {
               "type": "boolean"

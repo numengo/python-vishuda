@@ -81,6 +81,9 @@ install_requires = [
     'imageio',
 
     'pyowm',
+
+    'icalendar',
+    'telebot',
 ]
 
 post_install_requires = [i for i in install_requires if ('-' in i or ':' in i or '.' in i)]

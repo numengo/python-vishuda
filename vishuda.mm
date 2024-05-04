@@ -1,15 +1,16 @@
-<map version="freeplane 1.7.0">
-<!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
+<map version="freeplane 1.11.5">
+<!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
 <node TEXT="vishuda" FOLDED="false" ID="ID_244004206" CREATED="1601987431072" MODIFIED="1601987442507" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
-    <properties fit_to_viewport="false" show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" fit_to_viewport="false"/>
 
 <map_styles>
-<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
+<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
 <font SIZE="24"/>
-<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="right" STYLE="bubble">
-<stylenode LOCALIZED_TEXT="default" ICON_SIZE="12.0 pt" COLOR="#000000" STYLE="fork">
+<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="default" ID="ID_966588170" ICON_SIZE="12 pt" COLOR="#000000" STYLE="fork">
+<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_966588170" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" SIZE="10" BOLD="false" ITALIC="false"/>
 </stylenode>
 <stylenode LOCALIZED_TEXT="defaultstyle.details"/>
@@ -21,8 +22,9 @@
 <edge STYLE="hide_edge"/>
 <cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
 </stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.selection" BACKGROUND_COLOR="#4e85f8" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#4e85f8"/>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="bottom_or_right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="styles.topic" COLOR="#18898b" STYLE="fork">
 <font NAME="Liberation Sans" SIZE="10" BOLD="true"/>
 </stylenode>
@@ -36,8 +38,8 @@
 <icon BUILTIN="yes"/>
 </stylenode>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="right" STYLE="bubble">
-<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000" STYLE="oval" SHAPE_HORIZONTAL_MARGIN="10.0 pt" SHAPE_VERTICAL_MARGIN="10.0 pt">
+<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000" STYLE="oval" SHAPE_HORIZONTAL_MARGIN="10 pt" SHAPE_VERTICAL_MARGIN="10 pt">
 <font SIZE="18"/>
 </stylenode>
 <stylenode LOCALIZED_TEXT="AutomaticLayout.level,1" COLOR="#0033ff">
@@ -64,7 +66,7 @@
 </map_styles>
 </hook>
 <hook NAME="AutomaticEdgeColor" COUNTER="26" RULE="ON_BRANCH_CREATION"/>
-<node TEXT="imports" POSITION="right" ID="ID_846630262" CREATED="1623151301110" MODIFIED="1623397709362">
+<node TEXT="imports" POSITION="bottom_or_right" ID="ID_846630262" CREATED="1623151301110" MODIFIED="1623397709362">
 <icon BUILTIN="button_cancel"/>
 <edge COLOR="#0000ff"/>
 <node TEXT="ngochema" ID="ID_467937126" CREATED="1649172138922" MODIFIED="1649172145545"/>
@@ -78,7 +80,7 @@
 <node TEXT="telegram" ID="ID_1081543716" CREATED="1651225728792" MODIFIED="1651225740530"/>
 <node TEXT="telebot" ID="ID_1946501609" CREATED="1654896114744" MODIFIED="1654896116626"/>
 </node>
-<node TEXT="definitions" POSITION="right" ID="ID_1280878364" CREATED="1624090343389" MODIFIED="1649492676645">
+<node TEXT="definitions" POSITION="bottom_or_right" ID="ID_1280878364" CREATED="1624090343389" MODIFIED="1649492676645">
 <edge COLOR="#7c0000"/>
 <node TEXT="datasets" FOLDED="true" ID="ID_1162094135" CREATED="1654857599291" MODIFIED="1670499243412">
 <node TEXT="definitions" ID="ID_903082363" CREATED="1654857626374" MODIFIED="1654857631427">
@@ -488,10 +490,8 @@
 <node TEXT="LocaleDirDomains" ID="ID_1434368305" CREATED="1671258803595" MODIFIED="1671258831261"/>
 </node>
 <node TEXT="language" ID="ID_657986053" CREATED="1671250946615" MODIFIED="1671297633432">
-<node TEXT="items" ID="ID_882999597" CREATED="1671250965463" MODIFIED="1671250967866">
 <node TEXT="$ref" ID="ID_1311883818" CREATED="1671205995410" MODIFIED="1671205998395">
 <node TEXT="#/$defs/i18n/properties/languageCode" ID="ID_51435577" CREATED="1671205998990" MODIFIED="1671206143706"/>
-</node>
 </node>
 </node>
 <node TEXT="fallback" ID="ID_296516636" CREATED="1671261476448" MODIFIED="1671261480332">
@@ -520,7 +520,7 @@
 </node>
 <node TEXT="properties" ID="ID_1180989401" CREATED="1654901020946" MODIFIED="1654901027243">
 <node TEXT="domain" ID="ID_1432474439" CREATED="1671018565183" MODIFIED="1671018566716"/>
-<node TEXT="language" ID="ID_1287333210" CREATED="1579913039725" MODIFIED="1671192350541">
+<node TEXT="language" ID="ID_1287333210" CREATED="1579913039725" MODIFIED="1706673334993">
 <node TEXT="$ref" ID="ID_789006847" CREATED="1671205995410" MODIFIED="1671205998395">
 <node TEXT="#/$defs/i18n/properties/languageCode" ID="ID_1796043366" CREATED="1671205998990" MODIFIED="1671206143706"/>
 </node>
@@ -538,7 +538,7 @@
 </node>
 </node>
 <node TEXT="properties" ID="ID_707521521" CREATED="1654901020946" MODIFIED="1654901027243">
-<node TEXT="language" ID="ID_165121476" CREATED="1579913039725" MODIFIED="1671206166590">
+<node TEXT="to_language" ID="ID_165121476" CREATED="1579913039725" MODIFIED="1706276846757">
 <node TEXT="i18n.languageCode" ID="ID_571633602" CREATED="1671018506767" MODIFIED="1671206049939">
 <icon BUILTIN="button_cancel"/>
 </node>
@@ -555,6 +555,9 @@
 </node>
 <node TEXT="abstract" ID="ID_1675745864" CREATED="1654901130541" MODIFIED="1654901132564">
 <node TEXT="true" ID="ID_1409402371" CREATED="1654901132788" MODIFIED="1654901133858"/>
+</node>
+<node TEXT="notSerialized" ID="ID_1195033707" CREATED="1706532259946" MODIFIED="1706532264575">
+<node TEXT="multilingual" ID="ID_1123603229" CREATED="1706532272970" MODIFIED="1706532276770"/>
 </node>
 <node TEXT="properties" ID="ID_1735468144" CREATED="1623608727580" MODIFIED="1623608734151">
 <node TEXT="multilingual" ID="ID_1054426747" CREATED="1623608734472" MODIFIED="1623608755579">
@@ -700,7 +703,7 @@
 <node TEXT="properties" ID="ID_1180236204" CREATED="1655330580972" MODIFIED="1655330583044">
 <node TEXT="UID" ID="ID_704033733" CREATED="1655203567388" MODIFIED="1655203567388">
 <node TEXT="description" ID="ID_1930890292" CREATED="1655240469831" MODIFIED="1655240472252">
-<node TEXT="The event&#x2019;s unique id. This id should be globally unique so you should add an @DOMAIN_NAME to your id." ID="ID_52360468" CREATED="1655240384822" MODIFIED="1655333435614"/>
+<node TEXT="The event’s unique id. This id should be globally unique so you should add an @DOMAIN_NAME to your id." ID="ID_52360468" CREATED="1655240384822" MODIFIED="1655333435614"/>
 </node>
 </node>
 <node TEXT="DTSTAMP" ID="ID_1537324103" CREATED="1655203567388" MODIFIED="1655203567388">
@@ -1125,7 +1128,7 @@
 <node TEXT="ORGANIZER" ID="ID_882442075" CREATED="1655203567389" MODIFIED="1655203567389"/>
 <node TEXT="RECURRENCE-ID" ID="ID_387176425" CREATED="1655203567389" MODIFIED="1655330286220"/>
 <node TEXT="SEQUENCE" ID="ID_433844814" CREATED="1655203567389" MODIFIED="1655203567389"/>
-<node TEXT="STATUS" ID="ID_915069647" CREATED="1655203567389" MODIFIED="1655330286219" HGAP_QUANTITY="13.250000022351742 pt"/>
+<node TEXT="STATUS" ID="ID_915069647" CREATED="1655203567389" MODIFIED="1655330286219" HGAP_QUANTITY="13.25 pt"/>
 <node TEXT="SUMMARY" ID="ID_1645171619" CREATED="1655203567389" MODIFIED="1655203567389"/>
 <node TEXT="URL" ID="ID_330202293" CREATED="1655203567389" MODIFIED="1655203567389"/>
 <node TEXT="ATTACH" ID="ID_1864088025" CREATED="1655203567389" MODIFIED="1655330328689">
@@ -1390,7 +1393,7 @@
 </node>
 </node>
 </node>
-<node TEXT="emojis" ID="ID_646332613" CREATED="1654901787320" MODIFIED="1654901789085">
+<node TEXT="emojis" FOLDED="true" ID="ID_646332613" CREATED="1654901787320" MODIFIED="1654901789085">
 <node TEXT="$defs" ID="ID_1723686621" CREATED="1654901818965" MODIFIED="1654901824040">
 <node TEXT="Emoji" ID="ID_895054275" CREATED="1654901824307" MODIFIED="1654901826785">
 <node TEXT="type" ID="ID_1462502277" CREATED="1654901827054" MODIFIED="1654901829057">
@@ -2035,7 +2038,7 @@
 </node>
 </node>
 </node>
-<node TEXT="schema_org" FOLDED="true" ID="ID_1777220178" CREATED="1670369676069" MODIFIED="1670369685037">
+<node TEXT="schema_org" ID="ID_1777220178" CREATED="1670369676069" MODIFIED="1670369685037">
 <node TEXT="definitions" ID="ID_1066010012" CREATED="1670370530090" MODIFIED="1670370531839">
 <node TEXT="SchemaOrg" ID="ID_601213821" CREATED="1670369686330" MODIFIED="1670496247227">
 <node TEXT="extends" ID="ID_1924165726" CREATED="1670483430623" MODIFIED="1670483433155">
@@ -2117,7 +2120,7 @@
 </node>
 <node TEXT="LAN" ID="ID_537722106" CREATED="1627934215590" MODIFIED="1627934218272">
 <node TEXT="description" FOLDED="true" ID="ID_63046752" CREATED="1627934228572" MODIFIED="1627934231377">
-<node TEXT="A computer network spanned inside a building and operated under single administrative system is generally termed as Local Area Network (LAN). Usually,LAN covers an organization&#x2019; offices, schools, colleges or universities. Number of systems connected in LAN may vary from as least as two to as much as 16 million.&#xa;&#xa;LAN provides a useful way of sharing the resources between end users.The resources such as printers, file servers, scanners, and internet are easily sharable among computers.&#xa;&#xa;LANs are composed of inexpensive networking and routing equipment. It may contains local servers serving file storage and other locally shared applications. It mostly operates on private IP addresses and does not involve heavy routing. LAN works under its own local domain and controlled centrally.&#xa;&#xa;LAN uses either Ethernet or Token-ring technology. Ethernet is most widely employed LAN technology and uses Star topology, while Token-ring is rarely seen.&#xa;&#xa;LAN can be wired,wireless, or in both forms at once." ID="ID_892528730" CREATED="1627934239562" MODIFIED="1627934260857"/>
+<node TEXT="A computer network spanned inside a building and operated under single administrative system is generally termed as Local Area Network (LAN). Usually,LAN covers an organization’ offices, schools, colleges or universities. Number of systems connected in LAN may vary from as least as two to as much as 16 million.&#xa;&#xa;LAN provides a useful way of sharing the resources between end users.The resources such as printers, file servers, scanners, and internet are easily sharable among computers.&#xa;&#xa;LANs are composed of inexpensive networking and routing equipment. It may contains local servers serving file storage and other locally shared applications. It mostly operates on private IP addresses and does not involve heavy routing. LAN works under its own local domain and controlled centrally.&#xa;&#xa;LAN uses either Ethernet or Token-ring technology. Ethernet is most widely employed LAN technology and uses Star topology, while Token-ring is rarely seen.&#xa;&#xa;LAN can be wired,wireless, or in both forms at once." ID="ID_892528730" CREATED="1627934239562" MODIFIED="1627934260857"/>
 </node>
 <node TEXT="technologies" ID="ID_1960839844" CREATED="1627934509324" MODIFIED="1627934513220">
 <node TEXT="Ethernet" ID="ID_1944968549" CREATED="1627934519469" MODIFIED="1627934521042">
@@ -2488,7 +2491,7 @@
 <node TEXT="object" ID="ID_564585654" CREATED="1627981339987" MODIFIED="1627981345036"/>
 </node>
 <node TEXT="description" ID="ID_865498100" CREATED="1627981365260" MODIFIED="1627981367827">
-<node TEXT="Data-link layer takes packets from Network Layer and encapsulates them into Frames.Then, it sends each frame bit-by-bit on the hardware. At receiver&#x2019; end, data link layer picks up signals from hardware and assembles them into frames." ID="ID_741434548" CREATED="1627981368075" MODIFIED="1627981369572"/>
+<node TEXT="Data-link layer takes packets from Network Layer and encapsulates them into Frames.Then, it sends each frame bit-by-bit on the hardware. At receiver’ end, data link layer picks up signals from hardware and assembles them into frames." ID="ID_741434548" CREATED="1627981368075" MODIFIED="1627981369572"/>
 </node>
 </node>
 <node TEXT="addressing" ID="ID_548319542" CREATED="1627981307126" MODIFIED="1627981311759">
@@ -2808,7 +2811,7 @@
 <node TEXT="extends" ID="ID_277618174" CREATED="1627933440465" MODIFIED="1627933444566">
 <node TEXT="Encryption" ID="ID_1328878884" CREATED="1627933444863" MODIFIED="1627933453757"/>
 </node>
-<node TEXT="Both sender and receiver have one secret key. This secret key is used to encrypt the data at sender&#x2019;s end. After the data is encrypted, it is sent on the public domain to the receiver. Because the receiver knows and has the Secret Key, the encrypted data packets can easily be decrypted.&#xa;&#xa;Example of secret key encryption is Data Encryption Standard (DES). In Secret Key encryption, it is required to have a separate key for each host on the network making it difficult to manage." ID="ID_685009157" CREATED="1627933585245" MODIFIED="1627933586159"/>
+<node TEXT="Both sender and receiver have one secret key. This secret key is used to encrypt the data at sender’s end. After the data is encrypted, it is sent on the public domain to the receiver. Because the receiver knows and has the Secret Key, the encrypted data packets can easily be decrypted.&#xa;&#xa;Example of secret key encryption is Data Encryption Standard (DES). In Secret Key encryption, it is required to have a separate key for each host on the network making it difficult to manage." ID="ID_685009157" CREATED="1627933585245" MODIFIED="1627933586159"/>
 </node>
 <node TEXT="PublicKeyEncryption" ID="ID_144381109" CREATED="1627933430372" MODIFIED="1627933471237">
 <node TEXT="extends" ID="ID_1870271590" CREATED="1627933440465" MODIFIED="1627933444566">
@@ -3576,7 +3579,7 @@
 <node TEXT="documents" FOLDED="true" ID="ID_698183186" CREATED="1674322689636" MODIFIED="1674322699124">
 <node TEXT="definitions" ID="ID_6246213" CREATED="1674322699599" MODIFIED="1674322705161">
 <node TEXT="components" FOLDED="true" ID="ID_602889519" CREATED="1674366104730" MODIFIED="1674585882852">
-<node TEXT="definitions" ID="ID_1800152876" CREATED="1674366107959" MODIFIED="1674585882852" VSHIFT_QUANTITY="-0.7499999776482589 pt">
+<node TEXT="definitions" ID="ID_1800152876" CREATED="1674366107959" MODIFIED="1674585882852" VSHIFT_QUANTITY="-0.75 pt">
 <node TEXT="BlockToken" ID="ID_1992832503" CREATED="1674368725774" MODIFIED="1674368731777">
 <node TEXT="abstract" ID="ID_1117118842" CREATED="1674368795529" MODIFIED="1674368799067">
 <node TEXT="true" ID="ID_233509747" CREATED="1674368800153" MODIFIED="1674368801134"/>
@@ -4481,7 +4484,7 @@
 </node>
 </node>
 </node>
-<node TEXT="places" ID="ID_1814411473" CREATED="1670496921792" MODIFIED="1671092516749">
+<node TEXT="places" FOLDED="true" ID="ID_1814411473" CREATED="1670496921792" MODIFIED="1671092516749">
 <node TEXT="definitions" ID="ID_277244535" CREATED="1670496969577" MODIFIED="1671092516749">
 <node TEXT="Address" ID="ID_576510172" CREATED="1624043707857" MODIFIED="1624090576655">
 <node TEXT="description" ID="ID_1907792781" CREATED="1651423138821" MODIFIED="1651423143372">
@@ -5076,9 +5079,9 @@
 </node>
 </node>
 </node>
-<node TEXT="personas" ID="ID_873965533" CREATED="1587552096281" MODIFIED="1654901356394">
+<node TEXT="personas" FOLDED="true" ID="ID_873965533" CREATED="1587552096281" MODIFIED="1703712756394">
 <icon BUILTIN="executable"/>
-<node TEXT="definitions" ID="ID_113839801" CREATED="1649173338526" MODIFIED="1654901356394">
+<node TEXT="definitions" ID="ID_113839801" CREATED="1649173338526" MODIFIED="1703712756393">
 <node TEXT="ngomedia" FOLDED="true" ID="ID_290017321" CREATED="1669102356631" MODIFIED="1670170141848">
 <icon BUILTIN="button_cancel"/>
 <node TEXT="definitions" ID="ID_1143710789" CREATED="1669102366417" MODIFIED="1669102368904">
@@ -5860,15 +5863,19 @@
 <node TEXT="importable" ID="ID_1545723479" CREATED="1601111247524" MODIFIED="1601123451763"/>
 </node>
 </node>
-<node TEXT="command_name" ID="ID_926542719" CREATED="1601111228736" MODIFIED="1649415144323"/>
-<node TEXT="name" ID="ID_1165877922" CREATED="1654334539583" MODIFIED="1654334541599">
+<node TEXT="command_name" ID="ID_926542719" CREATED="1601111228736" MODIFIED="1649415144323">
 <node TEXT="default" ID="ID_767168529" CREATED="1654334543823" MODIFIED="1654334547897">
-<node TEXT="{{ this.command_name }}" ID="ID_1923101877" CREATED="1653925626182" MODIFIED="1654333447724"/>
+<node TEXT="{{ this.name }}" ID="ID_1923101877" CREATED="1653925626182" MODIFIED="1714674109241"/>
 </node>
 </node>
+<node TEXT="name" ID="ID_1165877922" CREATED="1654334539583" MODIFIED="1654334541599"/>
 <node TEXT="help" ID="ID_865143999" CREATED="1654899724771" MODIFIED="1654899728306"/>
-<node TEXT="emojis" ID="ID_1599744129" CREATED="1654899719624" MODIFIED="1654899723591"/>
-<node TEXT="emojis_after" ID="ID_1476463444" CREATED="1654935555537" MODIFIED="1654935562672"/>
+<node TEXT="emojis" ID="ID_1599744129" CREATED="1654899719624" MODIFIED="1714674006557">
+<icon BUILTIN="very_positive"/>
+</node>
+<node TEXT="emojis_after" ID="ID_1476463444" CREATED="1654935555537" MODIFIED="1714674006559">
+<icon BUILTIN="very_positive"/>
+</node>
 </node>
 </node>
 <node TEXT="App" ID="ID_1094845549" CREATED="1601988074677" MODIFIED="1601988081303">
@@ -5934,10 +5941,12 @@
 <node TEXT="merchant" ID="ID_1131557165" CREATED="1675686398993" MODIFIED="1675686402405">
 <node TEXT="..personas.Merchant" ID="ID_476865261" CREATED="1675686403186" MODIFIED="1675686438379"/>
 </node>
-<node TEXT="telebot" ID="ID_1191640571" CREATED="1652446077205" MODIFIED="1652446081479">
+<node TEXT="telebot" ID="ID_1191640571" CREATED="1652446077205" MODIFIED="1714656904682">
+<icon BUILTIN="button_cancel"/>
 <node TEXT="telebot.Telebot" ID="ID_1549297197" CREATED="1652446087899" MODIFIED="1654896127811"/>
 </node>
-<node TEXT="chatbot" ID="ID_1456767387" CREATED="1652446106367" MODIFIED="1652446109044">
+<node TEXT="chatbot" ID="ID_1456767387" CREATED="1652446106367" MODIFIED="1714656904684">
+<icon BUILTIN="button_cancel"/>
 <node TEXT=".chatbot.Chatbot" ID="ID_1846077422" CREATED="1652446109439" MODIFIED="1655194681667"/>
 </node>
 </node>
@@ -5992,7 +6001,7 @@
 </node>
 </node>
 </node>
-<node TEXT="chatbot" FOLDED="true" ID="ID_1079065453" CREATED="1649589569303" MODIFIED="1649671369989">
+<node TEXT="chatbot" ID="ID_1079065453" CREATED="1649589569303" MODIFIED="1649671369989">
 <node TEXT="definitions" ID="ID_1951525991" CREATED="1649589572345" MODIFIED="1649589574413">
 <node TEXT="Chatbot" FOLDED="true" ID="ID_1091820593" CREATED="1649494600778" MODIFIED="1649671278503">
 <icon BUILTIN="button_cancel"/>
@@ -9972,7 +9981,7 @@
 </node>
 </node>
 </node>
-<node TEXT="chatbot" FOLDED="true" POSITION="right" ID="ID_881375981" CREATED="1649494209712" MODIFIED="1649500571080">
+<node TEXT="chatbot" FOLDED="true" POSITION="bottom_or_right" ID="ID_881375981" CREATED="1649494209712" MODIFIED="1649500571080">
 <icon BUILTIN="button_cancel"/>
 <edge COLOR="#0000ff"/>
 <node TEXT="Eliza" ID="ID_602440483" CREATED="1649489263199" MODIFIED="1649489265303">
@@ -10247,9 +10256,9 @@
 <node TEXT="Thus I let go of unpleasant feelings/ and do not stir up new ones" ID="ID_1237952464" CREATED="1654527020351" MODIFIED="1654527035617"/>
 <node TEXT="Thereby the process of life goes on blameless, at ease and peace" ID="ID_1069817457" CREATED="1654527036033" MODIFIED="1654527051735"/>
 </node>
-<node TEXT="Notre P&#xe8;re" ID="ID_1469883332" CREATED="1654527107581" MODIFIED="1654527120088">
+<node TEXT="Notre Père" ID="ID_1469883332" CREATED="1654527107581" MODIFIED="1654527120088">
 <node TEXT="fr" ID="ID_392193539" CREATED="1654527168880" MODIFIED="1654536161772">
-<node TEXT="Notre P&#xe8;re, qui es aux cieux,&#xa;que ton nom soit sanctifi&#xe9;,&#xa;que ton r&#xe8;gne vienne,&#xa;que ta volont&#xe9; soit faite sur la terre comme au ciel.&#xa;Donne-nous aujourd&#x2019;hui notre pain de ce jour.&#xa;Pardonne-nous nos offenses,&#xa;comme nous pardonnons aussi &#xe0; ceux qui nous ont offens&#xe9;s.&#xa;Et ne nous laisse pas entrer en tentation&#xa;mais d&#xe9;livre-nous du Mal.&#xa;&#xa;Amen" ID="ID_692530613" CREATED="1654536161984" MODIFIED="1654536169005"/>
+<node TEXT="Notre Père, qui es aux cieux,&#xa;que ton nom soit sanctifié,&#xa;que ton règne vienne,&#xa;que ta volonté soit faite sur la terre comme au ciel.&#xa;Donne-nous aujourd’hui notre pain de ce jour.&#xa;Pardonne-nous nos offenses,&#xa;comme nous pardonnons aussi à ceux qui nous ont offensés.&#xa;Et ne nous laisse pas entrer en tentation&#xa;mais délivre-nous du Mal.&#xa;&#xa;Amen" ID="ID_692530613" CREATED="1654536161984" MODIFIED="1654536169005"/>
 </node>
 <node TEXT="en" ID="ID_1724866464" CREATED="1654536762898" MODIFIED="1654536764332">
 <node TEXT="Our Father which art in heaven,&#xa;Hallowed be thy name.&#xa;Thy kingdom come,&#xa;Thy will be done in earth, as it is in heaven.&#xa;Give us this day our daily bread.&#xa;And forgive us our debts, as we forgive our debtors.&#xa;And lead us not into temptation, but deliver us from evil:&#xa;For thine is the kingdom, and the power, and the glory, for ever. Amen." ID="ID_1946211444" CREATED="1654536765023" MODIFIED="1654536830990"/>
@@ -10258,64 +10267,64 @@
 <node TEXT="    Our Father, who art in heaven,&#xa;    hallowed be thy name;&#xa;    thy kingdom come,&#xa;    thy will be done&#xa;    on earth as it is in heaven.&#xa;    Give us this day our daily bread,&#xa;    and forgive us our trespasses,&#xa;    as we forgive those who trespass against us;&#xa;    and lead us not into temptation,&#xa;    but deliver us from evil.&#xa;&#xa;    Most Protestants conclude with the doxology:&#xa;    For thine is the kingdom,&#xa;    and the power, and the glory,&#xa;    for ever and ever. Amen." ID="ID_542040721" CREATED="1654536867403" MODIFIED="1654536870483"/>
 </node>
 <node TEXT="es" ID="ID_604168775" CREATED="1654536905816" MODIFIED="1654536906495">
-<node TEXT="Padre nuestro, que est&#xe1;s en el cielo,&#xa;&#xa;santificado sea tu Nombre;&#xa;venga a nosotros tu reino;&#xa;h&#xe1;gase tu voluntad en la tierra como en el cielo.&#xa;Danos hoy nuestro pan de cada d&#xed;a;&#xa;perdona nuestras ofensas&#xa;como tambi&#xe9;n nosotros perdonamos a los que nos ofenden;&#xa;no nos dejes caer en la tentaci&#xf3;n,&#xa;y l&#xed;branos del mal." ID="ID_818559378" CREATED="1654536907055" MODIFIED="1654536908353"/>
+<node TEXT="Padre nuestro, que estás en el cielo,&#xa;&#xa;santificado sea tu Nombre;&#xa;venga a nosotros tu reino;&#xa;hágase tu voluntad en la tierra como en el cielo.&#xa;Danos hoy nuestro pan de cada día;&#xa;perdona nuestras ofensas&#xa;como también nosotros perdonamos a los que nos ofenden;&#xa;no nos dejes caer en la tentación,&#xa;y líbranos del mal." ID="ID_818559378" CREATED="1654536907055" MODIFIED="1654536908353"/>
 </node>
 </node>
 <node TEXT="Je vous salue Marie" ID="ID_172257651" CREATED="1654527110881" MODIFIED="1654527115860">
 <node TEXT="fr" ID="ID_1988946196" CREATED="1654537109333" MODIFIED="1654537110199">
-<node TEXT="Je vous salue Marie, pleine de gr&#xe2;ce ;&#xa;Le Seigneur est avec vous.&#xa;Vous &#xea;tes b&#xe9;nie entre toutes les femmes&#xa;Et J&#xe9;sus, le fruit de vos entrailles, est b&#xe9;ni.&#xa;Sainte Marie, M&#xe8;re de Dieu,&#xa;Priez pour nous pauvres p&#xe9;cheurs,&#xa;Maintenant et &#xe0; l&#x2019;heure de notre mort.&#xa;&#xa;Amen" ID="ID_191111685" CREATED="1654536199646" MODIFIED="1654536210508"/>
+<node TEXT="Je vous salue Marie, pleine de grâce ;&#xa;Le Seigneur est avec vous.&#xa;Vous êtes bénie entre toutes les femmes&#xa;Et Jésus, le fruit de vos entrailles, est béni.&#xa;Sainte Marie, Mère de Dieu,&#xa;Priez pour nous pauvres pécheurs,&#xa;Maintenant et à l’heure de notre mort.&#xa;&#xa;Amen" ID="ID_191111685" CREATED="1654536199646" MODIFIED="1654536210508"/>
 </node>
 <node TEXT="en" ID="ID_806298661" CREATED="1654537110499" MODIFIED="1654537111687">
 <node TEXT="Hail Mary, full of grace,&#xa;the Lord is with thee.&#xa;Blessed art thou amongst women,&#xa;and blessed is the fruit of thy womb, Jesus.&#xa;Holy Mary, Mother of God,&#xa;pray for us sinners,&#xa;now and at the hour of our death. Amen." ID="ID_987249432" CREATED="1654537116889" MODIFIED="1654537118178"/>
 </node>
 <node TEXT="es" ID="ID_1509562637" CREATED="1654537111919" MODIFIED="1654537113985">
-<node TEXT="Dios te salve Mar&#xed;a, llena eres de gracia, el Se&#xf1;or es contigo.&#xa;&#xa;Bendita T&#xfa; eres entre todas las mujeres y bendito es el fruto de tu vientre Jes&#xfa;s.&#xa;Santa Mar&#xed;a, Madre de Dios, ruega por nosotros pecadores, ahora y en la hora de nuestra muerte. Am&#xe9;n." ID="ID_1247011383" CREATED="1654537208586" MODIFIED="1654537209698"/>
+<node TEXT="Dios te salve María, llena eres de gracia, el Señor es contigo.&#xa;&#xa;Bendita Tú eres entre todas las mujeres y bendito es el fruto de tu vientre Jesús.&#xa;Santa María, Madre de Dios, ruega por nosotros pecadores, ahora y en la hora de nuestra muerte. Amén." ID="ID_1247011383" CREATED="1654537208586" MODIFIED="1654537209698"/>
 </node>
 <node TEXT="latin" ID="ID_583383674" CREATED="1654537193175" MODIFIED="1654537194566">
-<node TEXT="Ave Maria gratia plena Dominus tecum Benedicta tu in mulieribus et benedictus Fructus ventris tui Iesus Sancta Maria Mater Dei ora pro nobis peccatoribus nunc et in hora mortis nostr&#xe6; Amen." ID="ID_1093288531" CREATED="1654537194781" MODIFIED="1654537196058"/>
+<node TEXT="Ave Maria gratia plena Dominus tecum Benedicta tu in mulieribus et benedictus Fructus ventris tui Iesus Sancta Maria Mater Dei ora pro nobis peccatoribus nunc et in hora mortis nostræ Amen." ID="ID_1093288531" CREATED="1654537194781" MODIFIED="1654537196058"/>
 </node>
 </node>
-<node TEXT="Les vingt myst&#xe8;res" ID="ID_584039433" CREATED="1654536279224" MODIFIED="1654536279224">
-<node TEXT="les myst&#xe8;res joyeux (naissance du Christ)," ID="ID_815508377" CREATED="1654536279224" MODIFIED="1654536279224">
-<node TEXT="L&#x2019;Annonciation : l&#x2019;Ange Gabriel annonce &#xe0; Marie qu&#x2019;elle aura un fils (Luc 1, 26-38)" ID="ID_162798359" CREATED="1654536420583" MODIFIED="1654536420583"/>
-<node TEXT="La Visitation : visite de Marie &#xe0; sa cousine &#xc9;lisabeth (Luc 1, 39-56)" ID="ID_1674295090" CREATED="1654536420583" MODIFIED="1654536420583"/>
-<node TEXT="La naissance de J&#xe9;sus &#xe0; Bethl&#xe9;em (Luc 2, 1-20)" ID="ID_1526389197" CREATED="1654536420584" MODIFIED="1654536420584"/>
-<node TEXT="La Pr&#xe9;sentation de J&#xe9;sus au Temple (Luc 2, 22-35)" ID="ID_709076540" CREATED="1654536420585" MODIFIED="1654536420585"/>
-<node TEXT="Les retrouvailles au Temple : Marie et Joseph ont cherch&#xe9; J&#xe9;sus pendant trois jours, il &#xe9;tait rest&#xe9; au Temple avec les docteurs de la loi (Luc 2, 41-52)" ID="ID_915363926" CREATED="1654536420585" MODIFIED="1654536420585"/>
+<node TEXT="Les vingt mystères" ID="ID_584039433" CREATED="1654536279224" MODIFIED="1654536279224">
+<node TEXT="les mystères joyeux (naissance du Christ)," ID="ID_815508377" CREATED="1654536279224" MODIFIED="1654536279224">
+<node TEXT="L’Annonciation : l’Ange Gabriel annonce à Marie qu’elle aura un fils (Luc 1, 26-38)" ID="ID_162798359" CREATED="1654536420583" MODIFIED="1654536420583"/>
+<node TEXT="La Visitation : visite de Marie à sa cousine Élisabeth (Luc 1, 39-56)" ID="ID_1674295090" CREATED="1654536420583" MODIFIED="1654536420583"/>
+<node TEXT="La naissance de Jésus à Bethléem (Luc 2, 1-20)" ID="ID_1526389197" CREATED="1654536420584" MODIFIED="1654536420584"/>
+<node TEXT="La Présentation de Jésus au Temple (Luc 2, 22-35)" ID="ID_709076540" CREATED="1654536420585" MODIFIED="1654536420585"/>
+<node TEXT="Les retrouvailles au Temple : Marie et Joseph ont cherché Jésus pendant trois jours, il était resté au Temple avec les docteurs de la loi (Luc 2, 41-52)" ID="ID_915363926" CREATED="1654536420585" MODIFIED="1654536420585"/>
 </node>
-<node TEXT="les myst&#xe8;res lumineux (vie publique du Christ)," ID="ID_970919899" CREATED="1654536279224" MODIFIED="1654536279224">
-<node TEXT="Le Bapt&#xea;me du Christ dans le Jourdain (saint Paul aux Corinthiens 2 Co 5, 21, Matthieu 3, 17)" ID="ID_416771540" CREATED="1654536329419" MODIFIED="1654536329419"/>
+<node TEXT="les mystères lumineux (vie publique du Christ)," ID="ID_970919899" CREATED="1654536279224" MODIFIED="1654536279224">
+<node TEXT="Le Baptême du Christ dans le Jourdain (saint Paul aux Corinthiens 2 Co 5, 21, Matthieu 3, 17)" ID="ID_416771540" CREATED="1654536329419" MODIFIED="1654536329419"/>
 <node TEXT="Les noces de Cana (Jean 2, 1-12)" ID="ID_1743528578" CREATED="1654536329419" MODIFIED="1654536329419"/>
-<node TEXT="L&#x2019;Annonce du Royaume de Dieu (Marc 1,15 ; Marc 2, 3-13 ; Luc 7, 47-48 ; Jean 20, 22-23)" ID="ID_682286141" CREATED="1654536329419" MODIFIED="1654536329419"/>
+<node TEXT="L’Annonce du Royaume de Dieu (Marc 1,15 ; Marc 2, 3-13 ; Luc 7, 47-48 ; Jean 20, 22-23)" ID="ID_682286141" CREATED="1654536329419" MODIFIED="1654536329419"/>
 <node TEXT="La Transfiguration du Christ (Luc 9,35)" ID="ID_743439629" CREATED="1654536329419" MODIFIED="1654536329419"/>
-<node TEXT="L&#x2019;institution de l&#x2019;Eucharistie (Jean 13,1)" ID="ID_500395672" CREATED="1654536329420" MODIFIED="1654536329420"/>
+<node TEXT="L’institution de l’Eucharistie (Jean 13,1)" ID="ID_500395672" CREATED="1654536329420" MODIFIED="1654536329420"/>
 </node>
-<node TEXT="les myst&#xe8;res douloureux (mort du Christ)," ID="ID_1720123597" CREATED="1654536279224" MODIFIED="1654536279224">
-<node TEXT="Geths&#xe9;mani : pri&#xe8;re de J&#xe9;sus au mont des Oliviers, la veille de son arrestation (Matthieu 26, 36-46 ; Marc 14,32-42 ; Luc 22,40-46)" ID="ID_1630991950" CREATED="1654536353686" MODIFIED="1654536353686"/>
-<node TEXT="La flagellation de J&#xe9;sus apr&#xe8;s son arrestation (Matthieu 26,67-68 ; Marc 14, 65 ; Luc 22, 63-66)" ID="ID_522143538" CREATED="1654536353686" MODIFIED="1654536353686"/>
-<node TEXT="Le couronnement d&#x2019;&#xe9;pines (Matthieu 27, 27-31 ; Marc 15, 16-20 ; Jean 19, 2-3)" ID="ID_930004996" CREATED="1654536353687" MODIFIED="1654536353687"/>
+<node TEXT="les mystères douloureux (mort du Christ)," ID="ID_1720123597" CREATED="1654536279224" MODIFIED="1654536279224">
+<node TEXT="Gethsémani : prière de Jésus au mont des Oliviers, la veille de son arrestation (Matthieu 26, 36-46 ; Marc 14,32-42 ; Luc 22,40-46)" ID="ID_1630991950" CREATED="1654536353686" MODIFIED="1654536353686"/>
+<node TEXT="La flagellation de Jésus après son arrestation (Matthieu 26,67-68 ; Marc 14, 65 ; Luc 22, 63-66)" ID="ID_522143538" CREATED="1654536353686" MODIFIED="1654536353686"/>
+<node TEXT="Le couronnement d’épines (Matthieu 27, 27-31 ; Marc 15, 16-20 ; Jean 19, 2-3)" ID="ID_930004996" CREATED="1654536353687" MODIFIED="1654536353687"/>
 <node TEXT="Le portage de la Croix (Matthieu 27,32-33, Marc, 15, 16-20 ; Luc 23,26 ; Jean 19,17)" ID="ID_257883479" CREATED="1654536353688" MODIFIED="1654536353688"/>
 <node TEXT="La Crucifixion au Golgotha (Matthieu 27, 32-43 ; Marc 15, 21-27 ; Luc 23, 33-34 ; Jean 19, 17-24)" ID="ID_779267888" CREATED="1654536353688" MODIFIED="1654536353688"/>
 </node>
-<node TEXT="les myst&#xe8;res glorieux (r&#xe9;surrection du Christ)." ID="ID_1912560825" CREATED="1654536279224" MODIFIED="1654536279224">
-<node TEXT="La R&#xe9;surrection (Matthieu 28, 1-8, Marc 16,1-8 ; Luc 24, 1-10 ; Jean 20,11-18)" ID="ID_749020320" CREATED="1654536442499" MODIFIED="1654536442499"/>
-<node TEXT="L&#x2019;Ascension (Marc 16, 19 ; Luc 24, 50-52 ; Actes 1,3-14)" ID="ID_1005084642" CREATED="1654536442499" MODIFIED="1654536442499"/>
-<node TEXT="La Pentec&#xf4;te (Actes 2, 1-13)" ID="ID_1989059753" CREATED="1654536442500" MODIFIED="1654536442500"/>
-<node TEXT="L&#x2019;Assomption de Marie (Apocalypse 12, 1)" ID="ID_1889768390" CREATED="1654536442501" MODIFIED="1654536442501"/>
+<node TEXT="les mystères glorieux (résurrection du Christ)." ID="ID_1912560825" CREATED="1654536279224" MODIFIED="1654536279224">
+<node TEXT="La Résurrection (Matthieu 28, 1-8, Marc 16,1-8 ; Luc 24, 1-10 ; Jean 20,11-18)" ID="ID_749020320" CREATED="1654536442499" MODIFIED="1654536442499"/>
+<node TEXT="L’Ascension (Marc 16, 19 ; Luc 24, 50-52 ; Actes 1,3-14)" ID="ID_1005084642" CREATED="1654536442499" MODIFIED="1654536442499"/>
+<node TEXT="La Pentecôte (Actes 2, 1-13)" ID="ID_1989059753" CREATED="1654536442500" MODIFIED="1654536442500"/>
+<node TEXT="L’Assomption de Marie (Apocalypse 12, 1)" ID="ID_1889768390" CREATED="1654536442501" MODIFIED="1654536442501"/>
 <node TEXT="Le couronnement de Marie au ciel (Apocalypse 12, 1)" ID="ID_944749225" CREATED="1654536442501" MODIFIED="1654536442501"/>
 </node>
-<node TEXT="Chaque myst&#xe8;re est annonc&#xe9; ou m&#xe9;dit&#xe9; et est suivi d&#x2019;une dizaine de chapelet (une dizaine de &#xab; Je vous salue Marie &#xbb;)." ID="ID_254958585" CREATED="1654536298372" MODIFIED="1654536299065"/>
+<node TEXT="Chaque mystère est annoncé ou médité et est suivi d’une dizaine de chapelet (une dizaine de « Je vous salue Marie »)." ID="ID_254958585" CREATED="1654536298372" MODIFIED="1654536299065"/>
 </node>
-<node TEXT="Priere de la s&#xe9;r&#xe9;nit&#xe9;" ID="ID_1075302792" CREATED="1654527122592" MODIFIED="1654527133956">
+<node TEXT="Priere de la sérénité" ID="ID_1075302792" CREATED="1654527122592" MODIFIED="1654527133956">
 <node TEXT="fr" ID="ID_1842637645" CREATED="1654536516039" MODIFIED="1654536518146">
-<node TEXT="Mon DIEU, donne-moi la S&#xe9;r&#xe9;nit&#xe9; d&#x2019;accepter les choses que je ne puis changer, le Courage  de changer les choses que je peux, et la Sagesse d&#x2019;en conna&#xee;tre la Diff&#xe9;rence." ID="ID_1147314042" CREATED="1654536524758" MODIFIED="1654536532720"/>
+<node TEXT="Mon DIEU, donne-moi la Sérénité d’accepter les choses que je ne puis changer, le Courage  de changer les choses que je peux, et la Sagesse d’en connaître la Différence." ID="ID_1147314042" CREATED="1654536524758" MODIFIED="1654536532720"/>
 </node>
 <node TEXT="en" ID="ID_1471114984" CREATED="1654536657502" MODIFIED="1654536658453">
 <node TEXT="God, grant me the serenity to accept the things I cannot change, courage to change the things I can, and wisdom to know the difference" ID="ID_942587362" CREATED="1654536659128" MODIFIED="1654536669371"/>
 </node>
 </node>
 </node>
-<node TEXT="documentation" FOLDED="true" POSITION="right" ID="ID_1023669565" CREATED="1602422829756" MODIFIED="1674494216285">
+<node TEXT="documentation" FOLDED="true" POSITION="bottom_or_right" ID="ID_1023669565" CREATED="1602422829756" MODIFIED="1674494216285">
 <icon BUILTIN="button_cancel"/>
 <edge COLOR="#007c7c"/>
 <node TEXT="Vishuda" ID="ID_18607518" CREATED="1602422834615" MODIFIED="1602422840324"/>
@@ -10327,7 +10336,7 @@
 <node TEXT="Basically, it is decorating the complete class with the types defined in the schema." ID="ID_1970028126" CREATED="1602528472558" MODIFIED="1602528517818"/>
 <node TEXT="Many details of implementation can be already given in the schema (default values, required values, variable dependencies, de/serialization options, etc...)." ID="ID_1013150747" CREATED="1602423843261" MODIFIED="1602425258526"/>
 <node TEXT="In the schema, variables can be expressed as Jinja2 expressions or Python code, and their value will be evaluated in their context at runtime." ID="ID_13026629" CREATED="1602425502459" MODIFIED="1602425580719"/>
-<node TEXT="Built objects and arrays can be used as standard collections, making the code in the scope of the API very pythonic and natural. They also support lazy-loading, ensuring that a variable and its dependencies are properly loaded, initialized and validated only when it is accessed." ID="ID_753208421" CREATED="1602424114615" MODIFIED="1674494216284" HGAP_QUANTITY="14.749999977648258 pt"/>
+<node TEXT="Built objects and arrays can be used as standard collections, making the code in the scope of the API very pythonic and natural. They also support lazy-loading, ensuring that a variable and its dependencies are properly loaded, initialized and validated only when it is accessed." ID="ID_753208421" CREATED="1602424114615" MODIFIED="1674494216284" HGAP_QUANTITY="14.75 pt"/>
 <node TEXT="Objects are automatically built with a logger, exception handling, type checking of inputs, flexible de/serialization in different formats (json, xml, yaml)." ID="ID_1157965252" CREATED="1602424211986" MODIFIED="1602527473009"/>
 <node TEXT="As all types are compiled at initialization, the resulting API is very fast and yet very robust with a minimum code implementation." ID="ID_1938121872" CREATED="1602424930544" MODIFIED="1602426005739"/>
 <node TEXT="It allows you to provide an interface of your application to others, without having to disclose your own implementation, and to make reusable libraries with less dependencies, sharing only the schemas as common interfaces." ID="ID_1005601351" CREATED="1602424744801" MODIFIED="1602528618791"/>
@@ -10335,11 +10344,11 @@
 <node TEXT="As the schema used to define most of the API is in json-schema, the remaining coding in Python should only be business implementation." ID="ID_1050189403" CREATED="1602527901768" MODIFIED="1602528705150"/>
 <node TEXT="Existing libraries allow to automatically create interfaces to other frameworks for web apps such as Django, Django Rest Framework, Django CMS, Django Shop; or for scientific calculations to generate corresponding code in other languages (cpp, c, fmi, modelica, matlab, amesim). Contact Numengo for consultancy." ID="ID_50281975" CREATED="1602528739089" MODIFIED="1602535832588"/>
 </node>
-<node TEXT="https://github.com/django-wiki/django-wiki/" POSITION="right" ID="ID_1335947334" CREATED="1674628512775" MODIFIED="1674628521229" LINK="https://github.com/django-wiki/django-wiki/">
+<node TEXT="https://github.com/django-wiki/django-wiki/" POSITION="bottom_or_right" ID="ID_1335947334" CREATED="1674628512775" MODIFIED="1674628521229" LINK="https://github.com/django-wiki/django-wiki/">
 <icon BUILTIN="button_cancel"/>
 <edge COLOR="#ff00ff"/>
 </node>
-<node TEXT="https://github.com/wighawag/template-ethereum-contracts" POSITION="right" ID="ID_844039625" CREATED="1615277876567" MODIFIED="1615277885964" LINK="https://github.com/wighawag/template-ethereum-contracts">
+<node TEXT="https://github.com/wighawag/template-ethereum-contracts" POSITION="bottom_or_right" ID="ID_844039625" CREATED="1615277876567" MODIFIED="1615277885964" LINK="https://github.com/wighawag/template-ethereum-contracts">
 <icon BUILTIN="button_cancel"/>
 <edge COLOR="#7c7c00"/>
 <node TEXT="" ID="ID_1022752777" CREATED="1654810208315" MODIFIED="1654810208315"/>

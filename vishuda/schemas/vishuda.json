@@ -257,10 +257,7 @@
               }
             },
             "language": {
-              "type": "string",
-              "items": {
-                "$ref": "#/$defs/i18n/properties/languageCode"
-              }
+              "$ref": "#/$defs/i18n/properties/languageCode"
             },
             "fallback": {
               "type": "boolean",
@@ -300,7 +297,7 @@
             "text": "msgstr"
           },
           "properties": {
-            "language": {
+            "to_language": {
               "$ref": "#/$defs/i18n/properties/languageCode"
             },
             "msgstr": {
@@ -314,6 +311,9 @@
             "#/$defs/i18n/$defs/Translatable"
           ],
           "abstract": true,
+          "notSerialized": [
+            "multilingual"
+          ],
           "properties": {
             "multilingual": {
               "type": "array",
@@ -2582,20 +2582,20 @@
               "type": "importable"
             },
             "command_name": {
-              "type": "string"
+              "type": "string",
+              "default": "{{ this.name }}"
             },
             "name": {
-              "type": "string",
-              "default": "{{ this.command_name }}"
+              "type": "string"
             },
             "help": {
               "type": "string"
             },
             "emojis": {
-              "type": "string"
+              "type": "array"
             },
             "emojis_after": {
-              "type": "string"
+              "type": "array"
             }
           }
         },
@@ -2627,12 +2627,6 @@
             },
             "merchant": {
               "$ref": "#/$defs/personas/$defs/Merchant"
-            },
-            "telebot": {
-              "$ref": "https://numengo.org/telebot#/$defs/Telebot"
-            },
-            "chatbot": {
-              "$ref": "#/$defs/app/$defs/chatbot/$defs/Chatbot"
             }
           }
         },

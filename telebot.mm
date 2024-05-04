@@ -1,15 +1,16 @@
-<map version="freeplane 1.7.0">
-<!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
+<map version="freeplane 1.11.5">
+<!--To view this file, download free mind mapping software Freeplane from https://www.freeplane.org -->
 <node TEXT="telebot" FOLDED="false" ID="ID_244004206" CREATED="1601987431072" MODIFIED="1654895912730" STYLE="oval">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
-    <properties show_icon_for_attributes="true" fit_to_viewport="false" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
+    <properties show_icon_for_attributes="true" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff" fit_to_viewport="false"/>
 
 <map_styles>
-<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24.0 pt">
+<stylenode LOCALIZED_TEXT="styles.root_node" STYLE="oval" UNIFORM_SHAPE="true" VGAP_QUANTITY="24 pt">
 <font SIZE="24"/>
-<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="right" STYLE="bubble">
-<stylenode LOCALIZED_TEXT="default" ICON_SIZE="12.0 pt" COLOR="#000000" STYLE="fork">
+<stylenode LOCALIZED_TEXT="styles.predefined" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="default" ID="ID_1257537755" ICON_SIZE="12 pt" COLOR="#000000" STYLE="fork">
+<arrowlink SHAPE="CUBIC_CURVE" COLOR="#000000" WIDTH="2" TRANSPARENCY="200" DASH="" FONT_SIZE="9" FONT_FAMILY="SansSerif" DESTINATION="ID_1257537755" STARTARROW="NONE" ENDARROW="DEFAULT"/>
 <font NAME="SansSerif" SIZE="10" BOLD="false" ITALIC="false"/>
 </stylenode>
 <stylenode LOCALIZED_TEXT="defaultstyle.details"/>
@@ -21,8 +22,9 @@
 <edge STYLE="hide_edge"/>
 <cloud COLOR="#f0f0f0" SHAPE="ROUND_RECT"/>
 </stylenode>
+<stylenode LOCALIZED_TEXT="defaultstyle.selection" BACKGROUND_COLOR="#4e85f8" BORDER_COLOR_LIKE_EDGE="false" BORDER_COLOR="#4e85f8"/>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="styles.user-defined" POSITION="bottom_or_right" STYLE="bubble">
 <stylenode LOCALIZED_TEXT="styles.topic" COLOR="#18898b" STYLE="fork">
 <font NAME="Liberation Sans" SIZE="10" BOLD="true"/>
 </stylenode>
@@ -36,8 +38,8 @@
 <icon BUILTIN="yes"/>
 </stylenode>
 </stylenode>
-<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="right" STYLE="bubble">
-<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000" STYLE="oval" SHAPE_HORIZONTAL_MARGIN="10.0 pt" SHAPE_VERTICAL_MARGIN="10.0 pt">
+<stylenode LOCALIZED_TEXT="styles.AutomaticLayout" POSITION="bottom_or_right" STYLE="bubble">
+<stylenode LOCALIZED_TEXT="AutomaticLayout.level.root" COLOR="#000000" STYLE="oval" SHAPE_HORIZONTAL_MARGIN="10 pt" SHAPE_VERTICAL_MARGIN="10 pt">
 <font SIZE="18"/>
 </stylenode>
 <stylenode LOCALIZED_TEXT="AutomaticLayout.level,1" COLOR="#0033ff">
@@ -63,13 +65,20 @@
 </stylenode>
 </map_styles>
 </hook>
-<hook NAME="AutomaticEdgeColor" COUNTER="28" RULE="ON_BRANCH_CREATION"/>
-<node TEXT="description" POSITION="right" ID="ID_715506666" CREATED="1651423138821" MODIFIED="1654895942528">
+<hook NAME="AutomaticEdgeColor" COUNTER="29" RULE="ON_BRANCH_CREATION"/>
+<node TEXT="description" POSITION="bottom_or_right" ID="ID_715506666" CREATED="1651423138821" MODIFIED="1654895942528">
 <icon BUILTIN="bookmark"/>
 <edge COLOR="#ff00ff"/>
 <node TEXT="This objects represents a Telegram bot. It allows you to add handlers for different kind of updates." ID="ID_1594277769" CREATED="1651423144531" MODIFIED="1651430192985"/>
 </node>
-<node TEXT="definitions" POSITION="right" ID="ID_1981363606" CREATED="1649589707822" MODIFIED="1654895942552">
+<node TEXT="documentation" POSITION="bottom_or_right" ID="ID_1554846758" CREATED="1714728075059" MODIFIED="1714728085319">
+<icon BUILTIN="button_cancel"/>
+<edge COLOR="#00007c"/>
+<node TEXT="png-240503-102126785-13078137914023852721.png" ID="ID_1597493227" CREATED="1714728089547" MODIFIED="1714728089547">
+<hook URI="telebot_files/png-240503-102126785-13078137914023852721.png" SIZE="0.20325203" NAME="ExternalObject"/>
+</node>
+</node>
+<node TEXT="definitions" POSITION="bottom_or_right" ID="ID_1981363606" CREATED="1649589707822" MODIFIED="1654895942552">
 <edge COLOR="#00ffff"/>
 <node TEXT="actions" ID="ID_700140138" CREATED="1654847104011" MODIFIED="1654847106197">
 <node TEXT="definitions" ID="ID_1605718146" CREATED="1654847109730" MODIFIED="1654847116821">
@@ -88,6 +97,7 @@
 </node>
 <node TEXT="properties" ID="ID_1508181872" CREATED="1654462180380" MODIFIED="1654462182710">
 <node TEXT="_type" ID="ID_721453048" CREATED="1654462183176" MODIFIED="1654462206531"/>
+<node TEXT="text" ID="ID_1254414159" CREATED="1714656208362" MODIFIED="1714656213583"/>
 <node TEXT="triggers" ID="ID_997489232" CREATED="1654269758194" MODIFIED="1654269786504">
 <icon BUILTIN="very_positive"/>
 </node>
@@ -99,8 +109,12 @@
 </node>
 <node TEXT="help" ID="ID_571419930" CREATED="1654897251812" MODIFIED="1654897376713"/>
 <node TEXT="example" ID="ID_1971608056" CREATED="1655113332699" MODIFIED="1655113335075"/>
-<node TEXT="emojis" ID="ID_1467908054" CREATED="1654897245478" MODIFIED="1654897249935"/>
-<node TEXT="emojis_after" ID="ID_1377089270" CREATED="1654935699516" MODIFIED="1654935704982"/>
+<node TEXT="emojis" ID="ID_1467908054" CREATED="1654897245478" MODIFIED="1714674177400">
+<icon BUILTIN="very_positive"/>
+</node>
+<node TEXT="emojis_after" ID="ID_1377089270" CREATED="1654935699516" MODIFIED="1714674177402">
+<icon BUILTIN="very_positive"/>
+</node>
 </node>
 </node>
 <node TEXT="Command" ID="ID_1403819288" CREATED="1653926382739" MODIFIED="1653926435841">
@@ -132,7 +146,30 @@
 </node>
 </node>
 </node>
-<node TEXT="plugins" ID="ID_1757347943" CREATED="1654847070478" MODIFIED="1654847080765">
+<node TEXT="EntryPoint" ID="ID_1489725755" CREATED="1654462097596" MODIFIED="1714660604674">
+<node TEXT="extends" ID="ID_1314178093" CREATED="1654455904600" MODIFIED="1655113358309">
+<node TEXT="...app.EntryPoint" ID="ID_1316676152" CREATED="1654455909800" MODIFIED="1714657329383">
+<icon BUILTIN="button_cancel"/>
+</node>
+<node TEXT="ngoschema.instances.Instance" ID="ID_885938215" CREATED="1650279600024" MODIFIED="1655113384260">
+<icon BUILTIN="button_cancel"/>
+</node>
+<node TEXT="vishuda.app.EntryPoint" ID="ID_54263251" CREATED="1714657354157" MODIFIED="1714657366063"/>
+<node TEXT="actions.Action" ID="ID_82021295" CREATED="1655113372063" MODIFIED="1714661444666"/>
+</node>
+<node TEXT="properties" ID="ID_622738340" CREATED="1654455921522" MODIFIED="1654455923402">
+<node TEXT="actions" ID="ID_1266912109" CREATED="1654456081859" MODIFIED="1654462312346">
+<icon BUILTIN="very_positive"/>
+<node TEXT="actions.Action" ID="ID_923635006" CREATED="1654456086584" MODIFIED="1714661438742"/>
+</node>
+<node TEXT="info" ID="ID_1677665666" CREATED="1654455973114" MODIFIED="1655113393645">
+<icon BUILTIN="button_cancel"/>
+<node TEXT="telebot.plugins.PluginInfo" ID="ID_1376781932" CREATED="1654455974447" MODIFIED="1654897338761"/>
+</node>
+</node>
+</node>
+<node TEXT="plugins" ID="ID_1757347943" CREATED="1654847070478" MODIFIED="1714660589428">
+<icon BUILTIN="button_cancel"/>
 <node TEXT="definitions" ID="ID_296175331" CREATED="1654847085920" MODIFIED="1654847090183">
 <node TEXT="PluginInfo" FOLDED="true" ID="ID_76214338" CREATED="1654269744019" MODIFIED="1655113425422">
 <icon BUILTIN="button_cancel"/>
@@ -159,30 +196,10 @@
 </node>
 </node>
 </node>
-<node TEXT="Plugin" ID="ID_1489725755" CREATED="1654462097596" MODIFIED="1654462099882">
-<node TEXT="extends" ID="ID_1314178093" CREATED="1654455904600" MODIFIED="1655113358309">
-<node TEXT="...app.EntryPoint" ID="ID_1316676152" CREATED="1654455909800" MODIFIED="1654897010833">
+</node>
+</node>
+<node TEXT="Telebot" FOLDED="true" ID="ID_1366426191" CREATED="1649314475764" MODIFIED="1714657905558">
 <icon BUILTIN="button_cancel"/>
-</node>
-<node TEXT="ngoschema.instances.Instance" ID="ID_885938215" CREATED="1650279600024" MODIFIED="1655113384260">
-<icon BUILTIN="button_cancel"/>
-</node>
-<node TEXT="..actions.Action" ID="ID_82021295" CREATED="1655113372063" MODIFIED="1655113379542"/>
-</node>
-<node TEXT="properties" ID="ID_622738340" CREATED="1654455921522" MODIFIED="1654455923402">
-<node TEXT="actions" ID="ID_1266912109" CREATED="1654456081859" MODIFIED="1654462312346">
-<icon BUILTIN="very_positive"/>
-<node TEXT="..actions.Action" ID="ID_923635006" CREATED="1654456086584" MODIFIED="1654847141148"/>
-</node>
-<node TEXT="info" ID="ID_1677665666" CREATED="1654455973114" MODIFIED="1655113393645">
-<icon BUILTIN="button_cancel"/>
-<node TEXT="telebot.plugins.PluginInfo" ID="ID_1376781932" CREATED="1654455974447" MODIFIED="1654897338761"/>
-</node>
-</node>
-</node>
-</node>
-</node>
-<node TEXT="Telebot" ID="ID_1366426191" CREATED="1649314475764" MODIFIED="1649314479936">
 <node TEXT="extends" ID="ID_452017346" CREATED="1655113582921" MODIFIED="1655113586070">
 <node TEXT="plugins.Plugin" ID="ID_7273259" CREATED="1655113587869" MODIFIED="1655113594153"/>
 </node>
@@ -216,6 +233,12 @@
 <icon BUILTIN="neutral"/>
 <node TEXT="default" ID="ID_1731028798" CREATED="1649365809986" MODIFIED="1649365813819">
 <node TEXT="2" OBJECT="java.lang.Long|2" ID="ID_1352988716" CREATED="1649365815552" MODIFIED="1649365816685"/>
+</node>
+</node>
+<node TEXT="labels" ID="ID_28140181" CREATED="1714651155892" MODIFIED="1714651171670">
+<icon BUILTIN="very_positive"/>
+<node TEXT="description" ID="ID_1000693533" CREATED="1714651173412" MODIFIED="1714651175748">
+<node TEXT="labels to make reference to for callback data (automatically numbered)" ID="ID_457739089" CREATED="1714651176148" MODIFIED="1714651241454"/>
 </node>
 </node>
 <node TEXT="entry_points" ID="ID_689995084" CREATED="1601112570936" MODIFIED="1607947517977">
@@ -526,9 +549,101 @@
 </node>
 </node>
 </node>
-<node TEXT="handlers" FOLDED="true" ID="ID_577537259" CREATED="1652811260083" MODIFIED="1652811263171">
+<node TEXT="CallBackContext" ID="ID_1953202469" CREATED="1714730892580" MODIFIED="1714730899691">
+<node TEXT="properties" ID="ID_608514668" CREATED="1714657954101" MODIFIED="1714657957807">
+<node TEXT="bot_data" ID="ID_460838310" CREATED="1714657959439" MODIFIED="1714657980082">
+<icon BUILTIN="executable"/>
+</node>
+<node TEXT="chat_data" ID="ID_532237554" CREATED="1714657961828" MODIFIED="1714657980082">
+<icon BUILTIN="executable"/>
+</node>
+<node TEXT="user_data" ID="ID_1603193599" CREATED="1714657971961" MODIFIED="1714657980081">
+<icon BUILTIN="executable"/>
+</node>
+<node TEXT="application" ID="ID_125194456" CREATED="1714730996982" MODIFIED="1714731000337">
+<node TEXT="Telebot" ID="ID_377403856" CREATED="1714731000661" MODIFIED="1714731002501"/>
+</node>
+<node TEXT="" ID="ID_800254809" CREATED="1714731009426" MODIFIED="1714731009426"/>
+</node>
+</node>
+<node TEXT="Telebot" ID="ID_481357282" CREATED="1714656724971" MODIFIED="1714656728810">
+<node TEXT="extends" ID="ID_239278339" CREATED="1655113582921" MODIFIED="1655113586070">
+<node TEXT="vishuda.app.App" ID="ID_1386309107" CREATED="1714657354157" MODIFIED="1714657443052"/>
+</node>
+<node TEXT="aliases" ID="ID_1831268602" CREATED="1714657449152" MODIFIED="1714657459374">
+<node TEXT="plugins" ID="ID_1888893494" CREATED="1714657459705" MODIFIED="1714657462134">
+<node TEXT="entry_points" ID="ID_97903057" CREATED="1714657464318" MODIFIED="1714657469206"/>
+</node>
+</node>
+<node TEXT="notSerialized" ID="ID_420290115" CREATED="1649314529881" MODIFIED="1649314533000">
+<node TEXT="token" ID="ID_270519594" CREATED="1649314533265" MODIFIED="1649314536332"/>
+</node>
+<node TEXT="required" ID="ID_816312090" CREATED="1649314541868" MODIFIED="1649314544667">
+<node TEXT="token" ID="ID_1985190148" CREATED="1649314545032" MODIFIED="1649314548218"/>
+<node TEXT="telebot_name" ID="ID_1213430455" CREATED="1621422216622" MODIFIED="1649505791954"/>
+</node>
+<node TEXT="additionalProperties" ID="ID_1167041505" CREATED="1649666530440" MODIFIED="1649666534540">
+<node TEXT="true" ID="ID_666832112" CREATED="1649666534749" MODIFIED="1649666535789"/>
+</node>
+<node TEXT="properties" ID="ID_837850070" CREATED="1714657509468" MODIFIED="1714657511469">
+<node TEXT="telebot_name" ID="ID_1186627132" CREATED="1649505793583" MODIFIED="1649505797006">
+<node TEXT="description" ID="ID_1282927711" CREATED="1651423138821" MODIFIED="1651423143372">
+<icon BUILTIN="bookmark"/>
+<node TEXT="Bot name" ID="ID_1762568731" CREATED="1651423144531" MODIFIED="1651430145253"/>
+</node>
+</node>
+<node TEXT="token" ID="ID_1329096207" CREATED="1649314511965" MODIFIED="1649314522881">
+<node TEXT="description" ID="ID_1625184464" CREATED="1651430166081" MODIFIED="1651430173226">
+<icon BUILTIN="bookmark"/>
+<node TEXT="bot API token" ID="ID_1667981483" CREATED="1651430169924" MODIFIED="1651430170814"/>
+</node>
+</node>
+<node TEXT="threaded" ID="ID_887123591" CREATED="1649365799232" MODIFIED="1649365802001">
+<icon BUILTIN="checked"/>
+</node>
+<node TEXT="num_threads" ID="ID_651214511" CREATED="1649365808558" MODIFIED="1649365821600">
+<icon BUILTIN="neutral"/>
+<node TEXT="default" ID="ID_1636105857" CREATED="1649365809986" MODIFIED="1649365813819">
+<node TEXT="2" OBJECT="java.lang.Long|2" ID="ID_591427087" CREATED="1649365815552" MODIFIED="1649365816685"/>
+</node>
+</node>
+<node TEXT="bot" ID="ID_1065709834" CREATED="1714729095792" MODIFIED="1714729097691"/>
+<node TEXT="updater" ID="ID_1762457957" CREATED="1714729098038" MODIFIED="1714729103000"/>
+<node TEXT="labels" ID="ID_1276992625" CREATED="1714651155892" MODIFIED="1714651171670">
+<icon BUILTIN="very_positive"/>
+<node TEXT="description" ID="ID_333153066" CREATED="1714651173412" MODIFIED="1714651175748">
+<node TEXT="labels to make reference to for callback data (automatically numbered)" ID="ID_1924636523" CREATED="1714651176148" MODIFIED="1714651241454"/>
+</node>
+</node>
+<node TEXT="entry_points" ID="ID_139696252" CREATED="1714660612326" MODIFIED="1714660629129">
+<icon BUILTIN="very_positive"/>
+<node TEXT="EntryPoint" ID="ID_1564829054" CREATED="1714660620579" MODIFIED="1714660625348"/>
+</node>
+<node TEXT="handlers" ID="ID_779419265" CREATED="1714657660964" MODIFIED="1714657669284">
+<icon BUILTIN="very_positive"/>
+<node TEXT="handlers.Handler" ID="ID_138234011" CREATED="1649231218359" MODIFIED="1649315337388"/>
+</node>
+<node TEXT="inline_handlers" ID="ID_1818490487" CREATED="1649232562631" MODIFIED="1649232565971">
+<icon BUILTIN="very_positive"/>
+<node TEXT="handlers.Handler" ID="ID_432107237" CREATED="1649231218359" MODIFIED="1649315337388"/>
+</node>
+<node TEXT="callback_query_handlers" ID="ID_1860723963" CREATED="1649232086838" MODIFIED="1649232541119">
+<icon BUILTIN="very_positive"/>
+<node TEXT="handlers.CallbackQueryHandler" ID="ID_1408973306" CREATED="1649231218359" MODIFIED="1654373448357"/>
+</node>
+<node TEXT="middleware_handlers" ID="ID_892809466" CREATED="1649232814217" MODIFIED="1649232817278">
+<icon BUILTIN="very_positive"/>
+<node TEXT="handlers.MiddlewareHandler" ID="ID_874077194" CREATED="1649231218359" MODIFIED="1649354669359"/>
+</node>
+<node TEXT="conversation_handlers" ID="ID_623084367" CREATED="1649232814217" MODIFIED="1714657865569">
+<icon BUILTIN="very_positive"/>
+<node TEXT="handlers.ConversationHandler" ID="ID_778867990" CREATED="1649231218359" MODIFIED="1714657873589"/>
+</node>
+</node>
+</node>
+<node TEXT="handlers" ID="ID_577537259" CREATED="1652811260083" MODIFIED="1652811263171">
 <node TEXT="definitions" ID="ID_1338519318" CREATED="1652819073832" MODIFIED="1652819076688">
-<node TEXT="Handler" ID="ID_773077076" CREATED="1652811264288" MODIFIED="1652811266316">
+<node TEXT="Handler" ID="ID_773077076" CREATED="1652811264288" MODIFIED="1714632408637">
 <node TEXT="extends" ID="ID_655165778" CREATED="1652811339324" MODIFIED="1652811341400">
 <node TEXT="ngoschema.instances.Instance" ID="ID_298546028" CREATED="1600966857836" MODIFIED="1621418522250">
 <icon BUILTIN="button_cancel"/>
@@ -536,6 +651,7 @@
 </node>
 <node TEXT="required" ID="ID_773578974" CREATED="1652818644277" MODIFIED="1652818646473">
 <node TEXT="callback" ID="ID_1584015016" CREATED="1652811334700" MODIFIED="1652811336526"/>
+<node TEXT="block" ID="ID_962283101" CREATED="1714726483940" MODIFIED="1714726485206"/>
 </node>
 <node TEXT="properties" ID="ID_182148580" CREATED="1652811268221" MODIFIED="1652811332433">
 <node TEXT="callback" ID="ID_1889080299" CREATED="1652811334700" MODIFIED="1652811336526">
@@ -543,11 +659,15 @@
 <node TEXT="importable" ID="ID_1942934257" CREATED="1652462437666" MODIFIED="1653326235214"/>
 </node>
 </node>
-<node TEXT="run_async" ID="ID_318596970" CREATED="1652462665216" MODIFIED="1652462707155">
+<node TEXT="block" ID="ID_350316647" CREATED="1714726025510" MODIFIED="1714726033603">
+<icon BUILTIN="checked"/>
+</node>
+<node TEXT="check_update" ID="ID_91807524" CREATED="1714726398743" MODIFIED="1714726406053">
 <icon BUILTIN="checked"/>
 </node>
 </node>
-<node TEXT="properties" ID="ID_1274379907" CREATED="1654327895688" MODIFIED="1654327927102">
+<node TEXT="properties" ID="ID_1274379907" CREATED="1654327895688" MODIFIED="1714726505395">
+<icon BUILTIN="button_cancel"/>
 <node TEXT="content_types" ID="ID_1188521338" CREATED="1654327946143" MODIFIED="1654327980392">
 <icon BUILTIN="very_positive"/>
 </node>
@@ -561,9 +681,33 @@
 <node TEXT="func" ID="ID_1028643724" CREATED="1654327965511" MODIFIED="1654327966517"/>
 </node>
 </node>
-<node TEXT="MessageHandler" FOLDED="true" ID="ID_587106154" CREATED="1652462331047" MODIFIED="1652462332820">
+<node TEXT="CommandHandler" ID="ID_377300949" CREATED="1654374115877" MODIFIED="1654374116597">
+<node TEXT="extends" ID="ID_274296584" CREATED="1652818606339" MODIFIED="1652818608036">
+<node TEXT="Handler" ID="ID_569412354" CREATED="1652818609848" MODIFIED="1714632445967"/>
+</node>
+<node TEXT="description" ID="ID_675186146" CREATED="1714726233232" MODIFIED="1714726236016">
+<node TEXT="Commands are Telegram messages that start with /, optionally followed by an @ and the bot’s name and/or some additional text. The handler will add a list to the CallbackContext named CallbackContext.args. It will contain a list of strings, which is the text following the command split on single or consecutive whitespace characters" ID="ID_1459621760" CREATED="1714726236427" MODIFIED="1714726237638"/>
+</node>
+<node TEXT="properties" ID="ID_1627774453" CREATED="1714726276195" MODIFIED="1714726279211">
+<node TEXT="command" ID="ID_445041991" CREATED="1714726287189" MODIFIED="1714726289370"/>
+<node TEXT="filters" ID="ID_595840454" CREATED="1652462339328" MODIFIED="1652462410482">
+<icon BUILTIN="very_positive"/>
+<node TEXT="..filters.BaseFilter" ID="ID_1886062789" CREATED="1652462344171" MODIFIED="1653770265498"/>
+</node>
+<node TEXT="block" ID="ID_1633176615" CREATED="1714726025510" MODIFIED="1714726033603">
+<icon BUILTIN="checked"/>
+</node>
+<node TEXT="has_args" ID="ID_925343994" CREATED="1714726318835" MODIFIED="1714726328945">
+<icon BUILTIN="checked"/>
+</node>
+<node TEXT="check_update" ID="ID_364839681" CREATED="1714726398743" MODIFIED="1714726406053">
+<icon BUILTIN="checked"/>
+</node>
+</node>
+</node>
+<node TEXT="MessageHandler" ID="ID_587106154" CREATED="1652462331047" MODIFIED="1652462332820">
 <node TEXT="extends" ID="ID_975486291" CREATED="1652818592575" MODIFIED="1652818596912">
-<node TEXT="Handler" ID="ID_276387017" CREATED="1652818599128" MODIFIED="1652818600579"/>
+<node TEXT="Handler" ID="ID_276387017" CREATED="1652818599128" MODIFIED="1714632416573"/>
 </node>
 <node TEXT="description" ID="ID_708292362" CREATED="1652462556670" MODIFIED="1652462558838">
 <node TEXT="Handler class to handle telegram messages. They might contain text, media or status updates." ID="ID_1806634817" CREATED="1652462571099" MODIFIED="1652462572181"/>
@@ -573,11 +717,14 @@
 <icon BUILTIN="very_positive"/>
 <node TEXT="..filters.BaseFilter" ID="ID_1424639511" CREATED="1652462344171" MODIFIED="1653770265498"/>
 </node>
+<node TEXT="block" ID="ID_862283576" CREATED="1714726025510" MODIFIED="1714726033603">
+<icon BUILTIN="checked"/>
 </node>
 </node>
-<node TEXT="CallbackQueryHandler" FOLDED="true" ID="ID_620003057" CREATED="1652808788193" MODIFIED="1652808798267">
+</node>
+<node TEXT="CallbackQueryHandler" ID="ID_620003057" CREATED="1652808788193" MODIFIED="1652808798267">
 <node TEXT="extends" ID="ID_86527321" CREATED="1649314961478" MODIFIED="1649314963946">
-<node TEXT="Handler" ID="ID_34338613" CREATED="1649522314927" MODIFIED="1652809805853"/>
+<node TEXT="Handler" ID="ID_34338613" CREATED="1649522314927" MODIFIED="1714632424041"/>
 </node>
 <node TEXT="properties" ID="ID_1480571855" CREATED="1649231863055" MODIFIED="1649231864979">
 <node TEXT="pattern" ID="ID_1889874132" CREATED="1652808963552" MODIFIED="1652809008889">
@@ -585,9 +732,9 @@
 </node>
 </node>
 </node>
-<node TEXT="ConversationHandler" FOLDED="true" ID="ID_1843530266" CREATED="1652462546074" MODIFIED="1652462546858">
+<node TEXT="ConversationHandler" ID="ID_1843530266" CREATED="1652462546074" MODIFIED="1652462546858">
 <node TEXT="extends" ID="ID_1274781447" CREATED="1652818606339" MODIFIED="1652818608036">
-<node TEXT="Handler" ID="ID_1412651560" CREATED="1652818609848" MODIFIED="1652818612257"/>
+<node TEXT="Handler" ID="ID_1412651560" CREATED="1652818609848" MODIFIED="1714632430705"/>
 </node>
 <node TEXT="description" FOLDED="true" ID="ID_1867299791" CREATED="1652462820924" MODIFIED="1652462823538">
 <node TEXT="A handler to hold a conversation with a single or multiple users through Telegram updates by managing four collections of other handlers.&#xa;&#xa;The first collection, a ``list`` named :attr:`entry_points`, is used to initiate the conversation, for example with a :class:`telegram.ext.CommandHandler` or :class:`telegram.ext.MessageHandler`.&#xa;&#xa;The second collection, a ``dict`` named :attr:`states`, contains the different conversation steps and one or more associated handlers that should be used if the user sends a message when the conversation with them is currently in that state. Here you can also define a state for `TIMEOUT` to define the behavior where `conversation_timeout` is exceeded, and a state for`WAITING` to define behavior when a new update is received while the previous ``@run_async`` decorated handler is not finished.&#xa;&#xa;The third collection, a ``list`` named :attr:`fallbacks`, is used if the user is currently in a conversation but the state has either no associated handler or the handler that is associated to the state is inappropriate for the update, for example if the update contains a command, but a regular text message is expected. You could use this for a ``/cancel`` command or to let the user know their message was not recognized.&#xa;&#xa;To change the state of conversation, the callback function of a handler must return the new state after responding to the user. If it does not return anything (returning :obj:`None` by default), the state will not change. If an entry point callback function returns :obj:`None`, the conversation ends immediately after the execution of this callback function.&#xa;To end the conversation, the callback function must return :attr:`END` or ``-1``. To handle the conversation timeout, use handler :attr:`TIMEOUT` or ``-2``.&#xa;Finally, :class:`telegram.ext.DispatcherHandlerStop` can be used in conversations as described in the corresponding documentation.&#xa;&#xa;Note:&#xa;In each of the described collections of handlers, a handler may in turn be a `ConversationHandler`. In that case, the nested :class:`ConversationHandler` should have the attribute :attr:`map_to_parent` which allows to return to the parent conversation at specified states within the nested conversation.&#xa;&#xa;Note that the keys in :attr:`map_to_parent` must not appear as keys in :attr:`states` attribute or else the latter will be ignored. You may map :attr:`END` to one of the parents states to continue the parent conversation after this has ended or even map a state to :attr:`END` to end the *parent* conversation from within the nested one. For an example on nested :class:`ConversationHandler` s, see our `examples`_." ID="ID_777181546" CREATED="1652462824812" MODIFIED="1652463090071"/>
@@ -595,8 +742,8 @@
 <node TEXT="properties" ID="ID_90421303" CREATED="1652462550643" MODIFIED="1652462553354">
 <node TEXT="entry_points" ID="ID_1454358955" CREATED="1652462611203" MODIFIED="1652463107514">
 <icon BUILTIN="very_positive"/>
+<node TEXT="Handler" ID="ID_339552575" CREATED="1714643090683" MODIFIED="1714643096015"/>
 </node>
-<node TEXT="callback" ID="ID_1904505748" CREATED="1652818698345" MODIFIED="1652818703210"/>
 <node TEXT="states" ID="ID_1222273884" CREATED="1652462616414" MODIFIED="1652462621493">
 <node TEXT="type" ID="ID_1347324028" CREATED="1652463118971" MODIFIED="1652463120847">
 <node TEXT="object" ID="ID_1947165981" CREATED="1652463151026" MODIFIED="1652463152936"/>
@@ -605,10 +752,14 @@
 <node TEXT="type" ID="ID_1816736225" CREATED="1652463138547" MODIFIED="1652463145064">
 <node TEXT="array" ID="ID_1947594790" CREATED="1652463145391" MODIFIED="1652463147235"/>
 </node>
+<node TEXT="items" POSITION="bottom_or_right" ID="ID_1751797900" CREATED="1714643191219" MODIFIED="1714643192555">
+<node TEXT="Handler" ID="ID_552216435" CREATED="1714643193252" MODIFIED="1714643194792"/>
+</node>
 </node>
 </node>
 <node TEXT="fallbacks" ID="ID_1465992220" CREATED="1652462621847" MODIFIED="1652463162076">
 <icon BUILTIN="very_positive"/>
+<node TEXT="Handler" ID="ID_627019783" CREATED="1714643090683" MODIFIED="1714643096015"/>
 </node>
 <node TEXT="allow_reentry" ID="ID_1422810360" CREATED="1652462626526" MODIFIED="1652463197569">
 <icon BUILTIN="checked"/>
@@ -639,9 +790,9 @@
 </node>
 </node>
 </node>
-<node TEXT="ChatMemberHandler" FOLDED="true" ID="ID_1593155567" CREATED="1652465983691" MODIFIED="1652465986499">
+<node TEXT="ChatMemberHandler" ID="ID_1593155567" CREATED="1652465983691" MODIFIED="1652465986499">
 <node TEXT="extends" ID="ID_456627549" CREATED="1652818606339" MODIFIED="1652818608036">
-<node TEXT="Handler" ID="ID_683870353" CREATED="1652818609848" MODIFIED="1652818612257"/>
+<node TEXT="Handler" ID="ID_683870353" CREATED="1652818609848" MODIFIED="1714632437587"/>
 </node>
 <node TEXT="description" ID="ID_227086898" CREATED="1652466003025" MODIFIED="1652466005295">
 <node TEXT="Handler class to handle Telegram updates that contain a chat member update." ID="ID_744140859" CREATED="1652466005612" MODIFIED="1652466006969"/>
@@ -656,9 +807,10 @@
 </node>
 </node>
 </node>
-<node TEXT="MiddlewareHandler" FOLDED="true" ID="ID_1065548912" CREATED="1652431984694" MODIFIED="1653328420493">
+<node TEXT="MiddlewareHandler" ID="ID_1065548912" CREATED="1652431984694" MODIFIED="1714726673587">
+<icon BUILTIN="button_cancel"/>
 <node TEXT="extends" ID="ID_276291939" CREATED="1652818606339" MODIFIED="1652818608036">
-<node TEXT="Handler" ID="ID_923647285" CREATED="1652818609848" MODIFIED="1652818612257"/>
+<node TEXT="Handler" ID="ID_923647285" CREATED="1652818609848" MODIFIED="1714632442528"/>
 </node>
 <node TEXT="properties" ID="ID_684648543" CREATED="1649354629144" MODIFIED="1649354631897">
 <node TEXT="update_types" ID="ID_1357710803" CREATED="1649354640094" MODIFIED="1649354648259">
@@ -666,14 +818,10 @@
 </node>
 </node>
 </node>
-<node TEXT="CommandHandler" FOLDED="true" ID="ID_377300949" CREATED="1654374115877" MODIFIED="1654374116597">
-<node TEXT="extends" ID="ID_274296584" CREATED="1652818606339" MODIFIED="1652818608036">
-<node TEXT="Handler" ID="ID_569412354" CREATED="1652818609848" MODIFIED="1652818612257"/>
-</node>
-</node>
-<node TEXT="RegexHandler" ID="ID_1447406237" CREATED="1654374130677" MODIFIED="1654374131316">
+<node TEXT="RegexHandler" ID="ID_1447406237" CREATED="1654374130677" MODIFIED="1714726673590">
+<icon BUILTIN="button_cancel"/>
 <node TEXT="extends" ID="ID_2355322" CREATED="1652818606339" MODIFIED="1652818608036">
-<node TEXT="Handler" ID="ID_150898343" CREATED="1652818609848" MODIFIED="1652818612257"/>
+<node TEXT="Handler" ID="ID_150898343" CREATED="1652818609848" MODIFIED="1714632449917"/>
 </node>
 </node>
 </node>
@@ -718,7 +866,7 @@
 </node>
 </node>
 </node>
-<node TEXT="Enums" ID="ID_202255908" CREATED="1655113980199" MODIFIED="1655114221682">
+<node TEXT="Enums" FOLDED="true" ID="ID_202255908" CREATED="1655113980199" MODIFIED="1655114221682">
 <node TEXT="type" ID="ID_946065544" CREATED="1655114222207" MODIFIED="1655114227866">
 <node TEXT="object" ID="ID_1796638339" CREATED="1655114228525" MODIFIED="1655114229673"/>
 </node>
@@ -964,7 +1112,6 @@
 </node>
 </node>
 </node>
-<node TEXT="" ID="ID_1878883800" CREATED="1655118032958" MODIFIED="1655118553066"/>
 </node>
 </node>
 </map>

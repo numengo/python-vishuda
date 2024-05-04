@@ -1,5 +1,5 @@
 # *- coding: utf-8 -*-
-from .schema_org import *
+#from .schema_org import *
 from .places import *
 from .auth import *
 from .personas import *

@@ -16,8 +16,8 @@ from .things import Place as Place_so
 from .schema_org import SchemaOrg, SchemaOrgMetaclass
 from .emojis.flags import country_flag
 
-world = get_world()
-#world = None
+#world = get_world()
+world = None
 
 
 class HasCountry(with_metaclass(SchemaMetaclass)):
