@@ -33,9 +33,6 @@
         },
         "application": {
           "$ref": "#/$defs/Telebot"
-        },
-        "": {
-          "type": "string"
         }
       }
     },
