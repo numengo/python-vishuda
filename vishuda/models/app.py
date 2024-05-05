@@ -24,6 +24,16 @@ class Namespace(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/app/$defs/Namespace"
 
 
+class EntryPoint(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint"
+
+    def get_symbol_name(self):
+        return self.symbol.__name__
+
+    def get_symbol_module(self):
+        return self.symbol.__module__
+
+
 class App(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/app/$defs/App"
 

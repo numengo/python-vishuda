@@ -19,6 +19,26 @@
         }
       }
     },
+    "CallBackContext": {
+      "type": "object",
+      "properties": {
+        "bot_data": {
+          "type": "object"
+        },
+        "chat_data": {
+          "type": "object"
+        },
+        "user_data": {
+          "type": "object"
+        },
+        "application": {
+          "$ref": "#/$defs/Telebot"
+        },
+        "": {
+          "type": "string"
+        }
+      }
+    },
     "Telebot": {
       "type": "object",
       "extends": [
@@ -51,6 +71,12 @@
           "type": "integer",
           "default": 2
         },
+        "bot": {
+          "type": "string"
+        },
+        "updater": {
+          "type": "string"
+        },
         "labels": {
           "type": "array",
           "description": "labels to make reference to for callback data (automatically numbered)"
@@ -65,30 +91,6 @@
           "type": "array",
           "items": {
             "$ref": "#/$defs/handlers/$defs/Handler"
-          }
-        },
-        "inline_handlers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/handlers/$defs/Handler"
-          }
-        },
-        "callback_query_handlers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/handlers/$defs/CallbackQueryHandler"
-          }
-        },
-        "middleware_handlers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/handlers/$defs/MiddlewareHandler"
-          }
-        },
-        "conversation_handlers": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/handlers/$defs/ConversationHandler"
           }
         }
       }
@@ -352,48 +354,66 @@
         }
       }
     },
-    "context": {
-      "type": "object",
-      "$defs": {
-        "ContextTypes": {
-          "type": "object",
-          "properties": {
-            "bot_data": {
-              "type": "object"
-            },
-            "chat_data": {
-              "type": "object"
-            },
-            "user_data": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
     "handlers": {
       "type": "object",
       "$defs": {
         "Handler": {
           "type": "object",
           "required": [
-            "callback"
+            "callback",
+            "block"
           ],
           "properties": {
-            "content_types": {
-              "type": "array"
+            "callback": {
+              "type": "importable"
             },
-            "regexp": {
+            "block": {
+              "type": "boolean"
+            },
+            "check_update": {
+              "type": "boolean"
+            }
+          }
+        },
+        "InlineQueryHandler": {
+          "type": "object",
+          "description": "This object represents an incoming inline query. When the user sends an empty query, your bot could return some default or trending results.",
+          "extends": [
+            "#/$defs/handlers/$defs/Handler"
+          ],
+          "properties": {
+            "pattern": {
               "type": "string"
-            },
-            "commands": {
-              "type": "array"
             },
             "chat_types": {
               "type": "array"
-            },
-            "func": {
+            }
+          }
+        },
+        "CommandHandler": {
+          "type": "object",
+          "description": "Commands are Telegram messages that start with /, optionally followed by an @ and the bot’s name and/or some additional text. The handler will add a list to the CallbackContext named CallbackContext.args. It will contain a list of strings, which is the text following the command split on single or consecutive whitespace characters",
+          "extends": [
+            "#/$defs/handlers/$defs/Handler"
+          ],
+          "properties": {
+            "command": {
               "type": "string"
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/filters/$defs/BaseFilter"
+              }
+            },
+            "block": {
+              "type": "boolean"
+            },
+            "has_args": {
+              "type": "boolean"
+            },
+            "check_update": {
+              "type": "boolean"
             }
           }
         },
@@ -409,6 +429,9 @@
               "items": {
                 "$ref": "#/$defs/filters/$defs/BaseFilter"
               }
+            },
+            "block": {
+              "type": "boolean"
             }
           }
         },
@@ -433,9 +456,6 @@
               "items": {
                 "$ref": "#/$defs/handlers/$defs/Handler"
               }
-            },
-            "callback": {
-              "type": "string"
             },
             "states": {
               "type": "object",
@@ -492,29 +512,6 @@
               ]
             }
           }
-        },
-        "MiddlewareHandler": {
-          "type": "object",
-          "extends": [
-            "#/$defs/handlers/$defs/Handler"
-          ],
-          "properties": {
-            "update_types": {
-              "type": "array"
-            }
-          }
-        },
-        "CommandHandler": {
-          "type": "object",
-          "extends": [
-            "#/$defs/handlers/$defs/Handler"
-          ]
-        },
-        "RegexHandler": {
-          "type": "object",
-          "extends": [
-            "#/$defs/handlers/$defs/Handler"
-          ]
         }
       }
     },
