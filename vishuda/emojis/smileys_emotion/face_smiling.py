@@ -1,0 +1,16 @@
+# -*- coding: utf-8
+from emoji import emojize
+grinning_face = emojize(":grinning_face:")
+grinning_face_with_big_eyes = emojize(":grinning_face_with_big_eyes:")
+grinning_face_with_smiling_eyes = emojize(":grinning_face_with_smiling_eyes:")
+beaming_face_with_smiling_eyes = emojize(":beaming_face_with_smiling_eyes:")
+grinning_squinting_face = emojize(":grinning_squinting_face:")
+grinning_face_with_sweat = emojize(":grinning_face_with_sweat:")
+rolling_on_the_floor_laughing = emojize(":rolling_on_the_floor_laughing:")
+face_with_tears_of_joy = emojize(":face_with_tears_of_joy:")
+slightly_smiling_face = emojize(":slightly_smiling_face:")
+upside_down_face = emojize(":upside-down_face:")
+melting_face = emojize(":melting_face:")
+winking_face = emojize(":winking_face:")
+smiling_face_with_smiling_eyes = emojize(":smiling_face_with_smiling_eyes:")
+smiling_face_with_halo = emojize(":smiling_face_with_halo:")

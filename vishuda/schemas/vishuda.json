@@ -139,6 +139,7 @@
         "languageCode": {
           "type": "string",
           "description": "Translation language code",
+          "$comment": "enumeration ordered by pondering each 1st language of a country with its population, worldwide",
           "enum": [
             "en",
             "zh",
@@ -265,6 +266,20 @@
             },
             "codeset": {
               "type": "string"
+            }
+          }
+        },
+        "LanguageContext": {
+          "type": "object",
+          "notSerialized": [
+            "activate_language"
+          ],
+          "notValidated": [
+            "active_language"
+          ],
+          "properties": {
+            "active_language": {
+              "$ref": "#/$defs/i18n/properties/languageCode"
             }
           }
         },
@@ -1281,7 +1296,6 @@
                 "https://numengo.org/ngoschema#/$defs/metadata/$defs/Taggable",
                 "#/$defs/schema_org/$defs/SchemaOrg"
               ],
-              "binary": true,
               "notSerialized": [
                 "file_info",
                 "name"
@@ -1290,6 +1304,7 @@
                 "file_info",
                 "name"
               ],
+              "binary": true,
               "properties": {
                 "_type": {
                   "type": "string"
@@ -2157,11 +2172,6 @@
               "country"
             ]
           },
-          "localized": [
-            "addressCountry",
-            "addressLocality",
-            "addressRegion"
-          ],
           "notSerialized": [
             "country",
             "country_emoji",
@@ -2175,6 +2185,11 @@
             "postal",
             "city",
             "admin"
+          ],
+          "localized": [
+            "addressCountry",
+            "addressLocality",
+            "addressRegion"
           ],
           "properties": {
             "country_emoji": {
@@ -2212,7 +2227,6 @@
             "postal": "postalAddress.postal",
             "postalCode": "postalAddress.postal-code"
           },
-          "crs": "EPSG:4326",
           "dependencies": {
             "admin": [
               "postalAddress.country",
@@ -2235,6 +2249,7 @@
           "required": [
             "postalAddress"
           ],
+          "crs": "EPSG:4326",
           "properties": {
             "postalAddress": {
               "$ref": "#/$defs/places/$defs/Address"
@@ -2401,7 +2416,16 @@
             },
             "affiliation": {
               "foreignKey": {
-                "foreignSchema": "#/$defs/personas/$defs/Organization"
+                "name": "foreignKey",
+                "foreignSchema": "#/$defs/personas/$defs/Organization",
+                "inheritance": null,
+                "foreignClass": null,
+                "cardinality": "one2one",
+                "foreignKeys": [],
+                "reverse": null,
+                "onDelete": "CASCADE",
+                "ordering": [],
+                "backPopulates": null
               }
             },
             "bday": {
@@ -2574,6 +2598,11 @@
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
+          "dependencies": {
+            "command_name": [
+              "name"
+            ]
+          },
           "required": [
             "symbol"
           ],
@@ -2590,12 +2619,6 @@
             },
             "help": {
               "type": "string"
-            },
-            "emojis": {
-              "type": "array"
-            },
-            "emojis_after": {
-              "type": "array"
             }
           }
         },

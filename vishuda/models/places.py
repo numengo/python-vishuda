@@ -14,7 +14,7 @@ from .things.intangibles.structured_values import GeoCoordinates as GeoCoordinat
 from .things.intangibles.structured_values.contact_points import PostalAddress as PostalAddress_so
 from .things import Place as Place_so
 from .schema_org import SchemaOrg, SchemaOrgMetaclass
-from .emojis.flags import country_flag
+
 
 #world = get_world()
 world = None
@@ -24,6 +24,7 @@ class HasCountry(with_metaclass(SchemaMetaclass)):
     _id = r"https://numengo.org/vishuda#/$defs/emojis/$defs/HasCountry"
 
     def get_country_emoji(self):
+        from vishuda.emojis.flags import country_flag
         if self.country:
             flag_name = 'flag_' + inflection.underscore(self.country.name)
             return getattr(country_flag, flag_name, None)

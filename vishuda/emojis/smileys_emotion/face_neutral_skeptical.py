@@ -1,0 +1,15 @@
+# -*- coding: utf-8
+from emoji import emojize
+zipper_mouth_face = emojize(":zipper-mouth_face:")
+face_with_raised_eyebrow = emojize(":face_with_raised_eyebrow:")
+neutral_face = emojize(":neutral_face:")
+expressionless_face = emojize(":expressionless_face:")
+face_without_mouth = emojize(":face_without_mouth:")
+dotted_line_face = emojize(":dotted_line_face:")
+face_in_clouds = emojize(":face_in_clouds:")
+smirking_face = emojize(":smirking_face:")
+unamused_face = emojize(":unamused_face:")
+face_with_rolling_eyes = emojize(":face_with_rolling_eyes:")
+grimacing_face = emojize(":grimacing_face:")
+face_exhaling = emojize(":face_exhaling:")
+lying_face = emojize(":lying_face:")

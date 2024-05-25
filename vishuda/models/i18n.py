@@ -6,7 +6,8 @@ import re
 import os.path
 import copy
 import pycountry
-from collections import Mapping, ChainMap
+from collections import ChainMap
+from collections.abc import Mapping
 
 from ngoschema.exceptions import InvalidValue
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
@@ -22,6 +23,7 @@ register_locale_dir('pycountry', 'locales')
 # Translations are cached in a dictionary for every language.
 # The active translations are stored by threadid to make them thread local.
 _translations = {}
+_active_language = local()
 _active = local()
 
 # The default translation is based on the settings file.
@@ -125,6 +127,10 @@ _translations = {
     for lang in settings.LANGUAGES}
 
 
+def active_language():
+    return _active_language.value
+
+
 def activate(language):
     """
     Fetch the translation object for a given language and install it as the
@@ -135,6 +141,7 @@ def activate(language):
     _active.value = t = _translations.get(language)
     if t is not None:
         t.install(['gettext', 'ngettext', 'lgettext', 'lngettext'])
+    _active_language.value = language
     return t
 
 
@@ -145,6 +152,8 @@ def deactivate():
     """
     if hasattr(_active, "value"):
         del _active.value
+    if hasattr(_active_language, "value"):
+        del _active_language.value
 
 
 def deactivate_all():
@@ -155,6 +164,14 @@ def deactivate_all():
     """
     _active.value = gettext_module.NullTranslations()
     _active.value.to_language = lambda *args: None
+
+
+class LanguageContext(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/i18n/$defs/LanguageContext"
+
+    def get_active_language(self):
+        if hasattr(_active_language, "value"):
+            return _active_language.value
 
 
 class Translatable(with_metaclass(SchemaMetaclass)):
