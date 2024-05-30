@@ -1,7 +1,7 @@
 import pycountry
 
-LANGUAGES = ['en', 'fr', 'de']
-#LANGUAGES = ['en', 'fr']
+#LANGUAGES = ['en', 'fr', 'ru', 'es', 'pt']
+LANGUAGES = ['en', 'fr']
 
 LOCALE_MODULE_DOMAINS = {
     'pycountry' : [

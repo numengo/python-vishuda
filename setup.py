@@ -83,7 +83,10 @@ install_requires = [
     'pyowm',
 
     'icalendar',
-    'telebot',
+    'telegram-bot-api',
+    'aiogram',
+    'aiogram-forms',
+    #'telebot',
 ]
 
 post_install_requires = [i for i in install_requires if ('-' in i or ':' in i or '.' in i)]

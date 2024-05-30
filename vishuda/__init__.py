@@ -6,7 +6,7 @@ __author__ = """Cedric ROMAN"""
 __email__ = 'roman@numengo.com'
 __version__ = '0.1.0'
 
-from simple_settings import LazySettings
+from ngoschema.config.utils import LazySettings
 settings = LazySettings('vishuda.config.settings')
 
 # PROTECTED REGION ID(vishuda.init) ENABLED START

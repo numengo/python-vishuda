@@ -199,7 +199,7 @@ def test_telebot2(tb):
 
 def test_translations():
     import gettext
-    from vishuda.models.i18n import activate
+    from vishuda.i18n import activate
     activate('fr')
     assert _('Germany') == 'Allemagne'
     assert __builtins__.__dict__['_']('Germany') == 'Allemagne'

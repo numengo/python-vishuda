@@ -8,7 +8,7 @@ from collections import ChainMap
 
 from ngoschema import type_builder
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-from .i18n import activate
+from ..i18n import activate
 
 Thing = type_builder.load('https://schema.org/#/$defs/Thing')
 

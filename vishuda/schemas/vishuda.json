@@ -6,6 +6,23 @@
     "datasets": {
       "type": "object",
       "$defs": {
+        "Enum": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "required": [
+            "names"
+          ],
+          "properties": {
+            "names": {
+              "type": "array"
+            },
+            "values": {
+              "type": "array"
+            }
+          }
+        },
         "NdArray": {
           "type": "object",
           "description": "This object represents a numpy nd-array",
@@ -2417,14 +2434,14 @@
             "affiliation": {
               "foreignKey": {
                 "name": "foreignKey",
-                "foreignSchema": "#/$defs/personas/$defs/Organization",
-                "inheritance": null,
-                "foreignClass": null,
-                "cardinality": "one2one",
-                "foreignKeys": [],
-                "reverse": null,
-                "onDelete": "CASCADE",
                 "ordering": [],
+                "reverse": null,
+                "cardinality": "one2one",
+                "onDelete": "CASCADE",
+                "inheritance": null,
+                "foreignSchema": "#/$defs/personas/$defs/Organization",
+                "foreignClass": null,
+                "foreignKeys": [],
                 "backPopulates": null
               }
             },
@@ -2599,7 +2616,7 @@
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
           "dependencies": {
-            "command_name": [
+            "command": [
               "name"
             ]
           },
@@ -2610,7 +2627,7 @@
             "symbol": {
               "type": "importable"
             },
-            "command_name": {
+            "command": {
               "type": "string",
               "default": "{{ this.name }}"
             },

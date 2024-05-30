@@ -59,12 +59,28 @@
     },
     "Triggers": {
       "type": "object",
+      "test": [
+        "command",
+        "message",
+        "edited_message",
+        "channel_post",
+        "edited_channel_post",
+        "inline_query",
+        "chosen_inline_result",
+        "callback_query",
+        "shipping_query",
+        "pre_checkout_query",
+        "poll",
+        "poll_answer",
+        "my_chat_member",
+        "chat_member"
+      ],
       "properties": {
-        "message": {
-          "$ref": "#/$defs/handlers/$defs/MessageHandler"
-        },
         "command": {
           "$ref": "#/$defs/handlers/$defs/CommandHandler"
+        },
+        "message": {
+          "$ref": "#/$defs/handlers/$defs/MessageHandler"
         },
         "edited_message": {
           "$ref": "#/$defs/handlers/$defs/Handler"
@@ -137,6 +153,11 @@
         "#/$defs/actions/$defs/Action"
       ],
       "properties": {
+        "routeur": {
+          "type": "string",
+          "description": "routeur name",
+          "default": "{{this.name}}_routeur"
+        },
         "actions": {
           "type": "array",
           "items": {
@@ -176,6 +197,14 @@
           "items": {
             "$ref": "#/$defs/StatesGroup"
           }
+        }
+      }
+    },
+    "BotConfig": {
+      "type": "object",
+      "properties": {
+        "admin_ids": {
+          "type": "array"
         }
       }
     },
@@ -230,6 +259,9 @@
           "items": {
             "$ref": "#/$defs/EntryPoint"
           }
+        },
+        "config": {
+          "$ref": "#/$defs/BotConfig"
         }
       }
     },
@@ -280,7 +312,6 @@
         "update_types": {
           "type": "string",
           "enum": [
-            "update_id",
             "message",
             "edited_message",
             "channel_post",
@@ -293,7 +324,8 @@
             "poll",
             "poll_answer",
             "my_chat_member",
-            "chat_member"
+            "chat_member",
+            "update_id"
           ]
         }
       }
@@ -1105,8 +1137,7 @@
         "Action": {
           "type": "object",
           "extends": [
-            "#/$defs/markup/$defs/HasMarkup",
-            "#/$defs/Triggers"
+            "#/$defs/markup/$defs/HasMarkup"
           ],
           "abstract": true,
           "dependencies": {
@@ -1124,12 +1155,6 @@
             "routeur": {
               "type": "string",
               "description": "routeur name"
-            },
-            "triggers": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/handlers/$defs/Handler"
-              }
             },
             "decorators": {
               "type": "array"
@@ -1153,34 +1178,32 @@
             }
           }
         },
-        "Command": {
-          "type": "object",
-          "extends": [
-            "#/$defs/actions/$defs/Action"
-          ],
-          "dependencies": {
-            "command_name": [
-              "name"
-            ]
-          },
-          "_type": "CommandHandler",
-          "properties": {
-            "command_name": {
-              "type": "gettext",
-              "default": "{{this.name}}"
-            }
-          }
-        },
         "Message": {
           "type": "object",
           "extends": [
             "#/$defs/actions/$defs/Action"
           ],
-          "_type": "MessageHandler",
           "properties": {
             "returns": {
               "type": "string",
               "default": "{{this.text}}"
+            }
+          }
+        },
+        "Command": {
+          "type": "object",
+          "extends": [
+            "#/$defs/actions/$defs/Message"
+          ],
+          "dependencies": {
+            "command": [
+              "name"
+            ]
+          },
+          "properties": {
+            "command": {
+              "type": "gettext",
+              "default": "{{this.name}}"
             }
           }
         }
