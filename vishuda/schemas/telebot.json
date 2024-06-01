@@ -1187,6 +1187,15 @@
             "returns": {
               "type": "string",
               "default": "{{this.text}}"
+            },
+            "parse_mode": {
+              "type": "string",
+              "enum": [
+                "",
+                "MarkdownV2",
+                "Markdown",
+                "HTML"
+              ]
             }
           }
         },
