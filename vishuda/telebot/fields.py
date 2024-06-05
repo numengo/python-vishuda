@@ -1,3 +1,4 @@
+from typing import Any
 from aiogram_forms.forms.fields import (
     TextField as TextField_required,
     EmailField as EmailField_required,
@@ -22,6 +23,15 @@ TextField = type('TextField', (OptionalField, TextField_required), {})
 EmailField = type('EmailField', (OptionalField, EmailField_required), {})
 PhoneNumberField = type('PhoneNumberField', (OptionalField, PhoneNumberField_required), {})
 ChoiceField = type('ChoiceField', (OptionalField, ChoiceField_required), {})
+
+class ChoiceField(OptionalField, ChoiceField_required):
+
+    async def process(self, value: str) -> Any:
+        # overried method to test against str(label) in case of i18n LazyObject
+        for label, key in self.choices:
+            if value == str(label):
+                return key
+        return None
 
 
 __all__ = [

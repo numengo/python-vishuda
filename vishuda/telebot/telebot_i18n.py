@@ -15,7 +15,7 @@ LANG_STORAGE = {}
 
 class Localization(I18n):
 
-    def __init__(self, default_locale='en'):
+    def __init__(self, default_locale=None):
         self.default_locale = default_locale
         self.ctx_locale = ContextVar("aiogram_ctx_locale", default=default_locale)
         self.locales = find_locales()
