@@ -86,6 +86,8 @@ install_requires = [
     'telegram-bot-api',
     'aiogram',
     'aiogram-forms',
+    'aiogram-widgets',
+    'aiogram_calendar';
     #'telebot',
 ]
 

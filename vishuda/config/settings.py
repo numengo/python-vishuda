@@ -1,7 +1,11 @@
 import pycountry
 
-#LANGUAGES = ['en', 'fr', 'ru', 'es', 'pt']
-LANGUAGES = ['en', 'fr']
+_ = lambda x: x
+
+
+LANGUAGES = ['en', 'fr', 'ru', 'es', 'pt']
+#LANGUAGES = ['en', 'fr']
+DEFAULT_LANGUAGE = 'en'
 
 LOCALE_MODULE_DOMAINS = {
     'pycountry' : [
@@ -14,22 +18,29 @@ LOCALE_MODULE_DOMAINS = {
     'vishuda': 'vishuda'
 }
 
+I18N_FORMAT_KEY = "telebot_i18n_format"
+
 TELEGRAM_BOT_TOKEN = ''
 
 
 CHATBOT_REFLECTIONS = {
-  "am": "are",
-  "was": "were",
-  "i": "you",
-  "i'd": "you would",
-  "i've": "you have",
-  "i'll": "you will",
-  "my": "your",
-  "are": "am",
-  "you've": "I have",
-  "you'll": "I will",
-  "your": "my",
-  "yours": "mine",
-  "you": "me",
-  "me": "you"
+  _("am"): _("are"),
+  _("was"): _("were"),
+  _("i"): _("you"),
+  _("i'd"): _("you would"),
+  _("i've"): _("you have"),
+  _("i'll"): _("you will"),
+  _("my"): _("your"),
+  _("are"): _("am"),
+  _("you've"): _("I have"),
+  _("you'll"): _("I will"),
+  _("your"): _("my"),
+  _("yours"): _("mine"),
+  _("you"): _("me"),
+  _("me"): _("you")
+}
+
+
+SIMPLE_SETTINGS = {
+    'OVERRIDE_BY_ENV': True,
 }

@@ -1,5 +1,6 @@
 # *- coding: utf-8 -*-
 import re
+import emoji
 
 from ngoschema.loaders.module import register_locale_dir
 from threading import local
@@ -93,7 +94,7 @@ _translations = find_locales(settings.LANGUAGES)
 
 
 def active_language():
-    return _active_language.value
+    return getattr(_active_language, 'value', None)
 
 
 def activate(language):
@@ -142,3 +143,29 @@ def get_lang_flag(code):
     code = lang_flags.get(code, code)
     code = code.upper()
     return chr(ord(code[0]) + OFFSET) + chr(ord(code[1]) + OFFSET)
+
+
+def is_constant_string(s: str) -> bool:
+    """
+    Determines if a string is a constant (not translatable).
+    Returns True if the string is a constant, False if it should be translated.
+    """
+    # 1. Empty string or whitespace only
+    if not s or s.isspace():
+        return True
+
+    # 2. String containing only emojis
+    if emoji.is_emoji(s) or all(emoji.is_emoji(c) for c in s):
+        return True
+
+    # 3. String containing only punctuation, symbols, or digits (no letters)
+    if re.match(r'^[\W\d]+$', s):  # \W = non-letters, \d = digits
+        return True
+
+    # 4. Specific cases: URLs, hashtags, mentions, etc.
+    if re.match(r'^(https?://|#|@)\S+$', s):
+        return True
+
+    # 5. If the string contains letters, assume it's a word or phrase to translate
+    return False
+

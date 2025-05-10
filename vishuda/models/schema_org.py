@@ -8,7 +8,6 @@ from collections import ChainMap
 
 from ngoschema import type_builder
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
-from ..i18n import activate
 
 Thing = type_builder.load('https://schema.org/#/$defs/Thing')
 
@@ -47,6 +46,7 @@ class SchemaOrg(with_metaclass(SchemaMetaclass)):
         #    self.do_validate(items=False)
 
     def get_as_schema_org(self):
+        from ..i18n import activate
         ret = {}
         language = self.language
         localized = self._localized

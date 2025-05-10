@@ -136,67 +136,46 @@
       "type": "object",
       "extends": [
         "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-      ]
-    },
-    "StatesGroup": {
-      "type": "object",
+      ],
+      "aliases": {
+        "default": "defaultValue",
+        "key": "state_full_name",
+        "label": "state_name"
+      },
       "properties": {
-        "states": {
-          "type": "array"
+        "state_name": {
+          "type": "string",
+          "default": "{{ this.name | upper }}"
+        },
+        "state_full_name": {
+          "type": "string"
+        },
+        "key_name": {
+          "type": "string",
+          "default": "{{ this.state_name }}_KEY"
         }
       }
     },
-    "EntryPoint": {
+    "StatesGroup": {
       "type": "object",
       "extends": [
-        "https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint",
-        "#/$defs/actions/$defs/Action"
+        "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
       ],
+      "dependencies": {
+        "states": [
+          "states_group_name"
+        ]
+      },
       "properties": {
-        "routeur": {
-          "type": "string",
-          "description": "routeur name",
-          "default": "{{this.name}}_routeur"
-        },
-        "actions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/actions/$defs/Action"
-          }
-        },
-        "commands": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/actions/$defs/Command"
-          }
-        },
-        "messages": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/actions/$defs/Message"
-          }
-        },
-        "filters": {
-          "type": "array",
-          "items": true
-        },
-        "middlewares": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/Middleware"
-          }
-        },
         "states": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/State"
           }
         },
-        "forms": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/StatesGroup"
-          }
+        "states_group_name": {
+          "type": "string",
+          "default": "{{ this.name | camelize }}"
         }
       }
     },
@@ -205,63 +184,6 @@
       "properties": {
         "admin_ids": {
           "type": "array"
-        }
-      }
-    },
-    "Telebot": {
-      "type": "object",
-      "extends": [
-        "https://numengo.org/vishuda#/$defs/app/$defs/App",
-        "#/$defs/EntryPoint"
-      ],
-      "additionalProperties": true,
-      "aliases": {
-        "plugins": "entry_points"
-      },
-      "notSerialized": [
-        "token"
-      ],
-      "required": [
-        "token",
-        "telebot_name"
-      ],
-      "properties": {
-        "telebot_name": {
-          "type": "string",
-          "description": "Bot name"
-        },
-        "token": {
-          "type": "string",
-          "description": "bot API token"
-        },
-        "threaded": {
-          "type": "boolean"
-        },
-        "num_threads": {
-          "type": "integer",
-          "default": 2
-        },
-        "bot": {
-          "type": "string"
-        },
-        "updater": {
-          "type": "string"
-        },
-        "labels": {
-          "type": "array",
-          "description": "labels to make reference to for callback data (automatically numbered)"
-        },
-        "labels_fixed": {
-          "type": "object"
-        },
-        "entry_points": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/EntryPoint"
-          }
-        },
-        "config": {
-          "$ref": "#/$defs/BotConfig"
         }
       }
     },
@@ -327,6 +249,202 @@
             "chat_member",
             "update_id"
           ]
+        },
+        "text_widget_types": {
+          "type": "string",
+          "enum": [
+            "const",
+            "format",
+            "i18n_format",
+            "multi",
+            "case",
+            "progress",
+            "list",
+            "jinja"
+          ]
+        },
+        "keyboard_widget_types": {
+          "type": "string",
+          "enum": [
+            "button",
+            "url",
+            "web_app",
+            "switchInline_query",
+            "group",
+            "row",
+            "column",
+            "scrolling_group",
+            "list_group",
+            "checkbox",
+            "select",
+            "radio",
+            "multiselect",
+            "calendar",
+            "counter",
+            "switch_to",
+            "next",
+            "back",
+            "start",
+            "cancel"
+          ]
+        },
+        "input_widget_types": {
+          "type": "string",
+          "enum": [
+            "message_input",
+            "text_input"
+          ]
+        },
+        "media_widget_types": {
+          "type": "string",
+          "enum": [
+            "static_media",
+            "dynamic_media"
+          ]
+        },
+        "dialog_launch_mode": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "root",
+            "exclusive",
+            "single_top"
+          ]
+        },
+        "dialog_show_mode": {
+          "type": "string",
+          "enum": [
+            "auto",
+            "edit",
+            "send",
+            "delete_and_send",
+            "no_update"
+          ]
+        },
+        "dialog_start_mode": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "reset_stack",
+            "new_stack"
+          ]
+        }
+      }
+    },
+    "EntryPoint": {
+      "type": "object",
+      "extends": [
+        "https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint"
+      ],
+      "dependencies": {
+        "states_groups": [
+          "states"
+        ]
+      },
+      "properties": {
+        "routeur": {
+          "type": "string",
+          "description": "routeur name",
+          "default": "{{this.name}}_routeur"
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/actions/$defs/Action"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "items": true
+        },
+        "middlewares": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/Middleware"
+          }
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialog/$defs/Window"
+          }
+        },
+        "widgets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialog/$defs/widgets/$defs/Widget"
+          }
+        },
+        "states": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/State"
+          }
+        },
+        "states_group": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StatesGroup"
+          }
+        },
+        "dialog": {
+          "$ref": "#/$defs/dialog/$defs/Dialog"
+        }
+      }
+    },
+    "Telebot": {
+      "type": "object",
+      "extends": [
+        "https://numengo.org/vishuda#/$defs/app/$defs/App",
+        "#/$defs/EntryPoint"
+      ],
+      "additionalProperties": true,
+      "aliases": {
+        "plugins": "entry_points"
+      },
+      "notSerialized": [
+        "token"
+      ],
+      "required": [
+        "token",
+        "telebot_name"
+      ],
+      "properties": {
+        "telebot_name": {
+          "type": "string",
+          "description": "Bot name"
+        },
+        "token": {
+          "type": "string",
+          "description": "bot API token"
+        },
+        "threaded": {
+          "type": "boolean"
+        },
+        "num_threads": {
+          "type": "integer",
+          "default": 2
+        },
+        "bot": {
+          "type": "string"
+        },
+        "updater": {
+          "type": "string"
+        },
+        "entry_points": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/EntryPoint"
+          }
+        },
+        "states_group": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/StatesGroup"
+          }
+        },
+        "config": {
+          "$ref": "#/$defs/BotConfig"
         }
       }
     },
@@ -366,7 +484,7 @@
         "ButtonMenu": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoci#/$defs/contexts/$defs/ProjectInstanceNode"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
           "dependencies": {
             "menu": [
@@ -1167,14 +1285,6 @@
             },
             "example": {
               "type": "string"
-            },
-            "returns": {
-              "type": "string",
-              "default": "{{this.label}}"
-            },
-            "label": {
-              "type": "string",
-              "default": "{{this.name|upper}}"
             }
           }
         },
@@ -1184,10 +1294,6 @@
             "#/$defs/actions/$defs/Action"
           ],
           "properties": {
-            "returns": {
-              "type": "string",
-              "default": "{{this.text}}"
-            },
             "parse_mode": {
               "type": "string",
               "enum": [
@@ -1213,6 +1319,757 @@
             "command": {
               "type": "gettext",
               "default": "{{this.name}}"
+            }
+          }
+        },
+        "SwitchTo": {
+          "type": "object"
+        }
+      }
+    },
+    "dialog": {
+      "type": "object",
+      "$defs": {
+        "Getter": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "properties": {
+            "local_data": {
+              "type": "object"
+            },
+            "dialog_data": {
+              "type": "object"
+            },
+            "middleware_data": {
+              "type": "object"
+            },
+            "start_data": {
+              "type": "object"
+            }
+          }
+        },
+        "Window": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "properties": {
+            "widgets": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/dialog/$defs/widgets/$defs/Widget"
+              }
+            },
+            "message_handler": true,
+            "state": {
+              "$ref": "#/$defs/State"
+            },
+            "getter": true,
+            "on_process_result": true,
+            "markup_factory": true,
+            "parse_mode": {
+              "type": "string"
+            },
+            "disable_web_page_preview": {
+              "type": "boolean"
+            },
+            "preview_add_transitions": true,
+            "preview_data": true
+          }
+        },
+        "Dialog": {
+          "type": "object",
+          "extends": [
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "properties": {
+            "windows": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/dialog/$defs/Window"
+              }
+            },
+            "on_start": true,
+            "on_close": true,
+            "on_process_result": true,
+            "launch_mode": {
+              "$ref": "#/$defs/Enums/properties/dialog_launch_mode"
+            },
+            "getter": true,
+            "preview_data": true
+          }
+        },
+        "widgets": {
+          "type": "object",
+          "$defs": {
+            "Widget": {
+              "type": "object",
+              "extends": [
+                "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+              ],
+              "abstract": true,
+              "properties": {
+                "_type": {
+                  "type": "string"
+                },
+                "when": true
+              }
+            },
+            "texts": {
+              "type": "object",
+              "$defs": {
+                "TextWidget": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/Widget"
+                  ],
+                  "abstract": true,
+                  "properties": {
+                    "_type": {
+                      "$ref": "#/$defs/Enums/properties/text_widget_types"
+                    }
+                  }
+                },
+                "Const": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "_type": "const",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "Format": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "_type": "format",
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "I18NFormat": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/Format"
+                  ],
+                  "_type": "i18n_format"
+                },
+                "Multi": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "_type": "multi",
+                  "properties": {
+                    "texts": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                      }
+                    },
+                    "sep": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "Case": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "_type": "case",
+                  "properties": {
+                    "texts": {
+                      "type": "object"
+                    },
+                    "selector": true
+                  }
+                },
+                "Progress": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "required": [
+                    "state_name"
+                  ],
+                  "_type": "progress",
+                  "properties": {
+                    "field": {
+                      "type": "string"
+                    },
+                    "width": {
+                      "type": "string",
+                      "default": 10
+                    }
+                  }
+                },
+                "List": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "_type": "list",
+                  "properties": {
+                    "field": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "items": {
+                      "type": "array"
+                    },
+                    "items_getter": true,
+                    "items_mfilter": {
+                      "type": "string"
+                    },
+                    "sep": {
+                      "type": "string",
+                      "default": "\\n"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "page_size": {
+                      "type": "string"
+                    },
+                    "on_page_changed": true
+                  }
+                },
+                "Jinja": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                  ],
+                  "_type": "jinja",
+                  "properties": {
+                    "template_text": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "keyboards": {
+              "type": "object",
+              "$defs": {
+                "KeyboardWidget": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/Widget"
+                  ],
+                  "abstract": true,
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": true,
+                    "on_click": true,
+                    "when": true
+                  }
+                },
+                "Button": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "button"
+                },
+                "Url": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "url",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "url": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    }
+                  }
+                },
+                "WebApp": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Url"
+                  ],
+                  "_type": "web_app"
+                },
+                "SwitchInlineQuery": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "switchInline_query",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "switch_inline_query": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    }
+                  }
+                },
+                "Group": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "_type": "group",
+                  "properties": {
+                    "buttons": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                      }
+                    },
+                    "width": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "Row": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
+                  ],
+                  "_type": "row"
+                },
+                "Column": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
+                  ],
+                  "_type": "column"
+                },
+                "ScrollingGroup": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
+                  ],
+                  "_type": "scrolling_group",
+                  "properties": {
+                    "width": {
+                      "type": "string"
+                    },
+                    "height": {
+                      "type": "string"
+                    },
+                    "on_page_changed": true,
+                    "hide_on_single_page": {
+                      "type": "boolean"
+                    },
+                    "hide_pager": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "ListGroup": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "list_group",
+                  "properties": {
+                    "buttons": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                      }
+                    },
+                    "items": {
+                      "type": "array"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "items_getter": true,
+                    "items_mfilter": {
+                      "type": "string"
+                    },
+                    "item_id_getter": true
+                  }
+                },
+                "Checkbox": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "checkbox",
+                  "properties": {
+                    "checked_text": {
+                      "type": "string"
+                    },
+                    "unchecked_text": {
+                      "type": "string"
+                    },
+                    "on_state_changed": true,
+                    "default": {
+                      "type": "boolean"
+                    }
+                  }
+                },
+                "Select": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "select",
+                  "properties": {
+                    "item_id_getter": true,
+                    "items": {
+                      "type": "array"
+                    },
+                    "type_factory": true
+                  }
+                },
+                "Radio": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "radio",
+                  "properties": {
+                    "checked_text": {
+                      "type": "string"
+                    },
+                    "unchecked_text": {
+                      "type": "string"
+                    },
+                    "item_id_getter": true,
+                    "items": {
+                      "type": "array"
+                    },
+                    "on_state_changed": true
+                  }
+                },
+                "Multiselect": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Select"
+                  ],
+                  "_type": "multiselect",
+                  "properties": {
+                    "checked_text": {
+                      "type": "string"
+                    },
+                    "unchecked_text": {
+                      "type": "string"
+                    },
+                    "items": {
+                      "type": "array"
+                    },
+                    "min_selected": {
+                      "type": "string"
+                    },
+                    "max_selected": {
+                      "type": "string"
+                    },
+                    "type_factory": true,
+                    "on_state_changed": true
+                  }
+                },
+                "Calendar": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "$defs": {
+                    "CalendarConfig": {
+                      "type": "object",
+                      "properties": {
+                        "firstweekday": {
+                          "type": "string"
+                        },
+                        "timezone": {
+                          "type": "string"
+                        },
+                        "min_date": {
+                          "type": "date"
+                        },
+                        "max_date": {
+                          "type": "date"
+                        },
+                        "month_columns": {
+                          "type": "string",
+                          "default": 3
+                        },
+                        "years_per_page": {
+                          "type": "string",
+                          "default": 20
+                        },
+                        "years_columns": {
+                          "type": "string",
+                          "default": 5
+                        }
+                      }
+                    }
+                  },
+                  "_type": "calendar",
+                  "properties": {
+                    "config": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Calendar/$defs/CalendarConfig"
+                    }
+                  }
+                },
+                "Counter": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "required": [
+                    "id"
+                  ],
+                  "_type": "counter",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "plus": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "minus": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "min_value": {
+                      "type": "integer"
+                    },
+                    "max_value": {
+                      "type": "integer",
+                      "default": 999999
+                    },
+                    "increment": {
+                      "type": "integer",
+                      "default": 1
+                    },
+                    "default": {
+                      "type": "integer",
+                      "default": 1
+                    },
+                    "cycle": {
+                      "type": "boolean"
+                    },
+                    "on_click": true,
+                    "on_text_click": true,
+                    "on_value_changed": true
+                  }
+                },
+                "SwitchTo": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "switch_to",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "$ref": "#/$defs/State"
+                    },
+                    "on_click": true,
+                    "when": true
+                  }
+                },
+                "Next": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "next",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "on_click": true,
+                    "when": true
+                  }
+                },
+                "Back": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "back",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "on_click": true,
+                    "when": true
+                  }
+                },
+                "Start": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "start",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "state": {
+                      "$ref": "#/$defs/State"
+                    },
+                    "data": true,
+                    "on_click": true,
+                    "mode": {
+                      "$ref": "#/$defs/Enums/properties/dialog_start_mode"
+                    },
+                    "when": true
+                  }
+                },
+                "Cancel": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
+                  ],
+                  "_type": "cancel",
+                  "properties": {
+                    "text": {
+                      "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "result": true,
+                    "on_click": true,
+                    "when": true
+                  }
+                }
+              }
+            },
+            "input": {
+              "type": "object",
+              "$defs": {
+                "InputWidget": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/Widget"
+                  ],
+                  "abstract": true,
+                  "properties": {
+                    "_type": {
+                      "$ref": "#/$defs/Enums/properties/input_widget_types"
+                    }
+                  }
+                },
+                "MessageInput": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/input/$defs/InputWidget"
+                  ],
+                  "_type": "message_input"
+                },
+                "TextInput": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/input/$defs/InputWidget"
+                  ],
+                  "_type": "text_input",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "type_factory": true,
+                    "on_success": true,
+                    "on_error": true,
+                    "filter": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "media": {
+              "type": "object",
+              "$defs": {
+                "MediaWidget": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/Widget"
+                  ],
+                  "abstract": true,
+                  "properties": {
+                    "_type": {
+                      "$ref": "#/$defs/Enums/properties/media_widget_types"
+                    }
+                  }
+                },
+                "StaticMedia": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/media/$defs/MediaWidget"
+                  ],
+                  "_type": "static_media",
+                  "properties": {
+                    "path": true,
+                    "url": true,
+                    "type": {
+                      "$ref": "#/$defs/Enums/properties/content_type_media"
+                    },
+                    "use_pipe": {
+                      "type": "boolean"
+                    },
+                    "media_params": {
+                      "type": "object"
+                    },
+                    "when": true
+                  }
+                },
+                "DynamicMedia": {
+                  "type": "object",
+                  "extends": [
+                    "#/$defs/dialog/$defs/widgets/$defs/media/$defs/MediaWidget"
+                  ],
+                  "_type": "dynamic_media",
+                  "properties": {
+                    "media_item": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
             }
           }
         }

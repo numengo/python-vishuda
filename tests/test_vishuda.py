@@ -290,11 +290,39 @@ def test_documents():
     print(test_markdown.raw_text)
     assert test_markdown.chapters
 
+def test_filter_for_i18n():
+    from vishuda.i18n import is_constant_string
+    # Example usage
+    strings = [
+        "Bonjour le monde",  # Phrase to translate
+        "Bonjour { coucou } le monde",  # Phrase to translate
+        "Bonjour %s le monde",  # Phrase to translate
+        "😊👍",  # Emojis (constant)
+        "!!!",  # Punctuation (constant)
+        "12345",  # Digits (constant)
+        "#hashtag",  # Hashtag (constant)
+        "https://exemple.com",  # URL (constant)
+        "Ceci est un test",  # Phrase to translate
+        "@utilisateur",  # Mention (constant)
+        "   ",  # Whitespace (constant)
+        "Hello world!"  # Phrase to translate
+    ]
+
+    constants = []
+    to_translate = []
+    for s in strings:
+        if is_constant_string(s):
+            constants.append(s)
+        else:
+            to_translate.append(s)
+    print("To translate (i18n):", to_translate)
+    print("Constants:", constants)
 
 if __name__ == '__main__':
     # to run test file standalone
-    test_documents()
-    test_files()
+    test_filter_for_i18n()
+    #test_documents()
+    #test_files()
     #test_personas()
     #test_vishuda_places()
     #test_places()

@@ -10,8 +10,44 @@ from collections.abc import Mapping
 
 from ngoschema.exceptions import InvalidValue
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
+from ngoschema.models.instances import Entity
 
 import gettext as gettext_module
+
+class Language(with_metaclass(SchemaMetaclass)):
+    _id = r"https://numengo.org/vishuda#/$defs/i18n/$defs/Language"
+    _lazyLoading = True
+
+    def __init__(self, *args, **kwargs):
+        Entity.__init__(self, *args, **kwargs)
+        self.id
+
+    def set_id(self, id):
+        from pycountry import languages
+        l = languages.get(alpha_2=id.split('-')[0])
+        if l is None:
+            l = languages.get(alpha_3=id.split('-')[0])
+        if l is not None:
+            for k, v in l._fields.items():
+                self._set_dataValidated(k, v)
+
+    def get_flag(self):
+        a2 = self.alpha_2
+        if self._get_data('flag') is None and a2:
+            from vishuda.i18n import get_lang_flag
+            return get_lang_flag(a2)
+
+    def get_localized_name(self):
+        from vishuda.i18n import _translations, active_language, activate
+        lang = self.alpha_2
+        name = self.name
+        cur_lang = active_language()
+        activate(lang)
+        t = _translations.get(lang)
+        if t:
+            return t.gettext(name)
+        if cur_lang != lang:
+            activate(cur_lang)
 
 
 class LocaleDirDomains(with_metaclass(SchemaMetaclass)):

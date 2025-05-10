@@ -52,5 +52,11 @@ class App(with_metaclass(SchemaMetaclass)):
     def get_user_log_dir(self, appname=None, appauthor=None, version=None):
         return Path(appdirs.user_log_dir(appname, appauthor, version))
 
+    def get_languages_details(self):
+        from .i18n import Language
+        langs = self.languages
+        if langs:
+            return [Language(id=lang) for lang in langs]
+
     #def __init__(self, *args, **kwargs):
     #    Entity.__init__(self, *args, **kwargs)
