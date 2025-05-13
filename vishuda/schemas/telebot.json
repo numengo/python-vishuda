@@ -4,6 +4,24 @@
   "$comment": "automatically generated for telebot",
   "description": "This objects represents a Telegram bot. It allows you to add handlers for different kind of updates.",
   "$defs": {
+    "TelebotInstance": {
+      "type": "object",
+      "extends": [
+        "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+      ],
+      "notSerialized": [
+        "_parentEntryPoint",
+        "_telebot"
+      ],
+      "notValidated": [
+        "_parentEntryPoint",
+        "_telebot"
+      ],
+      "properties": {
+        "_parentEntryPoint": true,
+        "_telebot": true
+      }
+    },
     "DeepLink": {
       "type": "object",
       "extends": [
@@ -46,7 +64,7 @@
     "Routeur": {
       "type": "object",
       "extends": [
-        "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+        "#/$defs/TelebotInstance"
       ],
       "properties": {
         "include_routeurs": {
@@ -59,22 +77,6 @@
     },
     "Triggers": {
       "type": "object",
-      "test": [
-        "command",
-        "message",
-        "edited_message",
-        "channel_post",
-        "edited_channel_post",
-        "inline_query",
-        "chosen_inline_result",
-        "callback_query",
-        "shipping_query",
-        "pre_checkout_query",
-        "poll",
-        "poll_answer",
-        "my_chat_member",
-        "chat_member"
-      ],
       "properties": {
         "command": {
           "$ref": "#/$defs/handlers/$defs/CommandHandler"
@@ -135,14 +137,28 @@
     "State": {
       "type": "object",
       "extends": [
-        "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+        "#/$defs/TelebotInstance"
       ],
       "aliases": {
         "default": "defaultValue",
         "key": "state_full_name",
         "label": "state_name"
       },
+      "readOnly": [
+        "state_name",
+        "key_name"
+      ],
       "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "defaultValue": true,
+        "getter": {
+          "$ref": "#/$defs/dialog/$defs/callables/$defs/DataGetter"
+        },
+        "selector": {
+          "$ref": "#/$defs/dialog/$defs/callables/$defs/Callback"
+        },
         "state_name": {
           "type": "string",
           "default": "{{ this.name | upper }}"
@@ -159,7 +175,7 @@
     "StatesGroup": {
       "type": "object",
       "extends": [
-        "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+        "#/$defs/TelebotInstance"
       ],
       "dependencies": {
         "states": [
@@ -334,13 +350,25 @@
     "EntryPoint": {
       "type": "object",
       "extends": [
-        "https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint"
+        "https://numengo.org/vishuda#/$defs/app/$defs/EntryPoint",
+        "#/$defs/TelebotInstance"
       ],
-      "dependencies": {
-        "states_groups": [
-          "states"
-        ]
-      },
+      "notSerialized": [
+        "all_states_groups",
+        "main_state",
+        "inner_states_groups",
+        "states_group",
+        "dialog",
+        "menu_window",
+        "all_windows",
+        "states_setters_windows",
+        "states_setters_btns",
+        "entry_points_btns",
+        "menu_window",
+        "menu_btn",
+        "menu_back",
+        "all_callbacks"
+      ],
       "properties": {
         "routeur": {
           "type": "string",
@@ -353,6 +381,12 @@
             "$ref": "#/$defs/actions/$defs/Action"
           }
         },
+        "callbacks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialog/$defs/callables/$defs/Callback"
+          }
+        },
         "filters": {
           "type": "array",
           "items": true
@@ -363,16 +397,19 @@
             "$ref": "#/$defs/Middleware"
           }
         },
-        "windows": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/dialog/$defs/Window"
-          }
+        "menu_text": {
+          "type": "tokens"
         },
         "widgets": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/dialog/$defs/widgets/$defs/Widget"
+          }
+        },
+        "windows": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialog/$defs/Window"
           }
         },
         "states": {
@@ -381,7 +418,7 @@
             "$ref": "#/$defs/State"
           }
         },
-        "states_group": {
+        "states_groups": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/StatesGroup"
@@ -395,8 +432,7 @@
     "Telebot": {
       "type": "object",
       "extends": [
-        "https://numengo.org/vishuda#/$defs/app/$defs/App",
-        "#/$defs/EntryPoint"
+        "https://numengo.org/vishuda#/$defs/app/$defs/App"
       ],
       "additionalProperties": true,
       "aliases": {
@@ -431,193 +467,17 @@
         "updater": {
           "type": "string"
         },
+        "main_entry_point": {
+          "$ref": "#/$defs/EntryPoint"
+        },
         "entry_points": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/EntryPoint"
           }
         },
-        "states_group": {
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/StatesGroup"
-          }
-        },
         "config": {
           "$ref": "#/$defs/BotConfig"
-        }
-      }
-    },
-    "markup": {
-      "type": "object",
-      "$defs": {
-        "HasEmojis": {
-          "type": "object",
-          "abstract": true,
-          "properties": {
-            "emojis": {
-              "type": "array"
-            },
-            "emojis_after": {
-              "type": "array"
-            },
-            "text": {
-              "type": "tokens"
-            }
-          }
-        },
-        "KeyboardButton": {
-          "type": "object",
-          "extends": [
-            "#/$defs/markup/$defs/HasEmojis",
-            "https://numengo.org/telegram#/$defs/KeyboardButton",
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ]
-        },
-        "InlineKeyboardButton": {
-          "type": "object",
-          "extends": [
-            "#/$defs/markup/$defs/KeyboardButton",
-            "https://numengo.org/telegram#/$defs/InlineKeyboardButton"
-          ]
-        },
-        "ButtonMenu": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "dependencies": {
-            "menu": [
-              "buttons",
-              "n_cols",
-              "header_buttons",
-              "footer_buttons"
-            ]
-          },
-          "properties": {
-            "buttons": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/markup/$defs/KeyboardButton"
-              }
-            },
-            "n_cols": {
-              "type": "string",
-              "default": 1
-            },
-            "header_buttons": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/markup/$defs/KeyboardButton"
-              }
-            },
-            "footer_buttons": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/markup/$defs/KeyboardButton"
-              }
-            },
-            "menu": {
-              "type": "array",
-              "items": {
-                "type": "array",
-                "items": {
-                  "null": {
-                    "$ref": "#/$defs/markup/$defs/n"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "BaseKeyboard": {
-          "type": "object",
-          "extends": [
-            "#/$defs/markup/$defs/ButtonMenu"
-          ],
-          "abstract": true,
-          "aliases": {
-            "keyboard": "buttons"
-          }
-        },
-        "Markup": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/telegram#/$defs/ReplyKeyboardMarkup",
-            "https://numengo.org/telegram#/$defs/ReplyKeyboardRemove",
-            "https://numengo.org/telegram#/$defs/InlineKeyboardMarkup",
-            "https://numengo.org/telegram#/$defs/ForceReply"
-          ],
-          "properties": {
-            "_type": {
-              "type": "string"
-            }
-          }
-        },
-        "ReplyKeyboardMarkup": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/telegram#/$defs/ReplyKeyboardMarkup",
-            "#/$defs/markup/$defs/BaseKeyboard"
-          ]
-        },
-        "InlineKeyboardMarkup": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/telegram#/$defs/InlineKeyboardMarkup",
-            "#/$defs/markup/$defs/BaseKeyboard"
-          ],
-          "aliases": {
-            "inline_keyboard": "keyboard"
-          }
-        },
-        "HasMarkup": {
-          "type": "object",
-          "extends": [
-            "#/$defs/markup/$defs/HasEmojis"
-          ],
-          "abstract": true,
-          "properties": {
-            "buttons": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/markup/$defs/KeyboardButton"
-              }
-            },
-            "buttons_inline": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/markup/$defs/InlineKeyboardButton"
-              }
-            },
-            "inline_keyboard": {
-              "$ref": "#/$defs/markup/$defs/InlineKeyboardMarkup"
-            },
-            "force_reply": {
-              "$ref": "https://numengo.org/telegram#/$defs/ForceReply"
-            },
-            "reply_keyboard": {
-              "$ref": "#/$defs/markup/$defs/ReplyKeyboardMarkup"
-            },
-            "reply_keyboard_remove": {
-              "$ref": "https://numengo.org/telegram#/$defs/ReplyKeyboardRemove"
-            },
-            "markup": {
-              "$ref": "#/$defs/markup/$defs/Markup"
-            },
-            "links": {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/DeepLink"
-              }
-            },
-            "text": {
-              "type": "tokens"
-            },
-            "text_html": {
-              "type": "tokens"
-            }
-          }
         }
       }
     },
@@ -719,7 +579,7 @@
         "BaseFilter": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "#/$defs/TelebotInstance"
           ],
           "abstract": true
         },
@@ -1076,7 +936,7 @@
         "Handler": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "#/$defs/TelebotInstance"
           ],
           "required": [
             "callback",
@@ -1255,7 +1115,7 @@
         "Action": {
           "type": "object",
           "extends": [
-            "#/$defs/markup/$defs/HasMarkup"
+            "#/$defs/TelebotInstance"
           ],
           "abstract": true,
           "dependencies": {
@@ -1273,6 +1133,9 @@
             "routeur": {
               "type": "string",
               "description": "routeur name"
+            },
+            "triggers": {
+              "$ref": "#/$defs/Triggers"
             },
             "decorators": {
               "type": "array"
@@ -1321,43 +1184,30 @@
               "default": "{{this.name}}"
             }
           }
-        },
-        "SwitchTo": {
-          "type": "object"
         }
       }
     },
     "dialog": {
       "type": "object",
       "$defs": {
-        "Getter": {
-          "type": "object",
-          "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
-          ],
-          "properties": {
-            "local_data": {
-              "type": "object"
-            },
-            "dialog_data": {
-              "type": "object"
-            },
-            "middleware_data": {
-              "type": "object"
-            },
-            "start_data": {
-              "type": "object"
-            }
-          }
-        },
         "Window": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "#/$defs/TelebotInstance"
           ],
           "additionalProperties": {
             "type": "string"
           },
+          "notSerialized": [
+            "all_callbacks",
+            "message_handler",
+            "state",
+            "getter",
+            "on_process_result",
+            "markup_factory",
+            "preview_add_transitions",
+            "preview_data"
+          ],
           "properties": {
             "widgets": {
               "type": "array",
@@ -1365,10 +1215,14 @@
                 "$ref": "#/$defs/dialog/$defs/widgets/$defs/Widget"
               }
             },
-            "message_handler": true,
-            "state": {
-              "$ref": "#/$defs/State"
+            "callbacks": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/dialog/$defs/callables/$defs/Callback"
+              }
             },
+            "message_handler": true,
+            "state": true,
             "getter": true,
             "on_process_result": true,
             "markup_factory": true,
@@ -1385,7 +1239,7 @@
         "Dialog": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "#/$defs/TelebotInstance"
           ],
           "additionalProperties": {
             "type": "string"
@@ -1413,14 +1267,20 @@
             "Widget": {
               "type": "object",
               "extends": [
-                "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+                "#/$defs/TelebotInstance"
               ],
               "abstract": true,
               "properties": {
                 "_type": {
                   "type": "string"
                 },
-                "when": true
+                "when": true,
+                "callbacks": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/$defs/dialog/$defs/callables/$defs/Callback"
+                  }
+                }
               }
             },
             "texts": {
@@ -1530,12 +1390,15 @@
                   "additionalProperties": {
                     "type": "string"
                   },
+                  "aliases": {
+                    "items": "items_"
+                  },
                   "_type": "list",
                   "properties": {
                     "field": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                     },
-                    "items": {
+                    "items_": {
                       "type": "array"
                     },
                     "items_getter": true,
@@ -1701,9 +1564,7 @@
                         "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                       }
                     },
-                    "items": {
-                      "type": "array"
-                    },
+                    "items_": true,
                     "id": {
                       "type": "string"
                     },
@@ -1741,9 +1602,7 @@
                   "_type": "select",
                   "properties": {
                     "item_id_getter": true,
-                    "items": {
-                      "type": "array"
-                    },
+                    "items_": true,
                     "type_factory": true
                   }
                 },
@@ -1761,9 +1620,7 @@
                       "type": "string"
                     },
                     "item_id_getter": true,
-                    "items": {
-                      "type": "array"
-                    },
+                    "items_": true,
                     "on_state_changed": true
                   }
                 },
@@ -1780,9 +1637,7 @@
                     "unchecked_text": {
                       "type": "string"
                     },
-                    "items": {
-                      "type": "array"
-                    },
+                    "items_": true,
                     "min_selected": {
                       "type": "string"
                     },
@@ -1886,6 +1741,12 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
+                  "notSerialized": [
+                    "state"
+                  ],
+                  "notValidated": [
+                    "state"
+                  ],
                   "_type": "switch_to",
                   "properties": {
                     "text": {
@@ -1894,9 +1755,7 @@
                     "id": {
                       "type": "string"
                     },
-                    "state": {
-                      "$ref": "#/$defs/State"
-                    },
+                    "state": true,
                     "on_click": true,
                     "when": true
                   }
@@ -1940,6 +1799,12 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
+                  "notSerialized": [
+                    "state"
+                  ],
+                  "notValidated": [
+                    "state"
+                  ],
                   "_type": "start",
                   "properties": {
                     "text": {
@@ -1948,9 +1813,7 @@
                     "id": {
                       "type": "string"
                     },
-                    "state": {
-                      "$ref": "#/$defs/State"
-                    },
+                    "state": true,
                     "data": true,
                     "on_click": true,
                     "mode": {
@@ -2068,6 +1931,41 @@
                       "type": "string"
                     }
                   }
+                }
+              }
+            }
+          }
+        },
+        "callables": {
+          "type": "object",
+          "$defs": {
+            "Callback": {
+              "type": "object",
+              "extends": [
+                "#/$defs/TelebotInstance"
+              ],
+              "is_async": true
+            },
+            "DataGetter": {
+              "type": "object",
+              "extends": [
+                "#/$defs/dialog/$defs/callables/$defs/Callback"
+              ],
+              "properties": {
+                "local_data": {
+                  "type": "object"
+                },
+                "dialog_data": {
+                  "type": "object"
+                },
+                "middleware_data": {
+                  "type": "object"
+                },
+                "start_data": {
+                  "type": "object"
+                },
+                "choices": {
+                  "type": "array"
                 }
               }
             }

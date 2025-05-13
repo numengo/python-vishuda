@@ -5,6 +5,7 @@ from typing import Union, List
 from ngoschema import type_builder
 from ngoschema.protocols import with_metaclass, SchemaMetaclass, ObjectProtocol
 from ngoschema.models import Instance
+
 from .. import settings
 
 
@@ -52,3 +53,19 @@ TextInput         = type_builder.load('https://numengo.org/telebot#/$defs/dialog
 MediaWidget       = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/media/$defs/MediaWidget')
 StaticMedia       = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/media/$defs/StaticMedia')
 DynamicMedia      = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/media/$defs/DynamicMedia')
+
+
+def create_text_widget(text):
+    from vishuda.i18n import is_constant_string
+    return Const(text=text) if is_constant_string(text) else I18NFormat(text=text)
+
+def create_tokenized_string_widget(text):
+    if isinstance(text, str):
+        return create_text_widget(text)
+    if text is None:
+        return None
+    texts = [create_tokenized_string_widget(t) for t in text if t is not None]
+    multi = Multi(texts=texts, sep=' ')
+    if any([isinstance(t, Multi) for t in texts]):
+        multi.sep = '\n'
+    return multi
