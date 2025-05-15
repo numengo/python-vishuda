@@ -1271,7 +1271,7 @@
               ],
               "abstract": true,
               "properties": {
-                "_type": {
+                "_widget_type": {
                   "type": "string"
                 },
                 "when": true,
@@ -1293,7 +1293,7 @@
                   ],
                   "abstract": true,
                   "properties": {
-                    "_type": {
+                    "_widget_type": {
                       "$ref": "#/$defs/Enums/properties/text_widget_types"
                     }
                   }
@@ -1303,7 +1303,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "_type": "const",
+                  "_widget_type": "const",
                   "properties": {
                     "text": {
                       "type": "string"
@@ -1315,7 +1315,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "_type": "format",
+                  "_widget_type": "format",
                   "properties": {
                     "text": {
                       "type": "string"
@@ -1337,7 +1337,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "_type": "multi",
+                  "_widget_type": "multi",
                   "properties": {
                     "texts": {
                       "type": "array",
@@ -1355,7 +1355,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "_type": "case",
+                  "_widget_type": "case",
                   "properties": {
                     "texts": {
                       "type": "object"
@@ -1371,7 +1371,7 @@
                   "required": [
                     "state_name"
                   ],
-                  "_type": "progress",
+                  "_widget_type": "progress",
                   "properties": {
                     "field": {
                       "type": "string"
@@ -1393,7 +1393,7 @@
                   "aliases": {
                     "items": "items_"
                   },
-                  "_type": "list",
+                  "_widget_type": "list",
                   "properties": {
                     "field": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1423,7 +1423,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "_type": "jinja",
+                  "_widget_type": "jinja",
                   "properties": {
                     "template_text": {
                       "type": "string"
@@ -1455,14 +1455,14 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "button"
+                  "_widget_type": "button"
                 },
                 "Url": {
                   "type": "object",
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "url",
+                  "_widget_type": "url",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1477,14 +1477,14 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Url"
                   ],
-                  "_type": "web_app"
+                  "_widget_type": "web_app"
                 },
                 "SwitchInlineQuery": {
                   "type": "object",
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "switchInline_query",
+                  "_widget_type": "switchInline_query",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1502,7 +1502,7 @@
                   "additionalProperties": {
                     "type": "string"
                   },
-                  "_type": "group",
+                  "_widget_type": "group",
                   "properties": {
                     "buttons": {
                       "type": "array",
@@ -1520,21 +1520,21 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
                   ],
-                  "_type": "row"
+                  "_widget_type": "row"
                 },
                 "Column": {
                   "type": "object",
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
                   ],
-                  "_type": "column"
+                  "_widget_type": "column"
                 },
                 "ScrollingGroup": {
                   "type": "object",
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group"
                   ],
-                  "_type": "scrolling_group",
+                  "_widget_type": "scrolling_group",
                   "properties": {
                     "width": {
                       "type": "string"
@@ -1556,7 +1556,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "list_group",
+                  "_widget_type": "list_group",
                   "properties": {
                     "buttons": {
                       "type": "array",
@@ -1580,7 +1580,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "checkbox",
+                  "_widget_type": "checkbox",
                   "properties": {
                     "checked_text": {
                       "type": "string"
@@ -1599,7 +1599,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "select",
+                  "_widget_type": "select",
                   "properties": {
                     "item_id_getter": true,
                     "items_": true,
@@ -1611,7 +1611,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "radio",
+                  "_widget_type": "radio",
                   "properties": {
                     "checked_text": {
                       "type": "string"
@@ -1629,7 +1629,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Select"
                   ],
-                  "_type": "multiselect",
+                  "_widget_type": "multiselect",
                   "properties": {
                     "checked_text": {
                       "type": "string"
@@ -1684,7 +1684,7 @@
                       }
                     }
                   },
-                  "_type": "calendar",
+                  "_widget_type": "calendar",
                   "properties": {
                     "config": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Calendar/$defs/CalendarConfig"
@@ -1699,7 +1699,7 @@
                   "required": [
                     "id"
                   ],
-                  "_type": "counter",
+                  "_widget_type": "counter",
                   "properties": {
                     "id": {
                       "type": "string"
@@ -1747,7 +1747,7 @@
                   "notValidated": [
                     "state"
                   ],
-                  "_type": "switch_to",
+                  "_widget_type": "switch_to",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1765,7 +1765,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "next",
+                  "_widget_type": "next",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1782,7 +1782,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "back",
+                  "_widget_type": "back",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1805,7 +1805,7 @@
                   "notValidated": [
                     "state"
                   ],
-                  "_type": "start",
+                  "_widget_type": "start",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1827,7 +1827,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "_type": "cancel",
+                  "_widget_type": "cancel",
                   "properties": {
                     "text": {
                       "$ref": "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
@@ -1852,7 +1852,7 @@
                   ],
                   "abstract": true,
                   "properties": {
-                    "_type": {
+                    "_widget_type": {
                       "$ref": "#/$defs/Enums/properties/input_widget_types"
                     }
                   }
@@ -1862,14 +1862,14 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/input/$defs/InputWidget"
                   ],
-                  "_type": "message_input"
+                  "_widget_type": "message_input"
                 },
                 "TextInput": {
                   "type": "object",
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/input/$defs/InputWidget"
                   ],
-                  "_type": "text_input",
+                  "_widget_type": "text_input",
                   "properties": {
                     "id": {
                       "type": "string"
@@ -1894,7 +1894,7 @@
                   ],
                   "abstract": true,
                   "properties": {
-                    "_type": {
+                    "_widget_type": {
                       "$ref": "#/$defs/Enums/properties/media_widget_types"
                     }
                   }
@@ -1904,7 +1904,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/media/$defs/MediaWidget"
                   ],
-                  "_type": "static_media",
+                  "_widget_type": "static_media",
                   "properties": {
                     "path": true,
                     "url": true,
@@ -1925,7 +1925,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/media/$defs/MediaWidget"
                   ],
-                  "_type": "dynamic_media",
+                  "_widget_type": "dynamic_media",
                   "properties": {
                     "media_item": {
                       "type": "string"

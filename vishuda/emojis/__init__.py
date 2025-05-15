@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
+from .utils import *
 from ._trends import *
 
 __all__ = [
+  'emojize_string',
+  'emojize_tokenized_string',
+
   'rolling_on_the_floor_laughing',
   'face_with_tears_of_joy',
   'smiling_face_with_smiling_eyes',
@@ -22,5 +26,4 @@ __all__ = [
   'kiss_mark',
   'revolving_hearts',
   'sweat_droplets',
-
 ]
