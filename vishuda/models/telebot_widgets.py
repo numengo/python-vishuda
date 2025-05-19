@@ -27,7 +27,16 @@ Button            = type_builder.load('https://numengo.org/telebot#/$defs/dialog
 Url               = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Url')
 WebApp            = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/WebApp')
 SwitchInlineQuery = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/SwitchInlineQuery')
-Group             = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group')
+#Group             = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group')
+
+class Group(with_metaclass(SchemaMetaclass)):
+    _id = 'https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Group'
+
+    def __init__(self, *buttons, **kwargs):
+        if buttons:
+            kwargs['widgets'] = buttons
+        Instance.__init__(self, **kwargs)
+
 Row               = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Row')
 Column            = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/Column')
 ScrollingGroup    = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/ScrollingGroup')

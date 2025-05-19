@@ -1,4 +1,3 @@
-from .forms import Form, FormsManager
 
 def create_deep_link(
     username: str,
@@ -45,8 +44,6 @@ def create_lang_buttons(languages, state_name='user_lang'):
 
 
 __all__ = [
-    'FormsManager',
-    'Form',
     'create_buttons_menu',
     'create_lang_buttons',
 ]

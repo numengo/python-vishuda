@@ -61,13 +61,13 @@
         }
       }
     },
-    "Routeur": {
+    "Router": {
       "type": "object",
       "extends": [
         "#/$defs/TelebotInstance"
       ],
       "properties": {
-        "include_routeurs": {
+        "include_routers": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/Routeur"
@@ -141,34 +141,24 @@
       ],
       "aliases": {
         "default": "defaultValue",
-        "key": "state_full_name",
         "label": "state_name"
       },
       "readOnly": [
-        "state_name",
-        "key_name"
+        "state_name"
       ],
       "properties": {
         "required": {
           "type": "boolean"
         },
         "defaultValue": true,
+        "state_name": {
+          "type": "string"
+        },
         "getter": {
           "$ref": "#/$defs/dialog/$defs/callables/$defs/DataGetter"
         },
         "selector": {
           "$ref": "#/$defs/dialog/$defs/callables/$defs/Callback"
-        },
-        "state_name": {
-          "type": "string",
-          "default": "{{ this.name | upper }}"
-        },
-        "state_full_name": {
-          "type": "string"
-        },
-        "key_name": {
-          "type": "string",
-          "default": "{{ this.state_name }}_KEY"
         }
       }
     },
@@ -370,10 +360,10 @@
         "all_callbacks"
       ],
       "properties": {
-        "routeur": {
+        "router": {
           "type": "string",
-          "description": "routeur name",
-          "default": "{{this.name}}_routeur"
+          "description": "router name",
+          "default": "{{this.name}}_router"
         },
         "actions": {
           "type": "array",
@@ -1130,9 +1120,9 @@
             "name"
           ],
           "properties": {
-            "routeur": {
+            "router": {
               "type": "string",
-              "description": "routeur name"
+              "description": "router name"
             },
             "triggers": {
               "$ref": "#/$defs/Triggers"
@@ -1203,7 +1193,6 @@
             "message_handler",
             "state",
             "getter",
-            "on_process_result",
             "markup_factory",
             "preview_add_transitions",
             "preview_data"
@@ -1224,7 +1213,6 @@
             "message_handler": true,
             "state": true,
             "getter": true,
-            "on_process_result": true,
             "markup_factory": true,
             "parse_mode": {
               "type": "string"
@@ -1502,9 +1490,12 @@
                   "additionalProperties": {
                     "type": "string"
                   },
+                  "aliases": {
+                    "buttons": "widgets"
+                  },
                   "_widget_type": "group",
                   "properties": {
-                    "buttons": {
+                    "widgets": {
                       "type": "array",
                       "items": {
                         "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
@@ -1556,9 +1547,12 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
+                  "aliases": {
+                    "buttons": "widgets"
+                  },
                   "_widget_type": "list_group",
                   "properties": {
-                    "buttons": {
+                    "widgets": {
                       "type": "array",
                       "items": {
                         "$ref": "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
@@ -1965,6 +1959,18 @@
                   "type": "object"
                 },
                 "choices": {
+                  "type": "array"
+                },
+                "local_data_states": {
+                  "type": "array"
+                },
+                "dialog_data_states": {
+                  "type": "array"
+                },
+                "middleware_data_states": {
+                  "type": "array"
+                },
+                "start_data_states": {
                   "type": "array"
                 }
               }
