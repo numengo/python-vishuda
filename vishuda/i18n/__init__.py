@@ -4,6 +4,7 @@ import emoji
 
 from ngoschema.loaders.module import register_locale_dir
 from threading import local
+from gettext import GNUTranslations
 import gettext as gettext_module
 
 from .. import settings
@@ -75,23 +76,33 @@ def find_module_domains():
 module_domains = find_module_domains()
 
 
+def make_i18n(languages=None):
+    from vishuda.models.i18n import I18nCore
+    languages = languages or settings.LANGUAGES
+    i18n_core = I18nCore(
+        languages=languages,
+        locale_dir_domains=list(module_domains.values()),
+    )
+    return i18n_core
+
+
 def find_locales(languages=None):
     """
     Load all compiled locales from path
 
     :return: dict with locales
     """
-    from vishuda.models.i18n import DomainsTranslation
+    from vishuda.models.i18n import Locale
     languages = languages or settings.LANGUAGES
     return {
-        lang: DomainsTranslation(
+        lang: Locale(
             locale_dirs=list(module_domains.values()),
-            language=lang)
+            locale=lang)
         for lang in languages}
 
 
-_translations = find_locales(settings.LANGUAGES)
-
+#_translations = find_locales(settings.LANGUAGES)
+_translations = make_i18n().get_locales_root()
 
 def active_language():
     return getattr(_active_language, 'value', None)
@@ -132,19 +143,6 @@ def deactivate_all():
     _active.value.to_language = lambda *args: None
 
 
-OFFSET = 127462 - ord('A')
-
-
-def get_lang_flag(code):
-    # https://github.com/python-telegram-bot/python-telegram-bot/wiki/Code-snippets#other-useful-stuff
-    # The Unicode flag emoji for any country can by definition be calculated from the countries 2 letter country code
-    # corresponding lang -> country code when different
-    lang_flags = {'en': 'gb'}
-    code = lang_flags.get(code, code)
-    code = code.upper()
-    return chr(ord(code[0]) + OFFSET) + chr(ord(code[1]) + OFFSET)
-
-
 def is_constant_string(s: str) -> bool:
     """
     Determines if a string is a constant (not translatable).
@@ -169,3 +167,11 @@ def is_constant_string(s: str) -> bool:
     # 5. If the string contains letters, assume it's a word or phrase to translate
     return False
 
+
+def get_localized_message(message, locale):
+    cur_lang = active_language()
+    translations = activate(locale)
+    output = translations.gettext(message)
+    if cur_lang != locale:
+        activate(cur_lang)
+    return output

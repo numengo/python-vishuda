@@ -245,13 +245,20 @@
           "dependencies": {
             "flag": [
               "alpha_2"
-            ],
-            "localized_name": [
-              "name",
-              "alpha_2"
             ]
           },
-          "primaryKey": "id",
+          "notSerialized": [
+            "localized_name",
+            "flag"
+          ],
+          "notValidated": [
+            "localized_name",
+            "flag"
+          ],
+          "primaryKeys": [
+            "id"
+          ],
+          "lazyLoading": true,
           "properties": {
             "id": {
               "type": "string"
@@ -265,9 +272,6 @@
             "name": {
               "type": "string"
             },
-            "localized_name": {
-              "type": "string"
-            },
             "flag": {
               "type": "string"
             }
@@ -275,6 +279,15 @@
         },
         "LocaleDirDomains": {
           "type": "object",
+          "dependencies": {
+            "locales_paths": [
+              "domains",
+              "locale_dir"
+            ]
+          },
+          "readOnly": [
+            "locales_paths"
+          ],
           "properties": {
             "module": {
               "type": "importable"
@@ -284,20 +297,43 @@
             },
             "domains": {
               "type": "array"
+            },
+            "locales_paths": {
+              "type": "object"
             }
           }
         },
-        "DomainsTranslation": {
+        "Locale": {
           "type": "object",
+          "extends": [
+            "#/$defs/i18n/$defs/Language"
+          ],
+          "aliases": {
+            "language": "locale"
+          },
+          "dependencies": {
+            "gnu_translations": [
+              "locale_paths"
+            ],
+            "locale_paths": [
+              "locale_dir_domains",
+              "locale"
+            ]
+          },
+          "lazyLoading": true,
           "properties": {
-            "locale_dirs": {
+            "locale_dir_domains": {
               "type": "array",
               "items": {
                 "$ref": "#/$defs/i18n/$defs/LocaleDirDomains"
               }
             },
-            "language": {
+            "locale": {
               "$ref": "#/$defs/i18n/properties/languageCode"
+            },
+            "id": {
+              "type": "string",
+              "default": "{{ locale }}"
             },
             "fallback": {
               "type": "boolean",
@@ -305,7 +341,76 @@
             },
             "codeset": {
               "type": "string"
+            },
+            "locale_paths": {
+              "type": "array",
+              "items": {
+                "type": "path"
+              }
+            },
+            "gnu_translations": {
+              "type": "array",
+              "items": true
             }
+          }
+        },
+        "I18nCore": {
+          "type": "object",
+          "additionalProperties": true,
+          "dependencies": {
+            "default_locale": [
+              "languages"
+            ],
+            "gnu_translations": [
+              "locales",
+              "default_locale"
+            ],
+            "locales": [
+              "locale_dir_domains",
+              "locales_map",
+              "languages"
+            ]
+          },
+          "notSerialized": [
+            "locales",
+            "root_locales"
+          ],
+          "readOnly": [
+            "locales",
+            "root_locales"
+          ],
+          "required": [
+            "languages",
+            "locale_dir_domains"
+          ],
+          "properties": {
+            "languages": {
+              "type": "array"
+            },
+            "locale_dir_domains": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/$defs/LocaleDirDomains"
+              }
+            },
+            "default_locale": {
+              "type": "string"
+            },
+            "locales_map": {
+              "type": "object",
+              "description": "fallback locales mapping"
+            },
+            "locales": {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/i18n/$defs/Locale"
+              }
+            },
+            "gnu_translations": {
+              "type": "array",
+              "items": true
+            },
+            "locales_root": true
           }
         },
         "LanguageContext": {
@@ -384,15 +489,13 @@
           "notSerialized": [
             "localized",
             "language",
-            "domainsTranslation"
+            "core"
           ],
           "properties": {
             "localized": {
               "type": "array"
             },
-            "domainsTranslation": {
-              "$ref": "#/$defs/i18n/$defs/DomainsTranslation"
-            },
+            "core": true,
             "language": {
               "$ref": "#/$defs/i18n/properties/languageCode"
             }
@@ -865,6 +968,7 @@
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
           "aliases": {
+            "description": "{'X-WR-CALDESC': None, 'description': 'The calendar description'}",
             "method": "METHOD",
             "product_id": "PRODID",
             "timezone": "X-WR-TIMEZONE"
@@ -1459,6 +1563,7 @@
               "extends": [
                 "#/$defs/files/$defs/medias/$defs/MediaFile"
               ],
+              "_type": "audio",
               "notSerialized": [
                 "stream_info",
                 "audiotags"
@@ -1467,7 +1572,6 @@
                 "stream_info",
                 "audiotags"
               ],
-              "_type": "audio",
               "properties": {
                 "stream_info": {
                   "$ref": "#/$defs/files/$defs/medias/$defs/AudioStreamInfo"
@@ -1613,13 +1717,13 @@
               "extends": [
                 "#/$defs/files/$defs/medias/$defs/MediaFile"
               ],
+              "_type": "image",
               "notSerialized": [
                 "image_info"
               ],
               "notValidated": [
                 "image_info"
               ],
-              "_type": "image",
               "properties": {
                 "image_info": {
                   "$ref": "#/$defs/files/$defs/medias/$defs/ImageInfo"
@@ -1655,10 +1759,10 @@
               "extends": [
                 "#/$defs/files/$defs/medias/$defs/MediaFile"
               ],
+              "_type": "video",
               "notSerialized": [
                 "video_info"
               ],
-              "_type": "video",
               "properties": {
                 "video_info": {
                   "$ref": "#/$defs/files/$defs/medias/$defs/VideoInfo"
@@ -2630,7 +2734,7 @@
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
           ],
           "dependencies": {
-            "command_name": [
+            "command": [
               "name"
             ]
           },
@@ -2641,9 +2745,9 @@
             "symbol": {
               "type": "importable"
             },
-            "command_name": {
+            "command": {
               "type": "string",
-              "default": "{{ this.name }}"
+              "default": "{{ this.name | lower }}"
             },
             "name": {
               "type": "string"
@@ -2675,7 +2779,6 @@
             "languages": {
               "type": "array",
               "description": "App supported language lists",
-              "asString": true,
               "items": {
                 "type": "string"
               },

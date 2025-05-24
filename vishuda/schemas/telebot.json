@@ -344,26 +344,18 @@
         "#/$defs/TelebotInstance"
       ],
       "notSerialized": [
-        "all_states_groups",
-        "main_state",
-        "inner_states_groups",
-        "states_group",
         "dialog",
-        "menu_window",
-        "all_windows",
-        "states_setters_windows",
-        "states_setters_btns",
-        "entry_points_btns",
-        "menu_window",
-        "menu_btn",
-        "menu_back",
-        "all_callbacks"
+        "filters",
+        "middlewares"
+      ],
+      "readOnly": [
+        "dialog"
       ],
       "properties": {
         "router": {
           "type": "string",
           "description": "router name",
-          "default": "{{this.name}}_router"
+          "default": "{{this.name | lower}}_router"
         },
         "actions": {
           "type": "array",
@@ -429,7 +421,9 @@
         "plugins": "entry_points"
       },
       "notSerialized": [
-        "token"
+        "token",
+        "bot",
+        "updater"
       ],
       "required": [
         "token",
@@ -451,12 +445,8 @@
           "type": "integer",
           "default": 2
         },
-        "bot": {
-          "type": "string"
-        },
-        "updater": {
-          "type": "string"
-        },
+        "bot": true,
+        "updater": true,
         "main_entry_point": {
           "$ref": "#/$defs/EntryPoint"
         },
@@ -1315,7 +1305,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/Format"
                   ],
-                  "_type": "i18n_format"
+                  "_widget_type": "i18n_format"
                 },
                 "Multi": {
                   "type": "object",
@@ -1959,18 +1949,6 @@
                   "type": "object"
                 },
                 "choices": {
-                  "type": "array"
-                },
-                "local_data_states": {
-                  "type": "array"
-                },
-                "dialog_data_states": {
-                  "type": "array"
-                },
-                "middleware_data_states": {
-                  "type": "array"
-                },
-                "start_data_states": {
                   "type": "array"
                 }
               }

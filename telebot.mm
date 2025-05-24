@@ -1031,7 +1031,7 @@
 <node TEXT="router name" ID="ID_680911112" CREATED="1716625790998" MODIFIED="1747686116403"/>
 </node>
 </node>
-<node TEXT="triggers" ID="ID_1940446668" CREATED="1746646279180" MODIFIED="1746646283543">
+<node TEXT="triggers" ID="ID_1940446668" CREATED="1746646279180" MODIFIED="1747736044354">
 <node TEXT="..Triggers" ID="ID_267645291" CREATED="1746646284105" MODIFIED="1746885254254"/>
 </node>
 <node TEXT="decorators" ID="ID_248658036" CREATED="1654462235179" MODIFIED="1654462478746">
@@ -1558,7 +1558,7 @@
 </node>
 </node>
 </node>
-<node TEXT="widgets" FOLDED="true" ID="ID_1416265262" CREATED="1720083376630" MODIFIED="1720083378663">
+<node TEXT="widgets" ID="ID_1416265262" CREATED="1720083376630" MODIFIED="1720083378663">
 <node TEXT="definitions" ID="ID_454548070" CREATED="1720083388277" MODIFIED="1720083389962">
 <node TEXT="Widget" ID="ID_706652733" CREATED="1720208451057" MODIFIED="1720208453138">
 <node TEXT="extends" ID="ID_368296666" CREATED="1716638242570" MODIFIED="1716638411322">
@@ -1621,7 +1621,7 @@
 <node TEXT="extends" ID="ID_1133277349" CREATED="1720088019571" MODIFIED="1720088023321">
 <node TEXT="Format" ID="ID_1158379617" CREATED="1720088023535" MODIFIED="1720299448949"/>
 </node>
-<node TEXT="_type" ID="ID_1790313824" CREATED="1720296141558" MODIFIED="1720296142894">
+<node TEXT="_widget_type" ID="ID_1790313824" CREATED="1720296141558" MODIFIED="1748112726924">
 <node TEXT="i18n_format" ID="ID_1226060456" CREATED="1720296143195" MODIFIED="1720299460999"/>
 </node>
 </node>
@@ -1739,7 +1739,7 @@
 </node>
 </node>
 </node>
-<node TEXT="keyboards" ID="ID_64414298" CREATED="1720083541067" MODIFIED="1720085155931">
+<node TEXT="keyboards" FOLDED="true" ID="ID_64414298" CREATED="1720083541067" MODIFIED="1720085155931">
 <node TEXT="definitions" ID="ID_1425028278" CREATED="1720083550717" MODIFIED="1720083552448">
 <node TEXT="KeyboardWidget" POSITION="bottom_or_right" ID="ID_1192989186" CREATED="1720083383077" MODIFIED="1720083387974">
 <node TEXT="extends" ID="ID_873604711" CREATED="1720208475417" MODIFIED="1720208477489">
@@ -2458,18 +2458,6 @@
 <node TEXT="choices" ID="ID_131013772" CREATED="1746956233670" MODIFIED="1746956238969">
 <icon BUILTIN="very_positive"/>
 </node>
-<node TEXT="local_data_states" ID="ID_125222968" CREATED="1746529003606" MODIFIED="1747628627438">
-<icon BUILTIN="very_positive"/>
-</node>
-<node TEXT="dialog_data_states" ID="ID_320060414" CREATED="1720772024412" MODIFIED="1747628627438">
-<icon BUILTIN="very_positive"/>
-</node>
-<node TEXT="middleware_data_states" ID="ID_406402185" CREATED="1720772033495" MODIFIED="1747628627437">
-<icon BUILTIN="very_positive"/>
-</node>
-<node TEXT="start_data_states" ID="ID_1397995278" CREATED="1720772061234" MODIFIED="1747628627434">
-<icon BUILTIN="very_positive"/>
-</node>
 </node>
 </node>
 </node>
@@ -2481,22 +2469,13 @@
 <node TEXT="vishuda.app.EntryPoint" ID="ID_54263251" CREATED="1714657354157" MODIFIED="1714657366063"/>
 <node TEXT="telebot.TelebotInstance" ID="ID_1612289287" CREATED="1746955404917" MODIFIED="1746955413198"/>
 </node>
-<node TEXT="dependencies" ID="ID_1018734367" CREATED="1746455085144" MODIFIED="1746455087671"/>
+<node TEXT="readOnly" ID="ID_1018734367" CREATED="1746455085144" MODIFIED="1747737278779">
+<node TEXT="dialog" ID="ID_1892212814" CREATED="1747737279115" MODIFIED="1747737280386"/>
+</node>
 <node TEXT="notSerialized" ID="ID_1197784524" CREATED="1747037965820" MODIFIED="1747037968642">
-<node TEXT="all_states_groups" ID="ID_399208146" CREATED="1746264426145" MODIFIED="1746455730142"/>
-<node TEXT="main_state" ID="ID_1746111571" CREATED="1747038324640" MODIFIED="1747038332227"/>
-<node TEXT="inner_states_groups" ID="ID_1626102828" CREATED="1746947410646" MODIFIED="1746947421224"/>
-<node TEXT="states_group" ID="ID_91436807" CREATED="1746455730598" MODIFIED="1746705321266"/>
-<node TEXT="dialog" ID="ID_212292598" CREATED="1746265924451" MODIFIED="1746265927173"/>
-<node TEXT="menu_window" ID="ID_1202712441" CREATED="1746775296539" MODIFIED="1746775306809"/>
-<node TEXT="all_windows" ID="ID_1670426466" CREATED="1746813449279" MODIFIED="1746813452038"/>
-<node TEXT="states_setters_windows" ID="ID_200642068" CREATED="1746799051173" MODIFIED="1747038120825"/>
-<node TEXT="states_setters_btns" ID="ID_1024450435" CREATED="1746799099644" MODIFIED="1747038120824"/>
-<node TEXT="entry_points_btns" ID="ID_722781159" CREATED="1746799197800" MODIFIED="1747038120815"/>
-<node TEXT="menu_window" ID="ID_1596224326" CREATED="1746943804858" MODIFIED="1746943808623"/>
-<node TEXT="menu_btn" ID="ID_1752620713" CREATED="1746859694780" MODIFIED="1746859701057"/>
-<node TEXT="menu_back" POSITION="bottom_or_right" ID="ID_886908241" CREATED="1746817035490" MODIFIED="1746817036171"/>
-<node TEXT="all_callbacks" POSITION="bottom_or_right" ID="ID_101066250" CREATED="1747038183089" MODIFIED="1747038184378"/>
+<node TEXT="dialog" ID="ID_1560364801" CREATED="1747737268983" MODIFIED="1747737271085"/>
+<node TEXT="filters" ID="ID_1957744025" CREATED="1747737296374" MODIFIED="1747737302277"/>
+<node TEXT="middlewares" ID="ID_145215213" CREATED="1747737302842" MODIFIED="1747737306505"/>
 </node>
 <node TEXT="properties" ID="ID_622738340" CREATED="1654455921522" MODIFIED="1654455923402">
 <node TEXT="router" ID="ID_1630975996" CREATED="1716625673539" MODIFIED="1747686125909">
@@ -2504,7 +2483,7 @@
 <node TEXT="router name" ID="ID_1114914992" CREATED="1716625790998" MODIFIED="1747686133769"/>
 </node>
 <node TEXT="default" ID="ID_895730946" CREATED="1716665772997" MODIFIED="1716665775141">
-<node TEXT="{{this.name}}_router" ID="ID_321403326" CREATED="1716665775639" MODIFIED="1747686137165"/>
+<node TEXT="{{this.name | lower}}_router" ID="ID_321403326" CREATED="1716665775639" MODIFIED="1747777159544"/>
 </node>
 </node>
 <node TEXT="actions" ID="ID_1266912109" CREATED="1654456081859" MODIFIED="1720208654235">
@@ -2560,6 +2539,8 @@
 </node>
 <node TEXT="notSerialized" ID="ID_420290115" CREATED="1649314529881" MODIFIED="1649314533000">
 <node TEXT="token" ID="ID_270519594" CREATED="1649314533265" MODIFIED="1649314536332"/>
+<node TEXT="bot" ID="ID_664875542" CREATED="1747737330858" MODIFIED="1747737335894"/>
+<node TEXT="updater" ID="ID_982719045" CREATED="1747737336478" MODIFIED="1747737339420"/>
 </node>
 <node TEXT="required" ID="ID_816312090" CREATED="1649314541868" MODIFIED="1649314544667">
 <node TEXT="token" ID="ID_1985190148" CREATED="1649314545032" MODIFIED="1649314548218"/>
@@ -2590,8 +2571,12 @@
 <node TEXT="2" OBJECT="java.lang.Long|2" ID="ID_591427087" CREATED="1649365815552" MODIFIED="1649365816685"/>
 </node>
 </node>
-<node TEXT="bot" ID="ID_1065709834" CREATED="1714729095792" MODIFIED="1714729097691"/>
-<node TEXT="updater" ID="ID_1762457957" CREATED="1714729098038" MODIFIED="1714729103000"/>
+<node TEXT="bot" ID="ID_1065709834" CREATED="1714729095792" MODIFIED="1714729097691">
+<node TEXT="true" ID="ID_1660523207" CREATED="1747737342369" MODIFIED="1747737344124"/>
+</node>
+<node TEXT="updater" ID="ID_1762457957" CREATED="1714729098038" MODIFIED="1714729103000">
+<node TEXT="true" ID="ID_108542856" CREATED="1747737344986" MODIFIED="1747737346864"/>
+</node>
 <node TEXT="main_entry_point" ID="ID_1309027124" CREATED="1747115658743" MODIFIED="1747115664343">
 <node TEXT="EntryPoint" ID="ID_1049212626" CREATED="1714660620579" MODIFIED="1714660625348"/>
 </node>
@@ -3365,6 +3350,29 @@
 </node>
 <node TEXT="DEFAULT_FORM_FILTERS" POSITION="bottom_or_right" ID="ID_857877830" CREATED="1718613920331" MODIFIED="1718613936460"/>
 </node>
+</node>
+</node>
+<node TEXT="GROK BRIEFING ON BOTS" ID="ID_247592200" CREATED="1747852741584" MODIFIED="1747852758635">
+<icon BUILTIN="button_cancel"/>
+<node ID="ID_863793264" CREATED="1747852826315" MODIFIED="1747852826315"><richcontent TYPE="NODE">
+
+<html>
+  <head>
+    
+  </head>
+  <body>
+    <p>
+      4. WhatsApp
+    </p>
+  </body>
+</html>
+</richcontent>
+<node TEXT="Description : WhatsApp, via son Business API, permet de créer des bots avec des interfaces interactives. Bien que moins riche que Telegram, WhatsApp supporte des boutons et des listes interactives.&#xa;Richesse de l’interface :&#xa;Boutons interactifs : Jusqu’à 3 boutons par message (ex. : “Oui”, “Non”, “Plus d’info”).&#xa;&#xa;Listes interactives : Menus déroulants avec jusqu’à 10 options.&#xa;&#xa;Messages formatés : Support des images, vidéos, et texte formaté (gras, italique).&#xa;&#xa;Modèles de messages : Messages prédéfinis pour des interactions structurées.&#xa;Bibliothèques Python :&#xa;python-whatsapp : Bibliothèque non officielle pour interagir avec l’API Business.&#xa;&#xa;twilio : Utilisé si tu passes par un fournisseur comme Twilio pour l’accès à WhatsApp.&#xa;&#xa;pywhatkit : Pour des automatisations simples (mais non officiel et limité)." POSITION="bottom_or_right" ID="ID_241978420" CREATED="1747852783604" MODIFIED="1747852824615"/>
+<node TEXT="Avantages :&#xd;&#xa;WhatsApp est extrêmement populaire, idéal pour atteindre un large public.&#xd;&#xa;&#xd;&#xa;Boutons et listes interactives suffisent pour des flux conversationnels simples.&#xd;&#xa;&#xd;&#xa;Bonne intégration avec des outils comme Twilio ou Meta Business API.&#xd;&#xa;&#xd;Limites :&#xd;&#xa;L’API Business est payante et complexe à configurer (nécessite un compte Meta Business ou un fournisseur comme Twilio).&#xd;&#xa;&#xd;&#xa;Moins flexible que Telegram ou Discord (pas de fenêtres complexes comme aiogram-dialog).&#xd;&#xa;&#xd;&#xa;Approbation des modèles de messages par Meta peut être lente.&#xd;&#xa;&#xd;Pertinence pour toi :&#xd;&#xa;Si tu veux un bot OSINT accessible au grand public, WhatsApp est une option, mais l’interface est moins riche que Telegram ou Discord.&#xd;&#xa;&#xd;&#xa;Utile pour envoyer des alertes ou collecter des réponses simples (ex. : “Voulez-vous plus d’info sur ce sujet ?”).&#xd;&#xa;&#xd;" POSITION="bottom_or_right" ID="ID_1248636116" CREATED="1747852816360" MODIFIED="1747852817678"/>
+</node>
+<node TEXT="Discord" ID="ID_1100138447" CREATED="1747852834595" MODIFIED="1747852837086">
+<node TEXT="Description : Discord est une plateforme de messagerie populaire pour les communautés, avec un support puissant pour les bots. Les bots Discord peuvent créer des interfaces riches grâce aux embeds, boutons, menus déroulants, et modals (formulaires interactifs).&#xd;&#xa;Richesse de l’interface :&#xd;&#xa;Embeds : Messages formatés avec titres, images, champs, et couleurs pour une présentation soignée.&#xd;&#xa;&#xd;&#xa;Composants interactifs : Boutons, sélecteurs (menus déroulants), et modals pour collecter des entrées utilisateur.&#xd;&#xa;&#xd;&#xa;Slash Commands : Commandes modernes (ex. : /info) qui s’intègrent bien dans l’interface.&#xd;&#xa;&#xd;&#xa;Modals : Fenêtres pop-up pour des formulaires (similaires aux fenêtres de aiogram-dialog).&#xd;&#xa;&#xd;&#xa;Réactions : Utilisation d’emojis pour des interactions simples.&#xd;&#xa;&#xd;&#xa;Threads et canaux : Gestion de conversations structurées dans différents contextes.&#xd;&#xa;&#xd;Bibliothèques Python :&#xd;&#xa;discord.py : La bibliothèque la plus populaire, bien documentée, mais en maintenance-only depuis 2022 (version 2.3.x).&#xd;&#xa;&#xd;&#xa;Pycord : Fork actif de discord.py, compatible avec les dernières fonctionnalités (slash commands, boutons, modals).&#xd;&#xa;&#xd;&#xa;nextcord : Autre fork de discord.py, similaire à Pycord mais avec quelques différences dans l’implémentation.&#xd;&#xa;&#xd;" ID="ID_1456230581" CREATED="1747852852282" MODIFIED="1747852866054"/>
+<node TEXT="Avantages :&#xd;&#xa;Interfaces très riches grâce aux embeds, boutons, et modals.&#xd;&#xa;&#xd;&#xa;Supporte des interactions complexes (similaires à aiogram-dialog).&#xd;&#xa;&#xd;&#xa;Communauté énorme et nombreuses ressources (tutoriels, exemples).&#xd;&#xa;&#xd;&#xa;Parfait pour l’OSINT : surveiller des discussions dans des serveurs, collecter des données, ou automatiser des notifications.&#xd;&#xa;&#xd;&#xa;Gratuit : Pas de coûts d’API, juste un token de bot via le Discord Developer Portal.&#xd;&#xa;&#xd;Limites :&#xd;&#xa;Nécessite un serveur Discord pour héberger le bot (mais tu peux en créer un gratuitement).&#xd;&#xa;&#xd;&#xa;discord.py n’est plus activement développé, mais Pycord et nextcord sont des alternatives solides.&#xd;&#xa;&#xd;&#xa;Moins orienté grand public que Telegram (plus communautaire).&#xd;&#xa;&#xd;Pertinence pour toi :&#xd;&#xa;Si tu veux des interfaces aussi riches que Telegram, Discord est une excellente option. Les modals et boutons te permettront de créer des flux conversationnels similaires à aiogram-dialog.&#xd;&#xa;&#xd;&#xa;Pour l’OSINT, tu peux utiliser un bot Discord pour agréger des données (ex. : tweets collectés via Tweepy) et les présenter dans des embeds interactifs à une équipe.&#xd;&#xa;&#xd;" ID="ID_906679868" CREATED="1747852869079" MODIFIED="1747852870641"/>
 </node>
 </node>
 </node>
