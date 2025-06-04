@@ -20,11 +20,20 @@ class TelebotInstance(with_metaclass(SchemaMetaclass)):
     def set_context(self, context, **opts):
         Instance.set_context(self, context, **opts)
         self._telebot = next((m for m in self._context.maps if isinstance(m, Telebot)), None)
+        self._parent_command = next((m for m in self._context.maps if isinstance(m, Command)), None)
+        self._parent_state = next((m for m in self._context.maps if isinstance(m, State)), None)
+        self._parent_states_group = next((m for m in self._context.maps if isinstance(m, StatesGroup)), None)
         self._parent_entry_point = next((m for m in self._context.maps if isinstance(m, EntryPoint)), None)
         if '_telebot' in self._properties:
             self._set_dataValidated('_telebot', self._telebot)
         if '_parentEntryPoint' in self._properties:
             self._set_dataValidated('_parentEntryPoint', self._parent_entry_point)
+        if '_parentCommand' in self._properties:
+            self._set_dataValidated('_parentCommmand', self._parent_command)
+        if '_parentStatesGroup' in self._properties:
+            self._set_dataValidated('_parentStatesGroup', self._parent_states_group)
+        if '_parentState' in self._properties:
+            self._set_dataValidated('_parentState', self._parent_state)
 
 
 class Action(with_metaclass(SchemaMetaclass)):
@@ -38,6 +47,7 @@ class Action(with_metaclass(SchemaMetaclass)):
 
 
 Message = type_builder.load('https://numengo.org/telebot#/$defs/actions/$defs/Message')
+Command = type_builder.load('https://numengo.org/telebot#/$defs/actions/$defs/Command')
 
 Callback = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/callables/$defs/Callback')
 DataGetter = type_builder.load('https://numengo.org/telebot#/$defs/dialog/$defs/callables/$defs/DataGetter')

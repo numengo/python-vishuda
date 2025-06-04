@@ -10,16 +10,25 @@
         "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
       ],
       "notSerialized": [
+        "_telebot",
         "_parentEntryPoint",
-        "_telebot"
+        "_parentCommand",
+        "_parentStatesGroup",
+        "_parentState"
       ],
       "notValidated": [
+        "_telebot",
         "_parentEntryPoint",
-        "_telebot"
+        "_parentCommand",
+        "_parentStatesGroup",
+        "_parentState"
       ],
       "properties": {
+        "_telebot": true,
         "_parentEntryPoint": true,
-        "_telebot": true
+        "_parentCommand": true,
+        "_parentStatesGroup": true,
+        "_parentState": true
       }
     },
     "DeepLink": {
@@ -137,7 +146,8 @@
     "State": {
       "type": "object",
       "extends": [
-        "#/$defs/TelebotInstance"
+        "#/$defs/TelebotInstance",
+        "https://numengo.org/vishuda#/$defs/emojis/$defs/HasEmojis"
       ],
       "aliases": {
         "default": "defaultValue",
@@ -165,7 +175,8 @@
     "StatesGroup": {
       "type": "object",
       "extends": [
-        "#/$defs/TelebotInstance"
+        "#/$defs/TelebotInstance",
+        "https://numengo.org/vishuda#/$defs/emojis/$defs/HasEmojis"
       ],
       "dependencies": {
         "states": [
@@ -380,7 +391,10 @@
           }
         },
         "menu_text": {
-          "type": "tokens"
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dialog/$defs/widgets/$defs/Widget"
+          }
         },
         "widgets": {
           "type": "array",
@@ -418,6 +432,7 @@
       ],
       "additionalProperties": true,
       "aliases": {
+        "main_entry_point": "entry_point",
         "plugins": "entry_points"
       },
       "notSerialized": [
@@ -447,7 +462,7 @@
         },
         "bot": true,
         "updater": true,
-        "main_entry_point": {
+        "entry_point": {
           "$ref": "#/$defs/EntryPoint"
         },
         "entry_points": {
@@ -1095,7 +1110,8 @@
         "Action": {
           "type": "object",
           "extends": [
-            "#/$defs/TelebotInstance"
+            "#/$defs/TelebotInstance",
+            "https://numengo.org/vishuda#/$defs/emojis/$defs/HasEmojis"
           ],
           "abstract": true,
           "dependencies": {
@@ -1106,10 +1122,16 @@
               "label"
             ]
           },
+          "notSerialized": [
+            "_action_type"
+          ],
           "primaryKeys": [
             "name"
           ],
           "properties": {
+            "_action_type": {
+              "type": "string"
+            },
             "router": {
               "type": "string",
               "description": "router name"
@@ -1136,6 +1158,7 @@
           "extends": [
             "#/$defs/actions/$defs/Action"
           ],
+          "_action_type": "message",
           "properties": {
             "parse_mode": {
               "type": "string",
@@ -1158,10 +1181,17 @@
               "name"
             ]
           },
+          "_action_type": "message",
           "properties": {
             "command": {
               "type": "gettext",
               "default": "{{this.name}}"
+            },
+            "mode": {
+              "$ref": "#/$defs/Enums/properties/dialog_start_mode"
+            },
+            "show_mode": {
+              "$ref": "#/$defs/Enums/properties/dialog_show_mode"
             }
           }
         }
@@ -1175,9 +1205,7 @@
           "extends": [
             "#/$defs/TelebotInstance"
           ],
-          "additionalProperties": {
-            "type": "string"
-          },
+          "additionalProperties": {},
           "notSerialized": [
             "all_callbacks",
             "message_handler",
@@ -1219,9 +1247,7 @@
           "extends": [
             "#/$defs/TelebotInstance"
           ],
-          "additionalProperties": {
-            "type": "string"
-          },
+          "additionalProperties": {},
           "properties": {
             "windows": {
               "type": "array",
@@ -1312,9 +1338,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "additionalProperties": {
-                    "type": "string"
-                  },
+                  "additionalProperties": {},
                   "_widget_type": "multi",
                   "properties": {
                     "texts": {
@@ -1365,9 +1389,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/texts/$defs/TextWidget"
                   ],
-                  "additionalProperties": {
-                    "type": "string"
-                  },
+                  "additionalProperties": {},
                   "aliases": {
                     "items": "items_"
                   },
@@ -1477,9 +1499,7 @@
                   "extends": [
                     "#/$defs/dialog/$defs/widgets/$defs/keyboards/$defs/KeyboardWidget"
                   ],
-                  "additionalProperties": {
-                    "type": "string"
-                  },
+                  "additionalProperties": {},
                   "aliases": {
                     "buttons": "widgets"
                   },

@@ -1030,18 +1030,6 @@
             }
           }
         },
-        "EmojiMixin": {
-          "type": "object",
-          "abstract": true,
-          "notSerialized": [
-            "emojis"
-          ],
-          "properties": {
-            "emojis": {
-              "type": "array"
-            }
-          }
-        },
         "HasCountry": {
           "type": "object",
           "abstract": true,
@@ -1072,6 +1060,40 @@
               "$ref": "#/$defs/emojis/$defs/EmojiCategory"
             }
           }
+        },
+        "HasEmojis": {
+          "type": "object",
+          "abstract": true,
+          "aliases": {
+            "emjois_before": "emojis",
+            "emoji_before": "emoji"
+          },
+          "dependencies": {
+            "emojis": [
+              "emoji"
+            ],
+            "emojis_after": [
+              "emoji_after"
+            ]
+          },
+          "notSerialized": [
+            "emoji",
+            "emoji_after"
+          ],
+          "properties": {
+            "emoji": {
+              "type": "string"
+            },
+            "emojis": {
+              "type": "array"
+            },
+            "emoji_after": {
+              "type": "string"
+            },
+            "emojis_after": {
+              "type": "array"
+            }
+          }
         }
       }
     },
@@ -1083,7 +1105,7 @@
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
             "#/$defs/i18n/$defs/TranslationMixin",
-            "#/$defs/emojis/$defs/EmojiMixin"
+            "#/$defs/emojis/$defs/HasEmojis"
           ],
           "abstract": true,
           "notSerialized": [
@@ -2666,7 +2688,8 @@
           "description": "This objects represents an app model.",
           "extends": [
             "https://numengo.org/ngoschema#/$defs/instances/$defs/Entity",
-            "#/$defs/i18n/$defs/TranslatableMixin"
+            "#/$defs/i18n/$defs/TranslatableMixin",
+            "#/$defs/emojis/$defs/HasEmojis"
           ],
           "abstract": true
         },
@@ -2731,7 +2754,8 @@
         "EntryPoint": {
           "type": "object",
           "extends": [
-            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance"
+            "https://numengo.org/ngoschema#/$defs/instances/$defs/Instance",
+            "#/$defs/emojis/$defs/HasEmojis"
           ],
           "dependencies": {
             "command": [
@@ -2761,7 +2785,8 @@
           "type": "object",
           "description": "This objects represents an app.",
           "extends": [
-            "#/$defs/app/$defs/Namespace"
+            "#/$defs/app/$defs/Namespace",
+            "#/$defs/emojis/$defs/HasEmojis"
           ],
           "dependencies": {
             "languages_details": [
