@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-07-06 08:59+0100\n"
+"POT-Creation-Date: 2025-06-04 11:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,106 +17,95 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:5
-msgid "automatically generated for telebot"
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:113
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:20
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:68
+msgid "Back"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:6
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:117
+msgid "Select calendar configuration"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:119
+msgid "Default"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:124
+msgid "Customized"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:132
+msgid "Default calendar widget"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:141
+msgid "Customized calendar widget"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:142
+msgid "Here we use custom text widgets to localize and store selection"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:144
+#, python-brace-format
 msgid ""
-"This objects represents a Telegram bot. It allows you to add handlers for "
-"different kind of updates."
+"\n"
+"Selected: {selected}"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:159
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1173
-msgid "routeur name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:232
-msgid "Bot name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:236
-msgid "bot API token"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:253
-msgid "labels to make reference to for callback data (automatically numbered)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:985
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:145
 msgid ""
-"This object represents an incoming inline query. When the user sends an "
-"empty query, your bot could return some default or trending results."
+"\n"
+"No dates selected"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1001
-msgid ""
-"Commands are Telegram messages that start with /, optionally followed by an "
-"@ and the bot’s name and/or some additional text. The handler will add a "
-"list to the CallbackContext named CallbackContext.args. It will contain a "
-"list of strings, which is the text following the command split on single or "
-"consecutive whitespace characters"
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/counter.py:34
+msgid "`Counter` widget is used to create +/- buttons."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1032
-msgid ""
-"Handler class to handle telegram messages. They might contain text, media or "
-"status updates."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/counter.py:35
+msgid "`Progress` widget shows percentage\n"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1064
-msgid ""
-"A handler to hold a conversation with a single or multiple users through "
-"Telegram updates by managing four collections of other handlers.\n"
-"\n"
-"The first collection, a ``list`` named :attr:`entry_points`, is used to "
-"initiate the conversation, for example with a :class:`telegram.ext."
-"CommandHandler` or :class:`telegram.ext.MessageHandler`.\n"
-"\n"
-"The second collection, a ``dict`` named :attr:`states`, contains the "
-"different conversation steps and one or more associated handlers that should "
-"be used if the user sends a message when the conversation with them is "
-"currently in that state. Here you can also define a state for `TIMEOUT` to "
-"define the behavior where `conversation_timeout` is exceeded, and a state "
-"for`WAITING` to define behavior when a new update is received while the "
-"previous ``@run_async`` decorated handler is not finished.\n"
-"\n"
-"The third collection, a ``list`` named :attr:`fallbacks`, is used if the "
-"user is currently in a conversation but the state has either no associated "
-"handler or the handler that is associated to the state is inappropriate for "
-"the update, for example if the update contains a command, but a regular text "
-"message is expected. You could use this for a ``/cancel`` command or to let "
-"the user know their message was not recognized.\n"
-"\n"
-"To change the state of conversation, the callback function of a handler must "
-"return the new state after responding to the user. If it does not return "
-"anything (returning :obj:`None` by default), the state will not change. If "
-"an entry point callback function returns :obj:`None`, the conversation ends "
-"immediately after the execution of this callback function.\n"
-"To end the conversation, the callback function must return :attr:`END` or "
-"``-1``. To handle the conversation timeout, use handler :attr:`TIMEOUT` or "
-"``-2``.\n"
-"Finally, :class:`telegram.ext.DispatcherHandlerStop` can be used in "
-"conversations as described in the corresponding documentation.\n"
-"\n"
-"Note:\n"
-"In each of the described collections of handlers, a handler may in turn be a "
-"`ConversationHandler`. In that case, the nested :class:`ConversationHandler` "
-"should have the attribute :attr:`map_to_parent` which allows to return to "
-"the parent conversation at specified states within the nested conversation.\n"
-"\n"
-"Note that the keys in :attr:`map_to_parent` must not appear as keys in :attr:"
-"`states` attribute or else the latter will be ignored. You may map :attr:"
-"`END` to one of the parents states to continue the parent conversation after "
-"this has ended or even map a state to :attr:`END` to end the *parent* "
-"conversation from within the nested one. For an example on nested :class:"
-"`ConversationHandler` s, see our `examples`_."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:13
+msgid "This is aiogram-dialog demo application"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1132
-msgid ""
-"Handler class to handle Telegram updates that contain a chat member update."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:14
+msgid "Use buttons below to see some options."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:16
+msgid "📐 Layout widgets"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:21
+msgid "📜 Scrolling widgets"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:26
+msgid "☑️ Selection widgets"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:31
+msgid "📅 Calendar"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:36
+msgid "💯 Counter and Progress"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:41
+msgid "🎛 Combining widgets"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:46
+msgid "🔢 Multiple steps"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:51
+msgid "⌨️ Reply keyboard"
 msgstr ""
 
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/schema_org.json:6
@@ -23079,173 +23068,780 @@ msgid ""
 "long descriptions are needed.)"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:5
-msgid "Django views definitions"
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:61
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:68
+msgid "am"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:6
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:61
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:68
+msgid "are"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:62
+msgid "was"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:62
+msgid "were"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:63
+msgid "i"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:63
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:73
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:74
+msgid "you"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:64
+msgid "i'd"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:64
+msgid "you would"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:65
+msgid "i've"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:65
+msgid "you have"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:66
+msgid "i'll"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:66
+msgid "you will"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:67
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:71
+msgid "my"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:67
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:71
+msgid "your"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:69
+msgid "you've"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:69
+msgid "I have"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:70
+msgid "you'll"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:70
+msgid "I will"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:72
+msgid "yours"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:72
+msgid "mine"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:73
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:74
+msgid "me"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:5
+msgid "automatically generated for vishuda"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:12
+msgid "This object represents a numpy nd-array"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:25
+msgid ""
+"The desired data-type for the array.  If not given, then the type will be "
+"determined as the minimum type required to hold the objects in the sequence."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:29
+msgid ""
+"If true (default), then the object is copied.  Otherwise, a copy will only "
+"be made if __array__ returns a copy, if obj is a nested sequence, or if a "
+"copy is needed to satisfy any of the other requirements(`dtype`, `order`, "
+"etc.)."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:34
+msgid ""
+"Specify the memory layout of the array. If object is not an array, the newly "
+"created array will be in C order (row major) unless 'F' is specified, in "
+"which case it will be in Fortran order (column major). If object is an array "
+"the following holds."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:44
+msgid ""
+"If True, then sub-classes will be passed-through, otherwise the returned "
+"array will be forced to be a base-class array (default)."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:48
+msgid ""
+"Specifies the minimum number of dimensions that the resulting array should "
+"have.  Ones will be pre-pended to the shape as needed to meet this "
+"requirement."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:52
+msgid ""
+"Reference object to allow the creation of arrays which are not NumPy arrays. "
+"If an array-like passed in as ``like`` supports the ``__array_function__`` "
+"protocol, the result will be defined by it. In this case, it ensures the "
+"creation of an array object compatible with that passed in via this argument."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:58
+msgid "This object represents a serie for Pandas"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:79
+msgid "This object represents series for Pandas"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:95
+msgid "dtype object of the underlying data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:114
+msgid ""
+"Two-dimensional size-mutable, potentially heterogeneous tabular data "
+"structure with labeled axes (rows and columns)."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:138
+msgid "This is a mixin for classes that require multlingual support"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:142
+msgid "Translation language code"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:143
+msgid ""
+"enumeration ordered by pondering each 1st language of a country with its "
+"population, worldwide"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:402
+msgid "fallback locales mapping"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:544
+msgid ""
+"The event’s unique id. This id should be globally unique so you should add "
+"an @DOMAIN_NAME to your id."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:551
+msgid "The event class (e.g. PUBLIC, PRIVATE, CONFIDENTIAL)"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:555
+msgid "The event create time"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:559
+msgid "The event description"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:563
+msgid "The event start time"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:567
+msgid ""
+"The latitude and longitude of the event. The value returned by this property "
+"should be a two-tuple containing the latitude and longitude as float values. "
+"semicolon. Ex: (37.386013, -122.082932)"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:571
+msgid "The event modified time"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:575
+msgid "The event location"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:579
+msgid ""
+"The event organizer. Expected to be a vCalAddress object. See iCalendar "
+"documentation or tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:589
+msgid "The status of an event. Can be CONFIRMED, CANCELLED or TENTATIVE."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:598
+msgid "The event name/title"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:602
+msgid ""
+"The event transparency. Defines whether the event shows up in busy searches. "
+"(e.g. OPAQUE, TRANSPARENT)"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:606
+msgid "The event url"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:613
+msgid "The event end time"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:626
+msgid ""
+"The event attendees. Expected to be a list of vCalAddress objects. See "
+"iCalendar documentation or tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:636
+msgid ""
+"The dates/times for exceptions of a recurring event. See iCalendar "
+"documentation or tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:652
+msgid ""
+"The recurring dates/times for a repeating event. See iCalendar documentation "
+"or tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:659
+msgid ""
+"The recurrence rule for repeating events. See iCalendar documentation or "
+"tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:663
+msgid ""
+"Alarms for the event, must be a list of Alarm objects. See iCalendar "
+"documentation or tests to know how to build them."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:967
+msgid "This is the base object for an iCalendar file."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:972
+msgid "{'X-WR-CALDESC': None, 'description': 'The calendar description'}"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:985
+msgid "The calendar product ID"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:995
+msgid "The calendar method such as meeting requests."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:999
+msgid "The calendar timezone"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1003
+msgid "The calendar name/title"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1140
+msgid "This represents associates a typed content to a db model symbol."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1154
+msgid "python model class name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1160
+msgid ""
+"The permissions system provides a way to assign permissions to specific "
+"users and groups of users.\n"
+"\n"
+"The permission system is used by the Django admin site, but may also be "
+"useful in your own code. The Django admin site uses permissions as follows:\n"
+"    - The \"add\" permission limits the user's ability to view the \"add\" "
+"form\n"
+"      and add an object.\n"
+"    - The \"change\" permission limits a user's ability to view the change\n"
+"      list, view the \"change\" form and change an object.\n"
+"    - The \"delete\" permission limits the ability to delete an object.\n"
+"    - The \"view\" permission limits the ability to view an object.\n"
+"\n"
+"Permissions are set globally per type of object, not per specific object "
+"instance. It is possible to say \"Mary may change news stories,\" but it's "
+"not currently possible to say \"Mary may change news stories, but only the "
+"ones she created herself\" or \"Mary may only change news stories that have "
+"a certain status or publication date.\"\n"
+"The permissions listed above are automatically created for each model."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1194
+msgid ""
+"Groups are a generic way of categorizing users to apply permissions, or some "
+"other label, to those users.\n"
+"A user can belong to any number of groups. A user in a group automatically "
+"has all the permissions granted to that group. For example, if the group "
+"'Site editors' has the permission can_edit_home_page, any user in that group "
+"will have that permission."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1217
+msgid ""
+"This objects represents a fully featured User model with admin-compliant "
+"permissions."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1233
+msgid "Unique User name, usually email address"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1240
+msgid "This objects represents a bank account."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1261
+msgid "Bank account holder's name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1265
+msgid "Bank's name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1269
+msgid "Bank's street"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1273
+msgid "Bank's city"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1277
+msgid "Bank's zip code"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1281
+msgid "Bank agency identifier"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1285
+msgid "SWIFT BIC number"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1289
+msgid "IBAN number"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1303
+msgid "This object represents file informations."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1330
+msgid "Content size in bytes."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1334
+msgid "Content size in human readable units."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1338
+msgid "SHA1 hash of the file."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1342
+msgid "MIME type of the file"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2319
+msgid ""
+"This object represents an address following the convention of http://"
+"microformats.org/wiki/hcard"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2457
+msgid "This object represent a person, a company, an organization, or a place"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2480
+msgid "Email address"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2484
+msgid "Telephone number"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2584
+msgid "First Name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2588
+msgid "Family (often last) name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2592
+msgid "Name, formatted/full"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2617
+msgid "This objects represents a merchant."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2656
+msgid "This objects represents a product manufacturer."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2663
+msgid "This objects represents a customer."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2701
+msgid "This objects represents an app model."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2711
+msgid "This objects represents an app fixture."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2725
+msgid "Fixture values"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2731
+msgid "This objects represents an app view."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2739
+msgid "This objects represents an app namespace."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2746
+msgid "Namespace models"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2753
+msgid "Namespace fixtures"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2760
+msgid "Namespace views"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2799
+msgid "This objects represents an app."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2812
+msgid "App entry points"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2819
+msgid "App supported language lists"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2913
+msgid "This objects represents a conversational pair."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2939
+msgid "This objects represents a conversational NLTK chatbot"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2949
+msgid "List of patterns and responses."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2956
+msgid "Mapping between first and second person expressions"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:37
+msgid "Apple"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:38
+msgid "Banana"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:39
+msgid "Orange"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:40
+msgid "Pear"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:44
+msgid "Mango"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:45
+msgid "Pineapple"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:46
+msgid "Kiwi"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:66
+msgid "Different keyboard Selects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:91
+msgid "Select widget"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:117
+msgid "Radio widget"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:136
+msgid "Multiselect widget"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:156
+msgid "Toggle widget. Click to switch between items."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:157
+msgid "It is compatible and interchangeable with `Radio`."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:79
+msgid "Scrolling variant demo. Please, select an option:"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:81
+msgid "📜 Default Pager"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:86
+msgid "📑 Customised pager"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:91
+msgid "📝 List scroll"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:96
+msgid "📄 Text scroll"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:101
+msgid "📟 StubScroll (getter-based)"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:106
+msgid "📜 & 📝 Sync scroll"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:115
+msgid "Scrolling group with default pager (legacy mode)"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:135
+msgid "Scrolling group with external paging controls"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:186
+msgid "Text list scrolling:\n"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:203
+msgid "Text scrolling:\n"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:217
+msgid "Stub Scroll. Getter is used to paginate\n"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:218
+#, python-brace-format
+msgid "You are at page {current_page} of {pages}"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:219
+#, python-brace-format
+msgid "Day by number is {day}"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:5
+msgid "Django admin definitions"
+msgstr ""
+
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:6
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/drf.json:6
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_forms.json:6
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:6
 msgid "object"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:13
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:10
+msgid "Functionality common to both ModelAdmin and InlineAdmin."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:65
+msgid "Options for inline editing of ``model`` instances."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:166
+msgid "Encapsulate all admin options and functionality for a given model."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:5
+msgid "automatically generated for telebot"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:6
 msgid ""
-"Intentionally simple parent class for all views. Only implements\n"
-"dispatch-by-method and simple sanity checking."
+"This objects represents a Telegram bot. It allows you to add handlers for "
+"different kind of updates."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:37
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:369
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1153
+msgid "router name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:451
+msgid "Bot name"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:455
+msgid "bot API token"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:958
 msgid ""
-"Render a template. Pass keyword arguments from the URLconf to the context."
+"This object represents an incoming inline query. When the user sends an "
+"empty query, your bot could return some default or trending results."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:77
-msgid "Provide a redirect on any GET request."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:115
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:974
 msgid ""
-"A default context mixin that passes the keyword arguments received by\n"
-"get_context_data() as the template context."
+"Commands are Telegram messages that start with /, optionally followed by an "
+"@ and the bot’s name and/or some additional text. The handler will add a "
+"list to the CallbackContext named CallbackContext.args. It will contain a "
+"list of strings, which is the text following the command split on single or "
+"consecutive whitespace characters"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:126
-msgid "A mixin that can be used to render a template."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:147
-msgid "A base view for displaying a form."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:191
-msgid "Base view for creating a new object instance."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:265
-msgid "Base view for deleting an object."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:326
-msgid "Base view for updating an existing object."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:400
-msgid "A view for displaying a form and rendering a template response."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:455
-msgid "View for creating a new object, with a response rendered by a template."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:547
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1005
 msgid ""
-"View for deleting an object retrieved with self.get_object(), with a\n"
-"response rendered by a template."
+"Handler class to handle telegram messages. They might contain text, media or "
+"status updates."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:627
-msgid "View for updating an object, with a response rendered by a template."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:719
-msgid "Provide a way to show and handle a form in a request."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:744
-msgid "Provide a way to show and handle a ModelForm in a request."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:798
-msgid "Render a form on GET and processes it on POST."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:824
-msgid "Provide the ability to delete objects."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:839
-msgid "A base view for displaying a single object."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:894
-msgid "Render a \"detail\" view of an object."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:969
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1037
 msgid ""
-"Provide the ability to retrieve a single object for further manipulation."
+"A handler to hold a conversation with a single or multiple users through "
+"Telegram updates by managing four collections of other handlers.\n"
+"\n"
+"The first collection, a ``list`` named :attr:`entry_points`, is used to "
+"initiate the conversation, for example with a :class:`telegram.ext."
+"CommandHandler` or :class:`telegram.ext.MessageHandler`.\n"
+"\n"
+"The second collection, a ``dict`` named :attr:`states`, contains the "
+"different conversation steps and one or more associated handlers that should "
+"be used if the user sends a message when the conversation with them is "
+"currently in that state. Here you can also define a state for `TIMEOUT` to "
+"define the behavior where `conversation_timeout` is exceeded, and a state "
+"for`WAITING` to define behavior when a new update is received while the "
+"previous ``@run_async`` decorated handler is not finished.\n"
+"\n"
+"The third collection, a ``list`` named :attr:`fallbacks`, is used if the "
+"user is currently in a conversation but the state has either no associated "
+"handler or the handler that is associated to the state is inappropriate for "
+"the update, for example if the update contains a command, but a regular text "
+"message is expected. You could use this for a ``/cancel`` command or to let "
+"the user know their message was not recognized.\n"
+"\n"
+"To change the state of conversation, the callback function of a handler must "
+"return the new state after responding to the user. If it does not return "
+"anything (returning :obj:`None` by default), the state will not change. If "
+"an entry point callback function returns :obj:`None`, the conversation ends "
+"immediately after the execution of this callback function.\n"
+"To end the conversation, the callback function must return :attr:`END` or "
+"``-1``. To handle the conversation timeout, use handler :attr:`TIMEOUT` or "
+"``-2``.\n"
+"Finally, :class:`telegram.ext.DispatcherHandlerStop` can be used in "
+"conversations as described in the corresponding documentation.\n"
+"\n"
+"Note:\n"
+"In each of the described collections of handlers, a handler may in turn be a "
+"`ConversationHandler`. In that case, the nested :class:`ConversationHandler` "
+"should have the attribute :attr:`map_to_parent` which allows to return to "
+"the parent conversation at specified states within the nested conversation.\n"
+"\n"
+"Note that the keys in :attr:`map_to_parent` must not appear as keys in :attr:"
+"`states` attribute or else the latter will be ignored. You may map :attr:"
+"`END` to one of the parents states to continue the parent conversation after "
+"this has ended or even map a state to :attr:`END` to end the *parent* "
+"conversation from within the nested one. For an example on nested :class:"
+"`ConversationHandler` s, see our `examples`_."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1036
-msgid "A base view for displaying a list of objects."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1093
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telebot.json:1105
 msgid ""
-"Render some list of objects, set by `self.model` or `self.queryset`.\n"
-"`self.queryset` can actually be any iterable of items, not just a queryset."
+"Handler class to handle Telegram updates that contain a chat member update."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1167
-msgid "A mixin for views manipulating multiple objects."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:13
+msgid "Multiple widgets in one window.\n"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1206
-msgid "Mixin for responding with a template and list of objects."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:14
+#, python-brace-format
+msgid "Your name: {event.from_user.username}"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1234
-msgid "Mixin for views manipulating year-based data."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:16
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:23
+msgid "✓ Checkbox"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1248
-msgid "Mixin for views manipulating month-based data."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:17
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:24
+msgid " Checkbox"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1262
-msgid "Mixin for views manipulating day-based data."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:21
+#, python-brace-format
+msgid "🔘 {item}"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1276
-msgid "Mixin for views manipulating week-based data."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:22
+#, python-brace-format
+msgid "⚪️ {item}"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1290
-msgid "Mixin class for views manipulating date-based data."
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:28
+#, python-brace-format
+msgid "✓ {item}"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1303
-msgid "Abstract base class for date-based views displaying a list of objects."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1375
-msgid ""
-"Abstract CBV mixin that gives access mixins the same customizable\n"
-"functionality."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1396
-msgid "Verify that the current user is authenticated."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1419
-msgid "Verify that the current user has all specified permissions."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1445
-msgid ""
-"Deny a request with a permission error if the test_func() method returns\n"
-"False."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/counter.py:34
-msgid "`Counter` widget is used to create +/- buttons."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/counter.py:35
-msgid "`Progress` widget shows percentage\n"
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:29
+#, python-brace-format
+msgid "{item}"
 msgstr ""
 
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/telegram.json:5
@@ -25087,825 +25683,6 @@ msgid ""
 "data decryption"
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:5
-msgid "Django admin definitions"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:10
-msgid "Functionality common to both ModelAdmin and InlineAdmin."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:65
-msgid "Options for inline editing of ``model`` instances."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_admin.json:166
-msgid "Encapsulate all admin options and functionality for a given model."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:13
-msgid "This is aiogram-dialog demo application"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:14
-msgid "Use buttons below to see some options."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:16
-msgid "📐 Layout widgets"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:21
-msgid "📜 Scrolling widgets"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:26
-msgid "☑️ Selection widgets"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:31
-msgid "📅 Calendar"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:36
-msgid "💯 Counter and Progress"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:41
-msgid "🎛 Combining widgets"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:46
-msgid "🔢 Multiple steps"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/main.py:51
-msgid "⌨️ Reply keyboard"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:5
-msgid "Validation schema for OpenAPI Specification 3.0.X."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1014
-msgid "Example and examples are mutually exclusive"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1023
-msgid "Schema and content are mutually exclusive, at least one is required"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1040
-msgid "Some properties are not allowed if content is present"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1171
-msgid "Parameter location"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1174
-msgid "Parameter in path"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1200
-msgid "Parameter in query"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1219
-msgid "Parameter in header"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1235
-msgid "Parameter in cookie"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1359
-msgid "Bearer"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1369
-msgid "Non Bearer"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1606
-msgid "Operation Id and Operation Ref are mutually exclusive"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:30
-msgid "Different keyboard layouts."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:32
-msgid "↔️ Row"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:37
-msgid "↕️ Column"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:42
-msgid "↩️ Group"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:50
-msgid "Select and Button inside `Row`"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:59
-msgid "Select and Button inside `Column`"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:68
-msgid "Select and Button inside `Group` with width=2"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:20
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:113
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:68
-msgid "Back"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:37
-msgid "Apple"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:38
-msgid "Banana"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:39
-msgid "Orange"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:40
-msgid "Pear"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:44
-msgid "Mango"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:45
-msgid "Pineapple"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:46
-msgid "Kiwi"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:66
-msgid "Different keyboard Selects."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:91
-msgid "Select widget"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:117
-msgid "Radio widget"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:136
-msgid "Multiselect widget"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:156
-msgid "Toggle widget. Click to switch between items."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/select.py:157
-msgid "It is compatible and interchangeable with `Radio`."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:117
-msgid "Select calendar configuration"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:119
-msgid "Default"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:124
-msgid "Customized"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:132
-msgid "Default calendar widget"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:141
-msgid "Customized calendar widget"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:142
-msgid "Here we use custom text widgets to localize and store selection"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:144
-#, python-brace-format
-msgid ""
-"\n"
-"Selected: {selected}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/calendar.py:145
-msgid ""
-"\n"
-"No dates selected"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:27
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:34
-msgid "am"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:27
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:34
-msgid "are"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:28
-msgid "was"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:28
-msgid "were"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:29
-msgid "i"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:29
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:39
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:40
-msgid "you"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:30
-msgid "i'd"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:30
-msgid "you would"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:31
-msgid "i've"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:31
-msgid "you have"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:32
-msgid "i'll"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:32
-msgid "you will"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:33
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:37
-msgid "my"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:33
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:37
-msgid "your"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:35
-msgid "you've"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:35
-msgid "I have"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:36
-msgid "you'll"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:36
-msgid "I will"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:38
-msgid "yours"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:38
-msgid "mine"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:39
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/config/settings.py:40
-msgid "me"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:17
-msgid "Reply keyboard with multiple widgets.\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:19
-msgid "👤 Send contact"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:20
-msgid "📍 Send location"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:23
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:16
-msgid "✓ Checkbox"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:24
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:17
-msgid " Checkbox"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:5
-msgid "automatically generated for vishuda"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:29
-msgid "This object represents a numpy nd-array"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:42
-msgid ""
-"The desired data-type for the array.  If not given, then the type will be "
-"determined as the minimum type required to hold the objects in the sequence."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:46
-msgid ""
-"If true (default), then the object is copied.  Otherwise, a copy will only "
-"be made if __array__ returns a copy, if obj is a nested sequence, or if a "
-"copy is needed to satisfy any of the other requirements(`dtype`, `order`, "
-"etc.)."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:51
-msgid ""
-"Specify the memory layout of the array. If object is not an array, the newly "
-"created array will be in C order (row major) unless 'F' is specified, in "
-"which case it will be in Fortran order (column major). If object is an array "
-"the following holds."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:61
-msgid ""
-"If True, then sub-classes will be passed-through, otherwise the returned "
-"array will be forced to be a base-class array (default)."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:65
-msgid ""
-"Specifies the minimum number of dimensions that the resulting array should "
-"have.  Ones will be pre-pended to the shape as needed to meet this "
-"requirement."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:69
-msgid ""
-"Reference object to allow the creation of arrays which are not NumPy arrays. "
-"If an array-like passed in as ``like`` supports the ``__array_function__`` "
-"protocol, the result will be defined by it. In this case, it ensures the "
-"creation of an array object compatible with that passed in via this argument."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:75
-msgid "This object represents a serie for Pandas"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:96
-msgid "This object represents series for Pandas"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:112
-msgid "dtype object of the underlying data."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:131
-msgid ""
-"Two-dimensional size-mutable, potentially heterogeneous tabular data "
-"structure with labeled axes (rows and columns)."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:155
-msgid "This is a mixin for classes that require multlingual support"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:159
-msgid "Translation language code"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:160
-msgid ""
-"enumeration ordered by pondering each 1st language of a country with its "
-"population, worldwide"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:419
-msgid ""
-"The event’s unique id. This id should be globally unique so you should add "
-"an @DOMAIN_NAME to your id."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:426
-msgid "The event class (e.g. PUBLIC, PRIVATE, CONFIDENTIAL)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:430
-msgid "The event create time"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:434
-msgid "The event description"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:438
-msgid "The event start time"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:442
-msgid ""
-"The latitude and longitude of the event. The value returned by this property "
-"should be a two-tuple containing the latitude and longitude as float values. "
-"semicolon. Ex: (37.386013, -122.082932)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:446
-msgid "The event modified time"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:450
-msgid "The event location"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:454
-msgid ""
-"The event organizer. Expected to be a vCalAddress object. See iCalendar "
-"documentation or tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:464
-msgid "The status of an event. Can be CONFIRMED, CANCELLED or TENTATIVE."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:473
-msgid "The event name/title"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:477
-msgid ""
-"The event transparency. Defines whether the event shows up in busy searches. "
-"(e.g. OPAQUE, TRANSPARENT)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:481
-msgid "The event url"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:488
-msgid "The event end time"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:501
-msgid ""
-"The event attendees. Expected to be a list of vCalAddress objects. See "
-"iCalendar documentation or tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:511
-msgid ""
-"The dates/times for exceptions of a recurring event. See iCalendar "
-"documentation or tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:527
-msgid ""
-"The recurring dates/times for a repeating event. See iCalendar documentation "
-"or tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:534
-msgid ""
-"The recurrence rule for repeating events. See iCalendar documentation or "
-"tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:538
-msgid ""
-"Alarms for the event, must be a list of Alarm objects. See iCalendar "
-"documentation or tests to know how to build them."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:842
-msgid "This is the base object for an iCalendar file."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:859
-msgid "The calendar product ID"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:869
-msgid "The calendar method such as meeting requests."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:873
-msgid "The calendar timezone"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:877
-msgid "The calendar name/title"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:992
-msgid "This represents associates a typed content to a db model symbol."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1006
-msgid "python model class name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1012
-msgid ""
-"The permissions system provides a way to assign permissions to specific "
-"users and groups of users.\n"
-"\n"
-"The permission system is used by the Django admin site, but may also be "
-"useful in your own code. The Django admin site uses permissions as follows:\n"
-"    - The \"add\" permission limits the user's ability to view the \"add\" "
-"form\n"
-"      and add an object.\n"
-"    - The \"change\" permission limits a user's ability to view the change\n"
-"      list, view the \"change\" form and change an object.\n"
-"    - The \"delete\" permission limits the ability to delete an object.\n"
-"    - The \"view\" permission limits the ability to view an object.\n"
-"\n"
-"Permissions are set globally per type of object, not per specific object "
-"instance. It is possible to say \"Mary may change news stories,\" but it's "
-"not currently possible to say \"Mary may change news stories, but only the "
-"ones she created herself\" or \"Mary may only change news stories that have "
-"a certain status or publication date.\"\n"
-"The permissions listed above are automatically created for each model."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1046
-msgid ""
-"Groups are a generic way of categorizing users to apply permissions, or some "
-"other label, to those users.\n"
-"A user can belong to any number of groups. A user in a group automatically "
-"has all the permissions granted to that group. For example, if the group "
-"'Site editors' has the permission can_edit_home_page, any user in that group "
-"will have that permission."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1069
-msgid ""
-"This objects represents a fully featured User model with admin-compliant "
-"permissions."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1085
-msgid "Unique User name, usually email address"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1092
-msgid "This objects represents a bank account."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1113
-msgid "Bank account holder's name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1117
-msgid "Bank's name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1121
-msgid "Bank's street"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1125
-msgid "Bank's city"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1129
-msgid "Bank's zip code"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1133
-msgid "Bank agency identifier"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1137
-msgid "SWIFT BIC number"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1141
-msgid "IBAN number"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1155
-msgid "This object represents file informations."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1182
-msgid "Content size in bytes."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1186
-msgid "Content size in human readable units."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1190
-msgid "SHA1 hash of the file."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:1194
-msgid "MIME type of the file"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2171
-msgid ""
-"This object represents an address following the convention of http://"
-"microformats.org/wiki/hcard"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2309
-msgid "This object represent a person, a company, an organization, or a place"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2332
-msgid "Email address"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2336
-msgid "Telephone number"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2436
-msgid "First Name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2440
-msgid "Family (often last) name"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2444
-msgid "Name, formatted/full"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2477
-msgid "This objects represents a merchant."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2516
-msgid "This objects represents a product manufacturer."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2523
-msgid "This objects represents a customer."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2561
-msgid "This objects represents an app model."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2570
-msgid "This objects represents an app fixture."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2584
-msgid "Fixture values"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2590
-msgid "This objects represents an app view."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2598
-msgid "This objects represents an app namespace."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2605
-msgid "Namespace models"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2612
-msgid "Namespace fixtures"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2619
-msgid "Namespace views"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2657
-msgid "This objects represents an app."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2664
-msgid "App entry points"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2671
-msgid "App supported language lists"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2760
-msgid "This objects represents a conversational pair."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2786
-msgid "This objects represents a conversational NLTK chatbot"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2796
-msgid "List of patterns and responses."
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/vishuda.json:2803
-msgid "Mapping between first and second person expressions"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:12
-msgid ""
-"Multiple windows in the same dialog can be used to provide step by step user "
-"data input.\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:28
-msgid "Step 1. Press Next"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:36
-msgid "Step 2. Select options"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:38
-msgid "✓ Option is enabled"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:39
-msgid "Click to enable the option"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:56
-msgid "Step 3. Your data:"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:59
-msgid "Option: enabled"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:60
-msgid "Option: disabled"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:64
-#, python-brace-format
-msgid "Selected emoji: {emoji}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:13
-msgid "Multiple widgets in one window.\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:14
-#, python-brace-format
-msgid "Your name: {event.from_user.username}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:21
-#, python-brace-format
-msgid "🔘 {item}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:22
-#, python-brace-format
-msgid "⚪️ {item}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:28
-#, python-brace-format
-msgid "✓ {item}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/mutltiwidget.py:29
-#, python-brace-format
-msgid "{item}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/common.py:9
-msgid "☰ Main menu"
-msgstr ""
-
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/drf.json:5
 msgid "Django REST Framework definitions"
 msgstr ""
@@ -26204,62 +25981,8 @@ msgstr ""
 msgid "Update a model instance."
 msgstr ""
 
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:79
-msgid "Scrolling variant demo. Please, select an option:"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:81
-msgid "📜 Default Pager"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:86
-msgid "📑 Customised pager"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:91
-msgid "📝 List scroll"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:96
-msgid "📄 Text scroll"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:101
-msgid "📟 StubScroll (getter-based)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:106
-msgid "📜 & 📝 Sync scroll"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:115
-msgid "Scrolling group with default pager (legacy mode)"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:135
-msgid "Scrolling group with external paging controls"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:186
-msgid "Text list scrolling:\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:203
-msgid "Text scrolling:\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:217
-msgid "Stub Scroll. Getter is used to paginate\n"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:218
-#, python-brace-format
-msgid "You are at page {current_page} of {pages}"
-msgstr ""
-
-#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/scrolls.py:219
-#, python-brace-format
-msgid "Day by number is {day}"
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/common.py:9
+msgid "☰ Main menu"
 msgstr ""
 
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_forms.json:5
@@ -26420,4 +26143,285 @@ msgstr ""
 
 #: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_forms.json:4505
 msgid "A widgets accepting multiple input values."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:12
+msgid ""
+"Multiple windows in the same dialog can be used to provide step by step user "
+"data input.\n"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:28
+msgid "Step 1. Press Next"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:36
+msgid "Step 2. Select options"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:38
+msgid "✓ Option is enabled"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:39
+msgid "Click to enable the option"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:56
+msgid "Step 3. Your data:"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:59
+msgid "Option: enabled"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:60
+msgid "Option: disabled"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/switch.py:64
+#, python-brace-format
+msgid "Selected emoji: {emoji}"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:5
+msgid "Validation schema for OpenAPI Specification 3.0.X."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1014
+msgid "Example and examples are mutually exclusive"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1023
+msgid "Schema and content are mutually exclusive, at least one is required"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1040
+msgid "Some properties are not allowed if content is present"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1171
+msgid "Parameter location"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1174
+msgid "Parameter in path"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1200
+msgid "Parameter in query"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1219
+msgid "Parameter in header"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1235
+msgid "Parameter in cookie"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1359
+msgid "Bearer"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1369
+msgid "Non Bearer"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/openapi-3-0.json:1606
+msgid "Operation Id and Operation Ref are mutually exclusive"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:5
+msgid "Django views definitions"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:13
+msgid ""
+"Intentionally simple parent class for all views. Only implements\n"
+"dispatch-by-method and simple sanity checking."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:37
+msgid ""
+"Render a template. Pass keyword arguments from the URLconf to the context."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:77
+msgid "Provide a redirect on any GET request."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:115
+msgid ""
+"A default context mixin that passes the keyword arguments received by\n"
+"get_context_data() as the template context."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:126
+msgid "A mixin that can be used to render a template."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:147
+msgid "A base view for displaying a form."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:191
+msgid "Base view for creating a new object instance."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:265
+msgid "Base view for deleting an object."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:326
+msgid "Base view for updating an existing object."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:400
+msgid "A view for displaying a form and rendering a template response."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:455
+msgid "View for creating a new object, with a response rendered by a template."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:547
+msgid ""
+"View for deleting an object retrieved with self.get_object(), with a\n"
+"response rendered by a template."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:627
+msgid "View for updating an object, with a response rendered by a template."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:719
+msgid "Provide a way to show and handle a form in a request."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:744
+msgid "Provide a way to show and handle a ModelForm in a request."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:798
+msgid "Render a form on GET and processes it on POST."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:824
+msgid "Provide the ability to delete objects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:839
+msgid "A base view for displaying a single object."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:894
+msgid "Render a \"detail\" view of an object."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:969
+msgid ""
+"Provide the ability to retrieve a single object for further manipulation."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1036
+msgid "A base view for displaying a list of objects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1093
+msgid ""
+"Render some list of objects, set by `self.model` or `self.queryset`.\n"
+"`self.queryset` can actually be any iterable of items, not just a queryset."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1167
+msgid "A mixin for views manipulating multiple objects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1206
+msgid "Mixin for responding with a template and list of objects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1234
+msgid "Mixin for views manipulating year-based data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1248
+msgid "Mixin for views manipulating month-based data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1262
+msgid "Mixin for views manipulating day-based data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1276
+msgid "Mixin for views manipulating week-based data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1290
+msgid "Mixin class for views manipulating date-based data."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1303
+msgid "Abstract base class for date-based views displaying a list of objects."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1375
+msgid ""
+"Abstract CBV mixin that gives access mixins the same customizable\n"
+"functionality."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1396
+msgid "Verify that the current user is authenticated."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1419
+msgid "Verify that the current user has all specified permissions."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/schemas/django_views.json:1445
+msgid ""
+"Deny a request with a permission error if the test_func() method returns\n"
+"False."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:30
+msgid "Different keyboard layouts."
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:32
+msgid "↔️ Row"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:37
+msgid "↕️ Column"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:42
+msgid "↩️ Group"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:50
+msgid "Select and Button inside `Row`"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:59
+msgid "Select and Button inside `Column`"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/layouts.py:68
+msgid "Select and Button inside `Group` with width=2"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:17
+msgid "Reply keyboard with multiple widgets.\n"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:19
+msgid "👤 Send contact"
+msgstr ""
+
+#: /home/cedric/Nextcloud/Devel/python/python-vishuda/vishuda/telebot/dialogs/reply_buttons.py:20
+msgid "📍 Send location"
 msgstr ""

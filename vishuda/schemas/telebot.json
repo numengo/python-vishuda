@@ -345,6 +345,15 @@
             "reset_stack",
             "new_stack"
           ]
+        },
+        "parse_mode": {
+          "type": "string",
+          "enum": [
+            "",
+            "MarkdownV2",
+            "Markdown",
+            "HTML"
+          ]
         }
       }
     },
@@ -1161,13 +1170,7 @@
           "_action_type": "message",
           "properties": {
             "parse_mode": {
-              "type": "string",
-              "enum": [
-                "",
-                "MarkdownV2",
-                "Markdown",
-                "HTML"
-              ]
+              "$ref": "#/$defs/Enums/properties/parse_mode"
             }
           }
         },
@@ -1233,7 +1236,7 @@
             "getter": true,
             "markup_factory": true,
             "parse_mode": {
-              "type": "string"
+              "$ref": "#/$defs/Enums/properties/parse_mode"
             },
             "disable_web_page_preview": {
               "type": "boolean"
